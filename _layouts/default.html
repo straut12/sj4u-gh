@@ -11,17 +11,34 @@
 
   <!-- Body -->
   <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+    
 
-    <!-- Header -->
-    {%- include header.html %}
-
-    <!-- Content -->
-    <div class="container mt-5">
-      {{ content }}
+    <div class="site-container">  <!-- initial al-folio container attrib was too narrow -->
+      <!-- Header -->
+      {%- include header.html %}
+      {% if page.toc %}
+          <div class="site-body wrapper"> <!-- removed container and mt-5 attribute (added too much to top margin)-->
+            <aside class="site-sidebar" id="site-sidebar"> <!-- {% include sidebar-toc.html %} below -->                
+              <nav class="toc">
+                <header><h4 class="toc__title">Table of Contents</h4></header>
+                {% include toc.html sanitize=false html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
+              </nav>
+            </aside>
+            <main>  <!-- initally used a main here -->
+              <!-- Content -->
+              {{ content }}
+            </main>
+          </div>
+      {% else %}
+        <!-- Content -->
+        <div class="container mt-5">
+          {{ content }}
+        </div>
+      {% endif %}
     </div>
-
     <!-- Footer -->
     {%- include footer.html %}
+      
 
     <!-- JavaScripts -->
     {% include scripts/jquery.html %}

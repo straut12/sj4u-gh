@@ -23,14 +23,16 @@ table {
 
 a, table.table a {
   color: var(--global-theme-color);
+  font-weight: normal;
   &:hover {
-    color: var(--global-theme-color);
+    color: var(--global-hover-color);
+    font-weight: bold;
     text-decoration: underline;
   }
   &:hover:after :not(.nav-item.dropdown) {
     width: 100%;
   }
-}
+} 
 
 figure, img {
   max-width: 90vw;
@@ -89,6 +91,7 @@ blockquote {
 .citation, .citation-number {
   color: var(--global-theme-color);
 }
+
 
 // Profile
 
@@ -602,10 +605,14 @@ figure.highlight {
 }
 
 pre {
-  color: var(--global-theme-color);
-  background-color: var(--global-code-bg-color);
+  color: var(--global-text-color-orange);  // initial was --global-theme-color but could't see it on dark bg
+  background-color: var(--global-code-bg-color);  // initial --global-code-bg-color
   border-radius: 6px;
   padding: 6px 12px;
+  max-height: 300px;
+  max-width: 500px;
+  overflow: auto;
+  
   pre, code {
     background-color: transparent;
     border-radius: 0;
@@ -614,7 +621,7 @@ pre {
 }
 
 code {
-  color: var(--global-theme-color);
+  color: var(--global-text-color-orange);    // initial was --global-theme-color but could't see it on dark bg
   background-color: var(--global-code-bg-color);
   border-radius: 3px;
   padding: 3px 3px;
