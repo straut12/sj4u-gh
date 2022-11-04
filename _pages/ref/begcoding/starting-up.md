@@ -98,4 +98,5 @@ When you're done hit the green flag and try it out!
 	**then** we want our sprite to move a specific direction and amount.
 * ​What if we want to add more sprites and have them moving too?
 
---------------------------------------------
+-----------------------------  
+-----------------------------  

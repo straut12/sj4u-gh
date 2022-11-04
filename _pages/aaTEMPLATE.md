@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /ref/begcoding/intro/
+permalink: /ref/begcoding/template/
 title: Whatever
 description: Intro to Coding
 nav: false
@@ -8,9 +8,10 @@ toc: true
 ---
 # Scratch and Python
 
------------------------------
+-----------------------------  
+-----------------------------  
 <div class="row">
-    <div class="col-md-auto mt-3 mt-md-0">
+    <div class="col-md mt-3 mt-md-0">
         {% include figure.html path="assets/img/begcoding/flappybird.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>

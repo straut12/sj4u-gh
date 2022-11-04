@@ -89,4 +89,5 @@ Is it starting to look like a possible game?
 * My dino code window is getting filled up with If-Then conditions. What if I want to add more features? How can I organize and keep it cleaned up?
 * Instead of moving my dino 10 steps when I press a key what if I want to move him slower or faster? Do I have to update every condition each time I want to tweak it?
 
------------------------------
+-----------------------------  
+-----------------------------  
