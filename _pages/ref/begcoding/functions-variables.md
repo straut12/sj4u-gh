@@ -30,7 +30,7 @@ Now our main loop is cleaner and we can easily add more code.
 </div>
 
 # Variables
-Another powerful tool in coding is variables. Variables are containers that hold information. It can be numbers or letters (aka strings in Python). You can retrieve and modify the information at multiple points in your code. Here are just a couple ways we'll use variables in our code.
+Another powerful tool in coding is variables or containers. Variables are containers that hold information. It can be numbers or letters (aka strings in Python). You can retrieve and modify the information at multiple points in your code. Here are just a couple ways we'll use variables in our code.
 ​​
 1. ​If you use the same number many areas, for the same purpose, we could use one variable to represent all of them and define it at the beginning. For example our motion controller is using **10** in all four If-Then conditions. Let's replace it with one variable. That will make it easier to change it to a different value later. We only have to change one location instead of everywhere it is used, possible missing a spot.
 2. If we're creating a game and we want to keep track of how many times we catch the grasshopper. Example each time we catch the grasshopper we want to increase our score by 1, we would use a variable and call it score.​​​  
@@ -43,7 +43,7 @@ There's a few steps to add a variable in our code (located in Variables block)
 1. Make a variable and give it a name
 2. Use the variable container in our code
 3. We'll use a multiply block in our green **Operators** to handle the negative directions
-4. Initialize the variable to a value using the **set** block. Notice we put it at the beginning, outside of our Main loop. We only want to assign it a value once. We don't want the main loop assigning a value every time it loops.
+4. Initialize the variable to a value using the **set** block. Notice we put it at the beginning, outside of our Main loop. We only want to assign it a value once(make it a constant). We don't want the main loop assigning a value every time it loops.
 
 > To have the variable display on your screen while you're code is running you can keep it selected. Or de-select to have it hidden. If you're variable is a score you would want it displayed on the screen. Or if you're de-bugging and trouble shooting an issue you may want to display it.  
 
@@ -56,7 +56,7 @@ There's a few steps to add a variable in our code (located in Variables block)
 Test your code and make sure the movement still works correctly.
 
 ## Local vs Global Variable
-When you create a variable you can select **All Sprites"=Global or **This Sprite Only"=Local. Early on it is best to only do Global to keep it simple. Eventually you may need Local though so it is good to understand it.
+When you create a variable you can select **All Sprites=Global** or **This Sprite Only=Local**. Early on it is best to only do Global to keep it simple. Eventually you may need Local though so it is good to understand it.
 * Global - All sprites can access and modify the variable. Example, if all sprites use a global variable called speed. If one sprites changes speed from 1 to 2 then all sprites will see the new value of 2.
 * ​Local - Changes to the variable only affect the sprite you're working. Example, all sprites might have a Local variable called speed. If I change speed in one sprite from 1 to 2 it will not impact the speed variable in the other sprites.
 
