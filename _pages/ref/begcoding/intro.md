@@ -75,7 +75,7 @@ Another option is the official [Python.org](https://www.python.org/shell/) web s
 - [RaspberryPi.org](https://www.raspberrypi.org/learn/) website is great for Scratch, Python, and circuits/web projects.
 - I will also include help for circuit specific methods in the Circuit projects  
 
-> For your first "Hello World" program it is good to use a simple text editor in a terminal. And then execute the file at the terminal prompt. But you'll quickly want to move on to an IDE (Integrated Development Environment) where you can run your program from inside the IDE and also do debugging. Here's some options.
+For your first "Hello World" program it is good to use a simple text editor in a terminal. And then execute the file at the terminal prompt. But you'll quickly want to move on to an IDE (Integrated Development Environment) where you can run your program from inside the IDE and also do debugging. Here's some options.
 - Thonny, geany and mu-editor are great Python IDEs and available on Raspberry Pi. Thonny and geany are pre-installed. Install mu-editor under "Raspberry Pi Recommended Software" in the Start menu.
 - VScode - Later you may want to move on to an even more powerful IDE like the popular VScode (easily installed on Raspberry Pis now). VScode has a lot of nice options (extensions) for debugging, integration with git, auto-complete, etc.​
 - Jupyter Notebook is a unique editor that lets you execute small chunks of code individually while embedding detailed comments and graphs through-out. Great for data science.  
