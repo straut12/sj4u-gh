@@ -2,7 +2,7 @@
 layout: page
 permalink: /ref/begcoding/intro/
 title: teaching
-description: Intro to Scratch
+description: Intro to Coding
 nav: false
 toc: true
 ---
@@ -30,8 +30,8 @@ Python
     </div>
 </div>
 
-# Scratch Coding Tools
-If you're not ready for Python go ahead and give Scratch a try. Have fun with it but focus on the concepts and make sure you use the tools below.​​
+# Scratch
+If you're not ready for Python go ahead and give Scratch a try. Have fun with it but focus on the concepts and make sure you understand the tools below.​​
 - Image editing (bitmap vs vector, gif's, transparency)
 - Coordinates (X/Y)
 - Loops (and nested loops)
@@ -43,9 +43,9 @@ If you're not ready for Python go ahead and give Scratch a try. Have fun with it
 - Broadcast and "When this happens/Do this" blocks (event driven concepts)
 - ​Lists (arrays)
 
-Raspberry Pis have an offline version of Scratch already installed or you can go to the web site [scratch](https://scratch.mit.edu/). Create an account and get started with the next sections under **Beginner Coding**
+Raspberry Pis have an offline version of Scratch already installed or you can go to the web site [scratch](https://scratch.mit.edu/). Create an account and get started with the next sections under [Scratch Tutorials](../../../ref/begcoding/starting-up/)
 
-# Scratch Example
+## Scratch Example
 Have fun with scratch while learning and utilizing good coding practices. Use functions and comments to keep your code organized and you'll be able to create animated scenes like the one below. [Scratch Tutorials](../../../ref/begcoding/starting-up/)   
 <div class="row">
     <div class="col-sm-5 mt-3 mt-md-0">
@@ -81,9 +81,9 @@ For your first "Hello World" program it is good to use a simple text editor in a
 - Jupyter Notebook is a unique editor that lets you execute small chunks of code individually while embedding detailed comments and graphs through-out. Great for data science.  
 
 ## Coding with Python and Minecraft on RPi (MCPi)
-Raspberry Pi comes with Python and a Pi edition of Minecraft (Mojang MCPi) installed. You can quickly write Python code that builds and interacts with the Minecraft world (note the Pi edition of Minecraft is a stripped down version of Minecraft. It does not receive updates or being developed further. It only runs createive mode, does not have mobs).  
+Raspberry Pi comes with Python and a Pi edition of Minecraft (Mojang MCPi) installed. You can quickly write Python code that builds and interacts with the Minecraft world (note the Pi edition of Minecraft is a stripped down version of Minecraft. It does not receive updates or being developed further. It only runs creative mode, does not have mobs).  
 
-If you're feeling adventurous there are newer Minecraft Pi edtions, [MCPi-Revival](https://github.com/MCPI-Revival/MCPIL), with more options. But you'll need to be comfortable with the command line.
+If you're feeling adventurous there are newer Minecraft Pi editions, [MCPi-Revival](https://github.com/MCPI-Revival/MCPIL), with more options. But you'll need to be comfortable with the command line.
 
 RaspberryPi.org has good tutorials for getting started with original RPi Minecraft.
 - [Getting-started-with-minecraft-pi](https://projects.raspberrypi.org/en/projects/getting-started-with-minecraft-pi) 

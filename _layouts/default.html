@@ -18,7 +18,7 @@
       {%- include header.html %}
       {% if page.toc %}
           <div class="site-body wrapper"> <!-- removed container and mt-5 attribute (added too much to top margin)-->
-            <aside class="site-sidebar" id="site-sidebar"> <!-- {% include sidebar-toc.html %} below -->                
+            <aside class="site-sidebar" id="site-sidebar">
               <nav class="toc">
                 <header><h4 class="toc__title">Table of Contents</h4></header>
                 {% include toc.html sanitize=false html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}

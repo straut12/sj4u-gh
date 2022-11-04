@@ -112,7 +112,7 @@ body.sticky-bottom-footer {
   box-shadow: $box-shadow;
   position: -webkit-sticky;
   position: sticky;
-  top: 8em;  // initial value of 2em allowed toc to scroll up
+  top: 4em;  // initial value of 2em allowed toc to scroll up
   float: left;
 
   .toc__title {
