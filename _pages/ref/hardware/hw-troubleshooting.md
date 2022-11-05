@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/begcoding/template/
-title: Whatever
-description: Intro to Coding
+permalink: /ref/hardware/hw-troubleshooting/
+title: hw-troubleshooting
+description: Intro to hw-troubleshooting
 nav: false
 toc: true
 ---
@@ -10,9 +10,6 @@ toc: true
 
 -----------------------------  
 -----------------------------  
-
-[Scratch Tutorials](../../../ref/begcoding/starting-up/)
-
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
         {% include figure.html path="assets/img/begcoding/flappybird.png" class="img-fluid rounded z-depth-1" %}

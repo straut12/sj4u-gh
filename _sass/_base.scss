@@ -13,11 +13,17 @@ hr {
 }
 
 table {
+  border-collapse: collapse;
   td, th {
     color: var(--global-text-color);
+    text-align: left;
+    //padding: 8px;
   }
   td {
     font-size: 1rem;
+  }
+  tr:nth-child(even) {
+    background-color: LightGray;
   }
 }
 
@@ -614,7 +620,7 @@ pre {
   overflow: auto;
   
   pre, code {
-    background-color: transparent;
+    background-color: transparent;  // this is the code txt inside blocks
     border-radius: 0;
     padding: 0;
   }
