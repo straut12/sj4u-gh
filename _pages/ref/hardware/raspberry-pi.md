@@ -14,6 +14,20 @@ Raspberry Pi is the most common component in my projects so I'll include more de
     </div>
 </div> 
 
+## RPi Imager
+Much of the setup info below was before the [Raspberry Pi Imager](https://www.raspberrypi.com/software/). With the RPi Imager you can set many of the settings below (ssh, user name password, wifi SSID/password) during the SD card setup.
+<div class="row">
+    <div class="col-8 mt-3 mt-md-0">
+        {% include figure.html path="assets/img/hardware/rpi-imager.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-8 mt-3 mt-md-0">
+        {% include figure.html path="assets/img/hardware/rpi-imager1.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-8 mt-3 mt-md-0">
+        {% include figure.html path="assets/img/hardware/rpi-imager2.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+
 ## Micro SD card
 * Instead of a hard drive the RPi uses a micro SD card to store the O/S and files
 * Speed - Class 10 or UHS class 1 are good options and inexpensive

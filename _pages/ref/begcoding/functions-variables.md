@@ -8,7 +8,7 @@ toc: true
 ---
 # Functions
 In the previous section we created a set of **motion** controls to move the sprite. The motion controls take up a lot of space. If we put those blocks in their own function we can set them off to the side and just call it in our main loop. Another benefit of functions is that we can store it in our backpack and use it later in other programs. 
-> Storing functions in your backpack and using them in another program is an important concept for Python. You're **importing** it when you drag it into another program.  
+> Storing functions in your backpack and using them in another program is an important concept for Python. Think of it as **importing** when you drag it into another program.  
 
 The function can be found in red **My Blocks", then **Make a Block** and hit ok (you can leave the other options to their defaults).
 There are two parts to use the function (note 2 red blocks used below). 

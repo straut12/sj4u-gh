@@ -1,6 +1,6 @@
 ---
 layout: page
-title: System-setup
+title: System Setup
 nav: true
 nav_order: 3
 dropdown: true
