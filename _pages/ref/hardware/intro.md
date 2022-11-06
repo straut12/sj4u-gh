@@ -9,7 +9,7 @@ toc: true
 # STEM Hardware
 Hardware is the physical equipment you work with. Examples are monitors, memory cards, single board computers, microcontrollers, and various circuit components.
 
-Below are the hardware that I've gravitated towards in my projects. There are many other options and opinions on which H/W is best but I won't try and sort that out. My criteria is fairly straight forward, affordable and easy to use with a large on-line community to research projects and tutorials.
+Below are the hardware that I've gravitated towards in my projects. There are many other SBC options and opinions on which H/W is best but I won't try and sort that out. My criteria is fairly straight forward, affordable and easy to use with a large on-line community to research projects and tutorials.
 
 I've listed five categories of hardware below. Not all the hardware is required for any given project. Depending on the complexity of the project it may require only a couple or multiple parts.
 
