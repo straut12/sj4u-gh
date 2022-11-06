@@ -1,11 +1,11 @@
 ---
 layout: page
-permalink: /teaching/
-title: teaching
+permalink: /coding/
+title: Coding
 description: Set of tutorials
 nav: true
 toc: true
-nav_order: 5
+nav_order: 4
 ---
 # Example table
 

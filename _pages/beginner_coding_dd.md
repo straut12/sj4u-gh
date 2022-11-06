@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Beginner Coding
+title: Scratch
 nav: true
 nav_order: 1
 dropdown: true

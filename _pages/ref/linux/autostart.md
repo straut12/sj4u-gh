@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /ref/linux//
+permalink: /ref/linux/
 title: 
 description: Intro to 
 nav: false
@@ -11,17 +11,17 @@ toc: true
 -----------------------------  
 -----------------------------  
 
-[Scratch Tutorials](../../../ref/linux/starting-up/)
+[Scratch Tutorials](../../../ref/linux//)
 
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/linux/flappybird.png" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/linux/.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
 <div class="row justify-content-center float-right">
     <div class="col-4-auto mt-3 mt-md-0">
-        {% include figure.html path="assets/img/linux/flappybird.png" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/linux/.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
