@@ -2,7 +2,7 @@
 layout: page
 permalink: /ref/linux/sharing/
 title: sharing
-description: Intro to methods for file sharing
+description: Intro to methods for file sharing and making back ups
 nav: false
 toc: true
 ---

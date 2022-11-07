@@ -24,6 +24,8 @@ There are two types of packages
 
 >  Good instructions for configure/make to install source code are at​ [itsfoss](https://itsfoss.com/install-software-from-source-code/). And more detailed explanations on installing packages are at [Debian docs](https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package) and [Ubuntu Community](https://help.ubuntu.com/community/InstallingSoftware)
 
+-------------------------
+
 # Repo, sources.list, adding PPA
 
 Helpful links  
@@ -111,6 +113,9 @@ The default Ubuntu repositories
 * Restricted -> Proprietary drivers for devices (ie hardware drivers)
 * Multiverse -> Software restricted by copyright or legal issues (a little more questinable to install but could be needed)
 
+-------------------------
+
+
 **Add Another Repository to sources.list**
 To add an additional repository you'll usually need two items  
 1. Public key (optional)
@@ -159,6 +164,9 @@ Instead of updating sources.list this will create a file in /etc/apt/sources.d d
 Terms to Know​  
 * Package index - A database that holds records of available packages from the repositories enabled in your system.​ (run sudo apt update to update the index)  
 * Repository - Directory containing deb packages/files used to install a software application. Typically a remote location, but also could be local.   
+
+-------------------------
+
 
 # Installing Packages
 Since I focus on Debian/Ubuntu/Raspberry Pi OS systems these notes will cover apt/.deb scenarios.
@@ -214,6 +222,9 @@ The Software Store, Synaptic (apt install) and gdebi will cover most of the meth
 
 As you use your Linux PC more you'll come across more applications you want to install and it will involve secondary methods. Below are my notes on all install methods.
 
+-------------------------
+
+
 # Common Installation Methods
 Before installing Check the Installation Documentation from the package provider and run the option that matches your system.
 Then make sure your system is up to date. Most systems, including Raspberry Pi OS, will notify you there are updates and ask you to download/install. Otherwise you can run the commands.  
@@ -262,6 +273,9 @@ Other methods for other types of applications
 - Flatpak
 - Linuxbrew​
 - Python Packages (pip)
+
+-------------------------
+
 
 # Command Lines for Installing/Uninstalling
 Don't forget to use tab auto-completion to help with package names  
@@ -353,6 +367,9 @@ Then refresh repository index
 $ sudo apt-get update
 Then retry installation
 ```
+
+-------------------------
+
 
 # Other Methods
 Flatpak, Snap, ​git, pip, shell, curl, wget, flatpak, AppImage
@@ -455,6 +472,9 @@ Example to list flatpak apps installed
 Example to update flatpak apps (your system may be doing this automatically)  
 * ```lxterminal -e "bash -c 'flatpak update;bash'"```  
 
+-------------------------
+
+
 ## Snap
 Snap Install and Commands. I do not use snap often however it is built into some of the Software Stores and good to know its commands.  
 ​
@@ -493,6 +513,9 @@ Run with sudo privileges
 $ sudo ./snap-cleaner.sh
 ```
 
+-------------------------
+
+
 ## Python pip
 Python packages install with apt or pip3
 * Ideally inside a virtual env (keeps the packages local to that project).
@@ -510,6 +533,9 @@ To uninstall can use either method
 * ```$ pip3 uninstall <package name> ```  
 * ```$ python3 -m pip uninstall <package name>```  
 
+-------------------------
+
+
 ## wget,curl,git,shell
 **curl or wget**. Both are command line tools for downloading packages from ftp and http.
 * ```$ wget <ftp/http....location>  ```  
@@ -523,6 +549,9 @@ After downloading and extracting. Follow documentation to run a
 * ```$ bash <installation file.sh> ```  
 or if it is installation file
 * ```$ ./<installation file> ```  
+
+-------------------------
+
 
 ## AppImage
 There's no installation or extracting files. You download the .AppImage file, make it executable, and run it.  
@@ -548,6 +577,9 @@ RPi - Preferences-Add/Remove software (uses PiPackages manager for GNOME)
 
 Ubuntu - GNOME software center, Linuxbrew, snap (have not tried snap on RPi)​  
 Download/Extract a Binary Distribution (tarball with /bin, /lib, /share)  
+
+-------------------------
+
 
 ## Download/extract a Binary Distribution
 If you download a tarball (.tar.gz or .tar.xz) and it has the files inside /bin, /lib, /share folders then you need to extract them to corresponding folders.  
@@ -592,6 +624,9 @@ Copy/install the files by unarchiving in /usr/local/ (-C is used to specify /usr
 Side note - this is not normal.. but if a program requires changing ownership run the chwon command after you unarchive and before you copy/install.
 * ```$ sudo chown -R root:root <folder> ```  
 
+-------------------------
+
+
 # Downloading the Right Package
 Picking the right package for your system. Synaptic(apt) knows what type of system you have and will install the correct version. However, if you are manually downloading an installation file you'll need to know what type of system you have and choose the right one.  
 You can find OS info with ```$ cat /etc/os-release ```  
@@ -613,6 +648,9 @@ PCs that are Intel/AMD CPU
 * AMD64 will run on both AMD and Intel 64 bit
 * Ubuntu (debian type) 64 bit = deb x64  
 (32 bit software can usually run on 64 bit system, but not vice versa)  
+
+-------------------------
+
 
 # Compressed Archived Files (zip)
 Quick info on compressed files
@@ -665,6 +703,9 @@ To Unzip/Extract/Decompress
 * unzip command for zip file
 * ```$ unzip file.zip```  
 
+-------------------------
+
+
 # Install Errors
 If you get **Msg Can Not Uninstall/Re-install an Older Package(Dependencies) Already Existing on Your System.**  ​
 --ignore-installed, --force-reinstall, -f  
@@ -680,6 +721,318 @@ Or try removing the dependency giving problems and re-run the install of the ori
 ```$ sudo apt-get remove python-'dependency listed in error msg'```  
 ```$ sudo apt install -f```  
 
+-------------------------
+
+
+# Updating Desktop Icons
+Updating Desktop Icons, Start Menu, Dock, Short-cut Keys  
+Depending on your system there are multiple locations you can launch an application from  
+* Desktop
+* Start Menu, Launcher, Dock (the bar on the side or top/bottom of your desktop)
+* there are also short-cut keys (example 'print screen' for screen capture)
+
+Typically when you install a program the Desktop Icon and/or Start Menu/Launcher will be added automatically. However, if you have a program that does not create a start icon, or if you want to add a customized launcher for a script then the instructions below should help.  
+
+Three key parts you'll need
+1. Location of the executable file you want launched
+2. An icon (optional, but improves appearance)
+3. A .desktop file (what you will create)  
+
+Here are common locations I've found these three parts on an existing system  
+
+| User      |executable |.desktop file          |icon  
+|----------|-----------|-----------------------|----  
+|All Users  | /usr/bin   | /usr/share/applications| /usr/share/applications  
+|Single User| $HOME/.local/bin | $HOME/.local/share/applications | /$HOME/.local/share/icons/  
+
+----------
+Note for Flatpak and some other installer the executable/icons may be found in /var/lib.
+Flatpak -  
+/var/lib/flatpak/exports/share/  
+~/.local/share/flatpak/exports/share/applications  
+
+**Ubuntu** - 
+ I noted some problems creating a .desktop file and having the "right-click, allow launching" option.  
+ Changed permissions and set the executable flag.  
+ But **unless the .desktop was in the desktop folder** it would only open in text editor. So on Ubuntu I put the .desktop files in the Desktop folder  
+
+ Most applications installed on my systems are in the "All users" category of /usr/bin.  
+ But there are a few that are installed in the $HOME/.local/bin and other locations.  
+ When adding my own application or downloading an AppImage I use the $HOME/.local/bin (you may need to create it if it doesn't already exist).  
+ Your ~/.profile should then add the $HOME/.local/bin to your $PATH.  
+ That is my preference but you could use $HOME/bin, too.  
+ My instructions below use $HOME/.local/ location.
+
+A useful command is the ```$ mlocate *name.desktop``` to search for existing apps and images. 
+
+For more details you can look at the specs at [freedesktop](https://www.freedesktop.org/wiki/Specifications/)  
+
+-------------------------
+
+
+**Finding the Executable File**  
+Primary part of the .desktop file is pointing it to the executable that it should launch.  
+* If the executable is for a downloaded ImageApp or custom shell then you'll know the location. My preference is to put them in the **$HOME/.local/bin **  
+* For Flatpak you will use the Flatpak run command ie. ```flatpak run org.gimp.GIMP```​  
+* If you're creating a .desktop file for an app that installed but did not create its own icon then you can try
+* ```$ which <program name>```  
+* Likely it is in **/usr/bin **  
+​Once you have the path of the executable you can move to the icon.
+
+-------------------------
+
+**Locating an Icon**
+The icon part is optional but will help with the appearance. It varies by system but below are some guidelines. (icons are typically .png or .svg files)
+* Quick method is download a logo from the web. Save it as a .png in $Home/.local/share/icons
+* If the .desktop is for an AppImage then you can copy the AppImage file and change the extension to .zip. Now open the zip file and drill down to /usr/share/icons/.. Extract one of the icons to $HOME/.local/share/icons
+* If you have another PC with the app/icon you can do a search in /usr/ for it with
+* ```$ find . -name *.png | grep "appname" ```  
+* or
+* ```$ mlocate --regex ".*appname.png" ``` (or *.svg)  
+* This searches for all .png images with "app-name" in them. Do not be too specific. Try only a few characters first. Some icons have very abbreviated names. Most icons under /usr/share/pixmaps and /usr/share/icons/ . Except flatpak. Look in /var/lib/flatpak/exports/share/ and ~/.local/share/flatpak/exports/share/applications.  
+
+-------------------------
+
+
+**Creatinging the .desktop File**
+* ​​Create a .desktop file in $HOME/.local/share/applications
+* example - $HOME/.local/share/applications/balenaEtcher.desktop​  
+
+Contents of balenaEtcher.desktop
+```console
+[Desktop Entry]
+​​Type=Application
+Name=BalenaEtcher
+Comment=BalenaEtcher
+Categories=Utilities;
+Terminal=false
+Exec=/home/USER/.local/share/applications/balenaEtcher-1.5.115-x64.AppImage
+Icon=/home/USER/.local/share/icons/balena-etcher-electron.png
+StartupWMClass=balena-etcher-electron​
+```
+* (Change "USER" to your user name)​​  
+* Now make the newly .desktop file executable ​​​
+    * Right click on the .desktop file and go to Properties/Permissions and check 'Allow executing file as program'
+    * Or command line ```$ chmod +x /path/to/your/file.desktop```  
+
+​To test the .desktop for errors
+* ```$ desktop-file-validate file.desktop```  
+* .desktop file should now be ready to execute. Can restart and confirm the program is also added to the Start/Launcher menu.
+
+*Ubuntu Specific​*  
+When app is running and in the dock, you can right click, add to favourites.  
+
+*RPi specific*  
+You can right click on an application in the Start Menu/Launcher and view the 'properties' which has the command line or you can 'add to Desktop'.  Can then find the .deskop file in /home/pi/.local/share/applications and view contents.   
+**Some RPi icons are in /usr/share/pixmaps**  
+
+-------------------------
+
+
+**More Details of the .desktop File**
+​​Parts of the .desktop file described at [Ubuntu community](https://help.ubuntu.com/community/UnityLaunchersAndDesktopFiles)  
+Labels and flags are case sensitive. It is helpful to create the icon in gedit and it will color code according to .desktop type​​  
+
+**[Desktop Entry]** <-- Do not forget header  
+**Type**= options are Application, Link, Directory  
+**Categories**=Tags;Describing;Application;   
+Use Alacarte and ```$ mlocate *app.desktop ``` to find existing files to figure out category names for your specific Start menu.  
+**Terminal**=true or false  
+If running a shell or python program that needs the terminal to select/execute options then set to true. (case sensitive) Another option is to open a terminal in the Exec line. If starting a terminal in Exec you will need  to know what type of terminal your system has (can open a terminal and click on the 'about' option). For my RPi it is 'lxterminal' and for my Ubuntu it is 'gnome-terminal'. Examples below.  
+
+**Exec**= path to the binary or executable  
+If the executable is in a location listed in $PATH then do not need to specify the path.  
+Examples  
+Exec=/usr/lib/firefox-esr/firefox-esr (full path since /usr/lib is not in $PATH)  
+Exec=vncviewer (vncviewer binary is in /usr/bin/, which is in $PATH, do not need full path)  
+Put a %F at the end for it be an option when associating an extension with an application.  
+​
+**Icon**= path to the icon image  
+There are locations the system will automatically include for icons so it's possible to just list the icon name with no path or extension. That is why most of the .desktop files on your system will not have paths listed for the icons. I usually include the full path while I have it. But you can try ame only if you put the icon in one of the locations /usr/share/icons or $Home/.local/share/icons/  
+
+​On Raspberry Pi, for a gui option. You can go to the .desktop file, right click 'Properties', and click on the icon image. It will open up a window where you can browse and select either a system icon or go to one of your folders.  
+
+Desktop file can not expand $HOME variable so do not use $HOME in path.  
+​
+**StartupWMClass**=  
+App will map at least one window with this string. Which class its grouped in launcher at startup.Have a window open with the app running, then  
+```$ xprop WM_CLASS```   
+Now click on the app window with your mouse  
+For manual ```$ man xprop```  
+Can use to see what terminal you are using if adding to your Exec command. ie lxterminal, mate-terminal, gnome-terminal  
+
+Path= List the working directory  
+
+**MimeType**=Type/Subtype  
+Equivilant of a file extension for the internet. Inidicates which program to open it with. Note the  ";" at the end of Categories and MimeType.  
+RPi Start Menu (alacarte)  
+Note - alacaret can be installed on Ubuntu too.  
+```$ sudo apt install alacarte```  
+Raspberry Pi uses 'alacarte' to edit the Start Menu/Launcher  
+Note - I've noticed my changes in RPi alacarte seem to revert to the 'Other' Menu. So I only add custom app launchers in the 'Other' category. I still find it helpful for organizing apps I use often.  
+Go to Start/Preferences/Main Menu Editor  
+Now you can add a New Menu or New Item  
+When you add a New Item you fill in the same primary fields as a .desktop file  
+Icon (click on the image)  
+Name (name of app)  
+Command - This will be the same as the Exec field in a .desktop file  
+/usr/bin/<application> (path to executable binary file)  
+lxterminal -e 'commands' (start terminal and execute commands, shell file, python file, etc)  
+bash -c 'commands' (run shell commands with ability to pass arguments/variables)  
+lxterminal -e 'bash -c "commands"' (wrap the bash command inside the terminal command)  
+Keyboard Short-Cuts and Compose Character Map  
+​​Keyboard short-cuts let you open applications with a combintion of key strokes (ie using  'print-screen' to take a screen capture. It can also be useful if you do not  have a mouse connected but have a keyboard and want to run a couple simple commands (ie check the IP address).   
+
+-------------------------
+
+
+**Raspberry Pi Specific**  
+Pi character map can be enabled with compose  
+```$ sudo raspi-config```  
+Localisation Options  
+* Keyboard  
+* Go thru options til you get to 'Compose Key' and select one (ie Right Alt)  
+* Keyboard combination descriptions are in ubuntu compose table  
+* (ie - Alt-o-o will insert ° and Alt-u-/ gives µ)  
+
+Keyboard shortcuts -mapped in /etc/xdg/openbox/lxde-pi-rc.xml  
+* If you edit ($ sudo nano /etc/xdg/openbox/lxde-pi-rc.xml) it will ask to copy this file to /hom/pi/.config/openbox. This also makes it easier to modify since you do not need 'sudo' and can edit with gedit.  
+
+Scroll down and you'll see key bindings  
+example below opens a Terminal with 'ctrl-alt'T'  
+```console
+<keybind key="C-A-T">   (see below.. this is equivilant to ctrl-alt-T)  
+    <action name="Execute">
+        <command>x-terminal-emulator</command>
+    </action>
+</keybind>
+```
+
+Note the mapping of keys to functions below  
+* A = ALT
+* C = CTRL
+* S = Shift
+* Super_L = Windows Start
+* Print = Print Screen
+* space = spacebar
+* Escape = esc key
+
+For keyboard specific keys (ie volume functions) you can run the command below to see what keys are binded to  
+```$ xev -event keyboard```  
+Now as you type keys you can see the value  
+(example- when I hit the mute button it showed "XF86AudioMute")  
+
+Some Existing Short-cuts  
+* ctrl-esc = Start Menu
+* ctrl-shift-esc = Task Manager
+* ctrl-alt-T = Terminal window
+* alt-F2 = command execute
+* Print - Screen Capture (I use /usr/bin/gnome-screenshot --interactive for the command)
+* Alt-F4 = close window
+* Alt-Space-M - move window with keyboard (useful if window menu is off the screen)
+* ctrl-alt-D = hide/unhide Desktop
+
+-------------------------
+
+
+**Ubuntu Specific**  
+GNOME character map varies by system. Search in settings first. One app I used is  
+```$ sudo apt install gucharmap```  
+Then run gucharmap for the gui. You can copy/paste special characters like °C.  
+
+Keyboard Shortcuts - Ubuntu has a simpler interface for updating short-cut keys  
+* Right click on Desktop and select 'settings'  
+* Go to 'Keyboard Shortcuts'  
+* Here you can re-map an existing shortcut   
+* Or go to the bottom and hit the + to create a custom shortcut  
+* the command option will be filled out similar to creating a Desktop icon  
+
+
+-------------------------
+
+
+**Associating an Extension with an Application**  
+​Usually the easiest method is to right-click a file and select "Open with Other Application".  
+Then search for the app.  
+You also have option of making it default.  
+If your app does not show up in the list make sure it has {% raw %}%F{% endraw %} at the end of exec in the .desktop file.  
+/usr/share/applications/defaults.list will show the default applications for types.  
+
+Can show MIME Type in "File Explorer" preferences.  
+<div class="row">
+    <div class="col-8 mt-3 mt-md-0">
+        {% include figure.html path="assets/img/linux/mime.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+-------------------------
+
+
+**Some Terms and Notes**
+​​* ​Existing desktop files are in /usr/share/applications.
+* MIME type identifies what type of of file it is. (so software knows how to handle the data). It is similar to a file extension.
+* $1, $2.. shell/bash arguments
+* touch - create a file
+* If the bin file is not in a path listed in your $PATH variable you will need to provide the entire path.
+* If the bin file is in a folder listed in your $PATH then you can just list the filename without the path.
+* You need to set the Terminal=true flag or include lxterminal -e 'command' in the Exec
+* If executing a script and want the terminal to stay open use $SHELL as last command  
+
+-------------------------
+
+
+**Advanced Exec Options**  
+Point Exec to a command(s) including shell file/scripts, python .py file  
+* lxterminal -e 'commands' (run commands, shell files/scripts, python files. Can add 'sudo' in command line)
+* bash -c 'commands' (run commands, shell files/scripts with bash so arguments or variables could be used)
+* lxterminal -e 'sh -c "commands"' (wrap the bash inside lxterminal -e. Note the nested quotation marks)
+
+-------------------------
+
+
+​**Some examples to execute shell and python scripts**  
+
+* Exec=sh /usr/bin/test.sh  (execute test shell script)
+* Exec=sh -c 'sudo ./test.py;$SHELL'  (Run shell/bash and using sudo execute python file. Note- test.py was made executable and has shebang with python version specified in it. $SHELL at the end will keep terminal open for more commands.)
+    * If no lxterminal is specified in Exec command then Terminal=true should be set (all lower case)
+* Exec=lxterminal -e "sh -c 'sudo ./test.py;$SHELL'"  
+    * Since lxterminal is specified in Exec command it doesn't matter what Terminal flag is set to.
+    * Note you may have a different terminal. Run $ xprop WM_CLASS and then click on an open termianl to see what the name is. Common examples
+    * lxterminal (RPi LXDE)
+    * mate-terminal (MATE)
+    * gnome-terminal (Gnome)
+    * xfce4-terminal  
+    
+-------------------------
+
+
+**More Exec examples to play around with**  
+
+* ```terminal -e 'command', sh -c 'command'``` (same as bash -c if bash is set as shell)
+* ```lxterminal -e 'command1;command2'``` will open a terminal and execute the commands inside the string
+* ```sh -c 'command1;command2' ``` (using sh with -c allows variables arguments to be used, starting at $0)
+    * An advantage of the sh -c is that it gives you the ability to use variables/arguments
+    * The sh -c can be wrapped inside the lxterminal -e 'command'
+* Can use "$BASH" at the end to keep a terminal screen up
+
+Some Examples  
+Exec=bash -c 'mkdir "$1"; cd "$1"; touch "$2"' bash test file.txt ($0 = bash, $1=test dir, $2=file.txt) Will make a dir, change into that dir and then create a file  
+Exec=bash -c 'cd "$1"; touch "$2"; $BASH' bash test file3.txt ($BASH command at the end will keep the terminal open)  
+
+Other examples of commands  
+​Exec=lxterminal -e 'ls; read'  (read will leave window up until you close it)  
+Exec=lxterminal -e './test.py; $SHELL'    (test.py must be executable)  
+Exec=lxterminal -e 'cd /home/pi/ && python3 test2.py; $SHELL'  (have to specify 'python3' because test 2 is not executable) OR  
+Exec=lxterminal -e 'cd /home/pi/;python3 test2.py; $SHELL'  
+Exec=lxterminal -e 'cd Pictures && ls; $SHELL'  ($SHELL or $BASH will leave the terminal window up for more commands. Otherwise it will close after executing)  
+Exec=lxterminal -t "test" -e "echo 'hello';sleep 3" (This command will open a terminal called "test", print 'hello', wait 3 seconds and close)  
+
+
+To make a Raspberry Pi menu item for running the update/upgrade as sudo  
+Go to preferences/main menu editor and Go to menu you want it in.  
+Do new item and edit it.  
+For command line use  
+```lxterminal -e "bash -c 'sudo apt update && sudo apt full-upgrade;bash'" ```  
 
 -----------------------------  
 -----------------------------  
