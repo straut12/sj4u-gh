@@ -11,10 +11,12 @@ toc: true
 
 Most my projects will have a esp32/MicroPython (I use μpython for shorthand) option along with the RPi/Python code. uPython includes a small subset of Python libraries to make beginner projects easier. For more advanced projects some adjustments to the code will be needed. Ssee [python vs upython section](../../../ref/morecoding/python-vs-micropython/). At minimum you will have a boot.py and main.py that run when the esp is powered. But you still have the ability to write packages/modules, store them on the esp in a /lib folder, and then import them into your main.py (ie you can create adc, motor, servo modules and import them for use in main)
 <div class="row">
-    <div class="col-md mt-3 mt-md-0">
+    <div class="col-8 mt-3 mt-md-0">
         {% include figure.html path="assets/img/hardware/esp32.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
+
+-----------------------------------
 
 # Compared to RPi
 The ESP32/ESP8266  differ from the Raspberry Pi in a couple ways.​
@@ -22,14 +24,20 @@ The ESP32/ESP8266  differ from the Raspberry Pi in a couple ways.​
 * At minimum you will have a boot.py and main.py. Both get loaded when the esp is powered. The boot typically has minimal code to finish the boot process. But the variables defined in boot are accessible in main. 
 * ESPxx also have analog in pins (ADC) for directly measuring voltage vs a digital, binary signal (lo/hi or 0V-3.3V). You do not need an external ADC like the Pi requires. When using a pin as an input always confirm you are not exceeding it's voltage range (esp32/Rpi is 3.3V max, esp8266 analog is 1V). If your input is greater than this you need a voltage divider (logic converter if going from 5V-3.3V)
 
+-----------------------------------
+
+
 # Download microPython Firmware
 * First download the micropython firmware .bin file from [https://micropython.org/download/](https://micropython.org/download/)  
 * Select the Espressif board you're using. Then the latest, stable GENERIC .bin file. (SPIRAM version is if you need access to extra memory).
 
 > Make sure your micro USB cable has data lines. Many thinner cables are charge only. I use a [micro USB to DIP](https://www.amazon.com/s?k=micro+usb+to+DIP&ref=nb_sb_noss_2) and [USB solder socket connector](https://www.amazon.com/s?k=female+usb+solder+jack+connector&ref=nb_sb_noss_2) to check continuity on the D+/D- pins.  
 
-# Programming the espXXXX
+# Programming the esp
 Next steps covers 2 options for installing the upython firmware on your board and programming it using an IDE.
+
+-----------------------------------
+
 
 # Option 1 Thonny IDE
 [Thonny](https://thonny.org/) has been the easiest to setup (comes installed on RPi) and a reliable IDE with an easy connection to ESP32. I've had the best luck with the most recent version of Thonny 3.3.3+ (default on 32bit RPi OS). The older version I have problems connecting to esp32 sometimes. I noticed 64bit Ubuntu installed 3.3.4. So depending on your system this has what worked for me.
@@ -41,10 +49,10 @@ NOTE - RPi OS (32bit) Thonny comes installed as 3.3.3+ and extra steps not neede
 * Ubuntu (64bit)I first tried ```$ sudo pip3 install thonny``` But did not work completely. Then tried ```$ sudo apt install thonny``` and had 3.3.4  
 * Another option is try ```$ bash <(wget -O - https://thonny.org/installer-for-linux)```  
 * On non-RaspberryPi OS install you will likely need to add your user to the dialout group to have access to the serial port (USB) for programming the esp. But you can hold off and see if you get the error later. Otherwise use ```$ sudo usermod -a -G dialout $USER``` to add your use.  
-​
+
 ## Install on RPi OS lite
-(Thonny not pre installed) Can install with ```$ sudo apt install thonny```, check ```$ thonny --version``` and make sure 3.3.3+
-​
+(Thonny not pre installed) Can install with ```$ sudo apt install thonny```, check ```$ thonny --version``` and make sure 3.3.3+  
+
 ## Install esptool and upython firmware
 * Once installed open Thonny and Install the **esptool** package under under **Tools/Manage plug-ins**.
 * Then go to Tools/Options/Interpreter and you can select the ESP32/ESP8266 option. 
@@ -62,6 +70,9 @@ Thonny has a nice file manager system to easily create directories on the esp32 
         {% include figure.html path="assets/img/hardware/thonny.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
+
+-----------------------------------
+
 
 # Option 2 VScode-Pymakr
 Another option that has the advantage of working with VScode is Pymakr. But there are more steps to setup. I would start with Thonny/RPi and move to Pymakr only if you have started using VScode and familiar with extensions (or if you do not have a Pi).
@@ -124,6 +135,9 @@ Setup Pymakr for coding
 * You'll want to be in a local folder to upload/download code between the esp32 and your PC.
 
 A great resource is at [randomnerdtutorials](https://randomnerdtutorials.com/)
+
+-----------------------------------
+
 
 # Helpful Commands
 Some Helpful Commands
