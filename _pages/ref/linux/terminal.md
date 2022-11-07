@@ -34,6 +34,7 @@ when you see '#' - needs to be executed with root privileges either directly as 
 
 -------------------------------------------------
 
+
 **Ownership functions**  
 Changing Ownership of a file  
 ```$ chown USER:GROUP FILE```  
@@ -142,7 +143,7 @@ Again, once you close the session it will not exist. To make it persistent add i
 * and add ```export TEST=hello```
 * Now save
 ​
-**Update PYTHONPATH**
+## PYTHONPATH
 Python has a similar path setting that you can use -> PYTHONPATH
 It will be empty initially. You do not need to set it up, however it can be good practice to understand the PATH concepts.
 You can create your /bin/ dir where you store your executable python scripts and update the PYTHONPATH so you can run these scripts from any location (without having to specify the full path)  
@@ -181,9 +182,10 @@ The concept is you can now keep your executable python scripts in ~/bin folder a
 
 # regex,awk,sed,grep
 Regular expression (regex), grep, sed, awk  
-Three common Linux commands for text processing are grep, sed, awk (and cut). Although there is some overlap each have a strength. The search pattern tool used with them is regular expression or regex.  
+Three common Linux commands for text processing are grep, sed, awk. Although there is some overlap each have a strength. The search pattern tool used with them is regular expression or regex.  
 
-regex - Regular expression is a type of search pattern used with the grep and sed. It allows complex search patterns (special characters are used). Can be used in commands, functions, programming, etc. For example used in Python with the "import re". Note regex is different than filename "globbing" where ? and * are used as wildcards to find a filename. Link to regex101 testing site  
+## regex
+Regular expression is a type of search pattern used with the grep and sed. It allows complex search patterns (special characters are used). Can be used in commands, functions, programming, etc. For example used in Python with the "import re". Note regex is different than filename "globbing" where ? and * are used as wildcards to find a filename. Link to [regex101](https://regex101.com/) testing site  
 * rep - give grep a text input and a "regular expression" and it will search line-by-line looking to match your regex. It will then output every line a match was found. 
 * sed -  does substituion. give sed a pattern to match and what you want to replace it with.  
 * awk - acts as an ad-hoc table or database; separating fields. You can specify which field to output.  
@@ -437,14 +439,14 @@ Then to view that page
 * ```man 7 daemon```  
 
 Commands to frequently run and keep your system up-to-date  
-​* ```sudo apt update && sudo apt upgrade -y  
+* ```sudo apt update && sudo apt upgrade -y```  
 (or full-upgrade which will remove packages if needed to update the whole system. Confirm which packages will be removed)  
 * ```sudo apt-get install -f  ```(fix partial upgrades)  
 * ```sudo killall apt apt-get ```(kill all running process)  
 
 * ```date```  
 * ```cal```  
-Directory and File Commands  
+## Dir/File commands  
 ​​​Directories/Files   
 * ```pwd ```Display the path for the directory you are in (current working dir)  
 * ```cd <directory> ```Change directory  
@@ -471,6 +473,8 @@ Can use ? wildcard to indicate wild for a single character.
 * ```cp <file> <destination directory> ```Copy a file  
 * ```cat <file> ```Display contents of a file  
 * ```less <file> ```Display contents by page  
+
+## Pipe/grep
 Using Pipe | and grep for Advanced Text Searches  
 grep is used to search for a text match in the contents of files (using regular expression). There are many grep options but here are a few common tools for matching text in a file.  
 Don't forget ```man grep``` and ```$ info grep​```  
@@ -557,6 +561,7 @@ Basic syntax
 -L (follow symbolic links)  
 -type (f=file, d=directory, l=symbolic link)  
 
+## Find/mlocate
 Find using wildcard/globbing  
 Can use * wildcards, will only find files.  
 Quotes are important for recursive search  
@@ -657,12 +662,14 @@ example $ echo $PATH > test will output the contents of $PATH to 'test' file
 Environment Variables  
 * ```env ``` To see list of variables  
 * ```echo $PATH ``` To output variable value  
+
+## globbing
 globbing vs regular expression  
 When researching wildcard/matching you may come across the terms globbing and regular expression (regex)  
 Globbing filenames is a simpler method of using * and ? wild cards  
 \* = match 0 or more characters  
 ? = match a single character  
-Regex is used in commands for pattern matching in text and has more complex options. A good tutorial to learn how it works is regexone  
+Regex is used in commands for pattern matching in text and has more complex options. A good tutorial to learn how it works is [regexone](https://regexone.com/)  
 Running Command with sudo/root  
 Running commands from root (see sudo section for more details)  
 Most common, temporary method, is  
