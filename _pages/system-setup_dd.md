@@ -18,7 +18,7 @@ children:
       permalink: /ref/linux/sharing/
     - title: divider
     - title: Remote vnc ssh
-      permalink: /ref/linux/vnc/
+      permalink: /ref/linux/vnc-ssh/
     - title: divider
     - title: Terminal cli
       permalink: /ref/linux/terminal/
