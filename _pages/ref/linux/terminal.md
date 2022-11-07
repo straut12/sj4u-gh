@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/linux/
-title: 
-description: Intro to 
+permalink: /ref/linux/terminal/
+title: termianl
+description: Intro to cli terminal commands
 nav: false
 toc: true
 ---

@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/linux/
-title: 
-description: Intro to 
+permalink: /ref/linux/autostart/
+title: autostart
+description: Intro to starting programs on boot
 nav: false
 toc: true
 ---

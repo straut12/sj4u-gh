@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/linux//
-title: 
-description: Intro to 
+permalink: /ref/linux/sharing/
+title: sharing
+description: Intro to methods for file sharing
 nav: false
 toc: true
 ---

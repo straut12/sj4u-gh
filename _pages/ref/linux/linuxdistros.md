@@ -11,7 +11,7 @@ At the core of any computer is the Operating System (OS). The most common OS on 
 
 > For clarification you do not install Linux OS, Linux is a [kernel](https://en.wikipedia.org/wiki/Linux_kernel). Instead you install a Linux distribution or distro.  
 
-There are multiple methods to run or install a Linux distro on a regular PC/laptop.
+It's helpful to understand early on what your options are for installing a Linux distro on a traditional PC/laptop.
 1. Install the Linux distro as the sole OS (ie you have an older Windows version on the PC that is not supported anymore or you're using a Raspberry Pi type system that only has enough SD card space/processing power to run Linux)
 2. Dual boot. Install the Linux distro along side the other OS. When you boot the machine you decide which OS to start. The most common method I use because when you're in the Linux distro you have all options/hardware available to you. Downside is both OS's require a hard drive partition/space. When you want to use one vs the other you need to reboot.
 3. [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) (windows subsystem for Linux) This option is becoming more popular and is similar to running Wine. You run Linux inside your windows environment. No reboot is required and it takes care of a lot of the Linux installation. Hardware resources are not as much an issue but you do not get all the Linux functionality (systemctl, vnc servers may not work the same). If you want to play with Linux but are not interested in Raspberry Pi/STEM projects WSL is probably the easiest option.
@@ -100,11 +100,12 @@ There are 2 factors for 32/64bit. If you run ```$ lscpu ``` most systems will li
 Processor (cpu)  
 **Intel/AMD**  
 * 32 bit = X86 (or i386)
-* 64 bit = X64 (or X86_64 or AMD64)
+* 64 bit = X64 (or X86_64 or AMD64)  
+
 [​ARM](https://en.wikipedia.org/wiki/ARM_architecture_family) wiki link has more details if you're new to arm  
 * 32 bit = armhf (hard float, refers to armv7 architecture), armv7, armv6, arm11, and more
-* 64 bit = arm64 (armv8+)
-​​
+* 64 bit = arm64 (armv8+)  
+
 **Architecture** - Operating System
 * 32 bit OS can run on both 32/64bit cpu
 * but 64 bit OS can only run on 64bit cpu​
@@ -116,28 +117,10 @@ Most OS's focus on 64 bit (Raspberry Pi OS is still 32 bit to support older RPis
 
 A Raspberry Pi being used in a project to interface with sensors or switches might be setup with RPi OS Lite and you login remotely to its terminal using ssh. If you do not need the desktop environment the RPi will be faster to boot/reboot.  
 
-Some DE options on top of Raspberry Pi OS Lite (or full version) with tutorials
-* MATE desktop
-* XFCE desktop
-
-Another wrinkle to Linux distros that differ from Windows/macOS is that you can install multiple desktop environments on a system and use a windows manager to login to which ever you want for that session.  
-
-Ubuntu also has distribution/desktop environment pairs with specific names.  
-* (Ubuntu) Budgie desktop
-* (Ubuntu) MATE desktop
-* (Kubuntu) KDE desktop (KDE = Plasma)
-* (Xubuntu) Xfce desktop
-* (Lubuntu) LXQt desktop  
-
-**Some More Useful Terms**  
-<div class="row">
-    <div class="col-7 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/linux/diagram.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-Shmuel Csaba Otto Traian, CC BY-SA 3.0, via Wikimedia Commons  
+**More Details on Terminology**  
 
 (don't forget the command ```$ man <command> ``` to see the manual)  
+
 **Debian Family**
 * [dpkg](https://en.wikipedia.org/wiki/Dpkg) - Low-level/back-end tool for Debian-type distros. Install/removes .deb packages.
 * [APT](https://en.wikipedia.org/wiki/APT_(software)) - High-level/front-end tool, (command line) package manager for dpkg based distros. ​​
@@ -150,12 +133,8 @@ Shmuel Csaba Otto Traian, CC BY-SA 3.0, via Wikimedia Commons
 * ​RHEL - Red Hat Enterprise Linux
 * SLED - SUSE Linux Enterprise Desktop
 * SLES - SUSE Linux Enterprise Server  
-​
+
 [Kernel](https://en.wikipedia.org/wiki/Kernel_(operating_system)) – The core of the OS and one of the first programs to load during boot. Interfaces between hardware and software, managing the CPU/Memory and connected devices. Linux is a unix-like kernel.​​​​  
-[Desktop Environment (DE)](https://en.wikipedia.org/wiki/Desktop_environment) - also referred as graphical interface. Some examples are GNOME, Cinnamon, MATE, XFCE, KDE. The part you interact with. Fully integrated system that builds upon the Window Manager. Requires a Display Server and Window Manager. A system can have multiple DEs and you can use a  Display Manager to select which one you want to use during login.  
-[Display Server](https://en.wikipedia.org/wiki/Windowing_system#Display_server) - (aka graphical server) Common example is Xorg. Provides the primitive framework for the DE. Uses display server protocol like X windows (aka X11, X, Xserver) or Wayland. Required for a DE.​​​​​  
-[Window Manager](https://en.wikipedia.org/wiki/Window_manager) - Common example is Openbox or Marco (older examples are twm and fvwm). It is system software, usually part of the DE, that manages the placement and appearance/menu/buttons of the windows. Can be used with DE or stand alone (requires X windows but not a DE)
-[Login or Display Manager (DM)](https://en.wikipedia.org/wiki/X_display_manager) - Common example is LightDM and GDM (GNOME Display Manager). It is a graphical login manager that starts the greeter (or auto login) and the display servers. But it is not required. ​You can have a setup that boots to cli and if you want a desktop you run $ startx and it will launch the DE. startx is a front end to xinit which can manually start the display server (instead of using a display manager). xinit will use .xinitrc and .xserverrc to determine the client/server to run (/etc/X11/xinit) . Recommended to start with a 'light' OS (no default DE installed) and build it from the ground up if wanting to customize these settings.
 Early Unix Systems​  
 [UNIX-V](https://en.wikipedia.org/wiki/UNIX_System_V) - UNIX System V, early UNIX system. Some components, like init, still visible in Linux distros.  
 [BSD](https://en.wikipedia.org/wiki/FreeBSD) - FreeBSD is a Unix-like OS descendent from BSD (Berkely Software Distribution). Slackware - oldest, maintained unix-like OS.  
@@ -190,9 +169,10 @@ Directions will reference the Ubuntu install
 4. Virtual Machine (ie VirtualBox) - You create a virtual environment within your OS (windows/macOS/Linux) that runs the Linux distro you're testing out. Memory/CPU resources are shared so you need a decent system to run a Virtual Machine.
 
 ## System Pre Check
-After setting up Linux/Windows dual boot on multiple systems I've ran into a few items to be careful of before starting the install process (including setup of Linux USB boot stick).
-1. **Partition Style** Check the partition style of the drive your windows system resides. Is it MBR or GPT? If you are adding disk drives for the Linux distro it is best to keep the partition styles the same and not mix-n-match.  MBR (master boot record) is older and has limitions on number of partitions and size. GPT (GUID Partition Table) is newer without the partition number restrictions. How to check partition style.
-    * Using Windows to check partion style - If you already have unallocated/free space on the drive (or you can create some free space for your linux distro) go to Disk Management (right click on PC file folder and select manage). Select the unallocated space partition and under properties/volume it will note the partition style. A second option is diskpart. Under run (window-R) type diskpart. A command line will appear and if you type "list disk" it will show if the drive is gpt. (if running the windows installation script you can get to diskpart command with "Shift F10") ​​​
+After setting up Linux/Windows dual boot on multiple systems I've ran into a few items to be careful of before starting the install process or even setting up the Linux USB boot stick.
+1. **Partition Style** Check the partition style of the drive your windows system resides. Is it MBR or GPT? If you are adding disk drives for the Linux distro it is best to keep the partition styles the same and not mix-n-match.  MBR (master boot record) is older and has limitions on number of partitions and size. GPT (GUID Partition Table) is newer without partition number restrictions. 
+    **How to check partition style.**  
+    * Using **Windows** to check partion style - If you already have unallocated/free space on the drive (or you can create some free space for your linux distro) go to Disk Management (right click on PC file folder and select manage). Select the unallocated space partition and under properties/volume it will note the partition style. A second option is diskpart. Under run (window-R) type diskpart. A command line will appear and if you type "list disk" it will show if the drive is gpt. (if running the windows installation script you can get to diskpart command with "Shift F10") ​​​
     * If you have a disk drive you're setting up and you want to make it gpt you can use diskpart. (be careful and make sure you're using the disk you're installing the Linux distro on)
     ```console
     ​$ list disk
@@ -200,17 +180,17 @@ After setting up Linux/Windows dual boot on multiple systems I've ran into a few
     $ clean
     $ convert gpt
     ```
-​​  * Using a Linux distro to check partion style - open gnome disk utility.  It will show the drives and partion style. (note - GParted is another software tool that is also capable of partitioning but be careful with it. I have accidentally broken my windows boot loader with it.)
+​​  * A **Linux distro** can be used to check partition style with gnome disk utility.  It will show the drives and partion style. (note - GParted is another software tool that is also capable of partitioning but be careful with it. I have accidentally broken my windows boot loader with it.)
 2. ​What boot option is the BIOS on your PC using? CSM (Legacy) or UEFI. You will want your Linux USB boot stick to match the boot option of your PC. These are the firmware of your PC and stored on the motherboard. It is the first software ran on your PC when you power on. It will initialize hardware and load the boot loader (grub) on the hard disk which will fire up the operating system. (UEFI will search for the EFI boot file in the EFI system partition.)​​  
 
-Newer systems will use GPT/UEFI and is usually the preferred setup. But you may have to adjust according to what your PC/windows is currently using.
+Newer systems will use GPT/UEFI and is usually the preferred setup. But you may have to adjust according to what your PC is currently using.
 
 Other things to research if running Linux dual boot with Windows
 * ​Disabling the "fast start" option in "control panel" under "what power buttons do"
 * Disabling the "secure boot" option in the BIOS
 * I have a system with Intel RST (Rapid Storage Technology)/Optane memory that stopped Ubuntu from installing. I did not want to disable the RST/Optane memory in Windows so I tried elementary OS and Zorin. Both of these installed successfully with no issues. 
 
-Always look up the Linux distro's installation instructions , especially if you have a NVIDIA/AMD GPU you want drivers for. But over-all the Linux distros I have tried have been easy and fast installs. I keep all personal files, along with a list of packages to install, on a google share drive. I then use overGrive  to access them and setup my Linux PC.  
+Always look up the Linux distro's installation instructions , especially if you have a NVIDIA/AMD GPU you want drivers for. But over-all the Linux distros I have tried have been easy and fast installs. I keep all personal files, along with a list of packages to install, on a google share drive. I then use [overGrive](https://www.thefanclub.co.za/overgrive) to access them and setup my Linux PC.  
 
 ## Windows Prep
 1. For windows 8/10 disable the 'fast start' option in 'control panel' under 'what power buttons do' (optional, but you may miss the option to boot to the Linux distro)
@@ -346,23 +326,3 @@ $ sudo update-grub
 
 -----------------------------  
 -----------------------------  
-
-[Scratch Tutorials](../../../ref/linux/starting-up/)
-
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/linux/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-<div class="row justify-content-center float-right">
-    <div class="col-4-auto mt-3 mt-md-0">
-        {% include figure.html path="assets/img/linux/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-----------------------------
-Images
-can you col-#  col-sm-#   col-md-#   col-lg-#
-Use auto to auto size around image
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).

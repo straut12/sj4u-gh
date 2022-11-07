@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/linux/
-title: 
-description: Intro to 
+permalink: /ref/linux/vnc-ssh/
+title: vnc ssh 
+description: Intro to vnc, ssh, remote connections
 nav: false
 toc: true
 ---

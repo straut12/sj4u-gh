@@ -11,7 +11,7 @@ toc: true
 -----------------------------  
 -----------------------------  
 
-[Scratch Tutorials](../../../ref/linux/starting-up/)
+(../../../ref/linux/starting-up/)
 
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
