@@ -115,29 +115,31 @@ Git branch commands for local
 ```$ git branch -m <new name>```   
 ```$ git branch -a ``` (list remote branches)  
 
-Create a permanent "develop' branch  
+**Create a permanent "develop' branch**  
 Develop acts as a work-in-progress version of you main branch. You can build features or fix bugs from the develop. (you will always merge back to the main branch when features/bug fixes are completed)  
 ```$ git checkout -b develop main```   
 
-Create a "feature" branch from develop  
+**Create a "feature" branch from develop**  
 ```$ git checkout -b feature1 develop ``` (creates feature branch and checks it out)  
 Can work on the feature and make commits  
 
-Merge the feature back into develop branch  
+**Merge the feature back into develop branch**  
 ```$ git checkout develop ``` (switch from feature back to develop)  
 ```$ git merge --no-ff feature1 ``` (merge develop and feature1)  
 ```$ git branch -d feature1 ``` (delete the feature1 branch)  
 ```$ git push origin develop ``` (update the remote repo)  
 
-When all features are complete merge develop back into main  
+**When all features are complete merge develop back into main**  
 ```$ git checkout main```   
 ```$ git merge develop```   
-​
-Create a "hotfix" (bug) branch from main  
+
+-----------------------------------------------
+
+**Create a "hotfix" (bug) branch from main**  
 ```$ git checkout -b hotfix1 main ``` (creates hotfix branch and checks it out)  
 Can work on the bug and make commits  
 
-Merge the bug fix back into main and develop branch  
+**Merge the bug fix back into main and develop branch**  
 ```$ git checkout main```   
 ```$ git merge --no-ff hotfix1```   
 ```$ git checkout develop```   
@@ -157,6 +159,7 @@ Many of the git commands are accessible in VScode in the command palette (ctrl-s
 To see a log of changes  
 ```$ git log --oneline --decorate```  
 
+## Rename a Repo
 **Rename a Repo**  
 At github go to settings and rename the repo 
 On local PC  
@@ -183,7 +186,7 @@ To see what HEAD points to
 
 ------------------------------------------------
 
-
+## Delete a git folder
 **Close/Remove a git folder from a local project**  
 In VScode palette (ctrl-shift-P) type Git: Close Repository  
 Then delete the .git directory  
@@ -224,6 +227,7 @@ origin' is just an alias on your local system for a particular remote repository
 ```$ git push origin -all ``` (push all local branches)  
 ```$ git push origin --force ``` (forces the push even if it results in non-fast-forward merge)  
 
+## Fix Remote Local Diverged
 **If remote history has diverged from local history then pull the remote and merge it into the local, then push again.**  
 
 ```$ git fetch origin ``` (download commits, files, refs from the remote repo but doesn't automatically merge them)  
@@ -336,23 +340,4 @@ If there are other Pi's with local clones will need to update them
 
 
 -----------------------------  
-
-(../../../ref/coding/starting-up/)
-
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-<div class="row justify-content-center float-right">
-    <div class="col-4-auto mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-----------------------------
-Images
-can you col-#  col-sm-#   col-md-#   col-lg-#
-Use auto to auto size around image
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
+-----------------------------  
