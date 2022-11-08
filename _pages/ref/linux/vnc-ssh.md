@@ -319,29 +319,31 @@ Or use rsync (much faster for a lot of files)
 -------------------------------
 
 # ssh Key Authentication
-ssh-keygen is a way of creating a secure method to log into remote hosts and allow transfer of code/files/data between your system/client and github or another PC/server. The general concept is two files are created (stored in ~/.ssh) with keys, a private and a matching public key. The public key is copied to the remote host/server. When connecting from your PC/client to the remote host/server a check will be done to confirm the private and public keys match.
+ssh-keygen is a way of creating a secure method to log into remote hosts and allow transfer of code/files/data between your system/client and github or another PC/server. The general concept is two files are created (stored in ~/.ssh) with keys, a private and a matching public key. The public key is copied to the remote host/server. When connecting from your PC/client to the remote host/server a check will be done to confirm the private and public keys match.  
 
-> Note I mainly use ssh key authentication for connecting my system to github account. So the notes here are focused on that scenario  
-
-Example files for RSA algo ssh.  
-* Private -> id_rsa (The private key acts as a password, remains on your PC, and should not be shared)  
-* Public -> id_rsa.pub (The public key is copied to other PC's, github, etc. When you login, the remote is able to use the public key for verification and grants access)   
-
-​
-**Quick steps**  
+**How it works**  
 * On your PC/client -> Create keys or copy existing keys
 * On the remote host/server -> Paste the key in your account security settings on the remote host (ie github)
     * Or if working with a server, paste the keys in the server authorized_keys file
-    * (in server scenario the sshd_config will also need to be updated to disable the default simple PasswordAuthentication)
+    * (in server scenario the sshd_config will also need to be updated to disable the default simple PasswordAuthentication)  
 
-**Creating Keys on your PC/Client Side (Private and Public)**  
+Example files for RSA algo ssh  
+* Private -> **id_rsa** (The private key acts as a password, remains on your PC, and should not be shared)  
+* Public -> **id_rsa.pub** (The public key is copied to other PC's, github, etc. When you login, the remote is able to use the public key for verification and grants access)  
+
+> Note I mainly use ssh key authentication for connecting my system to github account. So the notes here are focused on that scenario  
+
+**Detailed Steps**
+**Creating the Pair of Private/Public Keys on your PC/Client Side**  
 * RSA type SSH keys are what worked best for me with Raspberry Pi so the rest of this page will be referring to RSA type.  
 
 * You can run ```$ ls -al ~/.ssh ``` to see if you already have an existing key.   
-* If there is a id_rsa.pub and id_rsa then you already have keys. The id_rsa.pub can be copied to remote hosts for ssh key authentication.  
+* If there is an **id_rsa.pub** and **id_rsa** then you already have keys. Assuming you haven't already used it, the **id_rsa.pub** can be copied to a remote host for ssh key authentication. However if you've already used that key for another account you'll need to follow the steps below to create a new pair and give them a different name.  
 
-* If you need to create a key pair you use ssh-keygen (will create the private and public key pair)  
-* Github now notes new rsa keys need increased security. To increase security can specify algo (-t) and bits (-b): ```$ ssh-keygen -t rsa -b 4096```  
+**Create a Key Pair**  
+* If you need to create a key pair you use ssh-keygen (will create both the private and public key)  
+* Github now has a note that rsa keys need increased security. To increase security you can specify the algo (-t) and bits (-b):  
+```$ ssh-keygen -t rsa -b 4096```  
 * It will ask you to save the file. If the first time you can save as default. If you already have key pairs for other accounts then change the name and use the new name for commands below.  
 
 * Start the ssh-agent in the background and add the newly created SSH key(private) to the ssh-agent. (ssh-agent keeps track of keys and passphrases so you don't have to keep entering a password/passphrase).  
@@ -349,10 +351,9 @@ Example files for RSA algo ssh.
 * ```$ ssh-add ~/.ssh/id_rsa```​  
 
 
-**Sharing/Copying the Public Key to the Remote Host/Server**  
+**Sharing/Copying the Public Key to the Remote Host/Server (ie github)**  
 
 * ​Now you can copy the public key to a remote host like github so you can upload from your local PC to your remote github account. Don't forget to use the new id_rsa.pub name if you had to change it from the default.   
-​
 * A tool you can use to copy the key is  
 * ```$ xclip -sel clip < ~/.ssh/id_rsa.pub```  
 * Or you can manually open the rsa.pub file and copy the key. Once you have the key copied you go to the remote host and paste the key in your account security settings.
@@ -361,19 +362,19 @@ Example files for RSA algo ssh.
 * Go to github, then profile, settings, SSH key, new key and paste the key here.  
 * Now github can authenticate your local PC.  
 
+**Enable ssh Key Authentication for a Server/PC**
 If enabling keys for ssh to a server or another PC you paste the key into the server's authorized_keys file. The best way to do this is using the ssh-copy-id tool. Example below.  
 * ```$ ssh-copy-id user-name@ipaddress```  
 * It will reply with the RSA fingerprint and confirm you want to add it the list of known hosts.  
 
 * Or you can manually copy/paste the RSA key and paste it in the authorized_key file.  
-* ```$ sudo nano ~/.ssh/authorized_keys``` (I have found this file is not always in the same location)  
+* ```$ sudo nano ~/.ssh/authorized_keys```   
 * Paste the public key into the file and make sure it is on a single line.  
 ```console
 ssh-rsa AAB34NJD34987...   
 ```
 
-**SSH Enable Keys (Disable the Default PasswordAuthentication)**  
-For connecting to a remote PC/server. By default ssh only uses password authentication. For the remote PC/server to require keys instead of just a password you need to update the sshd_config file  
+By default ssh only uses password authentication. For the remote PC/server to require keys instead of just a password you need to update the sshd_config file  
 ```$ sudo nano /etc/ssh/sshd_config```  
 Uncomment the PasswordAuthentication line and set it to No  
 
