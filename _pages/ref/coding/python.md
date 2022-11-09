@@ -44,7 +44,11 @@ Two main components of OOP are classes and objects.
         * ATTRIBUTES - variables inside a class that define the data
         * METHODS (class_method) - similar to attributes but define functions instead of data. Typically used to take some kind of action
 
-Inheritance is the concept of building an object (child) or class based upon another (parent). The child inherits the attributes/methods of the parent class which reduces redundancy while also maintaining hierarchy. The child can add new attributes/methods that wouldn't be applicable to the parent. Two styles of OOP or inheritance models are class based inheritance (ie Python) and prototype based inheritance (ie JavaScript). This can be confusing since JavaScript can use the 'class' keyword (considered syntactic sugar) to mimic a class type language.​
+Inheritance is the concept of building an object (child) or class based upon another (parent). The child inherits the attributes/methods of the parent class which reduces redundancy while also maintaining hierarchy. The child can add new attributes/methods that wouldn't be applicable to the parent.  
+Two styles of OOP or inheritance models are  
+1. class based inheritance (ie Python) 
+2. prototype based inheritance (ie JavaScript). 
+This can be confusing since JavaScript can use the 'class' keyword (considered syntactic sugar) to mimic a class type language.​
 
 **JavaScript Structure with OOP**  
 ​​In JavaScript instances can be instantiated via constructor functions with the 'new' keyword.  

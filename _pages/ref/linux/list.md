@@ -22,13 +22,13 @@ Package manager GUI
 * sudo apt install gdebi
 * sudo apt install mlocate
 * sudo updatedb  
-with regex  
+* with regex  
 ```locate -r "^/home/USER/.local/.*png.*$"```  
 * ​sudo apt install curl
 
 * $ sudo su
 * ```# apt install flatpak```
-Add flatpak repository to get apps
+* Add flatpak repository to get apps
 * ```# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo```  
 
 restart  

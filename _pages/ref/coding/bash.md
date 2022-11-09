@@ -201,7 +201,7 @@ echo "today is $1"
 
 ------------------------------------------
 
-## If/Else Conditional and Case Statements
+## If/else Conditional and Case Statements
 ```bash
 # General syntax​​
 if [ condition ] ; then
