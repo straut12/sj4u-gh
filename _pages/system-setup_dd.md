@@ -25,4 +25,10 @@ children:
     - title: divider
     - title: Autostart systemd
       permalink: /ref/linux/autostart/
+    - title: divider
+    - title: Logs
+      permalink: /ref/linux/logs/
+    - title: divider
+    - title: List of SW to Install
+      permalink: /ref/linux/list/
 ---

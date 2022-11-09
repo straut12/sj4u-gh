@@ -672,27 +672,430 @@ Regardless of the package __init__.py (or if it even exists) you can import dire
     </div>
 </div>
 
+# uPython
 
+MicroPython has a subset of Python libraries but there are some areas where the projects will deviate. Especially if you want to take advantage of more recent Python3.7+ features.  
 
+Other differences come up due to the packages that are used for one vs the other. A good example is mqtt.  
+**mqtt**  
+* For RaspberryPi/Python3 I use paho-mqtt - Paho does not require topics to be defined in binary format.  
+* For esp32/uPython I use umqtt.simple - umqtt.simple requires topics to be in binary (b'topic') format. This is to save memory. MQTT requires binary format and converting back-and-forth between string-binary would be extra steps.
+
+Another example is logging. 
+**logging**  
+* Python3 has comprehensive built in logging modules.  
+* upython there is a basic version. To make it more advanced you have to add to it.  
+See section on [logging](../../../ref/coding/python/#logging)  
+
+**Get uPython System Info**  
+esp32 CPU info​  
+```python
+import machine  
+cpufreq = machine.freq()  
+```
+To set the freq  
+```python
+machine.freq(240000000)  
+```
+
+Python/RPi  
+```python
+f = open("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq")  
+cpufreq = int(f.read()) / 1000  
+```
+
+When possible it is best to use integers in upython to keep the processing time as low as possible.  
+At 0.24MHz my esp32 showed   
+Integer calculations (+,-,//,*) take 0.025ms  
+Float calculations (+,-,/,*) take 0.03-0.04ms  
+
+100 calculations would add up to an extra 1ms in process time. This is significant with a stepper motor project where the delay needs to be <1ms.  
+
+Time.sleep (<1 sec delays)  
+Python sleep can be entered as a decimal  
+```python
+from time import sleep  
+sleep(0.001) # 1ms sleep  
+```
+
+**upython**  
+Some boards do not support sleep as a float. Can use sleep_ms or sleep_us  
+```python
+from time import sleep_us  
+sleep_us(1000)  # 1ms sleep .. enter an int in us  
+```
+
+Timer Analysis  
+Python  
+perf_counter() includes delay times  
+process_time() derived from CPU counter so doesn't update with delay  
+```python
+from time import perf_counter_ns # (the _ns is with 3.7+)  
+time_ns = perf_counter_ns() # returns integer, ns. Includes delay times  
+print("code that is being timed")  
+time_ns = perf_counter_ns() - self.time_ns  
+time_ms = time_ns/1000000  
+```
+For python can also use timeit  
+
+**uPython**  
+```python
+import utime, uos  
+time_us = utime.ticks_us() # returns integer, us. Includes delay times  
+print("code that is being timed")  
+time_us = utime.ticks_diff(utime.ticks_us(), time_us)  
+time_ms = time_us/1000  
+```
+
+Another solution for both python/upython is creating a Timer class with start/stop methods built-in. (python Timer can be installed from pypi)  
+# logging
+
+Logging can be used to debug code and/or trouble shooting system issues.  
+For system logging
+* logs during boot
+* systemd logs
+* journalctl
+* var/logs  
+Check out the [system logging](../../../ref/linux/logs/) page.
+
+**For debugging**  
+The logging library has many useful features compared to standard print statements. It is installed with standard python installation and does not require extra install.
+* There are multiple levels of logging (see levels below). DEBUG and INFO are the levels I use the most. I keep status and general information print statements at the INFO level and more detailed print statements with variables at the DEBUG.
+* You can easily toggle these logging/print statements on/off for the entire code by changing the level.
+* This on/off toggle can also control the logging for modules that are imported. (You can either pass the logger to them or use a root logger) 
+* There are logging options to include both printing to the console and/or a log file.
+* There is a journal option to output the logs to the PC systemd journal (useful when your python script is running as a systemd service).​  
+
+A couple approaches  
+* **basicConfig** Quick, simple logging with basicConfig(). With basicConfig() you can configure the root logger. I've noticed many modules in other libraries will also use the root logger so you can control the log level for them from your main script, too.
+* **RotatingFileHandler**  More advanced options with RotatingFileHandler. When you want to output to multiple places (console/standard output stream, a log file, and the journal) it is better to use Handlers. RotatingFileHandler lets you specify the max size of the log and enables rolling log files.​
+​
+I have found both types of logging to be useful so I include an option for either in my main script. The template I use is below in the RotatingFileHandler example.
+
+**basicConfig()**  
+How to use basicConfig() logging in a python script  
+There are 5 levels of logging listed from lowest to highest (DEBUG/INFO do not get output by default. So you specify the level=logging.DEBUG in your code to force them)  
+* DEBUG
+* INFO
+* WARNING
+* ERROR
+* CRITICAL  (can use this to turn logging off essentially)
+
+```python
+import logging
+
+logging.basicConfig(level=logging.DEBUG) # Can set to CRITICAL to turn it off
+logging.debug('Output to console')
+
+# or to log to a file using log format option
+log_format = '%(asctime)s %(filename)s: %(message)s'
+logging.basicConfig(filename='test.log', format=log_format, level=logging.DEBUG)
+logging.warning('Send to log file')
+
+'''Can use the logging.error and exc_info=True to include the stack trace in the log (lists the function ran up to the point of the exception thrown)'''
+dummy_list = [1, 2]
+try:
+  print(dummy_list[2])
+except Exception as e:
+  logging.error("exception error", exc_info=True)
+
+# Another method
+try:
+    functionA()
+
+except IOError as e:
+    logging.info(e)
+
+except KeyboardInterrupt:
+    logging.info("ctrl c")
+    exit()
+```
+
+**RotatingFileHandler()**  
+How to use RotatingFileHandler() logging in a python script  
+For more logging options you can replace basicConfig() with RotatingFileHandler(). This allows you to create multiple handlers outputting to different levels of logging to multiple places (console or a log file). You can also specify the max size of the log file.  
+
+The 5 levels of logging are still used. Listed from lowest to highest (DEBUG/INFO do not get output by default. So you specify the level=logging.DEBUG in your code to force them)  
+
+Function below will create 3 handlers for three outputs (console, regular log, error log).  
+The auxillary loggers will only output up to the lowest level of main_logger.setLevel  
+If main_logger.setLevel is off (logging.CRITICAL) then the other loggers will not output.  
+
+```python
+def setup_logging(log_dir, log_level=logging.INFO, mode=1):
+    # Create loggers
+
+    if mode == 1:
+        logfile_log_level = logging.CRITICAL
+    elif mode == 2:
+        logfile_log_level = logging.DEBUG
+
+    main_logger = logging.getLogger(__name__)
+    main_logger.setLevel(log_level)
+    log_file_format = logging.Formatter("[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
+    log_console_format = logging.Formatter("[%(levelname)s]: %(message)s")
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.CRITICAL)
+    console_handler.setFormatter(log_console_format)
+
+    exp_file_handler = RotatingFileHandler('{}/debug.log'.format(log_dir), maxBytes=10**6, backupCount=5) # 1MB file
+    exp_file_handler.setLevel(logfile_log_level)
+    exp_file_handler.setFormatter(log_file_format)
+
+    exp_errors_file_handler = RotatingFileHandler('{}/error.log'.format(log_dir), maxBytes=10**6, backupCount=5)
+    exp_errors_file_handler.setLevel(logging.WARNING)
+    exp_errors_file_handler.setFormatter(log_file_format)
+
+    main_logger.addHandler(console_handler)
+    main_logger.addHandler(exp_file_handler)
+    main_logger.addHandler(exp_errors_file_handler)
+    return main_logger
+
+# Set next 3 variables for different logging options
+    logger_log_level= logging.DEBUG # CRITICAL=logging off. DEBUG=get variables. INFO=status messages.
+    logger_setup = 1  # 0 for basicConfig, 1 for custom logger with RotatingFileHandler (RFH)
+    RFHmode = 2 # If logger_setup ==1 (RotatingFileHandler) then access to modes below
+                #Arguments
+                #log_level, RFHmode|  logger.x() | output
+                #------------------|-------------|-----------
+                #      INFO, 1     |  info       | print only
+                #      INFO, 2     |  info       | print+logfile
+                #      DEBUG,1     |  info+debug | print only
+                #      DEBUG,2     |  info+debug | print+logfile
+    if logger_setup == 0: # Use basicConfig logger
+        if len(logging.getLogger().handlers) == 0:      # Root logger does not already exist, will create it
+            logging.basicConfig(level=logger_log_level) # Create Root logger
+            logger = logging.getLogger(__name__)        # Set logger to root logging
+            logger.setLevel(logger_log_level)
+        else:
+            logger = logging.getLogger(__name__)        # Root logger already exists so just linking logger to it
+            logger.setLevel(logger_log_level)
+    elif logger_setup == 1:                             # Using custom logger with RotatingFileHandler
+        logger = setup_logging(path.dirname(path.abspath(__file__)), logger_log_level, RFHmode ) # dir for creating logfile
+    logger.info(logger)
+
+    logger.debug('this will only print when level set to DEBUG')
+
+# Can pass the logger and log_level to sub modules
+example_function(mlogger=logger, mlog_level=logger_log_level)
+```
+
+**MicroPython Logging (ulogging)**  
+Logging statements with string formatting will add a small amount of time to the code even when the logging level is set higher. On the esp32 (.24MHz) each logging statement added 10ms. When I'm finished with debugging I comment or remove the logging statements for esp32 projects.  
+
+The basic upython version of logging is on [github](https://github.com/peterhinch/micropython-samples/blob/master/PicoWeb/ulogging.py)
+
+It follows similar syntax  
+
+```python
+import ulogging
+'''
+CRITICAL = 50
+ERROR = 40
+WARNING = 30
+INFO = 20
+DEBUG = 10
+NOTSET = 0
+'''
+a = "test"
+
+ulogging.basicConfig(level=10)
+ulogging.info('root logger info: {0}'.format(a))
+ulogging.debug('root logger debugging')
+
+logger = ulogging.getLogger(__name__)
+logger.setLevel(10)
+logger.info('logger info: {0}'.format(a))
+logger.debug('logger debug')
+```
+
+# Cheatsheet
+
+Functions and Arguments  
+
+Functions can return a value or return nothing (void function). A function that is meant to perform an action could be called a procedure. 
+Passing variable number of arguments in a function. Terminology changes when referring to definition vs call of the function. 
+Order is positional/non-default then keyword/default(a=1)  
+
+Defining the function  
+4 positional arguments. a,b are required (non-defaults). c,d are optional (have defaults)  
+```python
+def func(a, b, c=1, d=1)  
+    return a + b + c + d
+```
+
+Calling the function  
+* **func(1, 1)**  Called using two positional arguments. Default c,d will also be used but not shown  
+* **func(1, 1, 1, 1)** Called using four positionals, no keywords used (and no defaults used)  
+* **func(1, 1, d=1, c=1)** Called using positionals and keywords (keyword position doesn't matter)  
+
+a and b can also be passed using keywords  
+* **func(d=1, c=1, b=1, a=1)** Called using keywords, order/position does not matter. c,d were still optional.  
+
+*if 1 of the positionals is used (passed without keyword) the order is important. Positional (non-default) must be first.*  
+* **func(1, b=1)** Called using one positional and one keyword, b.  
+* **func(b=1, 1)** Not allowed - SyntaxError: positional argument follows keyword argument  
+
+Positional is still required too. Argument 'a' is missing below  
+* **func(b=1, c=1)** Not allowed - missing 1 required positional argument: 'a'  
+
+The * can be used to force an argument to be passed by keyword-only.  
+**Any argument after * must be passed using a keyword.**  
+```python
+def func(a, b, *, c=1, d=1)
+```
+a,b are still positional. c,d must now be passed using keywords
+* **func(1, 1, 1, 1)** Using four positionals doesn't work now. TypeError: takes 2 positional arguments but 4 were given
+* **func(1, 1, d=1, c=1)** Called using positionals and keywords (keyword position doesn't matter)​
+
+```python
+def func(a, *,  b, c=1, d=1)
+```
+a is now the only positional. b, c,d must now be passed using keywords (c,d have defaults)  
+* **func(1, 1, c=1, d=1)** Can not pass two positionals. TypeError: takes 1 positional argument but 2 positional arguments (and 2 keyword-only arguments) were given. Keywords could still be used for all four arguments though.  
+* **func(d=1, c=1, b=1, a=1)** Called using keywords, order/position does not matter. c,d were still optional.
+
+With Python3.8 the / can also be used to force arguments to be called by position (using keyword is not allowed)  
+```python
+​def func(a, /, b, *, c=1, d=1)
+```
+a is now positional-only. b is still positional but can use keyword, c,d must use keywords
+* **func(a=1, b=1, c=1, d=1)** Will not work. a is positional-only. TypeError: got some positional-only arguments passed as keyword arguments: 'a'
+* **func(1, b=1, c=1, d=1)** is good.
+
+Lists and Dictionaries  
+initialize list  
+```python
+channels = 4
+list = [0]*channels
+```
+
+List comprehension  
+```python
+sensor = [i for i in range(4)] --> [0, 1, 2, 3]
+# 2-dimensional
+sensor = [[x for x in range(1, 3)] for x in range(4)] -> [[1, 2], [1, 2], [1, 2], [1, 2]]
+
+list = [x**2 for x in range(10)] -> [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+even = [x for x in list if x %2 ==0] -> [0, 4, 16, 36, 64]
+```
+
+enumerate to include a counter  
+```python
+for i, pin in enumerate(pins, start = 1): (start is optional, otherwise starts at 0)
+   io_pin[i] = Pin(pin)
+```
+
+Check if an item exists in a list  
+```python
+if x in listx:
+```
+
+list() function will create a list object.  
+```python
+str='hello'
+list(str) = ['h', 'e', 'l', 'l', 'o']
+dict = {'alpha': 1, 'beta': 2, 'gamma': 3, 'delta':4}
+list(dict) = ['alpha', 'beta', 'gamma', 'delta'] # <-return the keys as a list
+*dict = alpha beta gamma delta    # <- will unpack the keys
+```
+
+Check if key exists in a dictionary  
+```python
+if dict.get(key) == None:
+```
+
+Check if dict is empty  
+```python
+bool(dict)
+```
+
+Unpack a dictionary  
+```python
+if isinstance(varD, dict):
+    for key, value in varD.items():
+        print("{0}:{1}".format(key, value))
+```
+Unpack a nested dictionary  
+```python
+for parm, item in varD.items():
+    if isinstance(item, dict):
+        for key in item:
+            print("{0}, {1}, {2}".format(parm, key, item[key]))
+```
+
+\* and ** Operators (\*args, \*\*kwargs)  
+​The \* will unpack any iterable object (strings, lists, tuples, dictionaries)  
+** will unpack dictionaries  
+Can be used as another method for combining lists  
+```python
+listA = [1, 2, 3]
+listB = [4,5,6]
+listC = [*listA, *listB]
+print(listC) = [1, 2, 3, 4, 5, 6]
+print(*listC) = 1 2 3 4 5 6 (unpacked)
+```
+So \* and \*\* can be used in passing arguments to functions (\*args, \*\*kwargs)  
+- \*args used to pass non-keyworded variable length argument list
+- \*\*kwargs used to pass keyworded variable length argument list
+
+```python
+def servos(*args):
+  print(*args)       # will unpack and print 1 2 3 on one line
+  for arg in args:  # will iterate thru args and print 1, 2, 3 on new lines
+     print(arg)
+print(servos(1, 2, 3))
+
+def motor(**kwargs):
+    for key, value in kwargs.items():
+        print ("do setup using key:{0} and value:{1}".format(key, value))
+    for arg in kwargs:   # will only print the keys.. motorA motorB
+        print(arg)
+    for arg in kwargs.values():  # will print the values 1 2
+        print(arg)
+motor(motorA=1, motorB=2)
+```
+kwarg used to combine two dictionaries  
+```python
+dict1 = {'hello':1, 'hello2':2}
+dict2 = {'hello3':1, 'hello4':2}
+dict = {**dict1, **dict2}  # will combine the two dictionaries
+print(dict)
+```
+
+Formatting (%, format, and f-string)  
+```python
+voltage = 1.24543534
+modulo = "%.2f"%voltage
+format = "{:.2f}".format(voltage)
+fstring = f"{voltage:.2f}"
+# Note - formatted variable will be a string type
+print(type(fstring))
+```
+To format a list of data  
+```python
+data = [1.23423, 423.2432, 1.2]
+formatted_data = ["%.3f"%x for x in data]
+formatted_data = ["{:.3f}".format(x) for x in data]
+formatted_data = [f"{x:.3f}" for x in data]
+```
+
+Inheritance (Child Class)  
+Create a class that inherits the functionality (properties and methods) from another class by passing the parent class as a parameter.  
+```python
+class Button:
+    def __init__(self, pin):
+        self.pin = pin
+
+    def on(self):
+        self.pin.value(1)
+
+class Switch(Button):
+    pass
+
+toggle1 = Switch(3)
+toggle1.on()
+```
 -----------------------------  
 -----------------------------  
-
-(../../../ref/coding/starting-up/)
-
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-<div class="row justify-content-center float-right">
-    <div class="col-4-auto mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-----------------------------
-Images
-can you col-#  col-sm-#   col-md-#   col-lg-#
-Use auto to auto size around image
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
