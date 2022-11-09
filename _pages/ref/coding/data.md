@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/coding//
-title: 
-description: Intro to 
+permalink: /ref/coding/data/
+title: data
+description: Intro to Data Analysis
 nav: false
 toc: true
 ---

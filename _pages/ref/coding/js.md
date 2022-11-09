@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/coding//
-title: 
-description: Intro to 
+permalink: /ref/coding/js/
+title: JavaScript
+description: Intro to JavaScript
 nav: false
 toc: true
 ---

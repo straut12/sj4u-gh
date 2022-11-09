@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /ref/coding//
-title: 
-description: Intro to 
+permalink: /ref/coding/html/
+title: HTML CSS
+description: Intro to HTML and CSS
 nav: false
 toc: true
 ---
