@@ -6,25 +6,30 @@ description: Intro to html and CSS and JavaScript
 nav: false
 toc: true
 ---
-Why learn html? Creating html web pages are handy for sharing information/data because they can be viewed with a web browser. Generally everyone knows how to use a web browser and every PC system comes with a web browser pre-installed. And if you want to share the information on a website you can easily get it hosted by github pages for free.
+Web pages are useful for sharing information/data because they can be viewed with a web browser. Generally everyone knows how to use a web browser and every PC system comes with a web browser pre-installed. If you want to share the information on a website you can easily get it hosted by github pages for free.
 
-html (HyperText Markup Language) is the language web browsers use to output a web page. You can use a simple notepad editor to type html formatted text into a txt document and then open it directly with a web browser. (geekforgeeks also have a handy app).  
+[html](https://www.w3schools.com/html/html_intro.asp) (HyperText Markup Language) is the language web browsers use to output a web page. You can use a simple notepad editor to type html formatted text into a txt document and then open it directly with a web browser. [geekforgeeks](https://ide.geeksforgeeks.org/tryit.php) also have a handy app. When viewing a web page using a browser, right click, select 'view page source', and you'll see the html for that page. Tags or angle brackets, often in pairs (opening/closing) are used to write the html elements (<body></body>).  Some common tools used to make web pages more powerful is cascading style sheets (css), JavaScript, and PHP.  
+* [CSS](https://en.wikipedia.org/wiki/CSS) is a styling tool. It gives the ability to put all of your formatting elements, colors, fonts, tables, menus, etc in one location. This helps with organization and allows you to make global changes easily.  
+* [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side.  
+* [PHP](https://www.php.net/manual/en/intro-whatis.php) is also a scripting language that supports databases and runs on the server side.
 
-When viewing a web page using a browser, right click, select 'view page source', and you'll see the html for that page. Tags or angle brackets, often in pairs (opening/closing) are used to write the html elements (<body></body>).  Two common tools used to make web pages more powerful is cascading style sheets (css) and JavaScript. CSS is helpful to put all of your formatting elements, colors, fonts, etc in one location. Javascript provides a user-interaction element and higher level functions.  
-
-html has advanced functions and formatting but can be difficult to read in its raw form with the many angle brackets, functions, and formatting elements. Markdown is a much simpler markup language and by design much easier to read. This makes it useful for creating quick web pages that do not require a lot of formatting or advanced functions. Although it does not have advanced features there are still options for basic formatting, image links, tables, etc. This can make it useful for turning a simple text documents with notes into a web page.  
-
-So how do you start building html pages?  
-* Use a web site builder where you enter text and images and it builds the html pages for you and likely hosts them. This is the most common option if you're not wanting to use it in an off-line, local mode and do not care 'how it works'.
-* You can use VS code or a notepad editor to write .html pages using tags <>. You can then open it in a web browser. Due to the tag syntax this will be slow.
-* Write in the [markdown](https://www.markdownguide.org/) format and use a tool to convert the markdown pages to html pages
+How do you start building html pages?  
+1. Use an on-line web site builder where you enter text and images and the builder creates the html pages and likely hosts them. This is the most common option if you're not wanting to use it in an off-line, local mode and do not care 'how it works'. Note since this will be on-line you'll need to pay for a domain name, hosting your html files, and you may have to pay for the web site builder, too.
+2. The most basic off-line option is using VS code or a notepad editor to write .html pages using tags <>. You can then open it in a web browser. You can even install a web server (ie Nginx or Apache) and be able to view the html pages from any device on your network. Since the files are stored locally on your computer they will not be viewable on the web. But you could always pay for a domain name and upload them to a hosting site. While html has a lot of options for formatting and functionality the drawback is that it's difficult to read in its raw form with many angle brackets (tags) and styling elements.  
+  * [Markdown](https://www.markdownguide.org/) is a simpler markup language without the angle brackets making it easy to read in its raw form. While markdown does not have advanced functions it still has options for basic formatting, image links, tables, etc. You can not open markdown directly in a web browser but you can install an extension/plugin or use a tool like pandoc/jekyll to convert it to html.  
+3. So a third option is write in the markdown format and use a tool to convert the markdown to html pages
     * [pandoc](https://pandoc.org/) is a simple tool that can convert various types (ie markdown) to another type (ie html)
-    * [Jekyll](https://jekyllrb.com/) can convert markdown to html
+    * [Jekyll](https://jekyllrb.com/), written in Ruby, also converts markdown to html (blog focused) and is easily integrated with github pages for hosting.
 
-The workflow I have been happiest with is the combination of jekyll and github pages. Jekyll with github pages can quickly convert my easy-to-read markdown notes/files to a web site.
-* [Jekyll](https://jekyllrb.com/) can take markdown with css and liquid templates and produce a complete static website
-* [github pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) will allow you to freely host the static jekyll-powered website
-With this option I still have all my markdown files stored locally and sync'd with github.  
+The option I have found myself using is 3. Writing notes in markdown, using jekyll to convert to html, and github pages to host the html (for free). You can fork existing themes/templates that work well with the jekyll/github pages workflow and incorporate advanced formatting/functions with css/scss and javascript. This quickly gets you up and running with a nice looking web page at no cost.  
+Here's my workflow  
+1. Write my notes in [Markdown](https://www.markdownguide.org/). The specific markdown used in the al-folio theme is [kramdown](https://kramdown.gettalong.org/quickref.html)
+2. Use [Jekyll](https://jekyllrb.com/) to convert the markdown to html files. It comes with a [sass-converter](../../../ref/coding/html/#sass) and [liquid](../../../ref/coding/html/#liquid) plugins for advanced functions.  
+3. Then [Github pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) will allow you to freely host the static jekyll-powered website.  
+
+For me an important advantage of this option is I still have all my markdown files stored locally and sync'd with github.  
+
+> You can install a web server (ie [Apache](https://ubuntu.com/server/docs/web-servers-apache) or [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)) on your PC/RPi and host the html files you create. This allows you to access your html files from a browser with any device on your network. Firefox/Chrome also have extensions to directly open markdown files if you want to skip the markdown-to-html conversion process. 
 
 # html
 Some HTML building blocks  
@@ -86,7 +91,7 @@ Elements are identified by the start/end tags. Attributes provide additional inf
 All html elements can have attributes assigned to them.
 * id:  an attribute that assigns a name to an element. Must be unique in the document and only used by one HTML element in the page. Can be used as a type of bookmark. 
 ```html
-<h1 id="unique-para1">This has a unique id</h1>
+<p id="unique-para1">This has a unique id</p>
 ```
 * class: an attribute assigning a class name or set of class names to an element. All html elements can have a class attribute. Used with css to identify elements for different styling. Can be used by multiple elements and often used by JavaScripts to access and modify elements with that class name. Can have multiple different classes in the same attribute so long as separated by a space.
 ```html
@@ -121,8 +126,7 @@ The {% raw %}{%  %}{% endraw %} are template tags. They are used to interpolate 
 
 The double curly brackets {% raw %}{{  }}{% endraw %} syntax is for template variables and indicate dynamic content. For example {{temperature}} indicates temperature is being calculated somewhere else and the value is changing.
 
-href, src, style, alt, lang, title, {% raw %}{{ }}{% endraw %}
-​
+
 ---------------------------------------
 
 # css
@@ -298,7 +302,25 @@ Button example with multiple actions
 <input id="btn" type="button" value="Text displayed on the button" onclick="alert('this is 1st popup'); alert('this is a 2nd popup');"/>
 ```
 
+# Jekyll with Github Pages
 
+## Jekyll
+[Jekyll](https://jekyllrb.com/) is a program, written in Ruby, that can convert plain text markdown files to html. One of the advantages to using Jekyll are [themes](https://jekyllrb.com/docs/themes/) that can quickly improve your website. These themes leverage off Jekyll plugins for sass and liquid so it helpful to learn some of their syntax.  
+
+## Github Pages
+[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is a service that can take markdown or html, css, and javascript files in your github repo and build/publish a website. You can build these from scratch or use pre-existing jekyll themes and quickly get a professional looking site with drop-down menus, table of contents, header, footer, etc. By default, for projects, the github page will use your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain.  
+Types of GitHub Pages Sites
+* Repo project site - http://username.github.io/repo
+* User/Organization site - http://username.github.io or http://organization.github.io  When creating a repo for a user site name the repo **user**.github.io 
+
+## Sass
+[Sass](https://sass-lang.com/documentation/) is a pre-processor to css giving it additional functionality (ie mixins, functions). Sass code is written in .scss files (Jekyll will look for Sass partials in _sass dir) and then compiled to css. Jekyll comes with a sass-converter plugin to do this for you. But you could also run Sass outside of Jekyll by [installing Sass](https://sass-lang.com/install).  
+
+## Liquid
+[Liquid](https://shopify.github.io/liquid/) is a template language and you'll see it used frequently in jekyll themes. You insert it in the markdown (can be placed directly in html) with curly braces  
+* {% raw %}{{}}{% endraw %} for outputting variables
+* {% raw %}{% %}{% endraw %} for logic statements if/else, loops, include, highlighting code, etc  
+Jekyll also has some documentation on [liquid](https://jekyllrb.com/docs/liquid/) and the [includes](https://jekyllrb.com/docs/includes/)   
 
 
 
@@ -306,21 +328,3 @@ Button example with multiple actions
 -----------------------------  
 
 (../../../ref/coding/starting-up/)
-
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-<div class="row justify-content-center float-right">
-    <div class="col-4-auto mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/flappybird.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-
-----------------------------
-Images
-can you col-#  col-sm-#   col-md-#   col-lg-#
-Use auto to auto size around image
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
