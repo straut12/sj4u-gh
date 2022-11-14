@@ -2,7 +2,38 @@ github_users:
   - stemjust4u
 
 github_repos:
-  - stemjust4u/al-folio
+  - stemjust4u/p1-blink
+  - stemjust4u/p1-blink-mqtt
+  - stemjust4u/ServoKitPCA9685
+  - stemjust4u/rotary-encoder
+  - stemjust4u/ADC
+  - stemjust4u/DCmotor
+  - stemjust4u/hardware-troubleshooting
+  - stemjust4u/dash
+  - stemjust4u/DHT11
+  - stemjust4u/1TEMP
+  - stemjust4u/encoder
+  - stemjust4u/Thermocouple
+  - stemjust4u/js-html-css-franks-lab-game1-starter
+  - stemjust4u/js-html-css-franks-lab-game1-graphics 
+  - stemjust4u/boilerplate-general-python-templates
+  - stemjust4u/speech-to-text
+  - stemjust4u/speech-transcribe-podcast-streamlit 
+  - stemjust4u/boilerplate-upython-debugging
+  - stemjust4u/StepMotor-28BYJ-48-ULN2003-Driver
+  - stemjust4u/ina219
+  - stemjust4u/python-nodered-mqtt-boilerplate 
+  - stemjust4u/esp32logging
+  - stemjust4u/boilerplate-upython-mqtt
+  - stemjust4u/boilerplate-python-mqtt
+  - stemjust4u/tutorial
+  - stemjust4u/NTC-thermistor-ADS1115c 
+  - stemjust4u/E-ink 
+  - stemjust4u/esp32all 
+  - stemjust4u/esp32all-debug 
+  - stemjust4u/esp32sandbox 
+  - stemjust4u/mqtt-RPi-monitor
+  - stemjust4u/Joystick-MCP3008-RPi-ESP32-Compare 
   - twbs/bootstrap
   - jekyll/jekyll
   - jquery/jquery
