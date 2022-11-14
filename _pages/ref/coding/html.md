@@ -309,29 +309,32 @@ Button example with multiple actions
 
 # Github Pages with Jekyll
 ## Github Pages
-[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is a service that can take markdown or html, css, and JavaScript files in your github repo and build/publish a website. You can build these from scratch or use pre-existing jekyll themes and quickly get a professional looking site with drop-down menus, table of contents, header, footer, etc. By default, for projects, the github page will use your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain.  
+[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is an option in your github repo that can take markdown or html, css, and JavaScript files in your project and use them to build and publish a website. You have the option of creating from scratch or using pre-existing jekyll gem-based themes that will quickly jump start to a professional looking site with drop-down menus, table of contents, header, footer, etc.  
 
-**Enable** github pages  
+> For projects the github page will default to your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain name if you already own one.  
+
+**Enabling** github pages  
 First decide on the type of GitHub Pages Site to host
-* Repo project site - url will be http://username.github.io/repo
-* or User/Organization site - url will be http://username.github.io or http://organization.github.io  When creating a repo for a user site name the repo **user**.github.io  
+* Repo project site - url will be **http://username.github.io/repo**.  Html pages are kept in the same repo as the project but the website content is usually stored in a separate branch like gh-branch or in a docs folder on the main branch.  
+* or User/Organization site - url will be **http://username.github.io** or http://organization.github.io  When creating a repo for a user site the repo should be named **user.github.io**  
 
-When you know which type you want then enable by ..  
+Once you know which type you want then enable **GitHub Pages**   
 1. Make sure you have a README.md or index.html file in the repo to act as the home page
 2. Go to your repo, then **settings**  
 3. On the left sidebar is **Pages**  
-4. Select the **Branch** and **Save**
-5. Go back to your README.md or index.html and make a change and commit
-6. Go back to **Pages** and it will show the url for your web site (it should follow the url naming convention above)
+4. Select the **Branch** (main) and **Save**
+5. Go back to your README.md or index.html and make a change (ie type the text Hello World) and commit
+6. Go to **Pages** again and it will show the url for your web site (it should follow the url naming convention above)
 
 **Using a custom domain name**  
-Github pages makes it possible to use a custom domain name for your url. Note you will only be able to link one github user account to an apex or subdomain name. You can not link different github repos (in the same github account) to different subdomains. It will be helpful to know some domain terms  
-* **Apex** domain is the name without the subdomain. ie *example.com*  
-* **Subdomain** is an additional part to your main domain name. ie the *www* in www.example.com or the *docs* in docs.example.com. In the example of *www* it often points to the main domain name. But docs.example.com could point to a completely different website.  
+Github pages makes it possible to use a custom domain name for your url. Note you will only be able to link one github user account to an apex or subdomain name. You can not link different github repos (in the same github account) to different subdomains.  
+It will be helpful to know some domain terms  
+* **Apex** domain is the name without the subdomain. ie *yoursite.com*  
+* **Subdomain** is an additional part to your main domain name. ie the *docs* in docs.yoursite.com. And the subdomain docs.yoursite.com can point to a completely different website. Another example is *www* in www.yoursite.com. It's worth noting *www* almost always points/re-directs to the main domain name instead of a different site.  
 
-You have a couple options for linking to your custom domain name  
-1. Link to the apex domain (ie example.com. Can also configure the *www* subdomain variant)
-2. Link to a subdomain (ie docs.example.com)
+So you have a couple options for linking to your custom domain name  
+1. Link to the apex domain (ie yoursite.com. Can also configure the *www* subdomain variant)
+2. Link to a subdomain (ie docs.yoursite.com)
 
 For either of these you will ..  
 * First need a custom domain name (purchase from Namecheap, GoDaddy, Google Domains, etc)  
@@ -339,10 +342,10 @@ For either of these you will ..
 
 Now you can setup a link to the apex or subdomain  
 
-**Option 1. Configure apex domain**
-Configure apex domain, ie example.com. GitHub also recommends setting up the *www* subdomain while you're at it. GitHub Pages will automatically create the redirect from www to your apex domain name.
-* On github go to **Pages** and enter your domain name in the **Custom domain** name field (ie example.com)
-  * Create a file called CNAME with the domain name in it (ie example.com)
+**Option 1. Configure apex domain**  
+Configure apex domain. GitHub also recommends setting up the *www* subdomain while you're at it. GitHub Pages will automatically create the redirect from www to your apex domain name.
+* On github go to **Pages** and enter your domain name in the **Custom domain** name field (yoursite.com)
+  * Create a file called CNAME with the domain name in it (yoursite.com)
 * Go to your DNS provider and under manage DNS Domain add the A Records for [github IP addresses](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
   * Type is **A Record**, Host name is **@**, and value/target is **185.199.108.153**
   * Type is **A Record**, Host name is **@**, and value/target is **185.199.109.153**
@@ -353,10 +356,10 @@ Configure apex domain, ie example.com. GitHub also recommends setting up the *ww
     * Note - In my example above only www was required in the host field because the apex domain name was automatically appended by the DNS provider.
 * Go back to github and under **Pages** confirm the DNS check was successful and that **Enforce HTTPS** is enabled.
 
-**Option 2. Configure subdomain**
-Configure subdomain, ie docs.example.com.  
-* On github go to **Pages** and enter your domain name in the **Custom domain** name field (ie docs.example.com)
-  * Create a file called CNAME with the domain name in it (ie docs.example.com)
+**Option 2. Configure subdomain**  
+Configure subdomain, docs.yoursite.com.  
+* On github go to **Pages** and enter your domain name in the **Custom domain** name field (docs.yoursite.com)
+  * Create a file called CNAME with the domain name in it (docs.yoursite.com)
 * Go to your DNS provider and under manage DNS Domain add a CNAME record. Example below is for a *docs* subdomain  
   * Type is **CNAME**, Host name is **docs**, and value/target is **user.github.io**
     * Note - In my example above only **docs** was required in the host field because the apex domain name was automatically appended by the DNS provider.
@@ -365,7 +368,7 @@ Configure subdomain, ie docs.example.com.
 ## Jekyll
 [Jekyll](https://jekyllrb.com/) is a program, written in Ruby, that can convert plain text markdown files to html. One of the advantages to using Jekyll are [themes](https://jekyllrb.com/docs/themes/) that can quickly improve your website. This includes formatting based on the size of the display, syntax highlighting, etc. These themes leverage off Jekyll plugins for sass and liquid so it helpful to learn some of their syntax. However before trying a highly customized theme it is a good idea to try the jekyll default **minima** theme  
 
-> Jekyll is written in Ruby. [RubyGems](https://guides.rubygems.org/) is a package manager for Ruby. A Gems file is used to describe dependencies for the Ruby program. It is possible to build a site from scratch by creating your own index.html and using the jekyll commands to build and server. The steps below use the jekyll **new** command which starts off with a gem-based theme and eliminates a lot of setup work.
+> Jekyll is written in Ruby. [RubyGems](https://guides.rubygems.org/) is a package manager for Ruby. A Gems file is used to describe dependencies for the Ruby program. It is possible to build a site from scratch by creating your own home page and using the jekyll commands **build** and **serve** to create/view the html. However I jumped ahead to using gem-based themes. The steps below use the jekyll **new** command which starts off with a gem-based theme minima and eliminates a lot of setup work.
 
 First install dependencies including Ruby (example below is for Ubuntu)
 * ```sudo apt-get install ruby-full build-essential zlib1g-dev```
@@ -379,22 +382,22 @@ source ~/.bashrc
 * Install Jekyll and Bundler  
 ```gem install jekyll bundler```  
 
-Now setup GitHub repo and run Jekyll commands
+Now setup GitHub repo and run Jekyll commands to create your static web site  
 * Follow the github section above to create a github repo and enable GitHub Pages  
 * git clone the repo to your local system  
 ```git clone git@github.com:user/repo.git```  
 * **cd** into the repo project directory  
 * Build the jekyll site using a gem-based theme with the **jekyll new** command (**jekyll new PATH** creates a new Jekyll site with default gem-based theme in the current dir. You can use --force to over ride the existing README.md file you created for testing)  
 ```jekyll new . --force```  
-* You will see that jekyll created a **Gemfile** and some initial directories. The Gemfile shows **minima** is being used as the theme. It will also give some initial instructions on using **bundle install** for updating Jekyll and running **bundle exec jekyll serve** for testing your web site.  
+* You will see that jekyll created a **Gemfile** and some initial directories. The Gemfile shows **minima** is being used as the theme. It also gives some instructions on using **bundle install** for updating Jekyll and running **bundle exec jekyll serve** for testing your web site.  
 ```bundle exec jekyll serve --livereload```
 * (the jekyll serve command will build the html files to _site dir and create a local web server. the --livereload flag will have your website update automatically as you change your project files)
-* You will see a **_site** directory is now created. Your README.md file will be copied there but a index.html will also be created and it will over-ride your README.md as the home site. An assets dir is also created for the minima css formatting.
-* Ctrl-click on the http://127.0.0.1:4000/ server address link to see the default Jekyll page open in a web browser  
+* After running the serve command You will see a **_site** directory is now created. Your README.md file will be copied there but a index.html will also be created and it will over-ride your README.md as the home site. An assets dir is also created for the minima css formatting.
+* Ctrl-click on the local server address http://127.0.0.1:4000/ link to see the default Jekyll page open in a web browser  
 * Open the **_config.yml** file and edit **url:** to point to your user (ie https://username.github.io)
   * If doing a project site you can update the base url to point to your repo. But I noticed for custom domain names I had to leave the base url blank for my website to get the theme formatting.
   * You will also notice the config file has Build settings where you set the theme
-* You can make changes, add pages in the _posts folder following the naming convention and hit refresh on the browser to see it show up on your home blog page.
+* You can make changes, add pages in the _posts folder following the naming convention and watch it show up on your home blog page. Depending on the change you may need to hit refresh.  
 * When finished testing. Commit/sync your changes to github.
 * Go to github.com and under **actions** you should see the site be deployed and turn green.
 * Go to **Pages** of your repo and click on the link under **Visit site**. You may have to hit reload on your browser to get the theme formatting to update.
@@ -403,11 +406,11 @@ Some quick notes on commands and files
 * The Gemfile amd Gemfile.lock are used by bundler to keep track of the gems. If you open Gemfile.lock you'll see the sass-converter and liquid plugins mentioned previously.
 * **bundle install** or just **bundler** will install gems listed in Gemfile  
 * **bundle update** installs but will also upgrade installed gems, too. 
-* Best practice is to normally use **bundle install** and only use **bundle update** if you're ready to allow updates from the theme developer (ie changes to stylesheets or includes).
+* Best practice is to normally use **bundle install** and save **bundle update** for when you're ready to accept updates from the theme developer (ie changes to stylesheets or includes could be made).
 
 Important aspect to gem-based themes  
 * Your project folder was updated with a _site folder that showed the converted html files but the folders/files used to create it are not shown.  
-* Gem-based theme folder/files just point to your project folder so they can keep getting updates via **bundle update**. If you want to see where the assets, _includes, _layouts, _sass folder/files are located run ..  
+* The gem-based theme folder/files (ie assets, _includes, _layouts, _sass) are in a separate location where they can keep receiving updates via **bundle update**. If you want to see where these hidden folders are located run ..  
 ```bundle info --path <theme>```  
 * For example under _layouts you'll see the home.html layout which has the liquid template for looping thru files in the _post directory and automatically updating the blog 
 * You can 'disconnect' the theme from getting updates and customize them yourself by copying them from the gem-based location returned above to your project folder. The folder/files in your project folder will over-ride the gem theme location and basically convert your site to a 'regular' theme. (note - this does not work for 'remote' themes. Remote theme folders are located in a github branch)
@@ -418,7 +421,7 @@ Following the previous steps will give you some background on setting up jekyll 
 
 **Fork an existing theme on GitHub**  
 1. In github fork the theme and save in your account under a new name
-2. On your local PC git clone the newly forked repo
+2. On your local PC git clone the newly forked repo ```git clone git@github.com:user/repo.git```  
 3. cd to the repo project dir
 4. Install the gem files with ```bundle install```
 5. Test with ```bundle exec jekyll serve```
@@ -427,6 +430,8 @@ Following the previous steps will give you some background on setting up jekyll 
   * Personal site - set url to https://username.github.io and leave baseurl empty (make sure the repo name is user.github.io)
 7. Commit/sync changes and go to github to check actions and verify site
 8. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme
+
+> Often themes will use a separate branch, **gh-pages**, to hold the built html files. You will need to change the Branch under **Pages** to show **gh-pages** branch is the publishing source.  
 
 **Install with Gem-based method**  
 (this example is for minimal-mistakes-jekyll theme)
