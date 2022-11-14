@@ -36,6 +36,7 @@ OOP is wrapping variables and functions in objects.  js is a prototype based OOP
 * Scope - Before ES6 (2015), js only had global scope and function scope.
     *  **let** and **const** introduced block scope. 
     * Variables declared inside a { } block cannot be accessed from outside the block  
+Use **typeof** to check for undefined
 
 
 -----------------------------  

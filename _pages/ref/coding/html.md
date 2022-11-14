@@ -1,17 +1,20 @@
 ---
 layout: page
 permalink: /ref/coding/html/
-title: html CSS JS
-description: Intro to html and CSS and JavaScript
+title: html css js
+description: Intro to html and css and JavaScript
 nav: false
 toc: true
 ---
+# Intro
 Web pages are useful for sharing information/data because they can be viewed with a web browser. Generally everyone knows how to use a web browser and every PC system comes with a web browser pre-installed. If you want to share the information on a website you can easily get it hosted by github pages for free.
 
-[html](https://www.w3schools.com/html/html_intro.asp) (HyperText Markup Language) is the language web browsers use to output a web page. You can use a simple notepad editor to type html formatted text into a txt document and then open it directly with a web browser. [geekforgeeks](https://ide.geeksforgeeks.org/tryit.php) also have a handy app. When viewing a web page using a browser, right click, select 'view page source', and you'll see the html for that page. Tags or angle brackets, often in pairs (opening/closing) are used to write the html elements (<body></body>).  Some common tools used to make web pages more powerful is cascading style sheets (css), JavaScript, and PHP.  
-* [CSS](https://en.wikipedia.org/wiki/CSS) is a styling tool. It gives the ability to put all of your formatting elements, colors, fonts, tables, menus, etc in one location. This helps with organization and allows you to make global changes easily.  
-* [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side.  
+* [html](https://www.w3schools.com/html/html_intro.asp) (HyperText Markup Language) is the language web browsers use to output a web page. You can use a simple notepad editor to type html formatted text into a txt document and then open it directly with a web browser. [geekforgeeks](https://ide.geeksforgeeks.org/tryit.php) also have a handy app. When viewing a web page using a browser, right click, select 'view page source', and you'll see the html for that page. Tags or angle brackets, often in pairs (opening/closing) are used to write the html elements (<body></body>).  Some common tools used to make web pages more powerful is cascading style sheets (css), JavaScript, and PHP.  
+* [css](https://en.wikipedia.org/wiki/CSS) is a styling tool. It gives the ability to put all of your formatting elements, colors, fonts, tables, menus, etc in one location. This helps with organization and allows you to make global changes easily.  
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side.  
 * [PHP](https://www.php.net/manual/en/intro-whatis.php) is also a scripting language that supports databases and runs on the server side.
+
+> [codepen.io](https://codepen.io/) is a great way to test html, css, js code. You get see your code for all three in separate window panes and there are live updates as you type.
 
 How do you start building html pages?  
 1. Use an on-line web site builder where you enter text and images and the builder creates the html pages and likely hosts them. This is the most common option if you're not wanting to use it in an off-line, local mode and do not care 'how it works'. Note since this will be on-line you'll need to pay for a domain name, hosting your html files, and you may have to pay for the web site builder, too.
@@ -21,7 +24,7 @@ How do you start building html pages?
     * [pandoc](https://pandoc.org/) is a simple tool that can convert various types (ie markdown) to another type (ie html)
     * [Jekyll](https://jekyllrb.com/), written in Ruby, also converts markdown to html (blog focused) and is easily integrated with github pages for hosting.
 
-The option I have found myself using is 3. Writing notes in markdown, using jekyll to convert to html, and github pages to host the html (for free). You can fork existing themes/templates that work well with the jekyll/github pages workflow and incorporate advanced formatting/functions with css/scss and javascript. This quickly gets you up and running with a nice looking web page at no cost.  
+The option I have found myself using is 3. Writing notes in markdown, using jekyll to convert to html, and github pages to host the html (for free). You can fork existing themes/templates that work well with the jekyll/github pages workflow and incorporate advanced formatting/functions with css/scss and JavaScript. This quickly gets you up and running with a nice looking web page at no cost.  
 Here's my workflow  
 1. Write my notes in [Markdown](https://www.markdownguide.org/). The specific markdown used in the al-folio theme is [kramdown](https://kramdown.gettalong.org/quickref.html)
 2. Use [Jekyll](https://jekyllrb.com/) to convert the markdown to html files. It comes with a [sass-converter](../../../ref/coding/html/#sass) and [liquid](../../../ref/coding/html/#liquid) plugins for advanced functions.  
@@ -32,7 +35,7 @@ For me an important advantage of this option is I still have all my markdown fil
 > You can install a web server (ie [Apache](https://ubuntu.com/server/docs/web-servers-apache) or [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)) on your PC/RPi and host the html files you create. This allows you to access your html files from a browser with any device on your network. Firefox/Chrome also have extensions to directly open markdown files if you want to skip the markdown-to-html conversion process. 
 
 # html
-Some HTML building blocks  
+Some html building blocks  
 * <> are used for tags and their attributes
 * paired has an opening and closing brackets. 
 * The opening bracket can contain an attribute field(s)  
@@ -89,7 +92,7 @@ Elements are identified by the start/end tags. Attributes provide additional inf
 <element attribute=value>
 ```
 All html elements can have attributes assigned to them.
-* id:  an attribute that assigns a name to an element. Must be unique in the document and only used by one HTML element in the page. Can be used as a type of bookmark. 
+* id:  an attribute that assigns a name to an element. Must be unique in the document and only used by one html element in the page. Can be used as a type of bookmark. 
 ```html
 <p id="unique-para1">This has a unique id</p>
 ```
@@ -104,7 +107,7 @@ JavaScript example
 ```
 Example.  
 Multiple plants listed with headers (h2)  
-The javascript function will remove the headers linked to class attribute "plant"  
+The JavaScript function will remove the headers linked to class attribute "plant"  
 ```html
 <button onclick="myFunction()">Hide titles</button>
 <h2 class="plant">Alfalfa</h2>
@@ -131,9 +134,9 @@ The double curly brackets {% raw %}{{  }}{% endraw %} syntax is for template var
 
 # css
 
-Formatting style using CSS
+Formatting style using css
 
-CSS is used for styling the HTML page. The syntax is
+css is used for styling the html page. The syntax is
 ```html
 selector {
    property 1: value;  (declarations)
@@ -178,7 +181,7 @@ Then used like this..
 </body></html>
 ```
 
-Common CSS selectors are Elements (pre, h1, div, span, a, btn, head), Class, and ID. For css to know which you are using the class uses a . (period) and id uses a #.  
+Common css selectors are Elements (pre, h1, div, span, a, btn, head), Class, and ID. For css to know which you are using the class uses a . (period) and id uses a #.  
 ```html
 pre { 
   property: value;
@@ -244,10 +247,10 @@ div p {
 
 Bootstrap is a set of templates, a front-end framework using bits of html/css code, that can help speed up the development of a website. For example instead of writing a set of html/css code to make professional looking buttons for your page you can use bootstrap buttons already created.  
 
-# javascript
+# JavaScript
 JavaScript is called in the script tags  
 
-Javascript can be called inside html multiple ways  
+JavaScript can be called inside html multiple ways  
 Placed inline using \<script>  
 ```html
 <body>
@@ -265,10 +268,10 @@ Built-in
 ```html
 <a href="#" onClick="alert('Next delivery is May 30');">Built in js</a>
 ```
-Triggered by a button and javascript located in \<script>  
+Triggered by a button and JavaScript located in \<script>  
 ```html
 <body>
-<button onclick = "myfunction()">Click this button to trigger the javascript function</button>
+<button onclick = "myfunction()">Click this button to trigger the JavaScript function</button>
 <script>
 function myfunction() {
 alert("Next delivery is May 30");
@@ -276,7 +279,7 @@ alert("Next delivery is May 30");
 </script> 
 <body>
 ```
-Or reference javascript function in another file  
+Or reference JavaScript function in another file  
 ```html
 <script type="text/javascript" src="fileA.js"></script>
 <script type="text/javascript" src="fileB.js"></script>
@@ -302,25 +305,181 @@ Button example with multiple actions
 <input id="btn" type="button" value="Text displayed on the button" onclick="alert('this is 1st popup'); alert('this is a 2nd popup');"/>
 ```
 
-# Jekyll with Github Pages
+# PHP
+
+# Github Pages with Jekyll
+## Github Pages
+[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is a service that can take markdown or html, css, and JavaScript files in your github repo and build/publish a website. You can build these from scratch or use pre-existing jekyll themes and quickly get a professional looking site with drop-down menus, table of contents, header, footer, etc. By default, for projects, the github page will use your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain.  
+
+**Enable** github pages  
+First decide on the type of GitHub Pages Site to host
+* Repo project site - url will be http://username.github.io/repo
+* or User/Organization site - url will be http://username.github.io or http://organization.github.io  When creating a repo for a user site name the repo **user**.github.io  
+
+When you know which type you want then enable by ..  
+1. Make sure you have a README.md or index.html file in the repo to act as the home page
+2. Go to your repo, then **settings**  
+3. On the left sidebar is **Pages**  
+4. Select the **Branch** and **Save**
+5. Go back to your README.md or index.html and make a change and commit
+6. Go back to **Pages** and it will show the url for your web site (it should follow the url naming convention above)
+
+**Using a custom domain name**  
+Github pages makes it possible to use a custom domain name for your url. Note you will only be able to link one github user account to an apex or subdomain name. You can not link different github repos (in the same github account) to different subdomains. It will be helpful to know some domain terms  
+* **Apex** domain is the name without the subdomain. ie *example.com*  
+* **Subdomain** is an additional part to your main domain name. ie the *www* in www.example.com or the *docs* in docs.example.com. In the example of *www* it often points to the main domain name. But docs.example.com could point to a completely different website.  
+
+You have a couple options for linking to your custom domain name  
+1. Link to the apex domain (ie example.com. Can also configure the *www* subdomain variant)
+2. Link to a subdomain (ie docs.example.com)
+
+For either of these you will ..  
+* First need a custom domain name (purchase from Namecheap, GoDaddy, Google Domains, etc)  
+* Setup your github repo as a project or user site and enable **Pages** (see **enable** section above)  
+
+Now you can setup a link to the apex or subdomain  
+
+**Option 1. Configure apex domain**
+Configure apex domain, ie example.com. GitHub also recommends setting up the *www* subdomain while you're at it. GitHub Pages will automatically create the redirect from www to your apex domain name.
+* On github go to **Pages** and enter your domain name in the **Custom domain** name field (ie example.com)
+  * Create a file called CNAME with the domain name in it (ie example.com)
+* Go to your DNS provider and under manage DNS Domain add the A Records for [github IP addresses](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+  * Type is **A Record**, Host name is **@**, and value/target is **185.199.108.153**
+  * Type is **A Record**, Host name is **@**, and value/target is **185.199.109.153**
+  * Type is **A Record**, Host name is **@**, and value/target is **185.199.110.153**
+  * Type is **A Record**, Host name is **@**, and value/target is **185.199.111.153**
+* To setup up the *www* subdomain add a CNAME record  
+  * Type is **CNAME**, Host is **www**, and value/target is **user.github.io**
+    * Note - In my example above only www was required in the host field because the apex domain name was automatically appended by the DNS provider.
+* Go back to github and under **Pages** confirm the DNS check was successful and that **Enforce HTTPS** is enabled.
+
+**Option 2. Configure subdomain**
+Configure subdomain, ie docs.example.com.  
+* On github go to **Pages** and enter your domain name in the **Custom domain** name field (ie docs.example.com)
+  * Create a file called CNAME with the domain name in it (ie docs.example.com)
+* Go to your DNS provider and under manage DNS Domain add a CNAME record. Example below is for a *docs* subdomain  
+  * Type is **CNAME**, Host name is **docs**, and value/target is **user.github.io**
+    * Note - In my example above only **docs** was required in the host field because the apex domain name was automatically appended by the DNS provider.
+* Go back to github and under **Pages** confirm the DNS check was successful and that **Enforce HTTPS** is enabled.
 
 ## Jekyll
-[Jekyll](https://jekyllrb.com/) is a program, written in Ruby, that can convert plain text markdown files to html. One of the advantages to using Jekyll are [themes](https://jekyllrb.com/docs/themes/) that can quickly improve your website. These themes leverage off Jekyll plugins for sass and liquid so it helpful to learn some of their syntax.  
+[Jekyll](https://jekyllrb.com/) is a program, written in Ruby, that can convert plain text markdown files to html. One of the advantages to using Jekyll are [themes](https://jekyllrb.com/docs/themes/) that can quickly improve your website. This includes formatting based on the size of the display, syntax highlighting, etc. These themes leverage off Jekyll plugins for sass and liquid so it helpful to learn some of their syntax. However before trying a highly customized theme it is a good idea to try the jekyll default **minima** theme  
 
-## Github Pages
-[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is a service that can take markdown or html, css, and javascript files in your github repo and build/publish a website. You can build these from scratch or use pre-existing jekyll themes and quickly get a professional looking site with drop-down menus, table of contents, header, footer, etc. By default, for projects, the github page will use your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain.  
-Types of GitHub Pages Sites
-* Repo project site - http://username.github.io/repo
-* User/Organization site - http://username.github.io or http://organization.github.io  When creating a repo for a user site name the repo **user**.github.io 
+> Jekyll is written in Ruby. [RubyGems](https://guides.rubygems.org/) is a package manager for Ruby. A Gems file is used to describe dependencies for the Ruby program. It is possible to build a site from scratch by creating your own index.html and using the jekyll commands to build and server. The steps below use the jekyll **new** command which starts off with a gem-based theme and eliminates a lot of setup work.
+
+First install dependencies including Ruby (example below is for Ubuntu)
+* ```sudo apt-get install ruby-full build-essential zlib1g-dev```
+* Set up a gem installation directory for your user account. These commands will add environment variables to configure the gem installation path
+```console
+echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+* Install Jekyll and Bundler  
+```gem install jekyll bundler```  
+
+Now setup GitHub repo and run Jekyll commands
+* Follow the github section above to create a github repo and enable GitHub Pages  
+* git clone the repo to your local system  
+```git clone git@github.com:user/repo.git```  
+* **cd** into the repo project directory  
+* Build the jekyll site using a gem-based theme with the **jekyll new** command (**jekyll new PATH** creates a new Jekyll site with default gem-based theme in the current dir. You can use --force to over ride the existing README.md file you created for testing)  
+```jekyll new . --force```  
+* You will see that jekyll created a **Gemfile** and some initial directories. The Gemfile shows **minima** is being used as the theme. It will also give some initial instructions on using **bundle install** for updating Jekyll and running **bundle exec jekyll serve** for testing your web site.  
+```bundle exec jekyll serve --livereload```
+* (the jekyll serve command will build the html files to _site dir and create a local web server. the --livereload flag will have your website update automatically as you change your project files)
+* You will see a **_site** directory is now created. Your README.md file will be copied there but a index.html will also be created and it will over-ride your README.md as the home site. An assets dir is also created for the minima css formatting.
+* Ctrl-click on the http://127.0.0.1:4000/ server address link to see the default Jekyll page open in a web browser  
+* Open the **_config.yml** file and edit **url:** to point to your user (ie https://username.github.io)
+  * If doing a project site you can update the base url to point to your repo. But I noticed for custom domain names I had to leave the base url blank for my website to get the theme formatting.
+  * You will also notice the config file has Build settings where you set the theme
+* You can make changes, add pages in the _posts folder following the naming convention and hit refresh on the browser to see it show up on your home blog page.
+* When finished testing. Commit/sync your changes to github.
+* Go to github.com and under **actions** you should see the site be deployed and turn green.
+* Go to **Pages** of your repo and click on the link under **Visit site**. You may have to hit reload on your browser to get the theme formatting to update.
+
+Some quick notes on commands and files  
+* The Gemfile amd Gemfile.lock are used by bundler to keep track of the gems. If you open Gemfile.lock you'll see the sass-converter and liquid plugins mentioned previously.
+* **bundle install** or just **bundler** will install gems listed in Gemfile  
+* **bundle update** installs but will also upgrade installed gems, too. 
+* Best practice is to normally use **bundle install** and only use **bundle update** if you're ready to allow updates from the theme developer (ie changes to stylesheets or includes).
+
+Important aspect to gem-based themes  
+* Your project folder was updated with a _site folder that showed the converted html files but the folders/files used to create it are not shown.  
+* Gem-based theme folder/files just point to your project folder so they can keep getting updates via **bundle update**. If you want to see where the assets, _includes, _layouts, _sass folder/files are located run ..  
+```bundle info --path <theme>```  
+* For example under _layouts you'll see the home.html layout which has the liquid template for looping thru files in the _post directory and automatically updating the blog 
+* You can 'disconnect' the theme from getting updates and customize them yourself by copying them from the gem-based location returned above to your project folder. The folder/files in your project folder will over-ride the gem theme location and basically convert your site to a 'regular' theme. (note - this does not work for 'remote' themes. Remote theme folders are located in a github branch)
+
+> YAML does not handle tabs. Make sure you use 2 spaces for indenting lines in the YAML files. To set variables/meta data use YAML front matter with the top pair of ---
+
+Following the previous steps will give you some background on setting up jekyll with the default gem-based minima theme. However there are even more themes with advanced formatting like drop down menus and table of contents. The guides below are for two themes I have tried out ([al-folio](https://github.com/alshedivat/al-folio) and [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes)). Always refer to the theme github site for more detailed instructions. (there are some differences when working with gem-based themes and remote themes where formatting files are stored in a github branch)  
+
+**Fork an existing theme on GitHub**  
+1. In github fork the theme and save in your account under a new name
+2. On your local PC git clone the newly forked repo
+3. cd to the repo project dir
+4. Install the gem files with ```bundle install```
+5. Test with ```bundle exec jekyll serve```
+6. Update _config.yml
+  * Project page - set url to https://username.github.io and baseurl to /repo-name
+  * Personal site - set url to https://username.github.io and leave baseurl empty (make sure the repo name is user.github.io)
+7. Commit/sync changes and go to github to check actions and verify site
+8. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme
+
+**Install with Gem-based method**  
+(this example is for minimal-mistakes-jekyll theme)
+1. Follow directions above to setup a default minima theme
+2. Update the Gemfile with new theme name  
+```gem "minimal-mistakes-jekyll"```
+3. Update gems with ```bundler```
+4. Set theme in _config.yml ```theme: minimal-mistakes-jekyll```
+5. You can get updates by running ```bundle update```
+6. The default minima theme calls for layouts under different names (ie post and page) so you will have to update these to point to layout listed in minimal-mistakes-jekyll
+7. To see location of gem-based files and layouts run ```bundle info --path minimal-mistakes-jekyll```
+8. Test with ```bundle exec jekyll serve```
+9. Update _config.yml
+  * Project page - set url to https://username.github.io and baseurl to /repo-name
+  * Personal site - set url to https://username.github.io and leave baseurl empty (make sure the repo name is user.github.io)
+10. Commit/sync changes and go to github to check actions and verify site
+11. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme
+
+**Install with remote-theme method**  
+1. Fork from existing theme (ie [mmistakes starter](https://github.com/mmistakes/mm-github-pages-starter/generate))
+2. When you have a base jekyll theme installed update it with remote theme locations
+3. Update the Gemfile with new plugins if required and run ```bundler```
+  * [jekyll remote theme plugin](https://github.com/benbalter/jekyll-remote-theme)
+4. Update _config.yml with remote_theme location 
+5. Test with ```bundle exec jekyll serve```
+6. Update _config.yml
+  * Project page - set url to https://username.github.io and baseurl to /repo-name
+  * Personal site - set url to https://username.github.io and leave baseurl empty (make sure the repo name is user.github.io)
+7. Commit/sync changes and go to github to check actions and verify site
+8. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme  
+
+**Copying from one of your existing GitHub Pages projects**  
+1. Create GitHub repo (including README.md)
+2. Turnon GitHub Pages
+3. git clone to local and cd to dir
+4. Copy projects files, **including hidden folders**, from the existing project to your new project
+5. Install gems with ```bundle install```
+6. Test with ```bundle exec jekyll serve```
+7. Update _config.yml
+  * Project page - set url to https://username.github.io and baseurl to /repo-name
+  * Personal site - set url to https://username.github.io and leave baseurl empty (make sure the repo name is user.github.io)
+8. Commit/sync changes and go to github to check actions and verify site
+9. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme
 
 ## Sass
-[Sass](https://sass-lang.com/documentation/) is a pre-processor to css giving it additional functionality (ie mixins, functions). Sass code is written in .scss files (Jekyll will look for Sass partials in _sass dir) and then compiled to css. Jekyll comes with a sass-converter plugin to do this for you. But you could also run Sass outside of Jekyll by [installing Sass](https://sass-lang.com/install).  
+[Sass](https://sass-lang.com/documentation/) is a preprocessor to css giving it additional functionality (ie mixins, functions). Sass code is written in .scss files (Jekyll will look for Sass partials in _sass dir) and then compiled to css. Jekyll comes with a sass-converter plugin to do this for you. But you could also run Sass outside of Jekyll by [installing Sass](https://sass-lang.com/install).  
 
 ## Liquid
 [Liquid](https://shopify.github.io/liquid/) is a template language and you'll see it used frequently in jekyll themes. You insert it in the markdown (can be placed directly in html) with curly braces  
 * {% raw %}{{}}{% endraw %} for outputting variables
 * {% raw %}{% %}{% endraw %} for logic statements if/else, loops, include, highlighting code, etc  
-Jekyll also has some documentation on [liquid](https://jekyllrb.com/docs/liquid/) and the [includes](https://jekyllrb.com/docs/includes/)   
+Jekyll also has some documentation on [liquid](https://jekyllrb.com/docs/liquid/) and the [includes](https://jekyllrb.com/docs/includes/)  
+
 
 
 
