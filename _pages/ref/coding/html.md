@@ -56,47 +56,156 @@ Comments are done with either
 // single line with 
 ```
 
-Basic elements and how they are nested. Note - not all elements are required.  
+Basic elements and how they are nested. Note - not all elements are required. Based on examples from w3schools  
+The html code below will generate the page below..
 ```html
-<!DOCTYPE html> inidicates HTML5
-<html>  root or all contents, visible and invisible, of the web page
-<head> 
-<style> used for styling ie css
-selector {
-   property 1: value;  (declarations)
-   color:black;
+<!DOCTYPE html>
+<html>
+<head>
+<title>html example</title> 
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style a side bar */
+aside {
+  width: 30%;
+  padding-left: 15px;
+  margin-left: 15px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>example</title>
 </head>
 
 <body> this is the visible page content, paragraphs, images, links, tables
 
-Two common grouping elements to provide structure are div and span  
+<header>
+  <h2> This is a header </h2>
+</header>
 
-<div> div is block level and often used as a container for other elements. It will start on a new line and takes up the full width </div>  
+<section>
+  <nav>
+    <ul>
+      <li><a href="#">Nav1</a></li>
+      <li><a href="#">Nav2</a></li>
+      <li><a href="#">Nav3</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h1>Article header</h1>
+    <p>This is content for the article. It should be independent and self contained.</p>
 
-<span> span is an inline element and used to mark up parts of the document. It only requires as much width as necessary </span>   
+  </article>
+</section>
 
+<section>
+  <p> This is more content that will have a side bar below it. </p>
+  <aside>
+    <p> This is content inside the aside. It is indirectly related to the main content </p>
+  </aside>
+  <p> And this is the content after the side bar </p>
+</section>
+<footer>
+  <p> This is a Footer </p>
+</footer>
 </body>
-</html>  closing brackets
-```
+</html>
+```  
+Generate this web page  
 
-More details
-Paragraph: <p></p>
-Headers: <h1></h1>
-Elements are identified by the start/end tags. Attributes provide additional info
+<div class="row">
+    <div class="col mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/html.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+
+More details  
+Block vs inline display types  
+* block - takes up full width available. Examples are paragraph (p) and division (div)  
+* inline - does not start a new line. Example is span  
+
+Pre tag: <pre> preserves space and line breaks. Useful to put code examples inside a pre to keep the text displayed exactly as written.  
+Paragraph: <p></p>  
+Headers: <h1></h1>  
+Elements are identified by the start/end tags. Attributes provide additional info  
+
 ```html
 <element attribute=value>
 ```
-All html elements can have attributes assigned to them.
-* id:  an attribute that assigns a name to an element. Must be unique in the document and only used by one html element in the page. Can be used as a type of bookmark. 
+All html elements can have attributes assigned to them.  
+
+id:  an attribute that assigns a name to an element. Must be unique in the document and only used by one html element in the page. Can be used as a type of bookmark. 
+
 ```html
 <p id="unique-para1">This has a unique id</p>
 ```
-* class: an attribute assigning a class name or set of class names to an element. All html elements can have a class attribute. Used with css to identify elements for different styling. Can be used by multiple elements and often used by JavaScripts to access and modify elements with that class name. Can have multiple different classes in the same attribute so long as separated by a space.
+class: an attribute assigning a class name or set of class names to an element. All html elements can have a class attribute. Used with css to identify elements for different styling. Can be used by multiple elements and often used by JavaScripts to access and modify elements with that class name. Can have multiple different classes in the same attribute so long as separated by a space.  
+
 ```html
 <h1 class="header-example"> A Header Title </h1>
 ```
@@ -108,6 +217,7 @@ JavaScript example
 Example.  
 Multiple plants listed with headers (h2)  
 The JavaScript function will remove the headers linked to class attribute "plant"  
+
 ```html
 <button onclick="myFunction()">Hide titles</button>
 <h2 class="plant">Alfalfa</h2>
@@ -125,10 +235,11 @@ x[i].style.display = "none";
 </script>
 ```
 
-The {% raw %}{%  %}{% endraw %} are template tags. They are used to interpolate a tag into the space. Examples include extend, include, or if conditions, loops.
-
-The double curly brackets {% raw %}{{  }}{% endraw %} syntax is for template variables and indicate dynamic content. For example {{temperature}} indicates temperature is being calculated somewhere else and the value is changing.
-
+**More html**  
+```html
+<section> Similar to a div </section>
+<nav> Provides a block of navigation links </nav>
+```
 
 ---------------------------------------
 
@@ -368,6 +479,8 @@ Configure subdomain, docs.yoursite.com.
 ## Jekyll
 [Jekyll](https://jekyllrb.com/) is a program, written in Ruby, that can convert plain text markdown files to html. One of the advantages to using Jekyll are [themes](https://jekyllrb.com/docs/themes/) that can quickly improve your website. This includes formatting based on the size of the display, syntax highlighting, etc. These themes leverage off Jekyll plugins for sass and liquid so it helpful to learn some of their syntax. However before trying a highly customized theme it is a good idea to try the jekyll default **minima** theme  
 
+Jekyll has a good [step-by-step tutorial](https://jekyllrb.com/docs/step-by-step/01-setup/) to get familiar with all the steps before diving in   
+
 > Jekyll is written in Ruby. [RubyGems](https://guides.rubygems.org/) is a package manager for Ruby. A Gems file is used to describe dependencies for the Ruby program. It is possible to build a site from scratch by creating your own home page and using the jekyll commands **build** and **serve** to create/view the html. However I jumped ahead to using gem-based themes. The steps below use the jekyll **new** command which starts off with a gem-based theme minima and eliminates a lot of setup work.
 
 First install dependencies including Ruby (example below is for Ubuntu)
@@ -409,15 +522,43 @@ Some quick notes on commands and files
 * Best practice is to normally use **bundle install** and save **bundle update** for when you're ready to accept updates from the theme developer (ie changes to stylesheets or includes could be made).
 
 Important aspect to gem-based themes  
-* Your project folder was updated with a _site folder that showed the converted html files but the folders/files used to create it are not shown.  
+* Your project folder was updated with a _site folder that showed the processed html files (converted from .md) but many of the folders/files used to create it are not shown.  
 * The gem-based theme folder/files (ie assets, _includes, _layouts, _sass) are in a separate location where they can keep receiving updates via **bundle update**. If you want to see where these hidden folders are located run ..  
 ```bundle info --path <theme>```  
 * For example under _layouts you'll see the home.html layout which has the liquid template for looping thru files in the _post directory and automatically updating the blog 
-* You can 'disconnect' the theme from getting updates and customize them yourself by copying them from the gem-based location returned above to your project folder. The folder/files in your project folder will over-ride the gem theme location and basically convert your site to a 'regular' theme. (note - this does not work for 'remote' themes. Remote theme folders are located in a github branch)
+* You can 'disconnect' the theme from getting updates and customize them yourself by copying them from the gem-based location returned above to your project folder. The folder/files in your project folder will over-ride the gem theme location and basically convert your site to a 'regular' theme. (note - this does not work for 'remote' themes. Remote theme folders are located in a github branch) 
 
-> YAML does not handle tabs. Make sure you use 2 spaces for indenting lines in the YAML files. To set variables/meta data use YAML front matter with the top pair of ---
+**Jekyll folder structure**  
+If you follow the gem theme link from running ```bundle info --path <theme>``` you'll find additional folders. The Jekyll site has a good description of these [folders](https://jekyllrb.com/docs/structure/).  
+* Note - Files or folders beginning with ., _ , # or ~ in the source directory will not be included in the destination folder. If you want them copied over you'll need to explicitly specify them in the config file **include**.  
+* _config.yml - configuration file  
+* **_site** - The Jekyll generated or processed files that make up the finished website will be placed here (.html files, main.css, js, images, etc)
+* **_posts** - Blog posts following the format YEAR-MONTH-DAY-title.md.  
+* **_data** - Jekyll will load all data files (.yml, .yaml, .json, .csv) and they will be accessible via `site.data`. Example if there's a file members.yml under the directory, then you can access contents of the file through site.data.members.
+* **.jekyll-cache** - A copy of the generated pages and markup/markdown are kept here for faster serving. Created during jekyll serve. 
+* **index.html** - any html, markdown, md files that have a front matter section will be processed by Jekyll
 
-Following the previous steps will give you some background on setting up jekyll with the default gem-based minima theme. However there are even more themes with advanced formatting like drop down menus and table of contents. The guides below are for two themes I have tried out ([al-folio](https://github.com/alshedivat/al-folio) and [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes)). Always refer to the theme github site for more detailed instructions. (there are some differences when working with gem-based themes and remote themes where formatting files are stored in a github branch)  
+Files stored in the gem theme folder by default  
+* [assets](https://jekyllrb.com/docs/assets/)
+  * Used by many themes to keep assets (css, images, and js) organized. 
+  * The *main.scss* file inside assets will import individual .scss files inside _sass. (note a nested import will behave slightly different)
+* [_sass](https://jekyllrb.com/docs/configuration/sass/) - The sass partials imported into main.scss which will then be processed into a single stylesheet main.css that defines the styles to be used for the site. In other words Sass partials, file that begin with an underscore _, are meant to be imported, not compiled to a css file.
+* [_layouts](https://jekyllrb.com/docs/layouts/) - Templates for wrapping the content. Each page can use a different layout specified in the front matter. The liquid tag {% raw %}{{ content }}{% endraw %} is used to inject content into the web page.
+* [_includes](https://jekyllrb.com/docs/includes/) - Partials that can be mixed and matched in different layouts. The liquid tag {% raw %}{% include filename %}{% endraw %} can be used to include the partial in _includes/filename
+
+> [YAML](https://www.redhat.com/en/topics/automation/what-is-yaml) is used for configuration files (similar to XML and JSON). YAML does not handle tabs. Make sure you use 2 spaces for indenting lines in the YAML files. A file that has YAML front matter (a block of variables at the top of the file between a pair of triple dashes) will be processed by Jekyll. The variables in the YAML front matter can be accessed using Liquid tags. The front matter can even be empty (there does not have to be any variables specified) and Jekyll will process it and put it in the destination folder of the same name as the source.  
+
+Following the previous steps will give you some background on setting up jekyll with the default gem-based minima theme. However there are many more themes with advanced formatting like drop down menus and table of contents. The guides below are for two themes I have tried out ([al-folio](https://github.com/alshedivat/al-folio) and [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes)). Always refer to the theme github site for more detailed instructions. (there are some differences when working with gem-based themes and remote themes where formatting files are stored in a github branch)  
+
+Options for installing custom themes  
+* Fork an existing theme on GitHub
+* Install with Gem-based method  
+
+If theme has remote option  
+* Install with remote-theme method  
+
+If copying from theme already installed locally
+* Copy all files from one of your existing GitHub Pages projects
 
 **Fork an existing theme on GitHub**  
 1. In github fork the theme and save in your account under a new name
@@ -465,7 +606,7 @@ Following the previous steps will give you some background on setting up jekyll 
 
 **Copying from one of your existing GitHub Pages projects**  
 1. Create GitHub repo (including README.md)
-2. Turnon GitHub Pages
+2. Turn on GitHub Pages
 3. git clone to local and cd to dir
 4. Copy projects files, **including hidden folders**, from the existing project to your new project
 5. Install gems with ```bundle install```
@@ -477,8 +618,68 @@ Following the previous steps will give you some background on setting up jekyll 
 9. Likely will need to go to **Pages** and change Branch to **gh-pages** depending on theme
 
 ## Sass
-[Sass](https://sass-lang.com/documentation/) is a preprocessor to css giving it additional functionality (ie mixins, functions). Sass code is written in .scss files (Jekyll will look for Sass partials in _sass dir) and then compiled to css. Jekyll comes with a sass-converter plugin to do this for you. But you could also run Sass outside of Jekyll by [installing Sass](https://sass-lang.com/install).  
+[Sass](https://sass-lang.com/guide) is a preprocessor to css giving it additional functionality (ie variables, mixins, functions). The Sass code is written in .scss files (Jekyll will look for Sass partials in _sass dir) and then compiled to css. Jekyll comes with a sass-converter plugin to do this for you. But you could also run Sass outside of Jekyll by [installing Sass](https://sass-lang.com/install).  
+* The scss syntax is a superset of css. All valid css is also valid scss.
+* Sass file that begin with an underscore _ are partials and meant to be imported, not compiled to a css file. Partials contain snippets of code to help organize.
+* Mixin - a generic OOP term. A class that contains methods for other classes. A design pattern in which some method of a base class uses a method it does not define. In Sass a mixin lets you make a group of css declarations you want to reuse in multiples places.  
 
+Some Sass examples  
+scss syntax
+```scss
+$grey-color:          #828282;
+$grey-color-dark:     #1C1C1D;
+
+body{
+  font: $grey-color;
+  color: $grey-color-dark;
+}
+```
+is compiled to css syntax  
+```css
+body {
+  font: #828282;
+  color: #1C1C1D;
+}
+```
+Mixin Example  
+scss syntax  
+```scss
+@mixin theme($theme: DarkGray) {
+  background: $theme;
+  box-shadow: 0 0 1px rgba($theme, .25);
+  color: #fff;
+}
+
+.info {
+  @include theme;
+}
+.alert {
+  @include theme($theme: DarkRed);
+}
+.success {
+  @include theme($theme: DarkGreen);
+}
+```
+is compiled to css syntax  
+```css
+.info {
+  background: DarkGray;
+  box-shadow: 0 0 1px rgba(169, 169, 169, 0.25);
+  color: #fff;
+}
+
+.alert {
+  background: DarkRed;
+  box-shadow: 0 0 1px rgba(139, 0, 0, 0.25);
+  color: #fff;
+}
+
+.success {
+  background: DarkGreen;
+  box-shadow: 0 0 1px rgba(0, 100, 0, 0.25);
+  color: #fff;
+}
+```
 ## Liquid
 [Liquid](https://shopify.github.io/liquid/) is a template language and you'll see it used frequently in jekyll themes. You insert it in the markdown (can be placed directly in html) with curly braces  
 * {% raw %}{{}}{% endraw %} for outputting variables

@@ -30,8 +30,6 @@ github_repos:
   - stemjust4u/NTC-thermistor-ADS1115c 
   - stemjust4u/E-ink 
   - stemjust4u/esp32all 
-  - stemjust4u/esp32all-debug 
-  - stemjust4u/esp32sandbox 
   - stemjust4u/mqtt-RPi-monitor
   - stemjust4u/Joystick-MCP3008-RPi-ESP32-Compare 
   - twbs/bootstrap
