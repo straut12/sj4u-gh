@@ -62,6 +62,12 @@ Polymorphism - behavior of the object may change according to state or context.
 Instantiation - create the object. return the handler.  
 Initialization (constructor) - set the initial/default values.  
 
+**Other helpful terms to know**  
+* Dynamically typed - you do not have to specify the data type (float, int, string) when writing the code. More convenient, common with scripting languages. The type is checked at run time when being executed. (Python/JS).
+* Statically typed - you must specify the data type (float, int, string) of your variables to avoid errors during compile. Less convenient but can help catch bugs early on. (C++, Java)
+* Strongly typed language means it will give an error if you try and perform an operation with incompatible data types (ie try and add an integer 1 and a string '2'. 1 + '2' will give an error). The program will not make implicit conversions between unrelated data types for you. (Python)
+* Loosely/weakly typed language will make conversions between unrelated data types. It will try and perform the action even if the data types are not compatible. 1 + '2' = 3. (Javascript)  
+
 # Helpful Python Commands
 I will not be listing the Python syntax for loops, variables, conditionals, etc. There are many online resources for syntax including [w3schools](https://www.w3schools.com/python/)  
 
