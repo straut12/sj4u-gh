@@ -111,9 +111,10 @@ Note it is recommended to install packages inside a virtual environment to avoid
 ```(.venv)$ python3.7 -m pip install package```  
 
 To see what packages are installed  
-```(.venv)$ pip3 list ```(will list all packages installed including editables)  
+```(.venv)$ pip3 list ```  
 Side note list vs freeze 
-```(.venv)$ pip3 freeze > requirements.txt ``` will list packages you installed in a txt file and in a format that can be used to reinstall.  
+```(.venv)$ pip3 freeze > requirements.txt ```  
+will list packages you installed in a txt file and in a format that can be used to reinstall.  
 
 **Python wheels**
 Often during a pip installation you'll see reference to wheels.  Python wheels are a tool that help install python packages. From stack overflow.. if the package is not a wheel, pip tries to build a wheel for it (via setup.py bdist_wheel). If that fails you get "failed building wheel for **package**" and pip falls back to installing directly (via setup.py install). Once we have a wheel, pip can install the wheel by unpacking it correctly. pip tries to install packages via wheels as often as it can. This is because of various advantages of using wheels (like faster installs, cache-able, not executing code again etc).  
@@ -158,7 +159,7 @@ You can change the second .venv to whatever virtual env name you want. The .venv
 Now use 'source', a built-in shell command to read/execute the contents of the 'activate' file  
 ```$ source .venv/bin/activate ```  (a .venv will now be at the beginning of your command prompt line)
 
-In VS code select the Python interpreter created in the venv from the menu at the bottom right of the window. Or go to command palatte, ctrl-shift-P, and then type 'Python: Select Interpreter' and choose your venv.  
+In VS code select the Python interpreter created in the venv from the menu at the bottom right of the window. Or go to command palette, ctrl-shift-P, and then type 'Python: Select Interpreter' and choose your venv.  
 
 **git Housekeeping Item**
 Add .venv to your .gitignore list so you do not load it to github. This can be done automatically when you create the repo by selecting Python template for your git ignore.  
@@ -202,7 +203,7 @@ Install from source
 ```$ python3 -m pip3 install . ```  
 
 To get access to site packages go into the virtual env folder and edit pyvenv.cfg  
-change include-system-site-packges=true  
+change include-system-site-packages=true  
 Module installations will still go to venv as normal and site packages will be visible too.  
 
 **Troubleshooting**  
@@ -228,7 +229,7 @@ Example
 Python Infrastructure  
 BOTTOM  
 * **MODULE** (module_name.py) is a python file that contains classes/functions and will have a .py extension and can be executed/imported.
-* **PACKAGE** (packagename) is a directory with a collection of modules and will include \__init__.py (constructor) so the interpreter knows it is a package.
+* **PACKAGE** (package) is a directory with a collection of modules and will include \__init__.py (constructor) so the interpreter knows it is a package.
 * **LIBRARY** is a collection of packages. More of a generic term meaning a collection of code that is designed to be re-used. A library can be a collection of packages/modules or even a single module.
 * **FRAMEWORK** is a collection of libraries.
 * (API or application programming interface is an interface or description of how to interact with an application)  
@@ -307,7 +308,7 @@ dir() - List all properties and methods of an object.
 globals() - Returns dict of variables defined in global symbol table (namepsace).   
 locals() - Returns dict of local symbol table  
 
-From the python interpeter - in a script use pprint(dir()) for pretty printer. (from pprint import pprint)  
+From the python interpreter - in a script use pprint(dir()) for pretty printer. (from pprint import pprint)  
 Can import modules and re-run dir() to see what was loaded.  
 ```console
 >>> import modules
@@ -418,7 +419,7 @@ To see a list of your python packages (directories) you can print(sys.path). A q
 ```/usr/lib/python3/dist-packages ``` (you'll see packages installed with apt)  
 If you look inside these directories you may see  
 * \__init__.py (makes a directory a package and may list what modules will be loaded)  
-* **directory** (this could be a subpackage)  
+* **directory** (this could be a sub package)  
 * **files**.py (these are the modules containing the classes/functions)  
 
 Another way to find the location is in the interpreter. Import a module and print the \__file__ variable. (however this does not work on built-in modules)  
@@ -492,12 +493,12 @@ or
 ```
 
 A browser window should open up with the python package/modules. You'll recognize the same directories listed from sys.path above. However the built-in modules are included here, too.  
-Under Bult-in Modules select "time". Scrolls past the Classes down to the  functions and you'll find "sleep". Now use the interpreter to experiment with importing it.
+Under Built-in Modules select "time". Scrolls past the Classes down to the  functions and you'll find "sleep". Now use the interpreter to experiment with importing it.
 Use pydoc to Explore Packages/Modules  
 ​Pydoc is a graphical way to explore packages/modules in a directory (packages/modules you've created in that directory and the installed packages/modules by python).    
 
 **Create Your Own Package Module**  
-The best way to get familiar with the package/mdoule concept is creating your own packages (directories) and modules (file.py).   
+The best way to get familiar with the package/module concept is creating your own packages (directories) and modules (file.py).   
 * Create \__init__.py inside the directories to make them packages. 
 * Create simple functions with a print("function") inside the modules.
 Now experiment with different import syntax.  
@@ -914,7 +915,7 @@ logger.info('logger info: {0}'.format(a))
 logger.debug('logger debug')
 ```
 
-# Cheatsheet
+# Cheat sheet
 
 Functions and Arguments  
 

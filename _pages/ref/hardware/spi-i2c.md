@@ -140,7 +140,7 @@ FS = GPIO 19
 [By wdwd - Own work, CC BY 3.0](https://commons.wikimedia.org/w/index.php?curid=16579640)  
 
 # UART (serial)
-Universal Asynchornous Reception and Trasnmission. 
+Universal Asynchronous Reception and Transmission. 
 * Often thru USB-to-serial converter, acting as if the USB is a serial port. 
 * The Pi or device can initiate data transfer. Data is transmitted/received one bit a time, sequentially, without a clock. 
 * Instead of clock, start/stop bits are used to synchronize. 
@@ -160,7 +160,7 @@ $ ls -l /dev/ttyUSB*
 crw-rw---- 1 root dialout 188, 0 Apr 6 12:41 /dev/ttyUSB0 
 ```
 To find out if Pi is in the group dialout use  
-```$ id  ```(typically only an issue if using non Rasperry Pi OS)  
+```$ id  ```(typically only an issue if using non Raspberry Pi OS)  
 To add  
 ```$ sudo usermod -a -G dialout pi ```  
 

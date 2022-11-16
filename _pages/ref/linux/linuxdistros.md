@@ -79,13 +79,13 @@ However all of the systems can be customized even more in their appearance once 
 
 Most of them are free and you can use a Bootable USB stick or Virtual Box (virtual machine s/w) to take them for a test drive before committing to one.  
 
-Since I focus heavily on RPis which use apt/.deb I have stuck with Debian/Ubuntu systems. If you are new to Linux, and focused on STEM projects, it might be best to stick to Raspberry Pi OS until you get more comfortable. But it is still valuable to know the terminoloy used across different distros. Knowing the terms will make you more efficient at googling "how to .. "
+Since I focus heavily on RPis which use apt/.deb I have stuck with Debian/Ubuntu systems. If you are new to Linux, and focused on STEM projects, it might be best to stick to Raspberry Pi OS until you get more comfortable. But it is still valuable to know the terminology used across different distros. Knowing the terms will make you more efficient at googling "how to .. "
 
 Installing software in Linux was one of the more frustrating items for me to get used to coming from Windows. Depending on the software or package there are a variety of ways for installing. But you adjust over time.  
 Here are some scenarios that caught me early on
 * You want to install a software pkg that is not in the built-in Software Store, you Google it, find a command to install it, run the command on your system and it comes back and says 'unable to locate package'. (This could be caused by the software pkg not having a version for your specific architecture and/or OS release)
 * You google various software that are not in the Software Store, and each have a different installation method. One uses apt, one is a .deb you download, one is a executable shell file, another is a tarball you unzip to corresponding folders. (You have to get used to installing packages via different methods)
-* The same software can be installed multiple times on your PC using different package managers. This can result in different versions of the same S/W installed. A good example is gimp photo editor. You may already have gimp installed thru the apt package manager and not realize it. You then install a newer version of gimp with flatpak package manager. But when you start the application it is still using the older, apt installed, version. (It is the nature of Linux distros having multple package managers. But once you learn the different options it quickly becomes a non-issue. Package section show how to catch this scenario and avoid it)
+* The same software can be installed multiple times on your PC using different package managers. This can result in different versions of the same S/W installed. A good example is gimp photo editor. You may already have gimp installed thru the apt package manager and not realize it. You then install a newer version of gimp with flatpak package manager. But when you start the application it is still using the older, apt installed, version. (It is the nature of Linux distros having multiple package managers. But once you learn the different options it quickly becomes a non-issue. Package section show how to catch this scenario and avoid it)
 
 Some Quick Terms (more details in section below)
 * OS is the operating system
@@ -143,7 +143,7 @@ Early Unix Systems​
 I use Raspberry Pi OS on RPis0-3 and various OS's on the RPi4. I also have other PCs with elementary OS, Zorin, Linux Mint. Most of the information is applicable across Debian/Ubuntu systems. Here's some terms you'll see when researching.  
 Debian is a Linux distro (distribution)
 
-Raspberry Pi OS is a Linux distro, derived from Debian . It follows the Debian version code names (Stretch, Buster, etc). It is developed by Raspberry Pi Foundation.  Default desktop evironment is PIXEL (based on LXDE) and window manager is OpenBox. Used for my Raspberry Pi 0-4 (ARM) systems.  
+Raspberry Pi OS is a Linux distro, derived from Debian . It follows the Debian version code names (Stretch, Buster, etc). It is developed by Raspberry Pi Foundation.  Default desktop environment is PIXEL (based on LXDE) and window manager is OpenBox. Used for my Raspberry Pi 0-4 (ARM) systems.  
 
 Ubuntu is a Linux distro and based on Debian. However it has its own releases and code names (Bionic, Focal, etc). It is developed by Canonical.  I use Ubuntu with default desktop environment GNOME and window manager Mutter. LTS means long-term support and usually the preferred version.  
 ​
@@ -170,9 +170,9 @@ Directions will reference the Ubuntu install
 
 ## System Pre Check
 After setting up Linux/Windows dual boot on multiple systems I've ran into a few items to be careful of before starting the install process or even setting up the Linux USB boot stick.
-1. **Partition Style** Check the partition style of the drive your windows system resides. Is it MBR or GPT? If you are adding disk drives for the Linux distro it is best to keep the partition styles the same and not mix-n-match.  MBR (master boot record) is older and has limitions on number of partitions and size. GPT (GUID Partition Table) is newer without partition number restrictions. 
+1. **Partition Style** Check the partition style of the drive your windows system resides. Is it MBR or GPT? If you are adding disk drives for the Linux distro it is best to keep the partition styles the same and not mix-n-match.  MBR (master boot record) is older and has limitations on number of partitions and size. GPT (GUID Partition Table) is newer without partition number restrictions. 
     **How to check partition style.**  
-    * Using **Windows** to check partion style - If you already have unallocated/free space on the drive (or you can create some free space for your linux distro) go to Disk Management (right click on PC file folder and select manage). Select the unallocated space partition and under properties/volume it will note the partition style. A second option is diskpart. Under run (window-R) type diskpart. A command line will appear and if you type "list disk" it will show if the drive is gpt. (if running the windows installation script you can get to diskpart command with "Shift F10") ​​​
+    * Using **Windows** to check partition style - If you already have unallocated/free space on the drive (or you can create some free space for your linux distro) go to Disk Management (right click on PC file folder and select manage). Select the unallocated space partition and under properties/volume it will note the partition style. A second option is diskpart. Under run (window-R) type diskpart. A command line will appear and if you type "list disk" it will show if the drive is gpt. (if running the windows installation script you can get to diskpart command with "Shift F10") ​​​
     * If you have a disk drive you're setting up and you want to make it gpt you can use diskpart. (be careful and make sure you're using the disk you're installing the Linux distro on)
     ```console
     ​$ list disk
@@ -180,7 +180,7 @@ After setting up Linux/Windows dual boot on multiple systems I've ran into a few
     $ clean
     $ convert gpt
     ```
-​​  * A **Linux distro** can be used to check partition style with gnome disk utility.  It will show the drives and partion style. (note - GParted is another software tool that is also capable of partitioning but be careful with it. I have accidentally broken my windows boot loader with it.)
+​​  * A **Linux distro** can be used to check partition style with gnome disk utility.  It will show the drives and partition style. (note - GParted is another software tool that is also capable of partitioning but be careful with it. I have accidentally broken my windows boot loader with it.)
 2. ​What boot option is the BIOS on your PC using? CSM (Legacy) or UEFI. You will want your Linux USB boot stick to match the boot option of your PC. These are the firmware of your PC and stored on the motherboard. It is the first software ran on your PC when you power on. It will initialize hardware and load the boot loader (grub) on the hard disk which will fire up the operating system. (UEFI will search for the EFI boot file in the EFI system partition.)​​  
 
 Newer systems will use GPT/UEFI and is usually the preferred setup. But you may have to adjust according to what your PC is currently using.
@@ -197,7 +197,7 @@ Always look up the Linux distro's installation instructions , especially if you 
 2. For windows 8/10 disable the 'secure boot' option in the BIOS (required)
 3. In Windows, manually create 'free' space on a hard drive for the Linux distro (optional - see below)
 
-> Why step 3 above is optional - There's an option later during the USB Ubuntu installation to automatilly "Install Ubuntu along side Windows 10". It will let you select how much space you want to take from Windows to use for the Ubuntu install. The advantage is you do not need to do step 3 where you shrink/delete to make free space. The downside is that your root/home will be on the same partition.  
+> Why step 3 above is optional - There's an option later during the USB Ubuntu installation to automatically "Install Ubuntu along side Windows 10". It will let you select how much space you want to take from Windows to use for the Ubuntu install. The advantage is you do not need to do step 3 where you shrink/delete to make free space. The downside is that your root/home will be on the same partition.  
 > My preference, is doing step 3, and using the "something else" option, where you specify partitions and memory amount  for root, home, and swap individually. The advantage is cleaner upgrades and easier tracking of space used by software packages vs personal files. I've done both options though, and they both work fine.
 
 * On your windows machine, go to file explorer and right click on 'This PC' and select 'manage' to get to the disk management tools (or type 'disk manage' in the Start menu)
@@ -207,7 +207,7 @@ Always look up the Linux distro's installation instructions , especially if you 
 ​​​
 Take note of the size of the drives and partitions. This will give you confidence later when selecting the 'free' space that you're not choosing the wrong partition.   ​
 
-​After 'shrinking' a Windows partition (or deleting an un-used parition) you should have 'Unallocated' or 'free' space to use for the Linux distro.  
+​After 'shrinking' a Windows partition (or deleting an un-used partition) you should have 'Unallocated' or 'free' space to use for the Linux distro.  
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
         {% include figure.html path="assets/img/linux/freespace1.png" class="img-fluid rounded z-depth-1" %}
@@ -317,7 +317,7 @@ $ sudo update-grub
 * **​Desktop Environment (DE)** - Also referred as graphical interface. The part you interact with. Fully integrated system that builds upon the Window Manager. Requires a Display Server and Window Manager. A system can have multiple DEs and you can use a  Display Manager to select which one you want to use during login.
 * **​Window Manager (WM)** - System software, usually part of the DE, that manages the placement and appearance/menu/buttons of the windows. Can be used with DE or stand alone (requires X windows but not a DE)
 * **Display Server** - (aka graphical server) Common example is Xorg. Provides the primitive framework for the DE. Uses display server protocol like X windows (aka X11, X, Xserver) or Wayland. Required for a DE.​​
-* **Gtk** - Open source widget tookit for making GUIs. (used in Wayland and X11) Gnome.
+* **Gtk** - Open source widget toolkit for making GUIs. (used in Wayland and X11) Gnome.
 * **Qt (cute)** - Open source widget toolkit for making GUIs and cross-platform apps. KDE
 * **​Process** - A running program with either a running, sleeping, or zombie state​​
 

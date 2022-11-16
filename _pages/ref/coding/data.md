@@ -82,8 +82,8 @@ mysql> SELECT * FROM mytable limit 10;
 
 **Advanced tools**
 * Jupyter notebook with pandas, numpy, matplotlib, seaborn. 
-* Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced boxplots, historgrams, heatmaps, etc with plotly. Only supports importing from pandas (df). Plotly is currently not supported in Power BI Python but may be useable in the R script.
-* dash. Python based dashboard using plotly to do advanced boxplots, historgrams, heatmaps.
+* Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df). Plotly is currently not supported in Power BI Python but may be useable in the R script.
+* dash. Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
 * streamlit. Quick and clean data visualizations.
 
 For time series data I usually use node-red (with its charting options) connected to influxdb

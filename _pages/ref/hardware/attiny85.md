@@ -43,7 +43,7 @@ Build-in USB Version, Micro USB Version, Bare attiny85, and Development board fo
 * Install [Arduino](https://www.arduino.cc/en/software)
 * Likely will need to install [digistump drivers](https://github.com/digistump/DigistumpArduino/releases/download/1.6.7/Digistump.Drivers.zip) DPInst64 is for 64bit systems.
 In Arduino
-* Go to File/Preferences and Additinal Boards Manager URL. Add/paste the digistump json package in the fields
+* Go to File/Preferences and Additional Boards Manager URL. Add/paste the digistump json package in the fields
 http://digistump.com/package_digistump_index.json
 * (if you had other packages they can be separated with a comma)
 * Go to Tools/Board/Boards Manager and install the **Digistump AVR Boards**

@@ -57,7 +57,7 @@ See [Monitor](../../../ref/hardware/monitor-setup/) link for more details
 > Power Guide-lines
 RPi0-3 **>10W** (5.1V,2-2.5A)micro-USB  
 RPi4 **>15W** (5.1V,3A)USB-C  
-Watts(Power)=I(currrent A)xV(voltage)  
+Watts(Power)=I(current A)xV(voltage)  
 
 ## Sound
 * The Pi uses PWM or PCM hardware for sound.
@@ -99,7 +99,7 @@ For reference a li-on power bank may have a capacity of 11Watts. Your project us
 
 # CPU/Memory/Power Compare 
 Raspberry Pi and ESP32 Specs
-This is a quick summary to help decide which device is best for your projects based on processor, memory, and power usage. Also helps when downloading packages .. for example Raspberry Pi is a armxx type, not a x86/x64 or amd64.
+This is a quick summary to help decide which device is best for your projects based on processor, memory, and power usage. Also helps when downloading packages .. for example Raspberry Pi is a arm type, not a x86/x64 or amd64.
 All RPi and ESP32 listed below have built in wi-fi and bluetooth. (attiny85 does not)
 Raspberry Pi's require SD card (16GB is good for projects.  32-64GB is good for using as a PC and installing another OS like Ubuntu.
 
@@ -126,7 +126,7 @@ Power usage of esp32 is smaller than Raspberry Pi.  When processing actions will
 
 Notes for RPi4
 - Has dual display ports (having 2 screens is nice for working on projects)
-- Most likely need a fan and heatsink
+- Most likely need a fan and heat sink
 - Requires larger power supply and type-C charging cord.
 
 Other notes

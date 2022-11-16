@@ -102,7 +102,7 @@ $ sudo nmap -sP 10.0.0.0/24
 ```
 (use the route -n command to get gateway, ie 10.0.0.0)
 
-A useul tool that will isolate RPi's on your network and also allow you to send some commands is RPi-hunter. It requires extra setup but may be worth it if you will have a lot of Pi's on your network. More details in Network-RPi-Hunter page  
+A useful tool that will isolate RPi's on your network and also allow you to send some commands is RPi-hunter. It requires extra setup but may be worth it if you will have a lot of Pi's on your network. More details in Network-RPi-Hunter page  
 
 ​​RealVNC Cloud Address book - This option does not need an IP address. You will be able to access devices from your Team address book in the RealVNC Viewer.  
 
@@ -147,7 +147,7 @@ Cloud is useful since you do not use the IP address. You have an address book an
 ## ​​Virtual RealVNC
 Enable RealVNC as previous instructions
 * Will create a virtual desktop in memory, so RPi can boot up 'To CLI'
-* Then remote terminal (ssh) to the RPi and type in comand with resolution
+* Then remote terminal (ssh) to the RPi and type in command with resolution
 ```$ vncserver -geometry 1360x768```  
 * It will create a virtual desktop and give you a new address to access it in RealVNC (ie IPADDRESS:1)
 * Go to RealVNC and type in the new IPADDRESS:1
@@ -197,7 +197,7 @@ If still having problems try the following
 ```sudo apt install xinput-calibrator```  
 Reboot  
 ```DISPLAY=:0.0 xinput_calibrator```  
-Peform the calibration  
+Perform the calibration  
 It will output calibration results. Copy the results and paste in 99-calibration.conf below  
 ```sudo nano /etc/X11/xorg.conf.d/99-calibration.conf```  
 Reboot  
@@ -240,7 +240,7 @@ More VNC Terms
 
 Other terms
 * cli - command line interface
-* Default login is **pi** and pswd **rasbperry** (change the password)
+* Default login is **pi** and pswd **raspberry** (change the password)
 * alt-space - While working on display setup, if a program opens up with menu outside the monitor window use “alt-space” to get a pop up menu allowing you to move it.
 
 Some terms you'll see from output of 
@@ -273,7 +273,7 @@ Public and Private IP Addresses
 
 * Public IP Address - Unique, public, address assigned to web sites for connecting to external locations thru the internet
 
-* IP (Internet Protocol) - Connectionless protocol for delivering information or data packets between computers (a source and a host). Does not send an acknowledgement.
+* IP (Internet Protocol) - Connection-less protocol for delivering information or data packets between computers (a source and a host). Does not send an acknowledgement.
 * TCP (Transmission Control Protocol) - Connection protocol that complements the IP. Provides error-checking and acknowledge of transmissions between systems to ensure data is reliable.
 * TCP/IP - TCP and IP work together to connect computers and send packets of data between them (request, acknowledge, transfer)
 

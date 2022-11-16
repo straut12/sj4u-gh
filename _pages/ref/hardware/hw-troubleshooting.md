@@ -43,7 +43,7 @@ The most thorough tool for checking RPi's uses [pigpio](https://abyz.me.uk/rpi/p
 Check with  
 ```sudo ./x_pigpio``` (check C)  
 ```sudo pigpiod ``` to start daemon
-```$ sudo killall pigpiod``` to kill deamon  
+```$ sudo killall pigpiod``` to kill daemon  
 ```./x_pigpio.py ``` (check python)  
 
 ### Install piscope

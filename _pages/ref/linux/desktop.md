@@ -170,7 +170,7 @@ Example Cairo-dock with 3D theme
 </div>
 
 **Raspberry Pi uses 'alacarte' to edit the Start Menu/Launcher**  
-Note - alacaret can be installed on Ubuntu too.  
+Note - alacarte can be installed on Ubuntu too.  
 ```$ sudo apt install alacarte```  
 I've noticed my changes in alacarte revert to the 'Other' Menu. So I only add custom app launchers in the 'Other' menu. 
 * Go to "Start" "Preferences" "Main Menu Editor"
@@ -268,7 +268,7 @@ Raspberry Pi Specifics
 Note - for ° symbol on RPi.  
 RPi character map can be enabled with [compose](https://help.ubuntu.com/community/GtkComposeTable)  
 ```$ sudo raspi-config```  
-Localisation Options  
+Localization Options  
 Keyboard  
 Go thru options til you get to 'Compose Key' and select one (ie Right Alt)  
 Keyboard combination descriptions are in ubuntu compose table  
@@ -282,7 +282,7 @@ Exec=lxterminal -e "sleep 5;conky &"
 
 Conky can be [started at boot](../../../ref/linux/autostart/) with a couple methods.  
 1. Use the autostart file at /etc/xdg/lxsession/LXDE-pi/autostart (can not use " " or ' ')
-2. Or create a .desktop file and put it in the autstart folder. Example below.  
+2. Or create a .desktop file and put it in the autostart folder. Example below.  
 ​```$ sudo nano /etc/xdg/autostart/conky.desktop```  
 ```console
 [Desktop Entry]
@@ -528,7 +528,7 @@ Lua script gauges 4 core CPU and wifi
 --  Author  : SeaJey
 --  Version : v0.1
 --  License : Distributed under the terms of GNU GPL version 2 or later
---  This version is a modification of lunatico_rings.lua wich is modification of conky_orange.lua 
+--  This version is a modification of lunatico_rings.lua which is modification of conky_orange.lua 
 --  conky_orange.lua:    http://gnome-look.org/content/show.php?content=137503&forumpage=0
 --  lunatico_rings.lua:  http://gnome-look.org/content/show.php?content=142884
 --==============================================================================

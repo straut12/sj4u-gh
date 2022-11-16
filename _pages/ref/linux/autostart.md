@@ -21,7 +21,7 @@ One thing to consider is if the program/service you're starting is graphical (GU
 
 **End of boot**  
 **Start-up Process begins**  
-* [systemd](https://en.wikipedia.org/wiki/Systemd) – System and service manager (d for daemon). The init system that takes over the boot process from the bootloader (GRUB2) and starts the rest of the system. init is the first process started. ```$ ps aux``` will show it as PID1. It will mount the filesystems defined in /etc/fstab and then starts up and maintains userspace services.
+* [systemd](https://en.wikipedia.org/wiki/Systemd) – System and service manager (d for daemon). The init system that takes over the boot process from the bootloader (GRUB2) and starts the rest of the system. init is the first process started. ```$ ps aux``` will show it as PID1. It will mount the file systems defined in /etc/fstab and then starts up and maintains userspace services.
 End of Start Up and PC is Running 
 * [userspace](https://en.wikipedia.org/wiki/User_space_and_kernel_space) - Code running outside the kernel space or after kernel is booted.  
 

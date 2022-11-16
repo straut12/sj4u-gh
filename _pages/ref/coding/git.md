@@ -7,7 +7,7 @@ nav: false
 toc: true
 ---
 # VS code with git
-There's many choices for code editors. [VScode](https://code.visualstudio.com/download) is a popular code editor with many extensions, light enough to run on RPi3-4, and integrates well with git.​  
+There is a large number of code editors to choose from. [VScode](https://code.visualstudio.com/download) is a popular choice because of its  extensions, light enough to run on RPi3-4, and integrates well with git.​  
 
 With VS code extensions you can essentially turn it into an IDE. At least for STEM project purposes. For Raspberry Pi the primary extensions I install are Python, Remote-SSH, and GitHub Pull Requests and Issues.
 * With remote-ssh you can connect from your main PC to any RPi (except a Pi0) and code a project. This eliminates having to hook a monitor up to the RPi and is smoother than vnc'ing to the RPi (especially a RPi3/A).
