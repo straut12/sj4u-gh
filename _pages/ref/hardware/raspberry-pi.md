@@ -14,6 +14,7 @@ Raspberry Pi is the most common component in my projects so I'll include more de
     </div>
 </div> 
 
+A great resources on the Raspberry Pi Hardware is at [raspberrypi.com](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html)  
 ## RPi Imager
 Much of the setup info below was before the [Raspberry Pi Imager](https://www.raspberrypi.com/software/). With the RPi Imager you can set many of the settings below (ssh, user name password, wifi SSID/password) during the SD card setup.
 <div class="row">

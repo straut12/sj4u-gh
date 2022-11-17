@@ -13,7 +13,7 @@ When using multiple systems (laptop, many Raspberry Pis,etc) you'll want to keep
 Overgrive - can be found in Software Store or you can download their .deb file and install using gdebi.​​ (also install instructions on web site link)
 ```$ sudo gdebi <overgrive.deb file>```  
 
-> I started creating a separate, 15GB, partion for my GoogleDrive so I could monitor it with conky and keep it separate in my backup strategy.  
+> I started creating a separate, 15GB, partition for my GoogleDrive so I could monitor it with conky and keep it separate in my backup strategy.  
 
 <div class="row">
     <div class="col-6 mt-3 mt-md-0">
@@ -111,7 +111,7 @@ $ cd <folder>
 Now connect to remote/destination system
 $ sftp pi@hostname.local (or IP address)
 enter login/pswd
-Change to the desitnation directory
+Change to the destination directory
 sftp> cd <folder>
 Use 'put' to move files to remote
 sftp> put <filename> 
@@ -289,10 +289,10 @@ I use Google Drive for personal files, and I found overGrive does a good job of 
 Here are the steps I follow.  
 
 Either before or right after installing my OS I reserve free space for the backup partitions (If working in Linux I use Gnome-disk-utility)  
-* Dual boot systems are easier (windows and Linux distros). You can boot into Windows or another Linux distro, leaving the primary OS unmounted and "shrink" or "resize" the hard drive. This gives you free space to create separate backup partions.
+* Dual boot systems are easier (windows and Linux distros). You can boot into Windows or another Linux distro, leaving the primary OS unmounted and "shrink" or "resize" the hard drive. This gives you free space to create separate backup partitions.
 * Single or sole Linux OS install is a little more work since it's harder to "resize" the primary drive. After installing the Linux distro I boot up 'live' from the USB stick and use "gnome-disks" to immediately shrink the primary disk and free up space. 
 * Raspberry Pi - Since the hard drive is a micro SD card you can easily use a USB adapter with another PC. 
-​Once I have "Free Space" I create these three Partions
+​Once I have "Free Space" I create these three Partitions
 * Note - I use "gnome-disks" for creating partitions.
 * 15GB partition for GoogleDrive that is sync'd with overGrive. This holds all my personal files.
 * 45-90GB partition for Google Drive Backups.
@@ -308,7 +308,7 @@ Select the "Free Space" and click on  "+" to "Create partition in unallocated sp
 Enter the amount for the partition (ext4 type) and give it a label.
 
 **Automount**
-Each time you boot will you need to open the file manager and click on the partion to have it mount. In order to have the partitions "auto-mount" open "Gnome-disks", select the partition and "Additional Partition Options", then "Edit Mount Options". Click on the "User Session Defaults" slide. Enter your password.​​
+Each time you boot will you need to open the file manager and click on the partition to have it mount. In order to have the partitions "auto-mount" open "Gnome-disks", select the partition and "Additional Partition Options", then "Edit Mount Options". Click on the "User Session Defaults" slide. Enter your password.​​
 * This is the GUI version of editing /etc/fstab
 * You can select/deselect the "Mount at system startup" and see the "noauto" option alternate.
 * Change "Identify as" to LABEL

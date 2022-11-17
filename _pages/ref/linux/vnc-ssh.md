@@ -253,10 +253,10 @@ ssh and sftp are options for logging into a terminal on another computer and run
 
 ssh has two choices for security or authentication. The default method is a simple password. But it can be updated to use key-based authentication which uses a private-public key pair.  
 
-**The RPi imager now lets you enable ssh in settings before you install Raspberry Pi OS on your sd card**  
+**Similar to vnc you need a ssh server running to allow ssh into your system. The openssh-server should be installed with the Raspberry Pi OS. And RPi Imager now lets you enable ssh and create a password in the Imager settings before you download/install to the sd card. Assuming you enabled ssh in the Imager settings you'll be able to ssh into it after you boot up.**  
 
 **ssh setup**  
-Similar to vnc you need a ssh server running.  
+If for some reason openssh was not installed you can set it up.  
 Install the ssh server  
 ```$ sudo apt install openssh-server ```  
 lsof should show port 22 LISTENing  
@@ -277,9 +277,6 @@ Enable ssh to start on boot
 Can test some ssh commands.  
 ```$ ssh <user>@<IP address>```  
 Login and check if it works  
-If the IP address changes (DHCP) on your pi you will need to run the following (replace 'user' with your user name and newIPaddress with IP address of device)  
-```$ ssh-keygen -f "/home/user/.ssh/known_hosts" -R "newIPaddress"```  
-​
 ```$ exit``` to leave  
 
 You can also use an app like PuTTY​​  
@@ -312,24 +309,18 @@ Or use rsync (much faster for a lot of files)
 * ```$ rsync -avz ./dir user@<IP address>:/home/user/dir```
 ```console
 -v (verbose)
--a (archive, preserve sym links, file permissins, etc)
+-a (archive, preserve sym links, file permissions, etc)
 -z (compress)
 ```
 
 -------------------------------
 
 # ssh Key Authentication
-ssh-keygen is a way of creating a secure method to log into remote hosts and allow transfer of code/files/data between your system/client and github or another PC/server. The general concept is two files are created (stored in ~/.ssh) with keys, a private and a matching public key. The public key is copied to the remote host/server. When connecting from your PC/client to the remote host/server a check will be done to confirm the private and public keys match.  
-
-**How it works**  
-* On your PC/client -> Create keys or copy existing keys
-* On the remote host/server -> Paste the key in your account security settings on the remote host (ie github)
-    * Or if working with a server, paste the keys in the server authorized_keys file
-    * (in server scenario the sshd_config will also need to be updated to disable the default simple PasswordAuthentication)  
+ssh-keygen is a way of creating a secure method to log into remote hosts and allow transfer of code/files/data between your system/client and github or another PC/server. The general concept is two files with keys (a private and matching public key) are created and stored in ~/.ssh. The public key is copied to the remote host (ie github) or server (in the server authorized_keys file). When connecting from your PC/client to the remote host/server a check will be done to confirm the private and public keys match.  
 
 Example files for RSA algo ssh  
 * Private -> **id_rsa** (The private key acts as a password, remains on your PC, and should not be shared)  
-* Public -> **id_rsa.pub** (The public key is copied to other PC's, github, etc. When you login, the remote is able to use the public key for verification and grants access)  
+* Public -> **id_rsa.pub** (The public key is copied to remote host (ie github or server). When you login, the remote is able to use the public key for verification and grant access. (in server scenario the sshd_config will also need to be updated to disable the default simple PasswordAuthentication)  
 
 > Note I mainly use ssh key authentication for connecting my system to github account. So the notes here are focused on that scenario  
 
@@ -362,7 +353,7 @@ Example files for RSA algo ssh
 * Go to github, then profile, settings, SSH key, new key and paste the key here.  
 * Now github can authenticate your local PC.  
 
-**Enable ssh Key Authentication for a Server/PC**
+**Enable ssh Key Authentication for a Server/PC**  
 If enabling keys for ssh to a server or another PC you paste the key into the server's authorized_keys file. The best way to do this is using the ssh-copy-id tool. Example below.  
 * ```$ ssh-copy-id user-name@ipaddress```  
 * It will reply with the RSA fingerprint and confirm you want to add it the list of known hosts.  
@@ -404,7 +395,7 @@ http://10.0.0.115:1880
 or  
 http://hostname.local:1880  
 
-To access from another computer you can use the IP addressor hostname found above.You can also update the lookup table with the hostname used for accessing from another computer.  
+To access from another computer you can use the IP address hostname found above.You can also update the lookup table with the hostname used for accessing from another computer.  
 ```$ sudo nano /etc/hostname```  
 ```$ sudo nano /etc/hosts ```(here you will see the 127.0.0.1 linked to localhost. Leave this line alone. Further down will be 127.0.1.1. Update the name next to this address.  
 To update the hostname of your RPi just go to $ sudo raspi-config and change the hostname in system options. ​
