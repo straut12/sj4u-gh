@@ -32,9 +32,3 @@ github_repos:
   - stemjust4u/esp32all 
   - stemjust4u/mqtt-RPi-monitor
   - stemjust4u/Joystick-MCP3008-RPi-ESP32-Compare 
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
