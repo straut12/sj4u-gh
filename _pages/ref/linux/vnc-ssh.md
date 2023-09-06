@@ -326,7 +326,7 @@ Example files for RSA algo ssh
 
 **Detailed Steps**
 **Creating the Pair of Private/Public Keys on your PC/Client Side**  
-* RSA type SSH keys are what worked best for me with Raspberry Pi so the rest of this page will be referring to RSA type.  
+* RSA type SSH keys are what worked best for me with Raspberry Pi  
 
 * You can run ```$ ls -al ~/.ssh ``` to see if you already have an existing key.   
 * If there is an **id_rsa.pub** and **id_rsa** then you already have keys. Assuming you haven't already used it, the **id_rsa.pub** can be copied to a remote host for ssh key authentication. However if you've already used that key for another account you'll need to follow the steps below to create a new pair and give them a different name.  
@@ -355,10 +355,11 @@ Example files for RSA algo ssh
 
 **Enable ssh Key Authentication for a Server/PC**  
 If enabling keys for ssh to a server or another PC you paste the key into the server's authorized_keys file. The best way to do this is using the ssh-copy-id tool. Example below.  
-* ```$ ssh-copy-id user-name@ipaddress```  
+* Login to the server
+* ```$ ssh-copy-id remote-user-name@ipaddress```  
 * It will reply with the RSA fingerprint and confirm you want to add it the list of known hosts.  
 
-* Or you can manually copy/paste the RSA key and paste it in the authorized_key file.  
+Or you can manually copy/paste the RSA key and paste it in the authorized_key file.  
 * ```$ sudo nano ~/.ssh/authorized_keys```   
 * Paste the public key into the file and make sure it is on a single line.  
 ```console
@@ -367,8 +368,20 @@ ssh-rsa AAB34NJD34987...
 
 By default ssh only uses password authentication. For the remote PC/server to require keys instead of just a password you need to update the sshd_config file  
 ```$ sudo nano /etc/ssh/sshd_config```  
-Uncomment the PasswordAuthentication line and set it to No  
+Uncomment the PasswordAuthentication line and set it to Yes  
 
+If you get a authentication error when logging in with ssh you can do a couple checks to confirm the system you're logging into.
+* Go to or remote desktop to the server
+* The server ssh key fingerprints are under /etc/ssh/ so run command below (assuming using SHA256)
+```console
+ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
+```
+* You can compare the returned fingerprint to what the ssh authentication error showed
+* To fix the mismatch on your remote machine's run the command below to remove the server from its known hosts file
+```console
+ssh-keygen -f "$HOME/.ssh/known_hosts" -R "IP-address-of-server"
+```
+* Now login again and it will update the known hosts file with the server info
 
 ---------------------------------
 

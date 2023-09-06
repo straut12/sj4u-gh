@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Scratch
+title: Beg Coding
 nav: true
 nav_order: 1
 dropdown: true
