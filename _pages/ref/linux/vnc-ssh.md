@@ -373,14 +373,10 @@ Uncomment the PasswordAuthentication line and set it to Yes
 If you get a authentication error when logging in with ssh you can do a couple checks to confirm the system you're logging into.
 * Go to or remote desktop to the server
 * The server ssh key fingerprints are under /etc/ssh/ so run command below (assuming using SHA256)
-```console
-ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
-```
+```ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub```
 * You can compare the returned fingerprint to what the ssh authentication error showed
-* To fix the mismatch on your remote machine's run the command below to remove the server from its known hosts file
-```console
-ssh-keygen -f "$HOME/.ssh/known_hosts" -R "IP-address-of-server"
-```
+To fix the mismatch on your remote machine's run the command below to remove the server from its known hosts file
+```ssh-keygen -f "$HOME/.ssh/known_hosts" -R "IP-address-of-server"```
 * Now login again and it will update the known hosts file with the server info
 
 ---------------------------------
