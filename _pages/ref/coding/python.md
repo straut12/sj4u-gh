@@ -1076,6 +1076,7 @@ print(dict)
 ```
 
 Formatting (%, format, and f-string)  
+Float formatting is {value:width.precision f}  
 ```python
 voltage = 1.24543534
 modulo = "%.2f"%voltage
