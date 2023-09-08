@@ -12,9 +12,9 @@ There are a couple different approaches to the over-all flow or framework of you
 Procedural is a fairly simple concept. Your code is written as a sequence of steps that are executed step-by-step. This makes sense when your project only requires a small number of steps to do some basic actions. You can still use functions, subroutines, procedures to organize actions that are often repeated to help keep the code clean and efficient. For quick, simple instructions procedural will be the most straight forward solution. But is it not as easy to scale up or build upon. If you plan on building on the project and making it a larger application then structuring your code with OOP will usually be better.
 (Almost all languages can do some level of procedural but the reverse is not necessarily true. There are some languages that are primarily procedural and could not do OOP. ie Fortran, C, and Basic)  
 
-In Object Oriented Programming (OOP) you try and think of your project in terms of objects. Each object usually contains data (attributes) and procedures (methods) that can access or manipulate the data. A common term you'll here is class or the blueprint for your objects. (objects are instances of classes). My first interpretation of objects was that they are similar to complex variables that have both containers and functions built into them.  
+In Object Oriented Programming (OOP) you try and think of your project in terms of objects. Each object usually contains data (attributes) and procedures (methods) that can access or manipulate the data. A method is similar to a function but resides inside the object. A common term you'll here is class or the blueprint for your objects. (objects are instances of classes). My first interpretation of objects was that they are similar to complex variables that have both containers and functions built into them.  
 
-Since STEM projects will frequently use external Python packages objects (that are using OOP) early on you will run into OOP methods. (You'll notice it from the dot notation) Dot notation means you are accessing data or running an operation connected to that object. (ie using an external library to get the temperature might call something like sensor.temperature)  
+Since STEM projects will frequently use external Python packages objects (that are using OOP) early on you will run into OOP methods. Or you're likely alreading using OOP concepts by using the built-in methods on python objects. For example using the .lower or .upper on a string. (You'll notice it from the dot notation) Dot notation means you are accessing data or running an operation connected to that object. (ie using an external library to get the temperature might call something like sensor.temperature). So OOP allows you to create your own objects and better organize your code with larger projects. It also makes it easier for someone else to use your code.       
 
 ```python
 import adafruit_dht
@@ -33,9 +33,11 @@ So understanding OOP early on will make it easier to navigate using 3rd party pa
 
 It is also helpful to understand Python as modular programming. Python supports grouping these classes into separate files or modules. But you can easily import the module (step 1 above) to use in your own code. This helps with organization and allowing you to easily use code from other libraries. The modules are namespaced (ensures unique names) to avoid conflict when a class has the same name as a class in another module.  
 
+note - variables/functions usually use lower case for the names since class will use CamelStyle naming.  
+
 **OOP Concepts**  
-Two main components of OOP are classes and objects.
-* Classes - this is the blueprint or template that defines the data(attributes) and available methods for acting on that data. (a complex user-defined data type)
+Two main components of OOP are classes and objects. (sometimes can be interchanged)
+* Classes - this is the blueprint or template that defines the data(attributes) and available methods for acting on that data. (a complex user-defined data type). It lets you create your ownn user defined object.
 * Objects - these are the specific instances of the class
 
 **Python Structure with OOP**  
@@ -69,9 +71,13 @@ Initialization (constructor) - set the initial/default values.
 * Loosely/weakly typed language will make conversions between unrelated data types. It will try and perform the action even if the data types are not compatible. 1 + '2' = 3. (Javascript)  
 
 # Helpful Python Commands
-I will not be listing the Python syntax for loops, variables, conditionals, etc. There are many online resources for syntax including [w3schools](https://www.w3schools.com/python/)  
+I will not be listing the Python syntax for loops, variables, conditionals, etc. There are many online resources for syntax including [w3schools](https://www.w3schools.com/python/) and udemy courses (I liked complete python bootcamp)  
 
 These are Python commands/concepts that I've come across and found useful.  
+
+Dictionary vs list
+* dict - objects referenced by key names. Easy to reference an item by its name. But can not be sorted.
+* list - objects referenced by location (similary to arrays). Can be sorted, indexed or sliced.  
 
 To check Python version.  
 ```$ ll /usr/bin/python3*```  
@@ -292,8 +298,9 @@ DOUBLE(private)
 \__method or \__attribute  : Not recommended. Makes the method/attribute private and can't be accessed outside the class. 'Stronger' enforcement. Will cause naming   mangling (ie will become Class._Class__method)  
 \__method__or \__attr__ : Indicates a special or magic Python method. Do not use for your own naming.  
 
+- self keyword is passed into methods to let python know that it's not just a simple function but a method connected to that class. So 'self' connects methods to the class.  
 - default constructor will only have one argument, self, which is referencing the instance being constructed.  
-- parameterized constructor can have extra arguments you pass to it  
+- parameterized constructor can have extra arguments you pass to it.  
 
 
 **Helpful Troubleshooting Commands**  
@@ -982,18 +989,32 @@ channels = 4
 list = [0]*channels
 ```
 
-List comprehension  
+Generator (ie. range(0,10,2))  
+* Will generate but not store to memory
+* Can cast it to a list to save it to memory and print it
+```python
+list(range(0,10,2))
+```
+
+List comprehension.  Flattened for loop. Less code space than doing i = i + 1 or list.append in a loop.    
 ```python
 sensor = [i for i in range(4)] --> [0, 1, 2, 3]
 # 2-dimensional
 sensor = [[x for x in range(1, 3)] for x in range(4)] -> [[1, 2], [1, 2], [1, 2], [1, 2]]
 
 list = [x**2 for x in range(10)] -> [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
-even = [x for x in list if x %2 ==0] -> [0, 4, 16, 36, 64]
+even = [x for x in range(0,11) if x % 2 ==0] -> [0, 2, 4, 6, 8, 10]
+tempC = [0, 20, 40, 80]
+tempF = [(9/5*temp+32) for temp in tempC]
+oddeven = [x if x%2==0 else 'ODD' for x in range(0,11)]
 ```
 
-enumerate to include a counter  
+enumerate to include a counter. Will come back with tuple but can unpack  
 ```python
+rpiPins = [10, 14, 15, 18]
+for i, pins in enumerate(rpiPins):
+    print(f'index={i} and pin={pins}')
+
 for i, pin in enumerate(pins, start = 1): (start is optional, otherwise starts at 0)
    io_pin[i] = Pin(pin)
 ```
@@ -1003,13 +1024,11 @@ Check if an item exists in a list
 if x in listx:
 ```
 
-list() function will create a list object.  
+Check for a specific key or value in a dict  
 ```python
-str='hello'
-list(str) = ['h', 'e', 'l', 'l', 'o']
-dict = {'alpha': 1, 'beta': 2, 'gamma': 3, 'delta':4}
-list(dict) = ['alpha', 'beta', 'gamma', 'delta'] # <-return the keys as a list
-*dict = alpha beta gamma delta    # <- will unpack the keys
+testdict = {'akey':123}
+123 in testdict.values()
+'akey' in testdict.keys()
 ```
 
 Check if key exists in a dictionary  
@@ -1022,6 +1041,21 @@ Check if dict is empty
 bool(dict)
 ```
 
+list() function will create a list object.  
+```python
+str='hello'
+list(str) = ['h', 'e', 'l', 'l', 'o']
+dict = {'alpha': 1, 'beta': 2, 'gamma': 3, 'delta':4}
+list(dict) = ['alpha', 'beta', 'gamma', 'delta'] # <-return the keys as a list
+*dict = alpha beta gamma delta    # <- will unpack the keys
+```
+Unpack a tuple (tuple unpacking)  
+```python
+alist = [(1,2),(3,4)]
+for a,b in alist:
+    print(a)
+    print(b)
+```
 Unpack a dictionary  
 ```python
 if isinstance(varD, dict):
@@ -1075,7 +1109,14 @@ dict = {**dict1, **dict2}  # will combine the two dictionaries
 print(dict)
 ```
 
-Formatting (%, format, and f-string)  
+Print formatting  
+Formatting (place holder %, format, and f-string)  
+Examples below are format and f string  
+```python
+print("motor was spinning {rpm:1.2f}".format(rpm=motor-speed))  
+rpm = motor-speed
+print(f'motor was spinning {rpm:1.2f}')  
+```
 Float formatting is {value:width.precision f}  
 ```python
 voltage = 1.24543534
@@ -1093,10 +1134,60 @@ formatted_data = ["{:.3f}".format(x) for x in data]
 formatted_data = [f"{x:.3f}" for x in data]
 ```
 
+map, filter, lambda  
+map will run a function on each item in a list,object  
+filter is similar but will return items that are true based on the function  
+You first give it the function and then the list,object    
+Will need to iterate through map()/filter() or cast it to a list  
+
+map example
+```python
+def square(num):
+    return num**2
+
+mylist = [1,2,3,4,5]
+
+# iterate
+for item in map(square, mylist):
+    print(item)
+
+# cast to list
+list(map(square, mylist))
+```
+
+filter example
+```python
+def is_even(num):
+    return num % 2 == 0 
+
+mylist = [0,1,2,3,4,5,6,7,8,9,10]
+
+list(filter(is_even,mylist))
+```
+
+lambda is an anonymous, adhoc, function (you don't use 'def' and give it a name) meant to run once for a simple task. Useful for when you are using a function that requires a simple functin passed into it. You can use lambda instead of formally defining the function.  
+
+example of formal function  
+```python
+def square(x):
+    return x**2
+```
+Converted to lambda  
+remove the 'def square' name and put the return on the same line
+```python
+lambda x: x ** 2
+```
+Could be used in the map/filter examples  
+instead of defining a 'square' function just use lambda  
+```python
+list(map(lambda x: x ** 2, mylist))
+list(filter(lambda n: n % 2 == 0,mylist))
+```
+
 Inheritance (Child Class)  
 Create a class that inherits the functionality (properties and methods) from another class by passing the parent class as a parameter.  
 ```python
-class Button:
+class Button():
     def __init__(self, pin):
         self.pin = pin
 
