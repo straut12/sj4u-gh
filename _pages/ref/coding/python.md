@@ -114,13 +114,19 @@ Pip is the Python package manager. Many projects involve pip to install specific
 
 Using pip  
 Note it is recommended to install packages inside a virtual environment to avoid broken/conflicting packages.  
-```(.venv)$ python3.7 -m pip install package```  
+```(.venv)$ python3.7 -m pip install package```  or  
+```curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10```  
 
 To see what packages are installed  
 ```(.venv)$ pip3 list ```  
 Side note list vs freeze 
 ```(.venv)$ pip3 freeze > requirements.txt ```  
 will list packages you installed in a txt file and in a format that can be used to reinstall.  
+
+Upgrade pip
+```python3 -m pip install --upgrade pip```  
+or  ```curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10```  
+
 
 **Python wheels**
 Often during a pip installation you'll see reference to wheels.  Python wheels are a tool that help install python packages. From stack overflow.. if the package is not a wheel, pip tries to build a wheel for it (via setup.py bdist_wheel). If that fails you get "failed building wheel for **package**" and pip falls back to installing directly (via setup.py install). Once we have a wheel, pip can install the wheel by unpacking it correctly. pip tries to install packages via wheels as often as it can. This is because of various advantages of using wheels (like faster installs, cache-able, not executing code again etc).  
@@ -213,9 +219,13 @@ change include-system-site-packages=true
 Module installations will still go to venv as normal and site packages will be visible too.  
 
 **Troubleshooting**  
-Helpful command when you get 'module not found'. Can use inside the venv  
-List locations (sys.path) Python is looking for modules to confirm the path of the module is included.  
+Helpful commands when you get 'module not found'. Make sure the python version you're using has the module installed and the pip version is upgraded too. If you believe you've already installed the module before it's possible you installed it in an earlier version of Python. If using vs studio or other IDE check which Python version it is using.  
+
+Inside the venv list locations (sys.path) Python is looking for modules to confirm the path of the module is included.  
 ```(.venv)$ python3 -c "import os; print (os.sys.path)" | tr "," "\n"```  
+
+You can use pydoc to browse the locations  
+```$ python3 -m pydoc -b```  
 
 Some folder explanations  
 * bin - the executables you use in the venv. ie activate
