@@ -6,6 +6,9 @@ description: Intro to VScode and Github
 nav: false
 toc: true
 ---
+For Linux I install with ```sudo apt install git```  
+For Windows I install from the git download page. You can then run a git cmd terminal and have similar functions as a linux terminal. You can also use the vs code to run git commands instead of a terminal.
+
 # VS code with git
 There is a large number of code editors to choose from. [VScode](https://code.visualstudio.com/download) is a popular choice because of its  extensions, light enough to run on RPi3-4, and integrates well with git.​  
 

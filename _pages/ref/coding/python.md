@@ -6,6 +6,10 @@ description: Intro to Python
 nav: false
 toc: true
 ---
+- On Linux systems I use the built-in Python (I do not use anaconda)  
+- For Windows I use Anaconda. The Anaconda Navigator has a gui with options to create environments and install python packages.  
+- For Windows/wsl be sure to run a ```sudo apt-get update``` and ```sudo apt install python3-pip``` to make sure you have all the Python tools installed.  
+
 # OOP vs Procedural
 There are a couple different approaches to the over-all flow or framework of your code, how it is structured and organized. Procedural vs Object Oriented Programming (OOP).  
 
@@ -14,7 +18,7 @@ Procedural is a fairly simple concept. Your code is written as a sequence of ste
 
 In Object Oriented Programming (OOP) you try and think of your project in terms of objects. Each object usually contains data (attributes) and procedures (methods) that can access or manipulate the data. A method is similar to a function but resides inside the object. A common term you'll here is class or the blueprint for your objects. (objects are instances of classes). My first interpretation of objects was that they are similar to complex variables that have both containers and functions built into them.  
 
-Since STEM projects will frequently use external Python packages objects (that are using OOP) early on you will run into OOP methods. Or you're likely alreading using OOP concepts by using the built-in methods on python objects. For example using the .lower or .upper on a string. (You'll notice it from the dot notation) Dot notation means you are accessing data or running an operation connected to that object. (ie using an external library to get the temperature might call something like sensor.temperature). So OOP allows you to create your own objects and better organize your code with larger projects. It also makes it easier for someone else to use your code.       
+Since STEM projects will frequently use external Python packages objects (that are using OOP) early on you will run into OOP methods. Or you're likely already using OOP concepts by using the built-in methods on python objects. For example using the .lower or .upper on a string. (You'll notice it from the dot notation) Dot notation means you are accessing data or running an operation connected to that object. (ie using an external library to get the temperature might call something like sensor.temperature). So OOP allows you to create your own objects and better organize your code with larger projects. It also makes it easier for someone else to use your code.       
 
 ```python
 import adafruit_dht

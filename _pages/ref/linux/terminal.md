@@ -6,6 +6,8 @@ description: Intro to cli terminal commands
 nav: false
 toc: true
 ---
+
+For windows you can use cmd.exe or PowerShell.  The Anaconda environment would not activate in PowerShell so I use cmd.exe (updated vscode in command palette. Terminal:Select default profile)
 # sudo, su, root
 The following assumes you're either a single user on a Linux distro or Raspberry Pi. By default there are two user names on RPi, "pi" and "root". (For non RPi systems replace "pi" with your user name entered during install)
 "pi" is the default user and is a member of the sudo group. This means you can run commands as root using sudo and can switch to the root user with ```$ sudo su```
@@ -129,6 +131,7 @@ Creating your own simple shell/bash file in a dir, making it executable, and the
 * ```$ nano .bashrc```
 * add ```export PATH=$PATH:/home/pi/test```  to the bottom of the file and save it.
 * Now when you open a terminal and type ```$ hello``` it will know to look for your executable 'hello' script inside /home/pi/test
+* To reload without having to logout/login use ```source ~/.bashrc``` or ```. ~/.bashrc```  
 * To clean up go remove the line.
 
 **Setting Environment Variable**
