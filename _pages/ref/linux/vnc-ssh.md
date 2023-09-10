@@ -346,7 +346,8 @@ Example files for RSA algo ssh
 
 * ​Now you can copy the public key to a remote host like github so you can upload from your local PC to your remote github account. Don't forget to use the new id_rsa.pub name if you had to change it from the default.   
 * A tool you can use to copy the key is  
-* ```$ xclip -sel clip < ~/.ssh/id_rsa.pub```  
+* ```xclip -sel clip < ~/.ssh/id_rsa.pub```  
+*win```clip < C:\Users\xxx\.ssh\id_rsa.pub```  
 * Or you can manually open the rsa.pub file and copy the key. Once you have the key copied you go to the remote host and paste the key in your account security settings.
 * Example for github.  
 * Copy the key inside ~/.ssh/id_rsa.pub  
