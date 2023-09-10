@@ -6,8 +6,8 @@ description: Intro to Python
 nav: false
 toc: true
 ---
-- On Linux systems I use the built-in Python (I do not use anaconda)  
-- For Windows I use Anaconda. The Anaconda Navigator has a gui with options to create environments and install python packages.  
+- On Linux systems I normally use the built-in Python (I only install anaconda for jupyter notebook functions.  ```source <PATH_TO_CONDA>/bin/activate``` to use anaconda env and ```conda deactivate``` to go back to std env)  
+- For Windows I use Anaconda for python/jupyter notebooks. The Anaconda Navigator has a gui with options to create environments and install python packages.  
 - For Windows/wsl be sure to run a ```sudo apt-get update``` and ```sudo apt install python3-pip``` to make sure you have all the Python tools installed.  
 
 # OOP vs Procedural
