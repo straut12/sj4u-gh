@@ -10,6 +10,29 @@ toc: true
 - For Windows I use Anaconda for python/jupyter notebooks. The Anaconda Navigator has a gui with options to create environments and install python packages.  (I allow it to add to the PATH)
 - For Windows/wsl be sure to run a ```sudo apt-get update``` and ```sudo apt install python3-pip``` to make sure you have all the Python tools installed.  
 
+> I have only used Python3 and will all my references are to Python3 (vs Python2 aka python commands without the 3).  
+> A powerful aspect of python are all the additional packages you can install. Almost all projects you work on will likely require installing additional python packages (using pip). A nuance of this is that the package installed is specific to the python3 version you used to install it and there are frequently newer versions of Python3 coming out. Which means you end up managing packages for multiple python3 versions. Although extra steps it is cleanest to use virtual environments and always specifying the python version you're using when executing scripts installing packages with pip (```(venv)$ python3.7 -m pip install packageA``` vs generic ```(venv)$ python3 -m pip install packageA```). If you use a venv for each project it will have its own python3/pip environment and will minimize the number of times you get confused or get missing module errors.  ie you know you've installed a package before but don't realize it was installed with a different version of python3. Especially if you install anaconda's python3 distribution later on. Unfortunately I did not learn this til later so a lot of my references to python3 commands do not specify the python3 version.  
+
+To check Python versions installed on your system.  
+```$ ll /usr/bin/python3*```  
+```$ python3 --version``` (to see which version is used with generic python3 command)  
+ (or just python* if you want to see python 2)  
+ ```$ which python3.7 ``` (will give you the path to python 3.7 binary/executable)  
+
+Advice on stackexchange..  
+Never use "sudo" with pip install  
+ie do not use ```sudo pip install package```  
+Instead run pip as a module with the -m using the specific python version you want  
+```(venv) python3.7 -m pip install package```  
+
+Inside the venv you can list locations (sys.path) Python is looking for modules to confirm the path of the module is included.  There are both system (standard Python library) and site packages.  
+Standard Python library
+```(.venv)$ python3.7 -c "import os; print (os.sys.path)" | tr "," "\n"```  
+Show where third party packages, using pip, will be installed   
+```$ python3.7 -c "import site; print (site.getsitepackages())" | tr "," "\n"```  
+You can use pydoc to browse the locations in a browser and searches for the specific methods you're using  
+```$ python3.7 -m pydoc -b```  
+
 # OOP vs Procedural
 There are a couple different approaches to the over-all flow or framework of your code, how it is structured and organized. Procedural vs Object Oriented Programming (OOP).  
 
@@ -82,11 +105,6 @@ These are Python commands/concepts that I've come across and found useful.
 Dictionary vs list
 * dict - objects referenced by key names. Easy to reference an item by its name. But can not be sorted.
 * list - objects referenced by location (similary to arrays). Can be sorted, indexed or sliced.  
-
-To check Python version.  
-```$ ll /usr/bin/python3*```  
-```$ python3 --version``` (to see which version is used with python3 command)  
- (or just python* if you want to see python 2)  
 
 New Python versions will come out with features you may want to use. To install a new version on Linux (example below to install python3.7)  
 ```$ sudo add-apt-repository ppa:deadsnakes/ppa```  
