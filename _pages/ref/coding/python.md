@@ -11,7 +11,8 @@ toc: true
 - For Windows/wsl be sure to run a ```sudo apt-get update``` and ```sudo apt install python3-pip``` to make sure you have all the Python tools installed.  
 
 > I have only used Python3 and will all my references are to Python3 (vs Python2 aka python commands without the 3).  
-> A powerful aspect of python are all the additional packages you can install. Almost all projects you work on will likely require installing additional python packages (using pip). A nuance of this is that the package installed is specific to the python3 version you used to install it and there are frequently newer versions of Python3 coming out. Which means you end up managing packages for multiple python3 versions. Although extra steps it is cleanest to use virtual environments and always specifying the python version you're using when executing scripts installing packages with pip (```(venv)$ python3.7 -m pip install packageA``` vs generic ```(venv)$ python3 -m pip install packageA```). If you use a venv for each project it will have its own python3/pip environment and will minimize the number of times you get confused or get missing module errors.  ie you know you've installed a package before but don't realize it was installed with a different version of python3. Especially if you install anaconda's python3 distribution later on. Unfortunately I did not learn this til later so a lot of my references to python3 commands do not specify the python3 version.  
+
+A powerful aspect of python are all the additional packages you can install. Almost all projects you work on will likely require installing additional python packages (using pip). A nuance of this is that the package installed is specific to the python3 version you used to install it and there are frequently newer versions of Python3 coming out. Which means you end up managing packages for multiple python3 versions. Although extra steps it is cleanest to use virtual environments and always specifying the python version you're using when executing scripts installing packages with pip (```(venv)$ python3.7 -m pip install packageA``` vs generic ```(venv)$ python3 -m pip install packageA```). If you use a venv for each project it will have its own python3/pip environment and will minimize the number of times you get confused or get missing module errors.  ie you know you've installed a package before but don't realize it was installed with a different version of python3. Especially if you install anaconda's python3 distribution later on. Unfortunately I did not learn this til later so a lot of my references to python3 commands do not specify the python3 version.  
 
 To check Python versions installed on your system.  
 ```$ ll /usr/bin/python3*```  
@@ -20,7 +21,7 @@ To check Python versions installed on your system.
  ```$ which python3.7 ``` (will give you the path to python 3.7 binary/executable)  
 
 Advice on stackexchange..  
-Never use "sudo" with pip install  
+Do not use "sudo" with pip install  
 ie do not use ```sudo pip install package```  
 Instead run pip as a module with the -m using the specific python version you want  
 ```(venv) python3.7 -m pip install package```  
@@ -32,6 +33,8 @@ Show where third party packages, using pip, will be installed
 ```$ python3.7 -c "import site; print (site.getsitepackages())" | tr "," "\n"```  
 You can use pydoc to browse the locations in a browser and searches for the specific methods you're using  
 ```$ python3.7 -m pydoc -b```  
+
+> If working in an editor like vs code you'll need to make sure you have the right version of python3 selected (in vscode it can be selected in bottom right frame).  
 
 # OOP vs Procedural
 There are a couple different approaches to the over-all flow or framework of your code, how it is structured and organized. Procedural vs Object Oriented Programming (OOP).  
