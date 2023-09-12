@@ -148,16 +148,23 @@ Note it is recommended to install packages inside a virtual environment to avoid
 ```(.venv)$ python3.7 -m pip install package```  or  
 ```curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10```  
 
-To see what packages are installed  
+To see what packages are installed and the version  
 ```(.venv)$ pip3 list ```  
 Side note list vs freeze 
 ```(.venv)$ pip3 freeze > requirements.txt ```  
 will list packages you installed in a txt file and in a format that can be used to reinstall.  
 
+To see the version of a package when not inside a venv  
+```python3.7 -m pip show package```  
+
 Upgrade pip
 ```python3 -m pip install --upgrade pip```  
 or  ```curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10```  
 
+> pipx is a tool similar to brew, npx, apt. It is designed for isolating application installation.  
+
+```python3 -m pip install --user pipx```  
+```pipx install virtualenv``  
 
 **Python wheels**
 Often during a pip installation you'll see reference to wheels.  Python wheels are a tool that help install python packages. From stack overflow.. if the package is not a wheel, pip tries to build a wheel for it (via setup.py bdist_wheel). If that fails you get "failed building wheel for **package**" and pip falls back to installing directly (via setup.py install). Once we have a wheel, pip can install the wheel by unpacking it correctly. pip tries to install packages via wheels as often as it can. This is because of various advantages of using wheels (like faster installs, cache-able, not executing code again etc).  
@@ -194,6 +201,8 @@ Installation (may need to go through update/upgrade steps)
 Often you'll be using a different version of python from the python3 default on your system (ie 3.8, 3.9) just replace python3 with python3.7 or python3.8 etc.  
 
 **Quick steps**  
+Install virtualenv  
+```python3.7 -m pip install virtualenv```
 create a new project folder and activate the venv  
 ```$ mkdir project-name && cd project-name```  
 ```$ python3 -m venv .venv ```  

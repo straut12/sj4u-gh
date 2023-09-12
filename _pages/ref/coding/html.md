@@ -418,6 +418,26 @@ Button example with multiple actions
 
 # PHP
 
+# PythonAnywhere
+
+Pythonanywhere makes it easy to upload an interactive dash to the web. It has a web terminal that you can use to git clone your project to the pythonanywhere server and then deploy it and view the dash charts on a web page. It is free up to 512MB. I used 93MB (18%) after installing some base packages and adding one small project.  
+1. Create your dash project and upload it to github. (make sure your python files is called app.py)
+2. Create free [pythonanywhere](https://www.pythonanywhere.com/) account and login
+3. Open a Bash console. If you're going to use ssh then create the pythonanywhere ssh keys using ```ssh-keygen -t rsa -b 4096```, add it to ssh-agent ```eval "$(ssh-agent -s)"``` and ```ssh-add ~/.ssh/id_rsa```. Now copy key contents in ~/.ssh/id_rsa.pub to github settings/SSH and GPG keys.  If you do not use ssh you can use the html clone option.
+4. Git clone your project to pythonanywhere ```git clone --depth=1 https://github.com/PROJECT-ABC.git```
+5. Go to the directory and remove any files that aren't necessary.
+6. Install any python packages that are necessary for your project.
+7. Go to the Web tab and add a new web app. Select **Flask** and the python web framework.
+8. In the Quickstart new Flask project page make sure to update the path with your project directory.
+9. After setup double check the source code location and click on the working directory to update it to match. This will make sure any data files in the directory can be opened.
+10. Click the [WSGI config file](https://help.pythonanywhere.com/pages/DashWSGIConfig/) and update the from flask_app import app section to the following. Then save and reload the web page.
+```console
+from app import app
+application = app.server
+```
+
+
+
 # Github Pages with Jekyll
 ## Github Pages
 [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is an option in your github repo that can take markdown or html, css, and JavaScript files in your project and use them to build and publish a website. You have the option of creating from scratch or using pre-existing jekyll gem-based themes that will quickly jump start to a professional looking site with drop-down menus, table of contents, header, footer, etc.  

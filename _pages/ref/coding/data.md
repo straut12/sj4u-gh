@@ -343,7 +343,7 @@ mysql> SELECT * FROM mytable limit 10;
 ```
 
 # ​Data Visualization Tools  
-**Basic tools**  
+**Basic-NodeRed/Grafana**  
 * Node-red 
     * can store/retrieve data from a db like influxdb
     * has basic line graphs and charts for monitoring data over time. 
@@ -351,15 +351,17 @@ mysql> SELECT * FROM mytable limit 10;
 * Grafana has more advanced charting features. 
     * Data from the influxdb can be accessed thru grafana (geared for time series data)
 
-**Advanced tools**
-* Jupyter notebook with pandas, numpy, matplotlib, seaborn. 
+**Advanced-dash/JupyterNotebook**
+* Jupyter notebook with pandas, numpy, matplotlib, seaborn and dash as the interactive portion.. 
 * Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df). Plotly is currently not supported in Power BI Python but may be useable in the R script.
 * dash. Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
-* streamlit. Quick and clean data visualizations.
+* streamlit. Quick and easy data visualizations.
 
 For time series data I usually use node-red (with its charting options) connected to influxdb
-For experimental data I read a csv using Jupyter Notebook or dash plotted by plotly
+For experimental data I read a csv using Jupyter Notebook or dash plotted by plotly. For more permanent solution dash is useful.
 
+**Pandas**  
+It is easiest to import your data from your db into a Pandas dataframe. From here you can modify, create pivots, format, add data, etc.
 ## Jupyter Notebook
 A Jupyter Notebook flow
 ```python
@@ -412,7 +414,7 @@ plt.show()
 i = sns.catplot(x="file", y="time", data=pivoted, ci='sd', kind="box")
 ```
 
-## Dash - plotly
+## Dash-plotly  
 Dash gives more GUI type functions letting a user toggle fields on/off while plotting.  
 ```$ python3 -m pip install dash```  
 
@@ -426,7 +428,7 @@ It will create a link to view the charts in your browser
 1. Load css and create dash object
 2. Define figures (charts. ie fig = px.histogram(df, x="values", nbins=1 ), optional text string (markdown), functions(ie to show the data/df)
 3. Layout (see below.. will use html and core components)
-4. Callbacks (not required but can be used for more interactive charts)
+4. Callbacks (not required but can be used for interactive charts)
 
 **More details**  
 * Layout is a hierarchical tree (dash_html_components)
