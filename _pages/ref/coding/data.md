@@ -291,11 +291,12 @@ Update permission
 
 changed folders in /etc/influxdb/influxdb.conf to /home/pi/influxdb (data and meta) along with IP address and under [http] at bottom enable=true for endpoint and bind-address = 8086   
 
-## Mariadb
+## MariaDB  
+
 Mariadb is based on mysql.  Port 3306
 > Note for remote connection from  excel. 
 > Will need to configure mariadab config file by commenting out bind statement and add user privileges to all db and wild card host (see comments below).
-> Also may need to install odbc connector from https://dev.mysql.com/downloads/connector/odbc/  and visual studio update. Then search/open up ODBC 64bit administrator and add MySQL ODBC 8.0 ANSI driver. Set up the connection and chose SQL server authentication. 
+> Also may need to install ODBC (Open DataBase Connectivity) connector from https://dev.mysql.com/downloads/connector/odbc/  and visual studio update. Then search/open up ODBC 64bit administrator and add MySQL ODBC 8.0 ANSI driver. Set up the connection and chose SQL server authentication. 
 
 
 Run sudo apt update to update the package list
@@ -406,8 +407,18 @@ or
 mysql> SELECT * FROM mytable limit 10;
 ```
 
+## MS Access
+
+Access makes importing data into excel convenient. You can use PowerQuery to import sheets and transform them. You can also modify tables (add col/rows) with append/merge using the gui and drop down menus vs writing a query.
+
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/msaccess-query.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
 # ​Data Visualization Tools  
-**Basic-NodeRed/Grafana**  
+**Basic Charting (NodeRed/Grafana)**  
 * Node-red 
     * can store/retrieve data from a db like influxdb
     * has basic line graphs and charts for monitoring data over time. 
@@ -415,17 +426,69 @@ mysql> SELECT * FROM mytable limit 10;
 * Grafana has more advanced charting features. 
     * Data from the influxdb can be accessed thru grafana (geared for time series data)
 
-**Advanced-dash/JupyterNotebook**
-* Jupyter notebook with pandas, numpy, matplotlib, seaborn and dash as the interactive portion.. 
-* Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df). Plotly is currently not supported in Power BI Python but may be useable in the R script.
+**Advanced (dash/Jupyter/PowerBI/PythonInExcel)**
+* Jupyter notebook with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
+* Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
 * dash. Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
+* Python in excel
 * streamlit. Quick and easy data visualizations.
+
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/dash.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/Excel-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/PowerBI-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/jupyter.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
 
 For time series data I usually use node-red (with its charting options) connected to influxdb
 For experimental data I read a csv using Jupyter Notebook or dash plotted by plotly. For more permanent solution dash is useful.
 
-**Pandas**  
+## Pandas    
 It is easiest to import your data from your db into a Pandas dataframe. From here you can modify, create pivots, format, add data, etc.
+```python
+ df = pd.DataFrame(client.query_api().query_data_frame('from(bucket: "esp2nred") |> range(start: -5d) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")'))
+    df = df.drop(columns=['result', 'table', '_start', '_stop', '_measurement', 'device'])
+    df = df.assign(date=df['_time'].dt.strftime('%Y-%m-%d'))
+    df['date'] = pd.to_datetime(df['date'])
+```  
+```python
+Results = multi.pairwise_tukeyhsd(df['tempf'], df['location'], alpha= 0.05)  # Use multi pairwise tukey HSD
+dftukey = pd.DataFrame(data=Results._results_table.data[1:], columns=Results._results_table.data[0])
+dftukey['reject'] = dftukey['reject'].astype(str)
+table_tukey = dbc.Table.from_dataframe(dftukey, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
+```
+
+```python
+# Create summary dataframe with statistics
+dfsummary = df.groupby('location')['tempf'].describe()  # describe outputs a dataframe
+dfsummary = dfsummary.reset_index()  # this moves the index (locations 1,2,3,4) into a regular column so they show up in the dash table
+'''dfsummary.style.format({   # this would work if the values were floats. However they
+    "mean": "{:.1f}",         # were strings after the describe functions so had to use
+    "std": "{:.1f}",          # the map function below
+})'''
+dfsummary.loc[:, "mean"] = dfsummary["mean"].map('{:.1f}'.format)  # format as float. see comment above
+dfsummary.loc[:, "std"] = dfsummary["std"].map('{:.1f}'.format)
+dfsummary.loc[:, "50%"] = dfsummary["50%"].map('{:.1f}'.format)
+dfsummary = dfsummary.set_index('location').T.rename_axis('location')
+dfsummary = dfsummary.reset_index()
+print(dfsummary)
+table_summary = dbc.Table.from_dataframe(dfsummary, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
+```  
+
 ## Jupyter Notebook
 A Jupyter Notebook flow
 ```python
