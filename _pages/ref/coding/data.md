@@ -417,48 +417,29 @@ Access makes importing data into excel convenient. You can use PowerQuery to imp
     </div>
 </div>
 
-# ​Data Visualization Tools  
-**Basic Charting (NodeRed/Grafana)**  
-* Node-red 
+# Basic Charting  
+
+For time series data I usually use node-red (with its charting options) connected to influxdb. This is the easiest/quickest setup.
+
+## Node-Red Charts/Gauges    
+Node-red 
     * can store/retrieve data from a db like influxdb
     * has basic line graphs and charts for monitoring data over time. 
     * options to read/write text files, too  
-* Grafana has more advanced charting features. 
+## Grafana  
+Grafana has more advanced charting features. 
     * Data from the influxdb can be accessed thru grafana (geared for time series data)
 
-**Advanced (dash/Jupyter/PowerBI/PythonInExcel)**
-* Jupyter notebook with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
-* Power BI (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
-* dash. Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
-* Python in excel
-* streamlit. Quick and easy data visualizations.
-
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/dash.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/Excel-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/PowerBI-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>  
-<div class="row">
-    <div class="col-md mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/jupyter.jpg" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>  
-
-For time series data I usually use node-red (with its charting options) connected to influxdb
-For experimental data I read a csv using Jupyter Notebook or dash plotted by plotly. For more permanent solution dash is useful.
-
+# Advanced Data Visualization  
+For more advanced data analysis options
+* **Jupyter notebook** with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
+* **Power BI** (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
+* **dash** is Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
+* **Python in excel** allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).   
+* streamlit is a quick and easy data visualizations.
 ## Pandas    
-It is easiest to import your data from your db into a Pandas dataframe. From here you can modify, create pivots, format, add data, etc.
+Pandas is a python library (built on top of NumPy) that provides a tabular structure to your data for most of the advanced data visualization tools. Typically one of the first steps you will do is import your data from a database, spreadsheet, or csv into a pandas dataframe. From here you can easily duplicate the dataframe, modify, create pivots, format columns, add data, etc. An advantage of this is you can easily/quickly transform your data without affecting your original database.  
+
 ```python
  df = pd.DataFrame(client.query_api().query_data_frame('from(bucket: "esp2nred") |> range(start: -5d) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")'))
     df = df.drop(columns=['result', 'table', '_start', '_stop', '_measurement', 'device'])
@@ -489,8 +470,16 @@ print(dfsummary)
 table_summary = dbc.Table.from_dataframe(dfsummary, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
 ```  
 
+## Python In Excel  
+Python in excel allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).  
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/Excel-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
+
 ## Jupyter Notebook
-A Jupyter Notebook flow
+Jupyter Notebook is easily started from anaconda in either windows, mac, or linux. A typical flow
 ```python
 from IPython.display import display 
 import pandas as pd
@@ -540,9 +529,14 @@ plt.show()
 ​# Seaborn categorical plot. kind="box"
 i = sns.catplot(x="file", y="time", data=pivoted, ci='sd', kind="box")
 ```
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/jupyter.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
 
 ## Dash-plotly  
-Dash gives more GUI type functions letting a user toggle fields on/off while plotting.  
+Dash gives more GUI type functions, ie letting a user toggle data series on/off while plotting.  
 ```$ python3 -m pip install dash```  
 
 You will create a file called app.py that contains the dash/plotly code.  
@@ -571,8 +565,6 @@ def generateChart(x,y):
    return fig
 ```
 
---------------------------------
-
 Packages to import  
 ```python
 import dash
@@ -582,9 +574,20 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
 ```
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/dash.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
 
------------------------------  
------------------------------  
+## Power BI  
+Power BI (microsoft windows based) is great for clean visualization in a presentation/powerpoint style. It is geared for presenting. It can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/PowerBI-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>   
+
 # Workflow  
 This is my general workflow I follow for projects. I often start with RPi/Python and then translate it to esp32/uPython.  
 
