@@ -327,13 +327,16 @@ Then create a user and privileges
 Can check user login with same ```sudo mysql -u user -p```  
 To see users  
 ```SELECT User, Host FROM mysql.user WHERE Host <> 'localhost';```  
-To grant remote access you wild card all db with * and use % to wild card IP addresses  
-```
-GRANT ALL PRIVILEGES ON *.* TO 'sj4u'@'192.168.100.%' IDENTIFIED BY 'password' WITH GRANT OPTION;```  
 
+To grant remote access you wild card all db with * and use % to wild card IP addresses  
+```GRANT ALL PRIVILEGES ON *.* TO 'sj4u'@'192.168.100.%' IDENTIFIED BY 'password' WITH GRANT OPTION;```  
+
+Firewall config
+```console
 firewall config  
 firewall-cmd --add-port=3306/tcp 
 firewall-cmd --permanent --add-port=3306/tcp
+```  
 
 Configuration file is in /etc/mysql/mariadb.conf.d/50-server.cnf  
 for remote access may need to update bind-address from 127.0.0.1 to 0.0.0.0 or comment it out  
@@ -422,20 +425,16 @@ Access makes importing data into excel convenient. You can use PowerQuery to imp
 For time series data I usually use node-red (with its charting options) connected to influxdb. This is the easiest/quickest setup.
 
 ## Node-Red Charts/Gauges    
-Node-red 
-    * can store/retrieve data from a db like influxdb
-    * has basic line graphs and charts for monitoring data over time. 
-    * options to read/write text files, too  
+Node-red can store/retrieve data from a db like influxdb. Has basic line graphs and charts for monitoring data over time. Options to read/write text files, too  
 ## Grafana  
-Grafana has more advanced charting features. 
-    * Data from the influxdb can be accessed thru grafana (geared for time series data)
+Grafana has more advanced charting features. Data from the influxdb can also be accessed thru grafana (geared for time series data)
 
 # Advanced Data Visualization  
 For more advanced data analysis options
 * **Jupyter notebook** with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
-* **Power BI** (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
+* **Power BI** (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly.   
 * **dash** is Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
-* **Python in excel** allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).   
+* **Python in excel** allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter/dash code for reports you can now copy these into excel (or Power BI).   
 * streamlit is a quick and easy data visualizations.
 ## Pandas    
 Pandas is a python library (built on top of NumPy) that provides a tabular structure to your data for most of the advanced data visualization tools. Typically one of the first steps you will do is import your data from a database, spreadsheet, or csv into a pandas dataframe. From here you can easily duplicate the dataframe, modify, create pivots, format columns, add data, etc. An advantage of this is you can easily/quickly transform your data without affecting your original database.  
