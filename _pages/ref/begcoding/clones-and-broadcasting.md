@@ -116,7 +116,7 @@ You'll notice for Terry when he starts flying, the **show** block, we'll set Ter
 * We have all our sprites created and moving on the screen. What if I want to add animation?
 * What if I want to keep track how many times the Dino eats a grasshopper?
 
-
+# [Next Section: Game Events/Animation](/ref/begcoding/game-events-and-animation/)
 -----------------------------  
 -----------------------------  
 

@@ -2,7 +2,7 @@
 layout: page
 title: Coding
 nav: true
-nav_order: 4
+nav_order: 3
 dropdown: true
 children: 
     - title: VScode Github
@@ -20,6 +20,6 @@ children:
     - title: HTML CSS
       permalink: /ref/coding/html/
     - title: divider
-    - title: Data Analysis
-      permalink: /ref/coding/data/
+    - title: Beginner Coding
+      permalink: /ref/begcoding/intro/
 ---

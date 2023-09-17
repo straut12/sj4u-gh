@@ -91,5 +91,6 @@ Example below is sneakier. When you replace an item it's possible the replaced i
 * What if I want to add more grasshoppers to my scene? Do I have to keep adding more grasshopper sprites and copying the code to each one? (thankfully the answer is no, see next section)
 * So far our code has been **sequence** based. It steps thru the code line-by-line. What if I want to add sprites and have them wait and listen for a specific event before running their code. This would be **event** driven code. In Scratch we use broadcasting for this.
 
+# [Next Section: Clones/Broadcasting](/ref/begcoding/clones-and-broadcasting/)
 -----------------------------  
 -----------------------------  

@@ -66,5 +66,6 @@ You can use the Scratch image editor to create animated sprites.
 3. Convert the parts to vectors and re-assemble (copy/paste) into one master vector image.
 4. Duplicate the master vector, adjusting each costume to make it appear animated.
 
+# [Next Section: Extra Game](/ref/begcoding/extra-game/)
 -----------------------------  
 -----------------------------  

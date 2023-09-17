@@ -6,6 +6,7 @@ description: Intro to Coding
 nav: false
 toc: true
 ---
+
 # Scratch and Python
 
 There are a couple different mindsets with respect to the best method for kids to learn coding (elementary or age 8-12 area). Two choices I'll mention are Scratch (drag-n-drop blocks) vs Python (typed code). Personally I would start with Scratch and focus on coding concepts. Then quickly move on to a typed language like Python that is commonly used in all types of industries.​  
@@ -231,5 +232,6 @@ def update_pipes():
         reset_pipes()
 ```  
 
+# [Next Section: Starting Up](/ref/begcoding/starting-up/)
 -----------------------------  
 -----------------------------  
