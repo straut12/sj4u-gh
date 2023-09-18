@@ -17,7 +17,7 @@ children:
     - title: JavaScript
       permalink: /ref/coding/js/
     - title: divider
-    - title: HTML CSS
+    - title: Web HTML
       permalink: /ref/coding/html/
     - title: divider
     - title: Beginner Coding

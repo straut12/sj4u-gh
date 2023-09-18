@@ -20,7 +20,7 @@ It's helpful to understand early on what your options are for installing a Linux
 Note you use a USB stick to install the Linux distro and it gives you an option to try the system out before installing to your PC.
 
 My setups look like this.
-* Raspberry Pis are option 1 (Linux Raspberry Pi OS is sole operating system)
+* Raspberry Pis are option 1 (Linux Raspberry Pi OS is sole operating system. On RPi0 I often boot straight to cli)
 * Laptops/PCs are option 2 (Dual boot between Windows and Linux distros)
 * Some PCs I'm using option 3 and learning more WSL capability.
 
