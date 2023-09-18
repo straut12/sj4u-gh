@@ -213,6 +213,15 @@ Now use 'source', a built-in shell command to read/execute the contents of the '
 
 In VS code select the Python interpreter created in the venv from the menu at the bottom right of the window. Or go to command palette, ctrl-shift-P, and then type 'Python: Select Interpreter' and choose your venv.  
 
+**Jupyter Notebook in venv**
+I usually using anaconda for jupyter notebook so instructions are for venv inside conda.
+```conda create -n .venv python=3.10```
+```conda activate .venv```
+```pip install --user ipykernel```
+```python -m ipykernel install --user --name.venv```  # manually add the vevn kernel
+Now you can go to Jupyter Notebook and refresh and you should see .venv as an option when creating a new kernel. You can also switch once inside the notebook.
+```jupyter kernelspec uninstall .venv``` to remove the kernel
+
 **git Housekeeping Item**
 Add .venv to your .gitignore list so you do not load it to github. This can be done automatically when you create the repo by selecting Python template for your git ignore.  
 
