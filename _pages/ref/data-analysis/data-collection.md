@@ -108,3 +108,66 @@ For influxdb and gauges/charts options go to menu in upper right and "manage pal
 
 Dashboard  
 Once you have gauges/charts setup you can view them at **http://hostname.local:1880/ui**   
+
+# API  
+API (application programming interface) is a useful method for getting data from the web.  
+Documentation below is for REST API using Python requests library.  
+You pass the url link in the requests function and will get the requested data back  
+The payload (or parameters) passes criteria  
+The header can be used to pass keys  
+
+Can use endpoint part of url to specify what resource to return. Typically found in API reference docs.  
+HTTP Method	    Description	                Method
+POST            Create a new resource	    requests.post()
+GET	            Read existing resource	    requests.get()
+PUT	            Update existing resource    requests.put()
+DELETE          Delete existing resource    requests.delete()
+
+Example with google translate  
+url = "https://google-translate1.p.rapidapi.com/language/translate/v2/detect"  
+
+```response = requests.get(url, param or payload, headers)```  
+
+You send the url, payload, and headers.  
+
+```python
+import requests
+
+payload = { "q": "English is hard, but detectably so" }
+headers = {
+	"content-type": "application/x-www-form-urlencoded",
+	"Accept-Encoding": "application/gzip",
+	"X-RapidAPI-Key": "",
+	"X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
+}
+
+response = requests.post(url, data=payload, headers=headers).json()  
+```
+
+This returned the language type of the sentence passed  
+```python
+example response = {'data': {'detections': [[{'isReliable': False, 'language': 'en', 'confidence': 1}]]}}
+langtype = response["data"]["detections"][0][0]["language"]
+```
+
+Could then request translation  
+```python
+url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
+
+payload = {
+	"q": "Hello, world!",
+	"target": "es",
+	"source": "en"
+}
+headers = {
+	"content-type": "application/x-www-form-urlencoded",
+	"Accept-Encoding": "application/gzip",
+	"X-RapidAPI-Key": "",
+	"X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
+}
+
+#response = requests.post(url, data=payload, headers=headers)
+example response = {'data': {'translations': [{'translatedText': 'Hola Mundo!'}]}}
+translation = response["data"]["translations"][0]["translatedText"]
+print(translation)
+```

@@ -244,7 +244,9 @@ Can use find to see where it was installed
 To uninstall  
 ```(.venv)$ python3 -m pip uninstall package-name ```  ​
 To upgrade a package  
-```$ python3 -m pip3 install --upgrade <package>```  
+```(.venv)$ python3 -m pip3 install --upgrade <package>```  
+To remove a .venv
+```rm -r .venv```  
 
 **Other Commands**  
 Install requests (useful for making HTTP requests in Python)  
