@@ -56,7 +56,13 @@ Python in excel allows you to enter python code in an excel formula bar and exec
 </div>  
 
 ## Jupyter Notebook
-Jupyter Notebook is easily started from anaconda in either windows, mac, or linux. A typical flow
+Jupyter Notebook can be installed separately or easily started from anaconda in either windows, mac, or linux. 
+Jupyter uses IPython as a backend (IPython is a dependency of Jupyter). It is a interactive Python interface usually using a web front end.  
+The ipykernel package provides the IPython kernel for Jupyter. But you can manually create a venv and install it for usage in Jupyter. See [Python venv](../../../ref/coding/python/#Python-venv)  
+
+For VS code to work with Python in Jupyter Notebooks you need to activate an Anaconda environment in VS Code or another Python venv in which the Jupyter package has been installed. (and there is Jupyter extension for vs code)  If you don't want to use Anaconda then ```(.venv) python3.10 -m pip install jupyter``` will install the Jupyter system, including the notebook, qtconsole, and the IPython kernel.  
+
+Once inside Jupyter Notebook. Example Jupyter flow
 ```python
 from IPython.display import display 
 import pandas as pd

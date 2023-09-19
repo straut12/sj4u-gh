@@ -14,6 +14,12 @@ toc: true
 
 A powerful aspect of python are all the additional packages you can install. Almost all projects you work on will likely require installing additional python packages (using pip). A nuance of this is that the package installed is specific to the python3 version you used to install it and there are frequently newer versions of Python3 coming out. Which means you end up managing packages for multiple python3 versions. Although extra steps it is cleanest to use virtual environments and always specifying the python version you're using when executing scripts installing packages with pip (```(venv)$ python3.7 -m pip install packageA``` vs generic ```(venv)$ python3 -m pip install packageA```). If you use a venv for each project it will have its own python3/pip environment and will minimize the number of times you get confused or get missing module errors.  ie you know you've installed a package before but don't realize it was installed with a different version of python3. Especially if you install anaconda's python3 distribution later on. Unfortunately I did not learn this til later so a lot of my references to python3 commands do not specify the python3 version.  
 
+> Another Python version you will see is Jupyter notebook (which uses IPython as a backend. IPython is a dependency of Jupyter). Jupyter is a interactive Python interface usually using a web front end.  
+
+> ipykernel package provides the IPython kernel for Jupyter. But you can manually create a venv and install it for usage in Jupyter. See below in venv notes.  
+
+> For VS code to work with Python in Jupyter Notebooks you need to activate an Anaconda environment in VS Code or another Python venv in which the Jupyter package has been installed. If you don't want to use Anaconda then ```(.venv) python3.10 -m pip install jupyter``` will install the Jupyter system, including the notebook, qtconsole, and the IPython kernel. You select the kernel in the upper right.
+
 To check Python versions installed on your system.  
 ```$ ll /usr/bin/python3*```  
 ```$ python3 --version``` (to see which version is used with generic python3 command)  
@@ -138,7 +144,7 @@ Do not use ```$ pip install package```
 Instead run pip as a module with the -m using the specific python version you want  
 ```$ python3.7 -m pip install package```  
 
-# Python pip
+# Python-pip
 
 **Python pip**
 Pip is the Python package manager. Many projects involve pip to install specific Python packages, ie the files needed for a module. Modules are python libraries that other people wrote which you can use in your code. This saves time/effort compared to trying to write all of the code from scratch. Pip packages can be found at [pypi](https://pypi.org/)  
@@ -179,7 +185,7 @@ ie pip3 would not work for RPi.GPIO on a project so I used apt
 ```$ sudo apt install python3-wheel```  
 ```$ sudo apt-get install RPi.GPIO```  
 
-# Python venv
+# Python-venv
 Using a virtual environment involves a couple extra steps but is a good practice. In my projects I only use python3 and venv for simplicity. (vs virtualenv or pipenv). The concept is that you're creating an isolated, unique python environment/folder which can be activated when working on a specific project. That environment will have its own Python and when you install python packages they will be specific to that environment. This helps handle the scenario where different projects have the same dependency; or share the same packages but different versions of that shared package which creates a dependency conflict. venv handles the conflict by isolating the project dependencies and allowing you to install a specific version of a package within that project folder; without affecting other projects. Since you start with a clean slate each time you can also use commands to see what packages are necessary for your project (and version), output them to a requirements.txt file and use it to easily install on another system. 
 
 Note - if you want to run your python program outside the venv (during startup of RPi) then you need to put the location of the venv python being used in the shebang !# header of your python program.  
