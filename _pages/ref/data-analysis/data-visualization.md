@@ -7,7 +7,7 @@ nav: false
 toc: true
 ---
 
-# Data Visualization  
+**Data Visualization**  
 For more advanced data analysis options
 * **Jupyter notebook** with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
 * **Power BI** (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly.   
@@ -47,7 +47,7 @@ print(dfsummary)
 table_summary = dbc.Table.from_dataframe(dfsummary, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
 ```  
 
-## Python In Excel  
+# Python In Excel  
 Python in excel allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).  
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
@@ -55,7 +55,7 @@ Python in excel allows you to enter python code in an excel formula bar and exec
     </div>
 </div>  
 
-## Jupyter Notebook
+# Jupyter Notebook
 Jupyter Notebook can be installed separately or easily started from anaconda in either windows, mac, or linux. 
 Jupyter uses IPython as a backend (IPython is a dependency of Jupyter). It is a interactive Python interface usually using a web front end.  
 The ipykernel package provides the IPython kernel for Jupyter. But you can manually create a venv and install it for usage in Jupyter. See [Python venv](../../../ref/coding/python/#Python-venv)  
@@ -118,7 +118,10 @@ i = sns.catplot(x="file", y="time", data=pivoted, ci='sd', kind="box")
     </div>
 </div>  
 
-## Dash-plotly  
+# Google Colab  
+Google colab is very similar to Jupyter Notebook. It is useful for ML since many of the libraries are pre-installed. https://colab.research.google.com/  
+
+# Dash-plotly  
 Dash gives more GUI type functions, ie letting a user toggle data series on/off while plotting.  
 ```$ python3 -m pip install dash```  
 
@@ -163,7 +166,7 @@ import pandas as pd
     </div>
 </div>  
 
-## Power BI  
+# Power BI  
 Power BI (microsoft windows based) is great for clean visualization in a presentation/powerpoint style. It is geared for presenting. It can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly. Only supports importing from pandas (df).  
 <div class="row">
     <div class="col-md mt-3 mt-md-0">
