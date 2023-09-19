@@ -19,4 +19,7 @@ children:
     - title: divider
     - title: data visualization
       permalink: /ref/data-analysis/data-visualization/
+    - title: divider
+    - title: machine learning
+      permalink: /ref/data-analysis/ml/
 ---

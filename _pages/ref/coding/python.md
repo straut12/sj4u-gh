@@ -73,7 +73,7 @@ note - variables/functions usually use lower case for the names since class will
 
 **OOP Concepts**  
 Two main components of OOP are classes and objects. (sometimes can be interchanged)
-* Classes - this is the blueprint or template that defines the data(attributes) and available methods for acting on that data. (a complex user-defined data type). It lets you create your ownn user defined object.
+* Classes - this is the blueprint or template that defines the data(attributes) and available methods for acting on that data. (a complex user-defined data type). It lets you create your own user defined object.
 * Objects - these are the specific instances of the class
 
 **Python Structure with OOP**  
@@ -990,6 +990,12 @@ logger.debug('logger debug')
 ```
 
 # Cheat sheet
+
+: is arrange. If now lower, upper then will select all [:]
+Python includes the lower bound but excludes the upper bound.
+So [:-1] starts at 0 but does not includes the last.
+to select first 2 row/col use [0:2, 0:2]
+to select last 2 row/col use [-2:, -2:]
 
 Functions and Arguments  
 

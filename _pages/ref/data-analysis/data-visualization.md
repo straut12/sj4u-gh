@@ -173,23 +173,3 @@ Power BI (microsoft windows based) is great for clean visualization in a present
         {% include figure.html path="assets/img/coding/PowerBI-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>   
-
-# ML  
-* Data Pre-Processing
-    - Import and scrub the data
-    - Split the data into a training and test sets. Use 80% for training and remaining data for testing. This lets you compare the predicted values from the model to the actual values.
-    - Feature scaling - Needed to normalize or standardize your data so one variable doesn't over power another due to a difference in units. Feature scaling always applied to columns (not row data across columns)
-        - Normalize values from 0-1 (X'=(X-Xmin)/Xrange)
-        - Standardize values from -3 to 3 except outliers (X'=(X-Xave)/Xstdev)
-* Modeling
-    - Build
-    - Train
-    - Make predictions
-* Evaluation
-    - Calculate performance metrics
-    - Make a verdict
-
-
-
-
-
