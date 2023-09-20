@@ -27,8 +27,9 @@ from sklearn.model_selection import train_test_split # Training and Test Sets
 
 from sklearn.preprocessing import StandardScaler  # Scale the training set so data is in the same range
 
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
+from sklearn.preprocessing import PolynomialFeatures # Used for Polynomial linear regression
+from sklearn.svm import SVR                 # Support vector regression
 
 ```
 # Data Pre-Processing
@@ -87,7 +88,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
 
 ## Feature scaling 
-Not used for a lot of models. Not used on multiple regression.    
+Not used for a lot of regression models. Not used on multiple regression. Coeffecients can compensate for high values of features. But can be used on other models where there is an implicit relationship between the features X and the dependent variable Y.     
 Feature scaling applied after split. your test split is supposed to represent new data that you don't have until training is done.  
 Needed to normalize or standardize your data so one variable doesn't over power another due to a difference in units. Feature scaling always applied to columns (not row data across columns)  
 * Normalize values from 0-1 (Xnorm=(X-Xmin)/Xrange)  # Works for normal distribution  
@@ -143,10 +144,11 @@ Assumptions
 [Heteroscedasticity By Q9 at the English-language Wikipedia, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=18064846)
 
 ```python
-# Using LineaerRegression. Will avoid dummy variable trap. 
+# Using LineaerRegression. Will avoid dummy variable issue
 regressor = LinearRegression() # Build linear regression model and create object
 regressor.fit(X_train, y_train) # Train on the training set using fit method
 
+# Predict method expect 2D array
 y_pred = regressor.predict(X_test) # Predict test results using predict method.
 
 # Plot training set
@@ -166,6 +168,7 @@ plt.ylabel('Salary')
 plt.show()
 
 # Get value
+# Predict method expect 2D array
 print(regressor.predict([[12]])) # prediction for 12yr experience. 2D array
 
 # Print equation coefficients
@@ -190,7 +193,7 @@ print(regressor.intercept_)
 There are multiple columns/features and we can not visualize the multidimensional output so use vectors to compare. Compare vector of the predicted vs vector of the test set result.  
 
 ```python  
-# Using LineaerRegression. Will avoid dummy variable trap. 
+# Using LineaerRegression. 
 # Will also iterate thru multiple features to find highest P value
 regressor = LinearRegression() # Build linear regression model and create object
 regressor.fit(X_train, y_train) # Train on the training set using fit method
@@ -205,6 +208,7 @@ np.set_printoptions(precision=2)
 print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
 
 # Single prediction
+# Predict method expect 2D array
 print(regressor.predict([[1, 0, 0, 160000, 130000, 300000]]))
 """
 double pair of square brackets.  "predict" method expects 2D array as the format
@@ -275,6 +279,7 @@ plt.ylabel('Salary')
 plt.show()
 
 # Predict new results with linear regression
+# Predict method expect 2D array
 lin_reg.predict([[6.5]])
 
 # Predict new results with polynomial regression
@@ -287,8 +292,41 @@ lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))
 # Support Vector Regression  
 Apply a buffer margin or tube where the error does not matter. But points outside the tube are support vectors and dictate the tube.  
 
+Example will have feature scaling.  
 
+```python
+y = y.reshape(len(y),1) # used to get array into 2D array with 1 col for standard scalar function
 
+# StandardScaler will calculate mean/std dev of columns for standardization
+sc_X = StandardScaler()   
+sc_y = StandardScaler()
+X = sc_X.fit_transform(X)  # scale the X col feature and Y dependent var separately
+y = sc_y.fit_transform(y)
+
+regressor = SVR(kernel = 'rbf')  # Gaussian radial basis function kernel
+regressor.fit(X, y)
+
+# Need to reverse the scaling to get original scale
+# predict method expect 2D array
+sc_y.inverse_transform(regressor.predict(sc_X.transform([[6.5]])).reshape(-1,1))
+
+plt.scatter(sc_X.inverse_transform(X), sc_y.inverse_transform(y), color = 'red')
+plt.plot(sc_X.inverse_transform(X), sc_y.inverse_transform(regressor.predict(X).reshape(-1,1)), color = 'blue')
+plt.title('Truth or Bluff (SVR)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show()
+
+# Higher resolution
+X_grid = np.arange(min(sc_X.inverse_transform(X)), max(sc_X.inverse_transform(X)), 0.1)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(sc_X.inverse_transform(X), sc_y.inverse_transform(y), color = 'red')
+plt.plot(X_grid, sc_y.inverse_transform(regressor.predict(sc_X.transform(X_grid)).reshape(-1,1)), color = 'blue')
+plt.title('Truth or Bluff (SVR)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show()
+```
 
 
 # Build A Model  
