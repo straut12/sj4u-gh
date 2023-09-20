@@ -9,7 +9,7 @@ toc: true
 
 Machine Learning 
 
-Some libraries..  
+Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn)  
 
 ```python
 import numpy as np
@@ -102,19 +102,44 @@ X_test[:, 3:] = sc.transform(X_test[:, 3:]) # do not create new fit. but apply t
 ```
 
 # Modeling  
-Regression is when you predict a continuous real value.
-Classification is predicting a category.
+Regression is when you predict a continuous real value. Classification is predicting a category.  
+Steps  
+- Build  
+- Train  
+- Make predictions  
 
 ## Linear Regression
-ý=b₀+b₁x₁  Ordinary least squares. Minimize error. Sum of squares. 
+ý=b₀+b₁X₁  Ordinary least squares. Minimize error. Sum of squares. 
+- ý is dependent var
+- X₁ is independent var (feature)
+- b₀ is y-intercept (constant)
+- b₁ is slope coefficient
 - residual Ɛᵢ=yᵢ-ýᵢ 
 - sum(yᵢ-ýᵢ)² is minimized  
+Assumptions  
+- Linear relationship between Y and each X
+- Equal variance (Homoscedasticity) - Can not show cone shape in variation or showing variation is dependent on X
+- Normality of error distribution (Multivariate Normality) - If you look along the line of linear regression would want to see normal distribution.  
+- Independence (no autocorrelation) - No patterns in the data. ie stock market where previous prices affect future  
+- Lack of Multicollinearity - Predictors are not correlated to each other. See category example below. 
+- Outlier check
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/Heteroscedasticity.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/linear_regression.svg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+[Heteroscedasticity By Q9 at the English-language Wikipedia, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=18064846)
 
 ```python
 regressor = LinearRegression() # create object
 regressor.fit(X_train, y_train) # Train on the training set using fit method
 
-y_pred = regressor.predict(X_test) # Predict test results using predict method
+y_pred = regressor.predict(X_test) # Predict test results using predict method.
 
 # Plot training set
 plt.scatter(X_train, y_train, color = 'red')
@@ -142,10 +167,20 @@ print(regressor.intercept_)
 # salary = 26816 + 9345(year experience)
 
 ```  
+## Multiple Regression  
+ý=b₀+b₁X₁+b₂X₂+..bₙXₙ + b₄D₁
+- ý is dependent var
+- X₁ is independent var (feature matrix) for each col or X
+- b₀ is y-intercept (constant)
+- b₁ is slope coefficient
+- D₁ is category - need to find how many unique values are in the col and split into multiple Dummy binary Variable columns (0,1)
+- Always omit one of the dummy variable col. If you have 4 then include 3. If 2 then include 1.  
+- Why? If 2 unique values only include 1 dummy col, not both. D2=1-D1 so you have a case of independent variable predicting another is Multicollinearity and fails the assumption criteria.
 
-- Build
-- Train
-- Make predictions
+
+- residual Ɛᵢ=yᵢ-ýᵢ 
+- sum(yᵢ-ýᵢ)² is minimized  
+
 # Evaluation
 - Calculate performance metrics
 - Make a verdict
