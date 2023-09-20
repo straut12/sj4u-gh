@@ -113,20 +113,23 @@ Steps
 - Make predictions  
 
 ## Linear Regression
-ý=b₀+b₁X₁  Ordinary least squares. Minimize error. Sum of squares. 
+ý=b₀+b₁X₁  
 - ý is dependent var
 - X₁ is independent var (feature)
 - b₀ is y-intercept (constant)
-- b₁ is slope coefficient
+- b₁ is slope coefficient  
+
+Line is derived using ordinary least squares. Minimize error. Sum of squares. 
 - residual Ɛᵢ=yᵢ-ýᵢ 
 - sum(yᵢ-ýᵢ)² is minimized  
+
 Assumptions  
 - Linear relationship between Y and each X
 - Equal variance (Homoscedasticity) - Can not show cone shape in variation or showing variation is dependent on X
 - Normality of error distribution (Multivariate Normality) - If you look along the line of linear regression would want to see normal distribution.  
 - Independence (no autocorrelation) - No patterns in the data. ie stock market where previous prices affect future  
 - Lack of Multicollinearity - Predictors are not correlated to each other. See category example below. 
-- Outlier check
+- Outlier check  
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -219,9 +222,6 @@ print(regressor.intercept_)
 """
 ```
 
-- residual Ɛᵢ=yᵢ-ýᵢ 
-- sum(yᵢ-ýᵢ)² is minimized  
-
 ## Polynomial Linear Regression  
 Polynomial linear regression is just a type of multiple linear regression.  
 It is still a linear model   
@@ -282,7 +282,15 @@ lin_reg.predict([[6.5]])
 # This is in the X_poly or poly_reg.fit_transform(X)
 lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))
 
-```
+```  
+
+# Support Vector Regression  
+Apply a buffer margin or tube where the error does not matter. But points outside the tube are support vectors and dictate the tube.  
+
+
+
+
+
 # Build A Model  
 Methods
 1. All-in - Have prior knowledge or preparing for Backward Elimination
