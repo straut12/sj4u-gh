@@ -25,6 +25,8 @@ from sklearn.preprocessing import LabelEncoder  # Encode No/Yes into 0,1
 from sklearn.model_selection import train_test_split # Training and Test Sets
 
 from sklearn.preprocessing import StandardScaler  # Scale the training set so data is in the same range
+
+from sklearn.linear_model import LinearRegression
 ```
 # Data Pre-Processing
 ## Import
@@ -67,16 +69,17 @@ y = le.fit_transform(y)  # does not have to be numpy array
 Split the data into a training and test sets. Use 80% for training and remaining data for testing. This lets you compare the predicted values from the model to the actual values.  
 Will create 4 sets.  
 Pair of matrix features and dependent variable for train set.   
-  X train or matrix of features of training set  
-  Y train or dependent var of training set  
+- X train or matrix of features of training set  
+- Y train or dependent var of training set  
 Pair of matrix features and dependent variable for test set.   
-  X test or matrix of features of test set  
-  Y test or dependent var of test set  
+- X test or matrix of features of test set  
+- Y test or dependent var of test set  
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
 # 80% observations go to training and 20% to test
 # random_state=1 for learning so will return same set as tutorial
+# random_state=0 for non tutorial
 ```
 
 ## Feature scaling 
@@ -84,9 +87,11 @@ Not used for a lot of models.
 Feature scaling applied after split. your test split is supposed to represent new data that you don't have until training is done.  
 Needed to normalize or standardize your data so one variable doesn't over power another due to a difference in units. Feature scaling always applied to columns (not row data across columns)  
 * Normalize values from 0-1 (Xnorm=(X-Xmin)/Xrange)  # Works for normal distribution  
-* Standardize values from -3 to 3 except outliers (Xstand=(X-Xave)/Xstdev)  # Works in most cases  
+* Standardize values from -3 to 3 except outliers (Xstand=(X-Xave)/Xstdev)  # Works in most cases   
+
 Use standardization since it works in all cases  
-Apply scaling to numerical col.  Don't apply to category  
+Apply scaling to numerical col.  Don't apply to category   
+
 ```python
 sc = StandardScaler()  # will calculate mean/std dev of columns for standardization
 # fit will get the mean/sigma
@@ -96,7 +101,48 @@ X_train[:, 3:] = sc.fit_transform(X_train[:, 3:]) # fit and transform. only appl
 X_test[:, 3:] = sc.transform(X_test[:, 3:]) # do not create new fit. but apply the scalar transform calculated on training set
 ```
 
-# Modeling
+# Modeling  
+Regression is when you predict a continuous real value.
+Classification is predicting a category.
+
+## Linear Regression
+ý=b₀+b₁x₁  Ordinary least squares. Minimize error. Sum of squares. 
+- residual Ɛᵢ=yᵢ-ýᵢ 
+- sum(yᵢ-ýᵢ)² is minimized  
+
+```python
+regressor = LinearRegression() # create object
+regressor.fit(X_train, y_train) # Train on the training set using fit method
+
+y_pred = regressor.predict(X_test) # Predict test results using predict method
+
+# Plot training set
+plt.scatter(X_train, y_train, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue') # use plot to graph function, the regression line
+plt.title('Salary vs Experience (Training set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+# Plot test set
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue') # regression line between test and train will be the same. Could plot either
+plt.title('Salary vs Experience (Test set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+# Get value
+print(regressor.predict([[12]])) # prediction for 12yr experience. 2D array
+
+# Print equation coefficients
+print(regressor.coef_)
+print(regressor.intercept_)
+
+# salary = 26816 + 9345(year experience)
+
+```  
+
 - Build
 - Train
 - Make predictions

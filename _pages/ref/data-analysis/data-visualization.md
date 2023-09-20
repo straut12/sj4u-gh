@@ -120,7 +120,7 @@ i = sns.catplot(x="file", y="time", data=pivoted, ci='sd', kind="box")
 </div>  
 
 # Google Colab  
-Google colab is very similar to Jupyter Notebook. It is useful for ML since many of the libraries are pre-installed. https://colab.research.google.com/  
+Google colab is very similar to Jupyter Notebook. It is useful for ML since many of the libraries are pre-installed. Can use google drive to store project code. [colab](https://colab.research.google.com/)  
 
 # Dash-plotly  
 Dash gives more GUI type functions, ie letting a user toggle data series on/off while plotting.  
