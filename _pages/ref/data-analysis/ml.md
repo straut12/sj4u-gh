@@ -11,6 +11,16 @@ toc: true
 Notes from udemy ML A-Z  
 Will be using scikit-learn which is easier to learn/use vs Tensorflow at the expense of being less powerful/flexible.  
 
+General Steps  
+- Data pre-processing
+- Build (Regression or Classification)
+- Train  
+- Make predictions  
+- Calculate performance metrics
+- Make a verdict
+
+Two types - Regression is when you predict a continuous real value. Classification is predicting a category. Regression models are listed first below and then Classification. 
+
 Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn)  
 
 ```python
@@ -33,6 +43,8 @@ from sklearn.preprocessing import PolynomialFeatures # Used for Polynomial linea
 from sklearn.svm import SVR                 # Support vector regression
 from sklearn.tree import DecisionTreeRegressor # Decision tree regression
 from sklearn.ensemble import RandomForestRegressor # Random forest
+
+from sklearn.linear_model import LogisticRegression # Logistic regression
 
 ```
 # Data Pre-Processing
@@ -92,7 +104,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
 
 ## Feature scaling 
-Scaling may be needed to normalize or standardize your data so one variable doesn't over power another (one col ranges from 10500-10600 and another ranges from 1-100). Typically not used for a lot of regression models because the coeffecients can compensate for high values of features. But useful on other models.  
+Scaling may be needed to normalize or standardize your data so one variable doesn't over power another (one col ranges from 500-10500 and another ranges from 1-50). Typically not used for a lot of regression models because the coeffecients can compensate for high values of features. But useful on other models.  
 
 Feature scaling is applied after split. Your test split is supposed to represent new data that you don't have until training is done so you don't want to modify it.  
 
@@ -111,14 +123,9 @@ X_train[:, 3:] = sc.fit_transform(X_train[:, 3:]) # fit and transform. only appl
 X_test[:, 3:] = sc.transform(X_test[:, 3:]) # do not create new fit. but apply the scalar transform calculated on training set
 ```
 
-# Modeling  
-Regression is when you predict a continuous real value. Classification is predicting a category.  
-Steps  
-- Build  
-- Train  
-- Make predictions  
+# Modeling (Regression)  
 
-More detail on the concepts and 5 different methods  
+Details on concepts and 5 different methods  
 1. All-in - Have prior knowledge or preparing for Backward Elimination
 2. Backward Elimination (* Stepwise Regression)
     1. Select a significance level to STAY in the model (0.05)
@@ -161,16 +168,25 @@ Assumptions
 - Lack of Multicollinearity - Predictors are not correlated to each other. See category example below. 
 - Outlier check  
 
+Examples of linear regression, deviation to model fit, cubic polynomial fit, and unequal variation.  
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/coding/Heteroscedasticity.png" class="img-fluid rounded z-depth-1" %}
-    </div>
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/coding/chart.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
-</div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/chart2.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/chart3.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/Heteroscedasticity.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
 
-[Heteroscedasticity By Q9 at the English-language Wikipedia, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=18064846)
+[By Krishnavedala - Own work, CC BY-SA 3.0, ](https://commons.wikimedia.org/w/index.php?curid=15462765)
+[By Skbkekas - Own work, CC BY 3.0, ](https://commons.wikimedia.org/w/index.php?curid=6457163)
+[Heteroscedasticity By Q9 at the English-language Wikipedia, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=18064846)   
 
 ```python
 from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
@@ -436,10 +452,102 @@ So need to use adjusted R².
     {% include figure.html path="assets/img/coding/adj-r-squared.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
 n - sample size
-p - number of independent variables  
- 
-- Calculate performance metrics
-- Make a verdict
+p - number of independent variables. as more variables add the R² will actually decrease unless the new variable improves the fit.  
+
+```python
+from sklearn.metrics import r2_score
+r2_score(y_test, y_pred)
+```  
+
+Run your data through all models and compare R²  
+
+# Modeling (Classification)
+Classification is a ML method to identify the category of new observations based on training data.  
+
+## Logistic Regression
+Logistic Regression will give a probability. Can split into two categories >50% or < 50% and get a binary 0,1 output.  
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/logistic-regression.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Canley - Own work, CC BY-SA 4.0, ](https://commons.wikimedia.org/w/index.php?curid=116449187)
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/logistic-regression2.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+# scaling
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test) # do not create new fit. but apply the scalar transform calculated on training set
+
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 1)
+classifier.fit(X_train, y_train)
+
+# Predicting
+print(classifier.predict(sc.transform([[30,87000]]))) # Have to use transform since model had scaled values used for training
+
+# print out a matrix of the prediction (Y predicted) vs the actual (Y test)
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+# Confusion Matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+"""
+[[65  3]  # There are 65 correct predictions of 0 (3 incorrect)
+ [ 8 24]] # There are 24 correct predictions of 1 (8 incorrect)
+          # Total of 89 correct predictions
+"""
+accuracy_score(y_test, y_pred) # accuracy score was 0.89 or 89% correct. There were 
+# 100 samples in the test set. 65 + 24 = 89 (89% of 100)
+
+# Visualize training set
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Logistic Regression (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+# Visualize Test set
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Logistic Regression (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+```
+
+K-Nearest Neighbors (K-NN)
+Support Vector Machine (SVM)
+Kernel SVM
+Naive Bayes
+Decision Tree Classification
+Random Forest Classification
 
 
 
