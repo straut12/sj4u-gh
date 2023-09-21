@@ -8,6 +8,7 @@ toc: true
 ---
 
 **Machine Learning**   
+Notes from udemy ML A-Z  
 Will be using scikit-learn which is easier to learn/use vs Tensorflow at the expense of being less powerful/flexible.  
 
 Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn)  
@@ -30,6 +31,8 @@ from sklearn.preprocessing import StandardScaler  # Scale the training set so da
 from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
 from sklearn.preprocessing import PolynomialFeatures # Used for Polynomial linear regression
 from sklearn.svm import SVR                 # Support vector regression
+from sklearn.tree import DecisionTreeRegressor # Decision tree regression
+from sklearn.ensemble import RandomForestRegressor # Random forest
 
 ```
 # Data Pre-Processing
@@ -80,6 +83,7 @@ Pair of matrix features and dependent variable for test set.
 - X test or matrix of features of test set  
 - Y test or dependent var of test set  
 
+
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
 # 80% observations go to training and 20% to test
@@ -113,6 +117,29 @@ Steps
 - Train  
 - Make predictions  
 
+More detail on the concepts and 5 different methods  
+1. All-in - Have prior knowledge or preparing for Backward Elimination
+2. Backward Elimination (* Stepwise Regression)
+    1. Select a significance level to STAY in the model (0.05)
+    2. Fit the full model with all possible predictors
+    3. Consider the predictor with hightest P value. If P > SL go to next step, else finish (when all variables P < SL then model is finished).
+    4. Remove the predictor
+    5. Fit model with this variable. You have to rebuild/refit the model with the fewer number of variables. Will get new coefficients/constants.
+    Keep looping steps 3-5. Remove predictor with highest P val. Fit the model again with one less variable. Keep repeating until variable with highest P is less than the SL.
+3. Forward Selection. Growing one variable at a time  (* Stepwise Regression)
+    1. Select a SL to ENTER the model (SL= 0.05)
+    2. Fit all simple regression models. Fit y to all the separate X features. Select the one with the lowest P value
+    3. Keep this variable and fit all possible models with one extra predictor added to the one(s) you already have
+    4. Consider the predictor with the lowest P-value. If P < SL, go to step 3, else finish and keep the previous model before adding the last var.
+4. Bidirectional Elimination - Combine methods 2-3 (** Stepwise Regression)  
+    1. Select a SL to ENTER and to STAY in the model (.05)
+    2. Perform the next step of Forward Selection (new var must have : P < SLENTER to enter)
+    3. Perform ALL steps of Backward Elimination (old variables must have P < SLSTAY to stay)
+    4. No new variables can enter and no old variables can exit  
+5. Score Comparison - All Possible Models
+    1. Select a criterion of goodness of fit
+    2. Construct all possible regression models
+    3. Select the one with the best criterion
 ## Linear Regression
 ý=b₀+b₁X₁  
 - ý is dependent var
@@ -144,6 +171,7 @@ Assumptions
 [Heteroscedasticity By Q9 at the English-language Wikipedia, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=18064846)
 
 ```python
+from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
 # Using LineaerRegression. Will avoid dummy variable issue
 regressor = LinearRegression() # Build linear regression model and create object
 regressor.fit(X_train, y_train) # Train on the training set using fit method
@@ -194,6 +222,7 @@ There are multiple columns/features and we can not visualize the multidimensiona
 
 ```python  
 # Using LineaerRegression. 
+from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
 # Will also iterate thru multiple features to find highest P value
 regressor = LinearRegression() # Build linear regression model and create object
 regressor.fit(X_train, y_train) # Train on the training set using fit method
@@ -240,6 +269,8 @@ It is still a linear model
 - b₁ is slope coefficient
 
 ```python
+from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
+from sklearn.preprocessing import PolynomialFeatures
 # Training the Linear Regression model on the whole dataset
 lin_reg = LinearRegression()
 # X,y is not broken into train/test set because all data is being used to create the model.
@@ -289,12 +320,14 @@ lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))
 
 ```  
 
-# Support Vector Regression  
+## Support Vector Regression  
 Apply a buffer margin or tube where the error does not matter. But points outside the tube are support vectors and dictate the tube.  
 
-Example will have feature scaling.  
+Example will have feature scaling.  Job class feature was from 1-15 and dependent Y salary was 45k-1M so had to scale the variables.
 
 ```python
+from sklearn.svm import SVR
+
 y = y.reshape(len(y),1) # used to get array into 2D array with 1 col for standard scalar function
 
 # StandardScaler will calculate mean/std dev of columns for standardization
@@ -328,34 +361,76 @@ plt.ylabel('Salary')
 plt.show()
 ```
 
+## Decision Tree Regression
+CART (Classification and Regression Tree)  
+Scaling is not required since predictions from decision tree regression are resulting from successive splits of the data through nodes of the tree and not equations like other models.    
+Decision tree is not ideal for single feature data set. Best for many data cols.  
 
-# Build A Model  
-Methods
-1. All-in - Have prior knowledge or preparing for Backward Elimination
-2. Backward Elimination (* Stepwise Regression)
-    1. Select a significance level to STAY in the model (0.05)
-    2. Fit the full model with all possible predictors
-    3. Consider the predictor with hightest P value. If P > SL go to next step, else finish (when all variables P < SL then model is finished).
-    4. Remove the predictor
-    5. Fit model with this variable. You have to rebuild/refit the model with the fewer number of variables. Will get new coefficients/constants.
-    Keep looping steps 3-5. Remove predictor with highest P val. Fit the model again with one less variable. Keep repeating until variable with highest P is less than the SL.
-3. Forward Selection. Growing one variable at a time  (* Stepwise Regression)
-    1. Select a SL to ENTER the model (SL= 0.05)
-    2. Fit all simple regression models. Fit y to all the separate X features. Select the one with the lowest P value
-    3. Keep this variable and fit all possible models with one extra predictor added to the one(s) you already have
-    4. Consider the predictor with the lowest P-value. If P < SL, go to step 3, else finish and keep the previous model before adding the last var.
-4. Bidirectional Elimination - Combine methods 2-3 (** Stepwise Regression)  
-    1. Select a SL to ENTER and to STAY in the model (.05)
-    2. Perform the next step of Forward Selection (new var must have : P < SLENTER to enter)
-    3. Perform ALL steps of Backward Elimination (old variables must have P < SLSTAY to stay)
-    4. No new variables can enter and no old variables can exit  
-5. Score Comparison - All Possible Models
-    1. Select a criterion of goodness of fit
-    2. Construct all possible regression models
-    3. Select the one with the best criterion
+```python
+from sklearn.tree import DecisionTreeRegressor
 
+regressor = DecisionTreeRegressor(random_state = 0)
+regressor.fit(X, y)
 
-# Evaluation
+regressor.predict([[6.5]])
+
+# High resolution
+X_grid = np.arange(min(X), max(X), 0.01)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(X, y, color = 'red')
+plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
+plt.title('Truth or Bluff (Decision Tree Regression)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show()
+```
+
+## Random Forest
+Ensemble. Build a lot of decision trees. Instead of just getting one prediction you get a lot of predictions (500+). Average across the predictions.   
+1. Pick at random K data points from training set
+2. Build the decision tree associated to these K data points
+3. Choose the number Ntree of trees you want to build and repeat steps 1-2
+4. For a new data point, make each one of Ntree trees predic the valueo of Y for the data point in question and assign the new data point the average across all of the predicted Y values.  
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
+regressor = RandomForestRegressor(n_estimators = 10, random_state = 0)
+regressor.fit(X, y)
+
+regressor.predict([[6.5]])
+
+X_grid = np.arange(min(X), max(X), 0.01)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(X, y, color = 'red')
+plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
+plt.title('Truth or Bluff (Random Forest Regression)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show()
+```
+
+# Evaluation  
+Residual sum of squares 
+Minimize error. Sum of squares.  
+- residual Ɛᵢ=yᵢ-ýᵢ 
+- sum(yᵢ-ýᵢ)² is minimized  
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/r-squared.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Orzetto - Own work, CC BY-SA 3.0,](https://commons.wikimedia.org/w/index.php?curid=11398293)  
+
+- R² > 0.9 is good
+- R² < 0.7 its marginal
+- R² ~ 0.4 is bad
+
+ý=b₀+b₁X₁+b₂X₂+..bₙXₙ  
+
+As you add more features/col (X's) the SStot does not change but the SSres will decrease or stay the same. This is a problem because as you add more columns of data/features your R² will appear to improve even though they may not be relevant or adding value. So need to use adjusted R².   
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/adj-r-squared.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+
 - Calculate performance metrics
 - Make a verdict
 
