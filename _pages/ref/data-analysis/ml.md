@@ -38,7 +38,7 @@ from sklearn.ensemble import RandomForestRegressor # Random forest
 # Data Pre-Processing
 ## Import
 Features (independent variables) vs Dependent variable vector.  
-Features/independent variables are the columns you will use to predict the dependent variable (last column).  
+- Features/independent variables are the columns you use to predict the dependent variable (typically last column).  
 
 ```python
 df = pd.read_csv('Data.csv')
@@ -47,7 +47,9 @@ y = df.iloc[:, -1].values # dependent variable vector. last col
 ```
 
 ## Scrub  
-Can leave bad/missing data out if <1% or could replace it with average data  
+What to do with bad/missing data
+- Can simply leave it out if <1%
+- Use imputer module to replace it with average data from that column    
 
 ```python
 imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
@@ -56,12 +58,13 @@ X[:, 1:3] = imputer.transform(X[:, 1:3]) # transform will perform the replacemen
 ```  
 
 ## Encode Categorical Data  
-OneHotEncoder will take a category col (ie a col with 3 unique tool IDs) and create multiple columns to represent them as 1/0.   So a col with 3 unique tool IDs would become 3 col with 1,0,0 and 0,1,0 and 0,0,1  
-ColumnTransformer takes 2 arg  
+OneHotEncoder will take a category col (ie a col with 3 unique tool IDs) and create multiple columns to represent them as 1/0. So a col with 3 unique tool IDs would become 3 col with 1,0,0 and 0,1,0 and 0,0,1  
+
+ColumnTransformer takes 2 arg
 1. what kind of transformation and which index to perform it on  
 2. remainder or which cols to keep that won't have transformation applied  
-this example using 'encoder' transformation with OneHotEncoder class on column 0 which is string type.  
-'passthrough' says to keep the columns that were not listed in the transform   
+
+Example below using 'encoder' transformation with OneHotEncoder class on column 0 which is string type. 'passthrough' says to keep the columns that were not listed in the transform   
 
 ```python
 # Remember toupdate the 3rd arg with the column to do OneHotEncoding on
@@ -73,16 +76,13 @@ le = LabelEncoder()
 y = le.fit_transform(y)  # does not have to be numpy array
 ```
 
-## Training and Test Sets
-Split the data into a training and test sets. Use 80% for training and remaining data for testing. This lets you compare the predicted values from the model to the actual values.  
-Will create 4 sets.  
-Pair of matrix features and dependent variable for train set.   
-- X train or matrix of features of training set  
-- Y train or dependent var of training set  
-Pair of matrix features and dependent variable for test set.   
-- X test or matrix of features of test set  
-- Y test or dependent var of test set  
+## Training and Test Sets  
+Separating your data into two sets, training and test, allows you to compare the predicted values from the model to the actual values.  
+A starting point is to use 80% for training and the remaining data for testing.    
 
+Will create 4 sets.  
+- Pair of matrix features (Xtrain) and dependent variable (Ytrain) for train set.   
+- Pair of matrix features (Xtest) and dependent variable (Ytest) for test set.   
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)
@@ -92,14 +92,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 ```
 
 ## Feature scaling 
-Not used for a lot of regression models. Not used on multiple regression. Coeffecients can compensate for high values of features. But can be used on other models where there is an implicit relationship between the features X and the dependent variable Y.     
-Feature scaling applied after split. your test split is supposed to represent new data that you don't have until training is done.  
-Needed to normalize or standardize your data so one variable doesn't over power another due to a difference in units. Feature scaling always applied to columns (not row data across columns)  
+Scaling may be needed to normalize or standardize your data so one variable doesn't over power another (one col ranges from 10500-10600 and another ranges from 1-100). Typically not used for a lot of regression models because the coeffecients can compensate for high values of features. But useful on other models.  
+
+Feature scaling is applied after split. Your test split is supposed to represent new data that you don't have until training is done so you don't want to modify it.  
+
+Feature scaling always applied to columns (not row data across columns)  
 * Normalize values from 0-1 (Xnorm=(X-Xmin)/Xrange)  # Works for normal distribution  
 * Standardize values from -3 to 3 except outliers (Xstand=(X-Xave)/Xstdev)  # Works in most cases   
 
-Use standardization since it works in all cases  
-Apply scaling to numerical col.  Don't apply to category   
+Standardization is a good choice since it works in most cases. (do not apply to category col) 
 
 ```python
 sc = StandardScaler()  # will calculate mean/std dev of columns for standardization
@@ -139,7 +140,8 @@ More detail on the concepts and 5 different methods
 5. Score Comparison - All Possible Models
     1. Select a criterion of goodness of fit
     2. Construct all possible regression models
-    3. Select the one with the best criterion
+    3. Select the one with the best criterion  
+
 ## Linear Regression
 ý=b₀+b₁X₁  
 - ý is dependent var
@@ -205,7 +207,8 @@ print(regressor.intercept_)
 
 # salary = 26816 + 9345(year experience)
 
-```  
+```   
+
 ## Multiple Linear Regression  
 ý=b₀+b₁X₁+b₂X₂+..bₙXₙ + b₄D₁
 - Do not need to apply feature scaling
@@ -253,7 +256,7 @@ print(regressor.intercept_)
 
 """Profit=86.6×Dummy State 1−873×Dummy State 2+786×Dummy State 3+0.773×R&D Spend+0.0329×Administration+0.0366×Marketing Spend+42467.53
 """
-```
+```  
 
 ## Polynomial Linear Regression  
 Polynomial linear regression is just a type of multiple linear regression.  
@@ -359,7 +362,7 @@ plt.title('Truth or Bluff (SVR)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
-```
+```  
 
 ## Decision Tree Regression
 CART (Classification and Regression Tree)  
@@ -383,7 +386,7 @@ plt.title('Truth or Bluff (Decision Tree Regression)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
-```
+```  
 
 ## Random Forest
 Ensemble. Build a lot of decision trees. Instead of just getting one prediction you get a lot of predictions (500+). Average across the predictions.   
@@ -408,7 +411,7 @@ plt.title('Truth or Bluff (Random Forest Regression)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
 plt.show()
-```
+```  
 
 # Evaluation  
 Residual sum of squares 
@@ -426,11 +429,15 @@ Minimize error. Sum of squares.
 
 ý=b₀+b₁X₁+b₂X₂+..bₙXₙ  
 
-As you add more features/col (X's) the SStot does not change but the SSres will decrease or stay the same. This is a problem because as you add more columns of data/features your R² will appear to improve even though they may not be relevant or adding value. So need to use adjusted R².   
+As you add more features/col (X's) the SStot does not change but the SSres will decrease or stay the same. This is a problem because as you add more columns of data/features your R² will appear to improve even though they may not be relevant or adding value.  
+
+So need to use adjusted R².   
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/adj-r-squared.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
-
+n - sample size
+p - number of independent variables  
+ 
 - Calculate performance metrics
 - Make a verdict
 
