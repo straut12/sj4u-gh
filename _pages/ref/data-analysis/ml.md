@@ -560,6 +560,8 @@ plt.show()
 ```
 
 ## K-Nearest Neighbors (K-NN)  
+Note - the color map visualizations only works for datasets with 2 features  
+
 KNN is a nonlinear classifier  
 1. Chose the number of K neighbors (5 is a good starting point)
 2. Take the K nearest neighbors of the new data point, according to the Euclidean distance sqrt(x^2+y^2)
@@ -996,7 +998,28 @@ plt.show()
 
 ```
 
+# Model Selection    
+1. Import data/scrub data
+2. Split data into training/test sets
+3. Feature scaling
+4. Train model on training set
+5. Generate confusion matrix 
+    - y_pred = classifier.predict(X_test)  
+    - print(confusion_matrix(y_test, y_pred))
+    - accuracy_score(y_test, y_pred)  
+
+To convert data types when scikit needs int type
+1. y=y.astype('int') 
+2. y = train_data['Y'].astype('int')
+3. for i,x in enumerate(y_pred):
+    y_pred[i]=x.astype('int')
 
 
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/confusion-matrix.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
 
+## Unsupervised Learning  
 
+Supervised - you know what to predict
+Unsupervised - you do not know what to predict
