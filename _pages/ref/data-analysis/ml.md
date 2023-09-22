@@ -8,6 +8,8 @@ toc: true
 ---
 
 **Machine Learning**   
+[Python Machine Learning](https://machine-learning-tutorial-abi.readthedocs.io/en/latest/)  
+
 Notes from udemy ML A-Z  
 Will be using scikit-learn which is easier to learn/use vs Tensorflow at the expense of being less powerful/flexible.  
 
@@ -45,10 +47,15 @@ from sklearn.tree import DecisionTreeRegressor # Decision tree regression
 from sklearn.ensemble import RandomForestRegressor # Random forest
 
 from sklearn.linear_model import LogisticRegression # Logistic regression
-
+from sklearn.neighbors import KNeighborsClassifier # K nearest neighbor
+from sklearn.svm import SVC         # Support Vector Classification
+from sklearn.naive_bayes import GaussianNB  # Naive Bayes
+from sklearn.tree import DecisionTreeClassifier # Decision tree
+from sklearn.ensemble import RandomForestClassifier # Random forest
 ```
-# Data Pre-Processing
-## Import
+# Data Pre-Processing  
+
+## Import  
 Features (independent variables) vs Dependent variable vector.  
 - Features/independent variables are the columns you use to predict the dependent variable (typically last column).  
 
@@ -58,7 +65,7 @@ X = df.iloc[:, :-1].values  # all rows/col except the last col (all feature/inde
 y = df.iloc[:, -1].values # dependent variable vector. last col
 ```
 
-## Scrub  
+## Scrub   
 What to do with bad/missing data
 - Can simply leave it out if <1%
 - Use imputer module to replace it with average data from that column    
@@ -125,6 +132,8 @@ X_test[:, 3:] = sc.transform(X_test[:, 3:]) # do not create new fit. but apply t
 
 # Modeling (Regression)  
 
+> Linear vs non linear with respect to the class of regression/model refers to the coefficients (b₀, b₁), not the X feature.  Can the model be expressed as a linear combination of coefficients. A non linear model would have b₀/(b₁+X₁) where you can not replace the coefficients with other coefficients to turn the equation into a linear one.  
+
 Details on concepts and 5 different methods  
 1. All-in - Have prior knowledge or preparing for Backward Elimination
 2. Backward Elimination (* Stepwise Regression)
@@ -149,12 +158,15 @@ Details on concepts and 5 different methods
     2. Construct all possible regression models
     3. Select the one with the best criterion  
 
+> LinearRegression class will iterate thru multiple features to find highest P value  
+
 ## Linear Regression
 ý=b₀+b₁X₁  
-- ý is dependent var
+- ý is dependent var (hat refers to a predictor)
 - X₁ is independent var (feature)
 - b₀ is y-intercept (constant)
 - b₁ is slope coefficient  
+- 1 X or feature
 
 Line is derived using ordinary least squares. Minimize error. Sum of squares. 
 - residual Ɛᵢ=yᵢ-ýᵢ 
@@ -168,7 +180,7 @@ Assumptions
 - Lack of Multicollinearity - Predictors are not correlated to each other. See category example below. 
 - Outlier check  
 
-Examples of linear regression, deviation to model fit, cubic polynomial fit, and unequal variation.  
+Examples of linear regression, deviation to model fit, cubic polynomial fit, and unequal variation (relationship between the Y dependent variation and the X feature).  
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/coding/chart.jpg" class="img-fluid rounded z-depth-1" %}
@@ -227,6 +239,7 @@ print(regressor.intercept_)
 
 ## Multiple Linear Regression  
 ý=b₀+b₁X₁+b₂X₂+..bₙXₙ + b₄D₁
+- More than 1 X feature.
 - Do not need to apply feature scaling
 - Do not need to test for linear regression assumptions. It will just show a lower score and you will need to pick a different model.
 - ý is dependent var
@@ -234,8 +247,6 @@ print(regressor.intercept_)
 - b₀ is y-intercept (constant)
 - b₁ is slope coefficient
 - D₁ is category - need to find how many unique values are in the col and split into multiple Dummy binary Variable columns (0,1). This LinearRegression class will omit one of the dummy variable col. If you have 4 then include 3. If 2 then include 1. Why? If 2 unique values only include 1 dummy col, not both. D2=1-D1 so you have a case of independent variable predicting another is Multicollinearity.
-
-> LinearRegression class will iterate thru multiple features to find highest P value  
 
 There are multiple columns/features and we can not visualize the multidimensional output so use vectors to compare. Compare vector of the predicted vs vector of the test set result.  
 
@@ -275,9 +286,9 @@ print(regressor.intercept_)
 ```  
 
 ## Polynomial Linear Regression  
-Polynomial linear regression is just a type of multiple linear regression.  
-It is still a linear model   
-ý=b₀+b₁X₁+b₂X₁²+..bₙX₁ⁿ
+ ý=b₀+b₁X₁+b₂X₁²+..bₙX₁ⁿ  
+ - Now the X feature may be at a higher power. ie X₁²
+ - Polynomial linear regression is just a type of multiple linear regression.  It is still a linear model  
 - X portion is not linear .. but Linear regression applies to the coefficients (b1) part. Trying determine the coefficients so can plug in varying X values and determine the output.  
 - The linear/non-linear refers to the coefficients (b) and if the function can be expressed as a linear combination of coefficients.  
 - Do not need to apply feature scaling
@@ -341,6 +352,11 @@ lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))
 
 ## Support Vector Regression  
 Apply a buffer margin or tube where the error does not matter. But points outside the tube are support vectors and dictate the tube.  
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/svr-rbf.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Shiyu Ji - Own work, CC BY-SA 4.0,](https://commons.wikimedia.org/w/index.php?curid=60632948)
 
 Example will have feature scaling.  Job class feature was from 1-15 and dependent Y salary was 45k-1M so had to scale the variables.
 
@@ -466,6 +482,7 @@ Classification is a ML method to identify the category of new observations based
 
 ## Logistic Regression
 Logistic Regression will give a probability. Can split into two categories >50% or < 50% and get a binary 0,1 output.  
+Logistic regression classifier is a linear classifier so the prediction boundary/line will be straight line.  
 
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/logistic-regression.jpg" class="img-fluid rounded z-depth-1" %}
@@ -542,12 +559,442 @@ plt.legend()
 plt.show()
 ```
 
-K-Nearest Neighbors (K-NN)
-Support Vector Machine (SVM)
-Kernel SVM
-Naive Bayes
-Decision Tree Classification
-Random Forest Classification
+## K-Nearest Neighbors (K-NN)  
+KNN is a nonlinear classifier  
+1. Chose the number of K neighbors (5 is a good starting point)
+2. Take the K nearest neighbors of the new data point, according to the Euclidean distance sqrt(x^2+y^2)
+3. Among these K neighbors, count the number of data points in each category
+4. Assign the new data point to the category where you counted the most neighbors
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/knn.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Antti Ajanki AnAj - Own work, CC BY-SA 3.0, ](https://commons.wikimedia.org/w/index.php?curid=2170282)
+
+KNeighborsClassifier args
+- 5 is good starting point for K number of neighbors
+- metric is the distance you want to use between observation point and neighbors. To use euclidean dist choose minkowski metric with p=2
+```python
+from sklearn.neighbors import KNeighborsClassifier
+classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
+classifier.fit(X_train, y_train) # train it on the training set
+
+print(classifier.predict(sc.transform([[30,87000]])))
+
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 1),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 1))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('K-NN (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 1),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 1))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('K-NN (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+```
+## Support Vector Machine (SVM)  
+Defines a support vector to separate groups or classes. Differs from traditional ML in that it focuses on observation points that are close to the boundary separating the classes vs focusing on observations that are safe, classic example of each class.  SVMs select a decision boundary which maximizes the distance from the closest data points of all classes. The decision boundary provided by the SVMs can be referred to as the maximum margin hyperplane or the maximum margin classifier and it will search through this margin.  
+
+- SVR can use both linear and non-linear kernels. The kernel you choose will depend on the data complexity.    
+- SVR is different from standard linear regression because it finds a hyperplane that best fits the data points in a continuous space.   
+
+Example below uses linear kernel assuming data is linearly separable
+```python
+# Train SMV model on the training set
+from sklearn.svm import SVC
+classifier = SVC(kernel = 'linear', random_state = 1) # using a linear kernel
+classifier.fit(X_train, y_train)
+
+# Predict a new result
+print(classifier.predict(sc.transform([[30,87000]])))
+
+# Predicting the test set results
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+# Making the confusion matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
+
+# Visualize training set
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('SVM (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+# Visualize test set
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('SVM (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+```
+## Kernel SVM  
+Kernel trick - Why? Because taking a non linearly separable data set and mapping it to a higher dimension to get a linearly separable data set. Then invoking the SVM alogrithm, building a decision boundary for the data and projecting all of that back into the original dimensions is computer intensive.
+
+Non linear SVM  
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/kernel-trick.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/svm.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+[By Shiyu Ji - Own work, CC BY-SA 4.0, ](https://commons.wikimedia.org/w/index.php?curid=60458994)
+
+**Types of Kernel Functions**  
+- Gaussian aka radial basis of function kernel
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/rbf.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+
+- Sigmoid  
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/sigmoid.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+[By Qef (talk) - Created from scratch with gnuplot, Public Domain,](https://commons.wikimedia.org/w/index.php?curid=4310325)
+
+Linear model/separator
+- in a 1 dimensional space it is a dot
+- in a 2 dimensional space it is a line
+- in a 3 dimensional space it is a hyperplane
+
+```python
+from sklearn.svm import SVC
+classifier = SVC(kernel = 'rbf', random_state = 0) # radial basis of function is nonlinear
+classifier.fit(X_train, y_train) # Train the kernel svm model on the training set
+
+# Predict a new result
+print(classifier.predict(sc.transform([[30,87000]])))
+
+# Predicting the test set results
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+# Build confusion matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
+
+# Visualize the training set results
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Kernel SVM (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+# visualize the test set results
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Kernel SVM (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+```
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/logistic-regression-plot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/knn-plot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/svm-linear-plot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/svm-kernel-plot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/bayes-plot.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+
+## Naive Bayes  
+Called Naive because you assume X and Y are not dependent when they may be. But it still works.  
+Bayes is a probabilistic type of classify because you first calculate the probabilities and then based on those probabilities assign the new point a class.
+Bayes Theorem Example  
+
+tool1: 60pph  P(tool1)=60/100=0.6  
+**tool2**: 40pph  P(**tool2**)=40/100=0.4  
+
+out of all parts 1% are defective   P(defect)=1%  
+out of all defective parts 50% from tool1 and 50% from tool2  
+P(tool1|defect) = 50%  
+P(**tool2**|defect) = 50%      
+
+( | means given)  
+
+What is propability that a part produced by tool2 is defective?  
+P(defect|**tool2**)=P(**tool2**|defect)*P(defect)/P(**tool2**)  
+P(defect|**tool2**)=0.5*0.01/0.4 = 0.0125 (12,500ppm are defective)  
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/bayes.jpg" class="img-fluid rounded z-depth-1" %}
+</div>   
+example  
+1 group walks  
+1 group drives  
+X Y chart  
+P(walks|X)=P(X|walks)*P(walks)/P(X)  
+
+1. Prior Probability= P(walks)  
+2. Marignal Likelihood = P(X)  
+3. Likelihood = P(X|walks)  
+4. Posterior Probability=P(walks|X)  
+
+Compare P(walks|X) vs P(drives|X)  
+
+Going to add a new observation to data set
+Calculate P(walks|X) first
+1. P(walks)=Total Walkers/Total Observations=10/30
+2. P(X)=What is the likelihood of any new random pt added to data set falling within the circle. The user selects the radius of the circle around the new data pt. Any points in the circle will be deemed similar to the observation being added. P(X)=Number of Similar Observations/Total Observations=4/30  
+3. P(X|walks)=Same circle but now only working with data pts of the 'walks' class. = Number of Similar Observations Among those who walk/total number of walkers = 3/10  
+4. P(walks|X)=3/10 * 10/30 / 4/30 = 0.75
+
+Calculate P(drives|X) second
+P(drives|X)=1/20 * 20/30 / 4/30 = 0.25  
+  .75 vs .25 or 75% change the person walks vs 25% change the person drives so will classify as a walker.  
+
+For Compare P(walks|X) vs P(drives|X) the denominator of P(X) is in both equations so if only comparing can cancel it out and reduce to ..  
+P(X|walks)*P(walks) vs P(X|drives) * P(drives)
+
+```python
+
+from sklearn.naive_bayes import GaussianNB
+classifier = GaussianNB()
+classifier.fit(X_train, y_train)
+
+print(classifier.predict(sc.transform([[30,87000]])))
+
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Naive Bayes (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Naive Bayes (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+```
+
+When you have more than 2 classes It follows a similar/straight process as it always adds up to 1. If you have 3 classes and classify 1 and it's greater than 50% you can assign that class, but if not you have to calculate for each to assign the classification.
+## Decision Tree Classification  
+CART - Classification (categories) vs regression (real numbers)  
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/tree.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Gilgoldm - Own work, CC BY-SA 4.0,](https://commons.wikimedia.org/w/index.php?curid=90405437)
+
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+classifier = DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
+classifier.fit(X_train, y_train)
+
+print(classifier.predict(sc.transform([[30,87000]])))
+
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Decision Tree Classification (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Decision Tree Classification (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+```
+
+## Random Forest Classification  
+Ensemble methods construct more than one decision tree
+1. Pick a random K data points from the training set
+2. Build a decision tree associated to those data points.
+3. Choose the number of Ntrees you want to build and repeat 1-2
+4. For a new data point make each one of your Ntrees predict the category to which the data points belongs and assign the new data point to the category that wins the majority vote.
+
+Start off with one tree and then build more trees based on randomly selected subsets of data. Then average the whole.
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
+classifier.fit(X_train, y_train)
+
+print(classifier.predict(sc.transform([[30,87000]])))
+
+y_pred = classifier.predict(X_test)
+print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+
+from sklearn.metrics import confusion_matrix, accuracy_score
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+accuracy_score(y_test, y_pred)
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_train), y_train
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Random Forest Classification (Training set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+from matplotlib.colors import ListedColormap
+X_set, y_set = sc.inverse_transform(X_test), y_test
+X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 10, stop = X_set[:, 0].max() + 10, step = 0.25),
+                     np.arange(start = X_set[:, 1].min() - 1000, stop = X_set[:, 1].max() + 1000, step = 0.25))
+plt.contourf(X1, X2, classifier.predict(sc.transform(np.array([X1.ravel(), X2.ravel()]).T)).reshape(X1.shape),
+             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
+plt.title('Random Forest Classification (Test set)')
+plt.xlabel('Age')
+plt.ylabel('Estimated Salary')
+plt.legend()
+plt.show()
+
+```
 
 
 
