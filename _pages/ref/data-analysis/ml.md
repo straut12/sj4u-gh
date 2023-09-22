@@ -447,7 +447,7 @@ plt.show()
 
 # Evaluation  
 Residual sum of squares 
-Minimize error. Sum of squares.  
+The better the linear fit matches the data in comparison to a simple average your R² value will approach 1 (Sum of Squares for linear regression fit will be close to 0, 1-0=1)
 - residual Ɛᵢ=yᵢ-ýᵢ 
 - sum(yᵢ-ýᵢ)² is minimized  
 <div class="col-sm mt-3 mt-md-0">
@@ -575,7 +575,8 @@ KNN is a nonlinear classifier
 
 KNeighborsClassifier args
 - 5 is good starting point for K number of neighbors
-- metric is the distance you want to use between observation point and neighbors. To use euclidean dist choose minkowski metric with p=2
+- metric is the distance you want to use between observation point and neighbors. To use euclidean dist choose minkowski metric with p=2  
+
 ```python
 from sklearn.neighbors import KNeighborsClassifier
 classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
@@ -768,7 +769,8 @@ plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
 ```
-
+Examples ..
+Logistic Regression, KNN, SVM_linear, SVM_kernel, Bayes
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/coding/logistic-regression-plot.jpg" class="img-fluid rounded z-depth-1" %}
@@ -779,6 +781,8 @@ plt.show()
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/coding/svm-linear-plot.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
+</div>
+<div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="assets/img/coding/svm-kernel-plot.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
@@ -830,15 +834,14 @@ Calculate P(walks|X) first
 3. P(X|walks)=Same circle but now only working with data pts of the 'walks' class. = Number of Similar Observations Among those who walk/total number of walkers = 3/10  
 4. P(walks|X)=3/10 * 10/30 / 4/30 = 0.75
 
-Calculate P(drives|X) second
+Calculate P(drives|X) second  
 P(drives|X)=1/20 * 20/30 / 4/30 = 0.25  
-  .75 vs .25 or 75% change the person walks vs 25% change the person drives so will classify as a walker.  
+.75 vs .25 or 75% change the person walks vs 25% change the person drives so will classify as a walker.  
 
-For Compare P(walks|X) vs P(drives|X) the denominator of P(X) is in both equations so if only comparing can cancel it out and reduce to ..  
-P(X|walks)*P(walks) vs P(X|drives) * P(drives)
+For Compare P(walks|X) vs P(drives|X) the denominator of P(X) is in both equations so if only comparing can cancel it out and reduce to    
+P(X|walks)*P(walks) vs P(X|drives) * P(drives)  
 
 ```python
-
 from sklearn.naive_bayes import GaussianNB
 classifier = GaussianNB()
 classifier.fit(X_train, y_train)
@@ -1007,6 +1010,9 @@ plt.show()
     - y_pred = classifier.predict(X_test)  
     - print(confusion_matrix(y_test, y_pred))
     - accuracy_score(y_test, y_pred)  
+
+Run your data through all models and compare accuracy  
+
 
 To convert data types when scikit needs int type
 1. y=y.astype('int') 
