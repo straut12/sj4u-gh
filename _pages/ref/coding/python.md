@@ -1088,6 +1088,22 @@ Check if an item exists in a list
 ```python
 if x in listx:
 ```
+Dictionary and avoiding/handling errors
+```python
+dict = {}
+dict['a'] = 'alligator'
+dict['b'] = 'boxer'
+dict['c'] = 'cat'
+
+print(dict) # {'a': 'alligator', 'b': 'boxer', 'c': 'cat'}
+
+print(dict['a'])    # Simple lookup, returns 'alligator'
+dict['a'] = 6       # Put new key/value into dict
+'a' in dict         # True
+## print(dict['z'])                  # Will throw a KeyError
+if 'z' in dict: print(dict['z'])     # Avoids KeyError
+print(dict.get('z'))  # Prints 'None' instead of throwing a KeyError
+```
 
 Check for a specific key or value in a dict  
 ```python
