@@ -23,7 +23,7 @@ General Steps
 
 Two types - Regression is when you predict a continuous real value. Classification is predicting a category. Regression models are listed first below and then Classification. 
 
-Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn)  
+Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn) and [scipy](https://docs.scipy.org/doc/scipy/tutorial/index.html#user-guide) 
 
 ```python
 import numpy as np
@@ -52,9 +52,13 @@ from sklearn.svm import SVC         # Support Vector Classification
 from sklearn.naive_bayes import GaussianNB  # Naive Bayes
 from sklearn.tree import DecisionTreeClassifier # Decision tree
 from sklearn.ensemble import RandomForestClassifier # Random forest
-
+               
 # Unsupervised
-from sklearn.cluster import KMeans   # Clustering
+from sklearn.cluster import KMeans   # K means clustering
+import scipy.cluster.hierarchy as sch  # Hierarchy clustering
+from sklearn.cluster import AgglomerativeClustering
+
+
 ```
 # Data Pre-Processing  
 
@@ -1142,4 +1146,103 @@ Brainstorm ways of reaching high income/low spending cluster
 
 
 ## Hierarchical Clustering Model 
+
+Two types  
+1. Agglomerative (bottom up)
+2. Divisive (top down)  
+
+Will use Agglomerative  
+1. Make each daa pt a single point cluster - that forms N clusters
+2. Take the two closest data points and make them one cluster - That form N-1 cluster
+3. Take the two closest data points and make them one cluster - That form N-2 cluster 
+4. Repeat step 3 until there is only one cluster
+
+Important aspect is closeness of clusters  
+- For 2 points on a 2D plane have been using euclidean distance sqrt(x^2+y^2)
+- For clusters can use distance of ..
+    1. closest points
+    2. furthest points
+    3. average distance
+    4. centroids
+
+Dendogram acts as the memory of the algorithm and will remember the steps of clustering to get the final result. Will build it first to find the optimal number of clusters.  Hierarchical clustering metric uses within cluster variance.  
+Find the largest vertical distance between horiz lines and then count the clusters  
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/dendogram.jpg" class="img-fluid rounded z-depth-1" %}
+</div> 
+
+```python
+
+dataset = pd.read_csv('Mall_Customers.csv')
+X = dataset.iloc[:, [3, 4]].values   # only importing last 2 col to make visualizing easier
+
+# Build dendogram
+import scipy.cluster.hierarchy as sch
+dendrogram = sch.dendrogram(sch.linkage(X, method = 'ward')) # use method of minimum variance
+plt.title('Dendrogram')
+plt.xlabel('Customers')  # X axis is observations or rows
+plt.ylabel('Euclidean distances')
+plt.show()
+
+# Fit hierarchal class model using 5 clusters 
+from sklearn.cluster import AgglomerativeClustering
+hc = AgglomerativeClustering(n_clusters = 5, affinity = 'euclidean', linkage = 'ward')
+y_hc = hc.fit_predict(X)  # fit and predict model
+
+plt.scatter(X[y_hc == 0, 0], X[y_hc == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(X[y_hc == 1, 0], X[y_hc == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(X[y_hc == 2, 0], X[y_hc == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.scatter(X[y_hc == 3, 0], X[y_hc == 3, 1], s = 100, c = 'cyan', label = 'Cluster 4')
+plt.scatter(X[y_hc == 4, 0], X[y_hc == 4, 1], s = 100, c = 'magenta', label = 'Cluster 5')
+plt.title('Clusters of customers')
+plt.xlabel('Annual Income (k$)')
+plt.ylabel('Spending Score (1-100)')
+plt.legend()
+plt.show()
+```
+
+**Association Rule Learning (ARL)**  
+
+## Apriori (ARL)
+People who bought also bought ..  Can you prove the result by using some prior knowledge  
+1. set a minimum support and confidence
+2. take all the subsets in transactions having higher support than minimum support
+3. take all the rules of these subsets having higher confidence than minimum confidence
+4. sort the rules by decreasing lift (confidence/support)
+
+Association rules inside an ensemble of transactions  
+```python
+dataset = pd.read_csv('Market_Basket_Optimisation.csv', header = None)
+transactions = []
+for i in range(0, 7501):
+  transactions.append([str(dataset.values[i,j]) for j in range(0, 20)])
+
+from apyori import apriori
+rules = apriori(transactions = transactions, min_support = 0.003, min_confidence = 0.2, min_lift = 3, min_length = 2, max_length = 2)
+
+results = list(rules)
+
+def inspect(results):
+    lhs         = [tuple(result[2][0][0])[0] for result in results]
+    rhs         = [tuple(result[2][0][1])[0] for result in results]
+    supports    = [result[1] for result in results]
+    confidences = [result[2][0][2] for result in results]
+    lifts       = [result[2][0][3] for result in results]
+    return list(zip(lhs, rhs, supports, confidences, lifts))
+resultsinDataFrame = pd.DataFrame(inspect(results), columns = ['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
+
+resultsinDataFrame
+
+resultsinDataFrame.nlargest(n = 10, columns = 'Lift')
+
+```
+
+## Eclat (ARL)  
+
+
+**Reinforcement Learning**  
+
+## Upper Confidence Bound (UCB)
+
+## Thompson Sampling  
 
