@@ -7,9 +7,7 @@ nav: false
 toc: true
 ---
 # STEM Hardware
-Hardware is the physical equipment you work with. Examples are monitors, memory cards, single board computers, microcontrollers, and various circuit components.
-
-Below are the hardware that I've gravitated towards in my projects. There are many other SBC options and opinions on which H/W is best but I won't try and sort that out. My criteria is fairly straight forward, affordable and easy to use with a large on-line community to research projects and tutorials.
+Below is the hardware that I've gravitated towards in my projects. There are many other SBC options and opinions on which H/W is best and it can be a great learning experience to compare them. For example I compared ADC response time of different raspberry pi vs esp32 microcontroller [ADC comparison](https://github.com/straut12/Joystick-MCP3008-RPi-ESP32-Compare).  
 
 I've listed five categories of hardware below. Not all the hardware is required for any given project. Depending on the complexity of the project it may require only a couple or multiple parts.
 
@@ -27,17 +25,17 @@ Raspberry Pi is a SBC (single board computer) and contains a microprocessor, RAM
         {% include figure.html path="assets/img/hardware/esp32.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
-esp32 is a microcontroller. The microcontroller is the 'analog' brains of the projects. If you're wanting to measure varying temperature, voltage, power usage, etc a microcontroller like ESP32 will be more efficient than a Raspberry Pi. You load one 'main.py' program and the ESP32 will run that program when powered on. You'll need a laptop or RaspberryPi to write the programs and load them on to the ESP32. It has built-in wifi so once you're program is running you can send/receive data wireless (ie MQTT).  
+esp32 is a microcontroller. The microcontroller is the 'analog' brains of the projects. If you're wanting to measure varying temperature, voltage, power usage, etc a microcontroller like ESP32 will be more efficient than a Raspberry Pi. You can use C/C++ or [uPython](https://docs.micropython.org/en/latest/). I focus on uPython since I use Python for other projects and I do not need the small time savings with C/C++. You load one 'main.py' program and the ESP32 will run that program when powered on. You'll need a laptop or RaspberryPi to write the programs and load them on to the ESP32. It has built-in wifi so once you're program is running you can send/receive data over wifi via [MQTT](https://docs.stemjust4u.com/ref/data-analysis/data-collection/).  
 
 # Peripherals
 Keyboard and mouse are straight forward peripherals. Monitors can be an expensive part of the project if you don't already have one. If you have a PC/laptop you can VNC to a Raspberry Pi and work remotely.
 
-If you'll only be working inside the power supply part is less of an issue (you can just use a 5V phone charger for many of the electronics). But if you want to make your project solar powered or portable then the power supply is critical. You'll want to learn how to safely use Lithium Ion (Li-on) batteries. These are common in 18650 size and are common in laptops and cordless power tools.
+If you'll only be working inside the power supply part is less of an issue (you can just use a 5V phone charger for many of the electronics). But if you want to make your project solar powered or portable then the power supply is critical. You'll want to learn how to safely use Lithium Ion (Li-on) batteries. These are common in 18650 size and frequently found in laptops and cordless power tools.
 
 # Sensors and Circuits
-These are external hardware you can to wire to your GPIO pins on the Raspberry Pi and/or ESP32 and see things happen. (You can also build stand alone circuit projects). There are too many parts to list here but some examples are cameras, motion sensors, voltage meter, power meter (by measuring current), buttons and switches. Many of these projects will use discrete parts like transistors and resistors and you'll use a bread board to connect them.
+This is external hardware you can wire to your GPIO pins on the Raspberry Pi and/or ESP32 and interact with the non-digital world. (You can also build stand alone circuit projects). There are too many parts to list here but some examples are cameras, motion sensors, voltage meter, power meter (by measuring current), buttons and switches. Many of these projects will use discrete parts like transistors and resistors and can use a bread board to connect them.
 
-# Measuring Instruments
+# Measuring Instruments (Metrology)
 Instruments are not required to build a project. But they are very useful in understanding how the components work and trouble shooting issues. A voltmeter, oscilloscope, IR temp gun are some examples.
 
 # Useful Terms

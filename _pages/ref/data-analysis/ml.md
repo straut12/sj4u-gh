@@ -52,6 +52,9 @@ from sklearn.svm import SVC         # Support Vector Classification
 from sklearn.naive_bayes import GaussianNB  # Naive Bayes
 from sklearn.tree import DecisionTreeClassifier # Decision tree
 from sklearn.ensemble import RandomForestClassifier # Random forest
+
+# Unsupervised
+from sklearn.cluster import KMeans   # Clustering
 ```
 # Data Pre-Processing  
 
@@ -67,6 +70,7 @@ y = df.iloc[:, -1].values # dependent variable vector. last col
 
 ## Scrub   
 What to do with bad/missing data
+- Plot your data in a scatter plot or box plot to identify outliers. Drill down to the data point and see if you can determine obvious reasons for it being an outlier.  
 - Can simply leave it out if <1%
 - Use imputer module to replace it with average data from that column    
 
@@ -445,8 +449,8 @@ plt.ylabel('Salary')
 plt.show()
 ```  
 
-# Evaluation  
-Residual sum of squares 
+# Evaluation (Regression R²) 
+R² can be used to compare models for model selection.  
 The better the linear fit matches the data in comparison to a simple average your R² value will approach 1 (Sum of Squares for linear regression fit will be close to 0, 1-0=1)
 - residual Ɛᵢ=yᵢ-ýᵢ 
 - sum(yᵢ-ýᵢ)² is minimized  
@@ -461,19 +465,30 @@ The better the linear fit matches the data in comparison to a simple average you
 
 ý=b₀+b₁X₁+b₂X₂+..bₙXₙ  
 
-As you add more features/col (X's) the SStot does not change but the SSres will decrease or stay the same. This is a problem because as you add more columns of data/features your R² will appear to improve even though they may not be relevant or adding value.  
+As you add more features/col (X's) the SStot does not change but the SSres may decrease or stay the same. This is a problem because as you add more columns of data/features your R² may appear to improve even though they may not be relevant or adding value.  
 
-So need to use adjusted R².   
+Could use adjusted R².   
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/adj-r-squared.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
 n - sample size
 p - number of independent variables. as more variables add the R² will actually decrease unless the new variable improves the fit.  
 
+R²adj = 1-(1-R²)*(n-1)/(n-p-1)
+p - number of independent variables  
+n - sample size  
+As more variables added the R² will actually decrease unless the new variable improves the fit.  
+
 ```python
 from sklearn.metrics import r2_score
 r2_score(y_test, y_pred)
+
+# NEED TO CHECK Radj formula below
+1 - ( 1-r2_score(y_test, y_pred) ) * ( len(y_pred) - 1 ) / ( len(y_pred) - X_test.shape[1] - 1 )
 ```  
+
+len(X_test.columns) or X_test.shape[1] for number of values?
+
 
 Run your data through all models and compare R²  
 
@@ -1001,7 +1016,7 @@ plt.show()
 
 ```
 
-# Model Selection    
+# Evaluation (Classification Accuracy)    
 1. Import data/scrub data
 2. Split data into training/test sets
 3. Feature scaling
@@ -1012,20 +1027,119 @@ plt.show()
     - accuracy_score(y_test, y_pred)  
 
 Run your data through all models and compare accuracy  
+Accuracy Rate = Correct/Total  
 
-
-To convert data types when scikit needs int type
+To convert data types when scikit needs int type  
 1. y=y.astype('int') 
 2. y = train_data['Y'].astype('int')
 3. for i,x in enumerate(y_pred):
     y_pred[i]=x.astype('int')
 
-
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/confusion-matrix.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
 
-## Unsupervised Learning  
+Accuracy Paradox can be seen if all data in ý moved from 1 to 0 (pos to neg) the accuracy rate could go up.  
+
+**Cumulative Accuracy Profile (CAP)**  CAP curve analysis  
+- add example  
+- Curve/Area of perfect model (aᵨ) and curve/area of a good model (aᵣ). AR = aᵣ/aᵨ  
+- or look at 50% line on horz axis and look where it crosses the good model and get the value of vert axis there.
+    - 90-100% is too good (over fitting or one of the independent var is a post facto var and should be removed)
+    - 80-90% is very good
+    - 70-80% is good
+    - 60-70% is poor
+    - less 60% is bad
+
+# Unsupervised Learning  
 
 Supervised - you know what to predict
 Unsupervised - you do not know what to predict
+
+**Clustering Model**  
+
+K-means  
+1. Decide how many clusters  
+2. Place a randomly placed centroi
+3. K-Means will assign each of the data points to the closest centroid  
+4. Calculate center of mass, move centroids, do process again
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/kcluster.gif" class="img-fluid rounded z-depth-1" %}
+</div>
+[By Chire - Own work, CC BY-SA 4.0,](https://commons.wikimedia.org/w/index.php?curid=59409335)
+
+K-means++ takes extra steps in placing the initial centroid to avoid Random initialization trap.  Uses weighted random approach below  
+1. first centroid is chosen at random
+2. for each remaining data point compute the distance D to the nearest out of already selected centroids
+3. choose next centroid among remaining data points using weighted random selection, weighted by D^2
+4. Repeat 2-3 until all k centroids have been selected  
+
+**Build clustering models**  
+## K-means Clustering Model
+Most popular  
+Background is that a team wants to understand their customers better and identify patterns.  
+Since it is not known what to predict will create the dependent variable.  Creating it in such a way that each of the values of this future dependent vriable being created are actually the classes of this dependent variable.  
+
+There will not be a y var when importing. And will not split into training/test set since this implies a dependent var containg the real results. Which is not the case in this scenario.  
+
+wcss (within cluster sum of squares) - the sum of the square distances between each observation point of the cluster and its central width  
+
+Will use elbow method to find optimal number of clusters  
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/numclusters.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+
+Code  
+
+```python
+dataset = pd.read_csv('Mall_Customers.csv')
+X = dataset.iloc[:, [3:4]].values   # In tutorial only impored last 2 columns purely for 2D visualisation reasons
+
+# Using the elbow method to find the optimal number of clusters
+# Run the KMeans multiple times with varying number of clusters
+# Using k-means++ to avoid random initialization trap
+from sklearn.cluster import KMeans
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters = i, init = 'k-means++', random_state = 42)
+    kmeans.fit(X)  # Train each one on the dataset with different cluster sizes
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1, 11), wcss)
+plt.title('The Elbow Method')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.show()
+
+# Use fit_predict method to train the K-means model on the dataset and return/create Y dependent y_kmeans
+# chose 5 clusters based on elbow method
+kmeans = KMeans(n_clusters = 5, init = 'k-means++', random_state = 42)
+y_kmeans = kmeans.fit_predict(X)
+print(y_kmeans) # Don't forget starts at 0. So value of 0 is the 1st cluster, etc
+
+# Visualize the 5 clusters
+# Call the X table where each row matches the cluster (y_kmeans == 0,1,2..) 
+# and then use col 0 for X and col 1 for Y (remember only used last 2 col of table)
+plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.scatter(X[y_kmeans == 3, 0], X[y_kmeans == 3, 1], s = 100, c = 'cyan', label = 'Cluster 4')
+plt.scatter(X[y_kmeans == 4, 0], X[y_kmeans == 4, 1], s = 100, c = 'magenta', label = 'Cluster 5')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'yellow', label = 'Centroids')
+plt.title('Clusters of customers')
+plt.xlabel('Annual Income (k$)')
+plt.ylabel('Spending Score (1-100)')
+plt.legend()
+plt.show()
+```  
+
+How to use the data  
+Could target high income/high spending cluster with new deals    
+Brainstorm ways of reaching high income/low spending cluster  
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/cluster-plot.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+
+
+## Hierarchical Clustering Model 
+

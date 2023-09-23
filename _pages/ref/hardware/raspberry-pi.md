@@ -55,10 +55,10 @@ See [Monitor](../../../ref/hardware/monitor-setup/) link for more details
 * There are other power options (ie thru the pins, POE) but become more involved  
 * The RPi0-3 can be powered with a decent 5.1V and 2-2.5A (>10W) power supply (phone charger, battery, etc) using micro-USB. Many phone chargers with 2A listed will work fine. However if the voltage on the power supply fluctuates below 5-5.1V you will get a low voltage symbol on the Pi (yellow lightning bolt). Another factor is the charging cord. If using a cheaper/thinner cord that is long (increased resistance) the voltage at the RPi may drop below 5V resulting in the low voltage symbol. Most of my charging bricks/cords work fine but there have been a few that caused problems. (side note - many micro USB cords are power only, do not have data lines. If wanting to transfer data over USB make sure the cord has data lines)
 
-> Power Guide-lines
-RPi0-3 **>10W** (5.1V,2-2.5A)micro-USB  
-RPi4 **>15W** (5.1V,3A)USB-C  
-Watts(Power)=I(current A)xV(voltage)  
+Power Guide-lines  
+- RPi0-3 **>10W** (5.1V,2-2.5A)micro-USB  
+- RPi4 **>15W** (5.1V,3A)USB-C  
+- Watts(Power)=I(current A)xV(voltage)  
 
 ## Sound
 * The Pi uses PWM or PCM hardware for sound.
