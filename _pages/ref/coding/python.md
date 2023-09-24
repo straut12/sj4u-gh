@@ -1006,6 +1006,24 @@ Defining the function
 ```python
 def func(a, b, c=1, d=1)  
     return a + b + c + d
+```   
+
+return vs yield  
+- return is used to exit the function and return a value
+- yield will suspend the execution of the function and return a value. the function can be resumed later by calling it again  
+
+generator is a function that returns an iterator. An iterator is an object that can be used to iterate over a sequence of values.  
+
+example of generator and yield  
+```python
+def my_generator():
+  for i in range(10):
+    yield str(i)
+
+rules = [i for i in my_generator()]
+
+results = list(rules)
+print(results)
 ```
 
 Calling the function  
@@ -1072,6 +1090,15 @@ even = [x for x in range(0,11) if x % 2 ==0] -> [0, 2, 4, 6, 8, 10]
 tempC = [0, 20, 40, 80]
 tempF = [(9/5*temp+32) for temp in tempC]
 oddeven = [x if x%2==0 else 'ODD' for x in range(0,11)]
+
+colors_list = [['blue', 'green', 'yellow'],
+               ['black', 'purple', 'orange'],
+               ['red', 'white', 'brown']
+               ]
+
+new_colors_list = [(y + '_color') for x in colors_list for y in x]
+
+print(new_colors_list)
 ```
 
 enumerate to include a counter. Will come back with tuple but can unpack  

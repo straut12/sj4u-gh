@@ -48,6 +48,21 @@ print(dfsummary)
 table_summary = dbc.Table.from_dataframe(dfsummary, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
 ```  
 
+A Pandas DataFrame is a two-dimensional data structure that can store data of different types. A Pandas Series is a one-dimensional data structure that can only store data of one type.
+
+Feature	    DataFrame	                                    Series
+Data type	Two-dimensional	                                One-dimensional
+Data types	Can store data of different types	            Can only store data of one type
+Index	    Can have an index	                            Must have an index
+Columns	    Can have columns	                            Cannot have columns
+Slicing	    Can be sliced by rows and columns	            Can only be sliced by index
+Iteration	Can be iterated over by rows and columns	    Can only be iterated over by index
+Merging	    Can be merged with other DataFrames	            Cannot be merged with other Series
+Sorting	    Can be sorted by rows and columns	            Cannot be sorted by rows and columns
+Groupby	    Can be grouped by rows and columns	            Cannot be grouped by rows and columns
+Reshaping	Can be reshaped into different data structures  Cannot be reshaped into different data structures
+
+
 # Python In Excel  
 Python in excel allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).  
 <div class="row">

@@ -30,6 +30,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Pre-processing tools
 from sklearn.impute import SimpleImputer        # Scrub data - populate empty cells with ave value of col
 
 from sklearn.compose import ColumnTransformer   # Categorical data tool
@@ -40,12 +41,14 @@ from sklearn.model_selection import train_test_split # Training and Test Sets
 
 from sklearn.preprocessing import StandardScaler  # Scale the training set so data is in the same range
 
+# Regression Models for Continues Real Numbers
 from sklearn.linear_model import LinearRegression   # Single/Multiple linear regression
 from sklearn.preprocessing import PolynomialFeatures # Used for Polynomial linear regression
 from sklearn.svm import SVR                 # Support vector regression
 from sklearn.tree import DecisionTreeRegressor # Decision tree regression
 from sklearn.ensemble import RandomForestRegressor # Random forest
 
+# Classification Models for Categories
 from sklearn.linear_model import LogisticRegression # Logistic regression
 from sklearn.neighbors import KNeighborsClassifier # K nearest neighbor
 from sklearn.svm import SVC         # Support Vector Classification
@@ -53,11 +56,13 @@ from sklearn.naive_bayes import GaussianNB  # Naive Bayes
 from sklearn.tree import DecisionTreeClassifier # Decision tree
 from sklearn.ensemble import RandomForestClassifier # Random forest
                
-# Unsupervised
+# Unsupervised learning algorithms (identify patterns in unlabeled data)
 from sklearn.cluster import KMeans   # K means clustering
 import scipy.cluster.hierarchy as sch  # Hierarchy clustering
 from sklearn.cluster import AgglomerativeClustering
 
+# Association Rule Learning
+from apyori import apriori   # apriori 
 
 ```
 # Data Pre-Processing  
@@ -140,7 +145,7 @@ X_test[:, 3:] = sc.transform(X_test[:, 3:]) # do not create new fit. but apply t
 
 # Modeling (Regression)  
 
-> Linear vs non linear with respect to the class of regression/model refers to the coefficients (b₀, b₁), not the X feature.  Can the model be expressed as a linear combination of coefficients. A non linear model would have b₀/(b₁+X₁) where you can not replace the coefficients with other coefficients to turn the equation into a linear one.  
+> Linear vs non linear with respect to the class of regression/model refers to the coefficients (b₀, b₁), not the X feature.  Can the model be expressed as a linear combination of coefficients. A non linear model would have b₀/(b₁+X₁) where you can not replace the coefficients with other coefficients to solve for X.  
 
 Details on concepts and 5 different methods  
 1. All-in - Have prior knowledge or preparing for Backward Elimination
@@ -1056,9 +1061,14 @@ Accuracy Paradox can be seen if all data in ý moved from 1 to 0 (pos to neg) th
     - less 60% is bad
 
 # Unsupervised Learning  
+Unsupervised learning algorithms (identify patterns in unlabeled data).  The models do not need to be supervised using a training set.  
 
 Supervised - you know what to predict
 Unsupervised - you do not know what to predict
+
+Grouped into two categories  
+1. clustering
+2. association rule learning (ARL)
 
 **Clustering Model**  
 
@@ -1205,44 +1215,191 @@ plt.show()
 
 ## Apriori (ARL)
 People who bought also bought ..  Can you prove the result by using some prior knowledge  
+Support, Confidence, Lift steps  
 1. set a minimum support and confidence
+    - support: the support of A and B is the number of transactions containg A and B divided by total num of transactions
+    - confidence: can start with 0.8 and then lower if not enough rules returned
 2. take all the subsets in transactions having higher support than minimum support
 3. take all the rules of these subsets having higher confidence than minimum confidence
-4. sort the rules by decreasing lift (confidence/support)
+4. sort the rules by decreasing lift
+    - lift: most relevant metric tomeasure the strength of a rule. the quality or relevance of a rule (confidence/support). good value is at least 3. below 3 and rule is not that relevant.  
 
-Association rules inside an ensemble of transactions  
+Lift is the metric for measuring the relevance of an association rule  
+
+Association rules inside an ensemble of transactions. Note since this is association rules there is no training/test set or dependent variable    
 ```python
+!pip install apyori # have to install apyori package
+
 dataset = pd.read_csv('Market_Basket_Optimisation.csv', header = None)
 transactions = []
-for i in range(0, 7501):
+for i in range(0, 7501): # data is rows of transactions so load into a list
   transactions.append([str(dataset.values[i,j]) for j in range(0, 20)])
 
+# Train apriori model on dataset
+"""
+transactions: list of items created above
+min_support: support for each rule. only compute rules with min support value.
+             There were 7501 transactions weekly. 
+             Let's say we only want to consider products that appear in at least 3 transactions/day or 21/weekly.
+             So 21/7501 = ~3%
+min_confidence: started with 0.8 but no rules returned. trial and error showed 0.2 returned decent number of rules
+min_lift:  3 or above indicated a decent rule quality/relevance
+
+Customer wanted scenarios of buy A and get B free. so 1 product on left hand side and 1 product on right hand side. Total of exactly 2.
+min_length: min number of elements you want to have in your rule. left to right
+max_length: max number of elements you want to have in your rule. left to right
+
+If wanted to do flexible scenarios. But BOGO and buy 10 get 1 free. Then min=2 and max=11
+"""
 from apyori import apriori
 rules = apriori(transactions = transactions, min_support = 0.003, min_confidence = 0.2, min_lift = 3, min_length = 2, max_length = 2)
 
-results = list(rules)
+# apriori returns a generator. generator is a function that returns an iterator. An iterator is an object that can be used to iterate over a sequence of values.
+
+results = list(rules) # cast results from apriori to a list
+results # print out
+"""
+[elationRecord(items=frozenset({'chicken', 'light cream'}), support=0.0045, ordered_statistics=[OrderedStatistic(items_base=frozenset({'light cream'}), items_add=frozenset({'chicken'}), confidence=0.290, lift=4.84)]), [...]
+"""
+# If customer buy light cream will have 29% chance of buying chicken (confidencee)
+# The rule containing these 2 products appears in 0.45% of the transactions (support)
+
+
+# Organize the results list into a df
+def inspect(results):                               # step through all items in list
+    lhs         = [tuple(result[2][0][0])[0] for result in results] # 
+    rhs         = [tuple(result[2][0][1])[0] for result in results]
+    supports    = [result[1] for result in results]
+    confidences = [result[2][0][2] for result in results]
+    lifts       = [result[2][0][3] for result in results]
+    return list(zip(lhs, rhs, supports, confidences, lifts)) # takes two or more lists as arguments and returns a list where the elements of the same index in the lists are paired together
+resultsinDataFrame = pd.DataFrame(inspect(results), columns = ['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
+
+# Display results non sorted
+resultsinDataFrame
+
+# Display the results sorted by descending lifts
+resultsinDataFrame.nlargest(n = 10, columns = 'Lift')
+
+"""
+Looking at highest lift indicates people who bought fromage blanc had a 24.5% change of buying honey.
+
+Left Hand Side	    Right Hand Side	Support	    Confidence  Lift
+3	fromage blanc	honey	        0.003333	0.245098	5.164271
+0	light cream	    chicken	        0.004533	0.290598	4.843951
+2	pasta	        escalope	    0.005866	0.372881	4.700812
+8	pasta	        shrimp	        0.005066	0.322034	4.506672
+"""
+
+# To get all items into a single dataframe column
+allTrans = pd.DataFrame({'items':transactions}) # each dataframe row will be a list which can be exploded in next step
+allTrans = allTrans.explode('items').replace('nan', np.nan).dropna()  # replace the nan with NaN and drop them
+
+from matplotlib.ticker import PercentFormatter
+
+itemCounts = allTrans['items'].value_counts() # get counts of the values. this returns a pandas series so convert to df in next step
+itemCounts = itemCounts.to_frame().reset_index() # convert series to df
+
+itemCounts.columns = ['items', 'count']  # rename option was not working so used .columns to oupdate column names
+
+# calculate the cumulative percent of each unique item
+itemCounts['cumperc'] = itemCounts['count'].cumsum()/itemCounts['count'].sum()*100
+print(itemCounts)
+print(itemCounts.columns)
+
+# use nlargest to get the top 10 'count' values
+top10 = itemCounts.nlargest(n=10, columns='count' )
+#top10['items'].value_counts().plot(ax=ax, kind='bar')  # if didn't need top 10 could just plot all counts of items without using nlargest
+#top10.plot(ax=ax, kind='bar')  # some quick plotting for simple bar chart
+
+# to get bar plot with cumulative line chart
+#define aesthetics for plot
+color1 = 'steelblue'
+color2 = 'red'
+line_size = 4
+
+df = top10
+#create basic bar plot
+#plt.rcParams["figure.figsize"] = [7.50, 3.50]
+#plt.rcParams["figure.autolayout"] = True
+fig, ax = plt.subplots()
+ax.bar(df['items'], df['count'], color=color1)
+plt.xticks(rotation=90)
+
+#add cumulative percentage line to plot
+ax2 = ax.twinx()
+ax2.plot(df.index, df['cumperc'], color=color2, marker="D", ms=line_size)
+ax2.yaxis.set_major_formatter(PercentFormatter())
+
+#specify axis colors
+ax.tick_params(axis='y', colors=color1)
+ax2.tick_params(axis='y', colors=color2)
+
+#display Pareto chart
+plt.show()
+
+"""
+plt. subplots() is popular because it gives you an Axes object and allows you to use the Axes interface to define plots.
+fig, axes = plt.subplots(nrows=2, ncols=3)  # default args is 1, 1
+  fig is the figure object
+  axes is a list of axes objects, one for each subplot
+  nrows is the number of rows in the grid
+  ncols is the number of columns in the grid
+
+The line of code fig, ax = plt.subplots() is a shortcut for creating a new figure and a set of subplots. The fig refers to the entire figure or window that contains the plot(s). 
+ The ax refers to the axes, which are the canvas you draw on. 
+ The subplots() method provides a way to plot multiple plots on a single figure. 
+You can use plt.subplots() to make all their subplots at once. It returns the figure and axes as a tuple. For example, fig, ax = plt.subplots(2,1) creates a subplot with 2 rows and 1 column.
+
+"""
+```
+
+## Eclat (ARL)  
+Similar to apriori, if you like A you might like B  
+But instead of lift describing the strength of a rule will only consider support in terms of sets. For A,B,C take transactions containing products A,B,C divided by total num of transactions       
+
+> usually would just use apriori instead of eclat
+
+```python
+# follow apriori instructions
+# just remove confidence and lifts
+# and since there are no rules replace with Product1 and Product2. not considering left vs right hand side
 
 def inspect(results):
     lhs         = [tuple(result[2][0][0])[0] for result in results]
     rhs         = [tuple(result[2][0][1])[0] for result in results]
     supports    = [result[1] for result in results]
-    confidences = [result[2][0][2] for result in results]
-    lifts       = [result[2][0][3] for result in results]
-    return list(zip(lhs, rhs, supports, confidences, lifts))
-resultsinDataFrame = pd.DataFrame(inspect(results), columns = ['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
+    return list(zip(lhs, rhs, supports))
+resultsinDataFrame = pd.DataFrame(inspect(results), columns = ['Product 1', 'Product 2', 'Support'])
 
-resultsinDataFrame
-
-resultsinDataFrame.nlargest(n = 10, columns = 'Lift')
-
+# Display by descending supports
+resultsinDataFrame.nlargest(n = 10, columns = 'Support')
+"""
+    Product 1	    Product 2	    Support
+4	herb & pepper	ground beef	    0.015998
+7	whole wheat pasta	olive oil	0.007999
+2	pasta	        escalope	    0.005866
+1	mushroom cream sauce	escalope	0.005733
+5	tomato sauce	ground beef	    0.005333
+8	pasta	        shrimp	        0.005066
+0	light cream	    chicken	        0.004533
+3	fromage blanc	honey	        0.003333
+"""
 ```
 
-## Eclat (ARL)  
-
-
-**Reinforcement Learning**  
+# Reinforcement Learning  
+Branch of ML moving in direction of AI and robotics. Used to solve interacting problems where the data observed up to time t is considered to decide which action to take at time t + 1. It is also used for Artificial Intelligence when training machines to perform tasks such as walking. Desired outcomes provide the AI with reward, undesired with punishment. Machines learn through trial and error.    
 
 ## Upper Confidence Bound (UCB)
+
+multi-armed bandit problem  
+1. we have D arms. Arms are ads that we display to users each time they connect to a web page
+2. each time a user visits this page, that's a round.
+3. at each round "n", we choose one ad to display.
+4. at each round n, ad i gives reward ri(n) {0,1}: ri(n)=1 if the user clicked on the ad i, 0 if the user didn't
+5. our goal is to maximize the total reward we get over many rounds
+
+
 
 ## Thompson Sampling  
 
