@@ -13,7 +13,7 @@ ML - Subset of AI algorithms which use data to learn and match patterns aka lear
 DL - Subset of ML for more complex tasks. Math heavy.  
 
 **Inference vs prediction**  
-- Prediction - Given X what is Y (geared toward future prediction). Create the best model that can take in all the X features and predict Y with high accuracy (low error). What will my final CD be given this dose on this scanner with this etcher. 
+- Prediction - Predict Y based on X (geared toward future prediction). Create the best model that can take in all the X features and predict Y with high accuracy (low error). What will my final CD be given this dose on this scanner with this etcher. 
     - linear regression, decision trees, support vector machines  
 - Inference is geared toward understanding the relationships and patterns between input and output variables. What impact do tools A, B and process C, D have on the yield.  
     - logistic regression, bayesian  
@@ -32,7 +32,7 @@ General Steps for Regression or Classification
 - Calculate performance metrics
 - Make a verdict
 
-Two types - Regression is when you predict a continuous real value. Classification is predicting a category. Regression models are listed first below and then Classification. 
+Two types - Regression is when you predict a continuous real value. Classification is predicting a category. Regression models are listed first and then Classification. 
 
 Some libraries using [scikit](https://en.wikipedia.org/wiki/Scikit-learn) and [scipy](https://docs.scipy.org/doc/scipy/tutorial/index.html#user-guide) 
 
@@ -68,6 +68,7 @@ from sklearn.tree import DecisionTreeClassifier # Decision tree
 from sklearn.ensemble import RandomForestClassifier # Random forest
                
 # Unsupervised learning algorithms (identify patterns in unlabeled data)
+# Clustering
 from sklearn.cluster import KMeans   # K means clustering
 import scipy.cluster.hierarchy as sch  # Hierarchy clustering
 from sklearn.cluster import AgglomerativeClustering

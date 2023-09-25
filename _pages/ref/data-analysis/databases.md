@@ -7,8 +7,8 @@ nav: false
 toc: true
 ---
 
-# Databases  
-## Influxdb  
+**Databases**  
+# Influxdb  
 Some database options  
 * influxdb (time series for monitoring measurements over time)   
 * mysql (relation based) Can be used to collect a set of measurements over varying conditions.    
@@ -42,7 +42,7 @@ Now install
 ```sudo systemctl start influxdb ```  
 ```journalctl -u influxdb ```  
 
-- unmask allows all/any attempts to start the service
+unmask allows all/any attempts to start the service
  
 ​For node-red to pull data you need to enable HTTP authentication.  With HTTP authentication enabled InfluxDB also requires you to create at least one admin user before you can interact with the system. Enter the influx interface by typing influx at a command line and then create an admin user/pswd.  
 ```console
@@ -136,7 +136,7 @@ Update permission
 
 changed folders in /etc/influxdb/influxdb.conf to /home/pi/influxdb (data and meta) along with IP address and under [http] at bottom enable=true for endpoint and bind-address = 8086   
 
-## MariaDB  
+# MariaDB  
 
 Mariadb is based on mysql.  Port 3306
 > Note for remote connection from  excel. 
@@ -255,7 +255,17 @@ or
 mysql> SELECT * FROM mytable limit 10;
 ```
 
-## MS Access
+## SELECT   
+SELECT will extract data FROM a database  
+- Can use DISTINCT after SELECT for distinct values  
+- Can use ORDER BY to sort the data
+
+```console
+SELECT * FROM `esp2nred`.`data` ORDER BY date DESC LIMIT 20;
+```
+WHERE is used to limit the number of rows returned  
+
+# MS Access
 
 Access makes importing data into excel convenient. You can use PowerQuery to import sheets and transform them. You can also modify tables (add col/rows) with append/merge using the gui and drop down menus vs writing a query.
 
