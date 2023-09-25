@@ -1399,7 +1399,63 @@ multi-armed bandit problem
 4. at each round n, ad i gives reward ri(n) {0,1}: ri(n)=1 if the user clicked on the ad i, 0 if the user didn't
 5. our goal is to maximize the total reward we get over many rounds
 
+Confidence Intervals used for  
+1. Differences between population means or proportions
+2. Estimates of variation among groups  
 
+Scenario with ads  
+UCB will select an ad to show to the user and will record if they click yes (1) or no (0)  
+Simulation dataset has 10k users with which ads they would click on  
+Will compare UCB vs Thompson to see which one is fastest at finding the best ad real-time   
+```python
+dataset = pd.read_csv('Ads_CTR_Optimisation.csv')
+
+# Implementing UCB
+import math
+N = 10000   # Can vary this number to see how fast the UCB can find the ad with the highest click rate. (needed more than 500)
+d = 10                          # number of ads
+ads_selected = []
+numbers_of_selections = [0] * d # List of Ni(n)
+sums_of_rewards = [0] * d       # List of Ri(n) Accumulated rewards for each of the ads
+total_reward = 0
+for n in range(0, N):   # Loop through all users n=user
+                        # General concept is to select the ad with the highest/max UCB
+    ad = 0              # for each user start at the first add 
+    max_upper_bound = 0
+    for i in range(0, d):
+        if (numbers_of_selections[i] > 0):  # if ad dealing with has already been selected do Step 2 calcs
+            average_reward = sums_of_rewards[i] / numbers_of_selections[i]        # Step 2 calculation
+            delta_i = math.sqrt(3/2 * math.log(n + 1) / numbers_of_selections[i]) # Step 2 confidence interval
+            upper_bound = average_reward + delta_i                                # Calculate UCB
+        else:
+            upper_bound = 1e400     # Trick to make sure all ads are cycled thru (should occur in first 10 rounds)
+                                    # By setting upper_bound to ~infinity will make sure each ad is cycled thru    
+        if upper_bound > max_upper_bound:   # Check if new max upper bound has been found
+            max_upper_bound = upper_bound   # Step 3
+            ad = i                          # Update ad to reflect this new ad with higher UCB
+    # Update 
+    ads_selected.append(ad) # full list of all the ads selected over the rounds
+    numbers_of_selections[ad] += 1 # increment the number of selections for that ad so far
+    reward = dataset.values[n, ad]  # Access the data set and get the value for the user or n and ad (row/col). 0 or 1
+    sums_of_rewards[ad] = sums_of_rewards[ad] + reward
+    total_reward = total_reward + reward
+
+# Visualize results
+# Should show which ad was getting the highest click rate so the UCB started selecting it more
+# Vary the N value above to see how fast it can still identify the ad with highest click rate (needs more than 500 users)
+plt.hist(ads_selected)  # the sequence of ads that were selected over the rounds. list of 10k elements
+plt.title('Histogram of ads selections')
+plt.xlabel('Ads')
+plt.ylabel('Number of times each ad was selected')
+plt.show()
+```
 
 ## Thompson Sampling  
 
+
+# Stats
+If data is normally distributed then 2sigma rule (standard error) gives a 95% confidence interval.  
+
+> A confidence interval (CI) is the range of values that a population parameter is likely to fall between with a certain degree of confidence. CIs that contain either 95% or 99% of expected observations is common. For example, if an estimated value is 50 and the confidence interval of 80% is ±5%, then there is an 80% probability that the true value is between 45 and 55.  
+
+> Another example. If you construct a confidence interval with a 95% confidence level, you are confident that 95 out of 100 times the estimate will fall between the upper and lower values specified by the confidence interval. Your desired confidence level is usually one minus the alpha (α) value you used in your statistical test: Confidence level = 1 − a  So if you use an alpha value of p < 0.05 for statistical significance, then your confidence level would be 1 − 0.05 = 0.95, or 95%.  
