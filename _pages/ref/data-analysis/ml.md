@@ -6,6 +6,17 @@ description: Machine Learning
 nav: false
 toc: true
 ---
+AI --> ML --> Deep Learning/Neural Nets  
+
+AI - intelligent machines  
+ML - Subset of AI algorithms which use data to learn and match patterns aka learn by example. Learn an approximate function that can be used to predict the response (dependent variable)   
+DL - Subset of ML for more complex tasks. Math heavy.  
+
+**Inference vs prediction**  
+- Prediction - Given X what is Y (geared toward future prediction). Create the best model that can take in all the X features and predict Y with high accuracy (low error). What will my final CD be given this dose on this scanner with this etcher. 
+    - linear regression, decision trees, support vector machines  
+- Inference is geared toward understanding the relationships and patterns between input and output variables. What impact do tools A, B and process C, D have on the yield.  
+    - logistic regression, bayesian  
 
 **Machine Learning**   
 [Python Machine Learning](https://machine-learning-tutorial-abi.readthedocs.io/en/latest/)  
@@ -13,10 +24,10 @@ toc: true
 Notes from udemy ML A-Z  
 Will be using scikit-learn which is easier to learn/use vs Tensorflow at the expense of being less powerful/flexible.  
 
-General Steps  
+General Steps for Regression or Classification  
 - Data pre-processing
-- Build (Regression or Classification)
-- Train  
+- Build 
+- Train (may be iterative process where you tweak/tune parameters)
 - Make predictions  
 - Calculate performance metrics
 - Make a verdict
@@ -173,7 +184,7 @@ Details on concepts and 5 different methods
 
 > LinearRegression class will iterate thru multiple features to find highest P value  
 
-## Linear Regression
+**Linear Regression**
 ý=b₀+b₁X₁  
 - ý is dependent var (hat refers to a predictor)
 - X₁ is independent var (feature)
@@ -409,7 +420,7 @@ plt.ylabel('Salary')
 plt.show()
 ```  
 
-## Decision Tree Regression
+## Decision Tree/Random Forest Regression
 CART (Classification and Regression Tree)  
 Scaling is not required since predictions from decision tree regression are resulting from successive splits of the data through nodes of the tree and not equations like other models.    
 Decision tree is not ideal for single feature data set. Best for many data cols.  
@@ -433,7 +444,7 @@ plt.ylabel('Salary')
 plt.show()
 ```  
 
-## Random Forest
+**Random Forest**  
 Ensemble. Build a lot of decision trees. Instead of just getting one prediction you get a lot of predictions (500+). Average across the predictions.   
 1. Pick at random K data points from training set
 2. Build the decision tree associated to these K data points
@@ -649,7 +660,7 @@ plt.legend()
 plt.show()
 
 ```
-## Support Vector Machine (SVM)  
+## Support Vector Machine (SVM) Kernel  
 Defines a support vector to separate groups or classes. Differs from traditional ML in that it focuses on observation points that are close to the boundary separating the classes vs focusing on observations that are safe, classic example of each class.  SVMs select a decision boundary which maximizes the distance from the closest data points of all classes. The decision boundary provided by the SVMs can be referred to as the maximum margin hyperplane or the maximum margin classifier and it will search through this margin.  
 
 - SVR can use both linear and non-linear kernels. The kernel you choose will depend on the data complexity.    
@@ -710,7 +721,7 @@ plt.legend()
 plt.show()
 
 ```
-## Kernel SVM  
+**Kernel SVM**  
 Kernel trick - Why? Because taking a non linearly separable data set and mapping it to a higher dimension to get a linearly separable data set. Then invoking the SVM alogrithm, building a decision boundary for the data and projecting all of that back into the original dimensions is computer intensive.
 
 Non linear SVM  
@@ -910,7 +921,7 @@ plt.show()
 ```
 
 When you have more than 2 classes It follows a similar/straight process as it always adds up to 1. If you have 3 classes and classify 1 and it's greater than 50% you can assign that class, but if not you have to calculate for each to assign the classification.
-## Decision Tree Classification  
+## Decision Tree/Random Forest Classification  
 CART - Classification (categories) vs regression (real numbers)  
 
 <div class="col-sm mt-3 mt-md-0">
@@ -967,7 +978,7 @@ plt.legend()
 plt.show()
 ```
 
-## Random Forest Classification  
+**Random Forest Classification**    
 Ensemble methods construct more than one decision tree
 1. Pick a random K data points from the training set
 2. Build a decision tree associated to those data points.
@@ -1063,8 +1074,8 @@ Accuracy Paradox can be seen if all data in ý moved from 1 to 0 (pos to neg) th
 # Unsupervised Learning  
 Unsupervised learning algorithms (identify patterns in unlabeled data).  The models do not need to be supervised using a training set.  
 
-Supervised - you know what to predict
-Unsupervised - you do not know what to predict
+Supervised - you know what to predict  
+Unsupervised - you do not know what to predict  
 
 Grouped into two categories  
 1. clustering
@@ -1391,6 +1402,7 @@ resultsinDataFrame.nlargest(n = 10, columns = 'Support')
 Branch of ML moving in direction of AI and robotics. Used to solve interacting problems where the data observed up to time t is considered to decide which action to take at time t + 1. It is also used for Artificial Intelligence when training machines to perform tasks such as walking. Desired outcomes provide the AI with reward, undesired with punishment. Machines learn through trial and error.    
 
 ## Upper Confidence Bound (UCB)
+UCB is a deterministic algorith. Choose the path with the highest upper confidence bound.  
 
 multi-armed bandit problem  
 1. we have D arms. Arms are ads that we display to users each time they connect to a web page
@@ -1413,14 +1425,14 @@ dataset = pd.read_csv('Ads_CTR_Optimisation.csv')
 # Implementing UCB
 import math
 N = 10000   # Can vary this number to see how fast the UCB can find the ad with the highest click rate. (needed more than 500)
-d = 10                          # number of ads
-ads_selected = []
+d = 10     # 10 different designed ads. Important assumption there is a fixed conversin rate
+ads_selected = []  # Will populate over the rounds which one was selected. At the end will contain all the different ads selected at each round. 
 numbers_of_selections = [0] * d # List of Ni(n)
 sums_of_rewards = [0] * d       # List of Ri(n) Accumulated rewards for each of the ads
 total_reward = 0
 for n in range(0, N):   # Loop through all users n=user
-                        # General concept is to select the ad with the highest/max UCB
-    ad = 0              # for each user start at the first add 
+                        # General concept is to select the ad with the highest conversion rate/max UCB
+    ad = 0              
     max_upper_bound = 0
     for i in range(0, d):
         if (numbers_of_selections[i] > 0):  # if ad dealing with has already been selected do Step 2 calcs
@@ -1428,8 +1440,8 @@ for n in range(0, N):   # Loop through all users n=user
             delta_i = math.sqrt(3/2 * math.log(n + 1) / numbers_of_selections[i]) # Step 2 confidence interval
             upper_bound = average_reward + delta_i                                # Calculate UCB
         else:
-            upper_bound = 1e400     # Trick to make sure all ads are cycled thru (should occur in first 10 rounds)
-                                    # By setting upper_bound to ~infinity will make sure each ad is cycled thru    
+            upper_bound = 1e400  # By setting upper_bound to ~infinity will make sure each ad is cycled thru    
+                                        # Trick to make sure all ads are cycled thru (should occur in first 10 rounds)
         if upper_bound > max_upper_bound:   # Check if new max upper bound has been found
             max_upper_bound = upper_bound   # Step 3
             ad = i                          # Update ad to reflect this new ad with higher UCB
@@ -1451,6 +1463,66 @@ plt.show()
 ```
 
 ## Thompson Sampling  
+Thompson sampling is a probabilistic algorithm. Consists of choosing the action that maximizes the expected reward with respect to a randomly drawn belief. But not trying to guess the distributions. Trying to mathematically explain what we think is going on.   
+
+- Create a hypothetical point that we think will be our expected return
+- Take action that will trigger the distribution to spit out a real world value
+- Adjust the models perception to incorporat the new value
+- Will trigger more refining on the best option
+
+```python
+dataset = pd.read_csv('Ads_CTR_Optimisation.csv')
+
+import random
+N = 10000   # Can vary this number to see how fast
+d = 10     # 10 different designed ads. Important assumption there is a fixed conversin rate
+ads_selected = [] # Will populate over the rounds which one was selected. At the end will contain all the different ads selected at each round. 
+numbers_of_rewards_1 = [0] * d # Ni^1(n) number of times the ad i got reward 1, up to round N
+numbers_of_rewards_0 = [0] * d # Ni^0(n) number of times the ad i got reward 0, up to round N
+total_reward = 0
+for n in range(0, N):  # General concept is to select the ad with the highest conversion rate
+    ad = 0
+    max_random = 0
+    for i in range(0, d):   # betavariate will return random draw from the beta distribution 0-1
+        random_beta = random.betavariate(numbers_of_rewards_1[i] + 1, numbers_of_rewards_0[i] + 1)
+        if random_beta > max_random:
+            max_random = random_beta
+            ad = i
+    ads_selected.append(ad)
+    reward = dataset.values[n, ad]
+    if reward == 1:
+        numbers_of_rewards_1[ad] = numbers_of_rewards_1[ad] + 1
+    else:
+        numbers_of_rewards_0[ad] = numbers_of_rewards_0[ad] + 1
+    total_reward = total_reward + reward
+
+# Can find the optimal ad (highest conversion rate) in less than 500 rounds. UCB required 500 or more.
+
+# Visualize
+plt.hist(ads_selected)
+plt.title('Histogram of ads selections')
+plt.xlabel('Ads')
+plt.ylabel('Number of times each ad was selected')
+plt.show()
+
+```
+
+
+**UCB vs Thompson Sampling**  
+**UCB**  
+- deterministic algorithm. When you get a value you look at the upper confidence bound and continue with the one that is highest. There's no randomness in the algorithm itself.  
+- If you rerun an iteration in the UCB algorithm after receiving the previous value it will always give the same result.  
+- Requires update at every round. Can not proceed to next round until you incorporate the value      
+
+**Thompson**  
+- probabilistic alogrithm. In the algorithim itself it has distributions which represent where we think the actual expected returns are. Therefore every time we iterate we generate random values from those distributions. 
+- If you rerun an iteration after receiving the previous value it will always be different becaues we're sampling from the distributions which characterize our perception of the world.  
+- Does not require update each round. Can accommodate delayed feedback. Can update in a batch manner. If for some reason you will not know the results until 100 rounds later you can still run the algorithm because you'll get a new set of hypothetical results generated in a probabilistic manner (even without updating your perception of the world).    
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/UCBvsThompson.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+[Machine Learning A-Z](https://www.udemy.com/share/101Wci3@fIpzabLTJizOhW5Z7f5nTLyiMam_1ctmhB0flC5at1HREDxUsdwvIF8jj1lHXAOa/)
 
 
 # Stats
