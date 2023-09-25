@@ -176,6 +176,13 @@ To see users
 To grant remote access you wild card all db with * and use % to wild card IP addresses  
 ```GRANT ALL PRIVILEGES ON *.* TO 'sj4u'@'192.168.100.%' IDENTIFIED BY 'password' WITH GRANT OPTION;```  
 
+To see grants for a specific user  
+```SHOW GRANTS FOR CURRENT_USER```  
+```SHOW GRANTS FOR 'user'@'localhost'```  
+
+**note** When creating a new database I found I had to still grant privileges to the user for that specific database.  
+
+
 Firewall config
 ```console
 firewall config  
@@ -257,6 +264,7 @@ mysql> SELECT * FROM mytable limit 10;
 
 ## SELECT   
 SELECT will extract data FROM a database  
+- SELECT table.col1, table.col2 ..
 - Can use DISTINCT after SELECT for distinct values  
 - Can use ORDER BY to sort the data
 
@@ -264,6 +272,23 @@ SELECT will extract data FROM a database
 SELECT * FROM `esp2nred`.`data` ORDER BY date DESC LIMIT 20;
 ```
 WHERE is used to limit the number of rows returned  
+ - WHERE humidity > 50 
+ - Can use wildcards
+ - WHERE device LIKE '%esp%'
+
+```console
+SELECT * FROM `esp2nred`.`data` WHERE humidity > 50;
+```
+
+ JOIN is used to combine multiple tables based on a related column between them.  
+ - INNER only returns rows when there is a match between the columns
+ - LEFT returns all rows from left and matching records from right
+ - RIGHT returns all rows from right and matching records from left
+ - FULL returns all matching records from both tables whether the other table matches or not
+
+```console
+SELECT * FROM esp2nred.data INNER JOIN rpi2nred.data ON esp2nred.data.device=rpi2nred.data.device AND esp2nred.data.location=rpi2nred.data.location;
+```
 
 # MS Access
 
