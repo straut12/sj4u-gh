@@ -263,7 +263,7 @@ mysql> SELECT * FROM mytable limit 10;
 ```
 
 ## SELECT   
-SELECT will extract data FROM a database  
+SELECT 'columns to return' FROM a database  
 - SELECT table.col1, table.col2 ..
 - Can use DISTINCT after SELECT for distinct values  
 - Can use ORDER BY to sort the data
@@ -271,8 +271,10 @@ SELECT will extract data FROM a database
 ```console
 SELECT * FROM `esp2nred`.`data` ORDER BY date DESC LIMIT 20;
 ```
-WHERE is used to limit the number of rows returned  
+WHERE is a search condition used to limit the number of rows returned  
+ - WHERE expression OPERATOR expression
  - WHERE humidity > 50 
+ - WHERE device = 'esp32'
  - Can use wildcards
  - WHERE device LIKE '%esp%'
 
@@ -290,6 +292,10 @@ SELECT * FROM `esp2nred`.`data` WHERE humidity > 50;
 SELECT * FROM esp2nred.data INNER JOIN rpi2nred.data ON esp2nred.data.device=rpi2nred.data.device AND esp2nred.data.location=rpi2nred.data.location;
 ```
 
+To update a value in a column. Example below replaces " with a space    
+```console
+UPDATE table SET colA =  REPLACE(colA, '\"', '');
+```
 # MS Access
 
 Access makes importing data into excel convenient. You can use PowerQuery to import sheets and transform them. You can also modify tables (add col/rows) with append/merge using the gui and drop down menus vs writing a query.

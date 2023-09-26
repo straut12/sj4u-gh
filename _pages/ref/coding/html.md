@@ -262,7 +262,14 @@ Example
 <html>
 <head>
   <style>
-     
+     <table style="width:100%">
+      <tr>
+        <th>Index</th> 
+      </tr>
+      <tr ng-repeat="x in msg.payload | limitTo:15">
+        <td><center>{{$index}}</center></td>
+      </tr>
+    </table>
   </style>
 </head>
 ```
