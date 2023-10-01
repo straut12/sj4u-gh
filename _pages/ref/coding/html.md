@@ -11,8 +11,8 @@ html (or markdown) formatted pages are useful for sharing information/data becau
 
 * [html](https://www.w3schools.com/html/html_intro.asp) (HyperText Markup Language) is the language web browsers use to output a web page. You can use a simple notepad editor to type html formatted text into a txt document and then open it directly with a web browser. [geekforgeeks](https://ide.geeksforgeeks.org/tryit.php) also have a handy app. When viewing a web page using a browser, right click, select 'view page source', and you'll see the html for that page. Tags or angle brackets, often in pairs (opening/closing) are used to write the html elements (<body></body>).  Some common tools used to improve the appearance and usefulness of web pages is cascading style sheets (css), JavaScript, and PHP.  
 * [css](https://en.wikipedia.org/wiki/CSS) is a styling tool. It gives the ability to put all of your formatting elements, colors, fonts, tables, menus, etc in one location. This helps with organization and allows you to make global changes easily.  
-* [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side or front end (compared to the back end or server side using java, python, ruby, etc).  
-* [PHP](https://www.php.net/manual/en/intro-whatis.php) is also a scripting language that supports databases and runs on the server side.
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side or front end (compared to the back end or server side using java, python, ruby, etc).  However Node.js is a run-time environment that will allow javascript to run on server side. 
+* [PHP](https://www.php.net/manual/en/intro-whatis.php) is also a scripting language that supports databases and runs on the server side. PHP is older and javascript(Node.js) or Python(flask) are server/back-end frameworks that are other alternatives.
 
 > [codepen.io](https://codepen.io/) is a great way to test html, css, js code. You get see your code for all three in separate window panes and there are live updates as you type.
 
@@ -82,10 +82,16 @@ header {
   color: white;
 }
 
+.flex-container{ /* Use flex container to make heights the same for blocks*/
+    width: 100%;
+    min-height: 300px;          
+    display: flex; /* Standard syntax */
+}
+
 /* Create two columns/boxes that floats next to each other */
 nav {
   float: left;
-  width: 30%;
+  width: 20%;
   background: #ccc;
   padding: 20px;
 }
@@ -99,7 +105,7 @@ nav ul {
 article {
   float: left;
   padding: 20px;
-  width: 70%;
+  width: 80%;
   background-color: #f1f1f1;
 }
 
@@ -128,6 +134,14 @@ footer {
   color: white;
 }
 
+table {
+  width: 60%;
+}
+
+td, th {
+  text-align: center;
+}
+
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
   nav, article {
@@ -146,7 +160,7 @@ footer {
   <h2> This is a header </h2>
 </header>
 
-<section>
+<section class="flex-container">
   <nav>
     <ul>
       <li><a href="#">Nav1</a></li>
@@ -158,7 +172,24 @@ footer {
   <article>
     <h1>Article header</h1>
     <p>This is content for the article. It should be independent and self contained.</p>
-
+    <table>
+        <tr>
+          <th>Index</th> 
+          <th>Time</th>
+          <th>Device</th>
+          <th>Location</th> 
+          <th>Humidity</th>
+          <th>Temp</th>
+        </tr>
+        <tr ng-repeat="x in msg.payload | limitTo:15">
+          <td>1</td>
+          <td>05:10</td>
+          <td>>esp32</td>
+          <td>BldgA</td> 
+          <td>53%</td>
+          <td>78.3</td>
+        </tr>
+      </table>
   </article>
 </section>
 
@@ -189,6 +220,8 @@ Block vs inline display types
 * block - takes up full width available. Examples are paragraph (p) and division (div)  
 * inline - does not start a new line. Example is span  
 
+* div - used to group similar sets of content together or apply the same CSS style or scripting effect to other document elements.  
+
 Pre tag: <pre> preserves space and line breaks. Useful to put code examples inside a pre to keep the text displayed exactly as written.  
 Paragraph: <p></p>  
 Headers: <h1></h1>  
@@ -204,12 +237,14 @@ id:  an attribute that assigns a name to an element. Must be unique in the docum
 ```html
 <p id="unique-para1">This has a unique id</p>
 ```
+## Class  
 class: an attribute assigning a class name or set of class names to an element. All html elements can have a class attribute. Used with css to identify elements for different styling. Can be used by multiple elements and often used by JavaScripts to access and modify elements with that class name. Can have multiple different classes in the same attribute so long as separated by a space.  
 
 ```html
 <h1 class="header-example"> A Header Title </h1>
 ```
-JavaScript example  
+
+JavaScript example with class  
 ```html
 <script> function myFunction(){ function contents}
 </script>
@@ -235,6 +270,14 @@ x[i].style.display = "none";
 </script>
 ```
 
+# Table  
+Elements of a table  
+- tr: row
+- th: header
+- td: table cell
+- other elements, caption, colgroup, thead, tfoot, tbody  
+
+
 **More html**  
 ```html
 <section> Similar to a div </section>
@@ -253,28 +296,25 @@ selector {
    property 1: value;  (declarations)
    color:black;
 }
-```
-The css (styling language) can be detailed in the html or placed in a separate file and referenced in <head>  
+```  
 
-When detailed in-line it is in <style></style>. (not recommended)  
-Example  
+The css (styling language) can be detailed in the html (multiple methods) or placed in a separate file and referenced in <head>  
+
+1. Inline: use the style attribute inside the element  
 ```html
-<html>
-<head>
-  <style>
-     <table style="width:100%">
-      <tr>
-        <th>Index</th> 
-      </tr>
-      <tr ng-repeat="x in msg.payload | limitTo:15">
-        <td><center>{{$index}}</center></td>
-      </tr>
-    </table>
-  </style>
-</head>
+<table style="width:100%; border: 1px solid"> ..define table.. </table>)
+2. Internal: define it in the head section using  
+```html
+<style>
+table, th, td {
+  width:100%;
+  border: 1px solid;
+  border-collapse: collapse;
+}
+</style>
 ```
+3. External: use <link> element and rel="stylesheet" to link to an external css file (preferred)  
 
-When placed in a separate file it will be referenced by the link  
 Example  
 ```html
 <html>
@@ -283,7 +323,8 @@ Example
 </head>
 ```
 
-And then a file called "my-formatting.css" (in the same dir) contains styling for the "pre" tag (preformatted text)  
+And then a file called "my-formatting.css" (in the same dir) contains styling  
+Example for the "pre" tag (preformatted text)  
 ```html
 pre {
   background-color: #bababa;
@@ -298,6 +339,12 @@ Then used like this..
 </code></pre>
 </body></html>
 ```
+If the selector is a class use .class (ie .myclass)  
+If the selector is an element name you call it by the name (ie h1)  
+If using the id attribute use # (ie #box1 for id="box1")  
+If specific class of an element use element.class (ie h1.center)  
+The universal selector/wildcard is *. Selects all HTML elements on the page  
+Can group selectors with commas (ie tr, td)  
 
 Common css selectors are Elements (pre, h1, div, span, a, btn, head), Class, and ID. For css to know which you are using the class uses a . (period) and id uses a #.  
 ```html
@@ -366,9 +413,10 @@ div p {
 Bootstrap is a set of templates, a front-end framework using bits of html/css code, that can help speed up the development of a website. For example instead of writing a set of html/css code to make professional looking buttons for your page you can use bootstrap buttons already created.  
 
 # JavaScript
-JavaScript is called in the script tags  
+JavaScript is called in the script tags. It can go inside or outside the body of the html, built-in, or in a separate file.  
 
-JavaScript can be called inside html multiple ways  
+If it is inside the body, it will be executed when the document is loaded. If it is outside the body, it will be executed when the user interacts with the document.    
+  
 Placed inline using \<script>  
 ```html
 <body>
@@ -424,7 +472,36 @@ Button example with multiple actions
 ```
 
 # PHP
+PHP is an older scripting language that runs on the server side. You can install a php server extension in vs code and execute .php files. Make sure to create your project in a folder and open the folder instead of opening an individual file (otherwise you'll get 404 file not found error). Once you install the php server extension and create a .php file you can start the server and view the page in a browser.  
 
+To insert php in your html just use the php tags. Example  
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>This web page includes PHP</h1>
+
+<?php
+$txt = "Hello world!";
+$x = 5;
+$y = 10.5;
+
+echo $txt;
+?>
+
+<p>
+    Some more text
+</p>
+
+<?php
+echo "Some math ";
+echo $x + $y;
+?>
+
+</body>
+</html>
+```
 # PythonAnywhere
 
 Pythonanywhere makes it easy to upload an interactive dash to the web. It has a web terminal that you can use to git clone your project to the pythonanywhere server and then deploy it and view the dash charts on a web page. It is free up to 512MB. I used 93MB (18%) after installing some base packages and adding one small project.  
