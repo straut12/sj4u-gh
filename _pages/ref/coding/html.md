@@ -35,7 +35,7 @@ For me an important advantage of this option is I still have all my markdown fil
 > You can install a web server (ie [Apache](https://ubuntu.com/server/docs/web-servers-apache) or [Nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)) on your PC/RPi and host the html files you create. This allows you to access your html files from a browser with any device on your network. Firefox/Chrome also have extensions to directly open markdown files if you want to skip the markdown-to-html conversion process. 
 
 # html
-Some html building blocks  
+Some html components  
 * <> are used for tags and their attributes
 * paired has an opening and closing brackets. 
 * The opening bracket can contain an attribute field(s)  
@@ -270,13 +270,62 @@ x[i].style.display = "none";
 </script>
 ```
 
-# Table  
+## Table  
 Elements of a table  
 - tr: row
 - th: header
 - td: table cell
 - other elements, caption, colgroup, thead, tfoot, tbody  
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  width: auto;
+  border-collapse: collapse;
+  overflow: auto;
+  height:100px;
+  display:block; /* block level start on new line and take up as much horz space as can*/
+}
+
+th, td {
+  padding: 5px;
+}
+</style>
+<title>Scrollable Table</title>
+</head>
+<body>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>25</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>27</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <td>Peter Jones</td>
+      <td>30</td>
+      <td>Male</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
+```
 
 **More html**  
 ```html
@@ -473,6 +522,11 @@ Button example with multiple actions
 
 # PHP
 PHP is an older scripting language that runs on the server side. You can install a php server extension in vs code and execute .php files. Make sure to create your project in a folder and open the folder instead of opening an individual file (otherwise you'll get 404 file not found error). Once you install the php server extension and create a .php file you can start the server and view the page in a browser.  
+
+1. Install php server in vs code
+2. Create folder with .php file (ie index.php) and open the folder
+3. Use php tags for scripting
+4. Start the php server and go to the web page
 
 To insert php in your html just use the php tags. Example  
 ```html
