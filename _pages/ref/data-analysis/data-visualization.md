@@ -62,6 +62,23 @@ Sorting	    Can be sorted by rows and columns	            Cannot be sorted by ro
 Groupby	    Can be grouped by rows and columns	            Cannot be grouped by rows and columns
 Reshaping	Can be reshaped into different data structures  Cannot be reshaped into different data structures
 
+# Matplot/Seaborn  
+ 
+Using fig, ax = plt.subplots() creates a figure and set of subplots
+- fig is the window that contains the plot(s). Can be used for adjusting the size of the fig and saving to image file  
+- ax is the axes of the figure. Allows to manipulate the x and y axes.  
+
+Figure level function  
+displot and catplot return a FacetGrid. When columns are added the figure itself will become wider (subplots will have same size and shape). FacetGrid is an object managing one or more subplots that correspond to conditional data subsets with convenient methods for batch-setting of axes attributes.
+
+Seaborn empirical cumulative distribution plot
+```python
+g = sns.displot(df, x="Defects", hue="Tool", kind="ecdf")
+g.set(xlim=(0,50),ylim=(0,1))
+plt.title("Defects by Track")
+plt.grid(g)
+plt.show(g)
+```
 
 # Python In Excel  
 Python in excel allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).  

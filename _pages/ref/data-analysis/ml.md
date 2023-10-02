@@ -114,7 +114,11 @@ Example below using 'encoder' transformation with OneHotEncoder class on column 
 # Remember toupdate the 3rd arg with the column to do OneHotEncoding on
 ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [0])], remainder='passthrough')
 X = np.array(ct.fit_transform(X))  # does fit and transform at same time. Must keep X as numpy array
+```
+Nominal scale variables are labeled with no specific order. Ordinal scale the variables are in a specific order (ie, low income, mid income, high income or less than 50, 50-100, over 100 or dislike, neutral, like etc)  
 
+Use label encoder to convert yes/no to 0/1  
+```python
 # For single vector, dependent variable, use label encoder to convert yes/no to 0/1 (binary)
 le = LabelEncoder()
 y = le.fit_transform(y)  # does not have to be numpy array
@@ -515,6 +519,11 @@ Run your data through all models and compare R²
 
 # Modeling (Classification)
 Classification is a ML method to identify the category of new observations based on training data.  
+- **Logistic Regression** predicts binary outcome (pass/fail)
+- **K-NN** is pattern recognition algorithm that uses training datasets to find the k closest relatives in future examples.
+- **SVM kernel** is multidimensional. Assigns a hyperplane that best separates the features. 
+- **Naive Bayes** calculates the possibility of whether a data point belongs within a certain category. 
+- **Random Forest/Decision Tree** - supervised learning algorithm that works like a flow chart. Separates data points into two similar categories at a time from the trunk to branches to leaves. Random forest averages the decision trees.
 
 ## Logistic Regression
 Logistic Regression will give a probability. Can split into two categories >50% or < 50% and get a binary 0,1 output.  
