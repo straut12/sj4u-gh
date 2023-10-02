@@ -989,13 +989,129 @@ logger.debug('logger debug')
 
 # Cheat sheet
 
+Data types  
+- int
+- float
+- str
+- list (ordered sequence of objects)
+    - C++ std::vector
+    - JavaScript: Array
+    - Ruby: Array
+    approximated
+    - HTML: can use js array
+    - PHP: array[], key is optional
+- dict (unordered key:value pairs)
+    - C++ no built-in dict type
+    - C# Dictionary
+    - JavaScript: Object
+    - Ruby: Hash
+    - Java: Map
+    approximated
+    - PHP: array[]
+
+
+## Lists and Dictionaries  
+```python
+dictA = {}  # initialized empty
+dictA['car'] = 'ford'
+listA = []  # initialized empty
+listA.append('red') # since started empty need to use .append to assign a value
+  # also .append would be required to keep adding more items to the list
+  # But can change the value assignment with []
+listA[0]='blue'
+
+# Can also initialize multiple items in a list during declaration
+channels = 4
+list = [0]*channels
+
+```  
+
+2D list  
+```python
+list2D = [[]] # first list is initialized with a 2nd list
+              # note 2nd list is empty and would require .append to assign a value
+# or
+list2D = [[0]] # both lists are initialized with objects and can be assigned using [] 
+
+list2D[0][0]=1  # [[1]]
+list2D.append([2,3])  # [[1], [2, 3]]
+
+list2D[0] = [0,1]    # [[0, 1]]
+list2D.append([2,3]) # [[0, 1], [2, 3]]
+list2D[0][1] = 4     # [[0, 4], [2, 3]]
+```
+
+Check if an item exists in a list  
+```python
+if x in listx:
+```  
+
+Iterate through items in a list
+```python
+listx = [0]*5
+
+for x in listx:
+    print(x)
+```  
+
+List comprehension + logic  
+```python
+tempC = [0, 20, 40, 80]
+tempF = [(9/5*temp+32) for temp in tempC] # [32.0, 68.0, 104.0, 176.0]
+
+oddeven = ['EVEN' if x%2==0 else 'ODD' for x in range(0,11)] # ['EVEN', 'ODD', 'EVEN',..]
+```
+
+Dictionary and avoiding/handling errors
+```python
+dict = {}
+dict['a'] = 'alligator'
+dict['b'] = 'boxer'
+dict['c'] = 'cat'
+
+print(dict) # {'a': 'alligator', 'b': 'boxer', 'c': 'cat'}
+
+print(dict['a'])    # Simple lookup, returns 'alligator'
+dict['a'] = 6       # Put new key/value into dict
+'a' in dict         # True
+## print(dict['z'])                  # Will throw a KeyError
+if 'z' in dict: print(dict['z'])     # Avoids KeyError
+print(dict.get('z'))  # Prints 'None' instead of throwing a KeyError
+```
+
+Check for a specific key or value in a dict  
+```python
+testdict = {'akey':123}
+123 in testdict.values()
+'akey' in testdict.keys()
+```
+
+Check if key exists in a dictionary  
+```python
+if dict.get(key) == None:
+```
+
+Check if dict is empty  
+```python
+bool(dict)
+```
+
+list() function will create a list object.  
+```python
+str='hello'
+list(str) = ['h', 'e', 'l', 'l', 'o']
+dict = {'alpha': 1, 'beta': 2, 'gamma': 3, 'delta':4}
+list(dict) = ['alpha', 'beta', 'gamma', 'delta'] # <-return the keys as a list
+*dict = alpha beta gamma delta    # <- will unpack the keys
+```
+
 : is arrange. If now lower, upper then will select all [:]
 Python includes the lower bound but excludes the upper bound.
 So [:-1] starts at 0 but does not includes the last.
 to select first 2 row/col use [0:2, 0:2]
 to select last 2 row/col use [-2:, -2:]
 
-Functions and Arguments  
+## Functions and Arguments  
 
 Functions can return a value or return nothing (void function). A function that is meant to perform an action could be called a procedure. 
 Passing variable number of arguments in a function. Terminology changes when referring to definition vs call of the function. 
@@ -1044,15 +1160,18 @@ Positional is still required too. Argument 'a' is missing below
 The * can be used to force an argument to be passed by keyword-only.  
 **Any argument after * must be passed using a keyword.**  
 ```python
-def func(a, b, *, c=1, d=1)
+def func(a, b, *, c=1, d=1):
 ```
 a,b are still positional. c,d must now be passed using keywords
 * **func(1, 1, 1, 1)** Using four positionals doesn't work now. TypeError: takes 2 positional arguments but 4 were given
 * **func(1, 1, d=1, c=1)** Called using positionals and keywords (keyword position doesn't matter)​
 
 ```python
-def func(a, *,  b, c=1, d=1)
+def func(a, *,  b, c=1, d=1):
+    # code here
+    return output
 ```
+
 a is now the only positional. b, c,d must now be passed using keywords (c,d have defaults)  
 * **func(1, 1, c=1, d=1)** Can not pass two positionals. TypeError: takes 1 positional argument but 2 positional arguments (and 2 keyword-only arguments) were given. Keywords could still be used for all four arguments though.  
 * **func(d=1, c=1, b=1, a=1)** Called using keywords, order/position does not matter. c,d were still optional.
@@ -1065,12 +1184,6 @@ a is now positional-only. b is still positional but can use keyword, c,d must us
 * **func(a=1, b=1, c=1, d=1)** Will not work. a is positional-only. TypeError: got some positional-only arguments passed as keyword arguments: 'a'
 * **func(1, b=1, c=1, d=1)** is good.
 
-Lists and Dictionaries  
-initialize list  
-```python
-channels = 4
-list = [0]*channels
-```
 
 Generator (ie. range(0,10,2))  
 * Will generate but not store to memory
@@ -1079,7 +1192,8 @@ Generator (ie. range(0,10,2))
 list(range(0,10,2))
 ```
 
-List comprehension.  Flattened for loop. Less code space than doing i = i + 1 or list.append in a loop.    
+## List comprehension  
+Flattened for loop. Less code space than doing i = i + 1 or list.append in a loop.    
 ```python
 sensor = [i for i in range(4)] --> [0, 1, 2, 3]
 # 2-dimensional
@@ -1101,7 +1215,8 @@ new_colors_list = [(y + '_color') for x in colors_list for y in x]
 print(new_colors_list)
 ```
 
-enumerate to include a counter. Will come back with tuple but can unpack  
+## enumerate  
+Enumerate to include a counter. Will come back with tuple but can unpack  
 ```python
 rpiPins = [10, 14, 15, 18]
 for i, pins in enumerate(rpiPins):
@@ -1111,52 +1226,6 @@ for i, pin in enumerate(pins, start = 1): (start is optional, otherwise starts a
    io_pin[i] = Pin(pin)
 ```
 
-Check if an item exists in a list  
-```python
-if x in listx:
-```
-Dictionary and avoiding/handling errors
-```python
-dict = {}
-dict['a'] = 'alligator'
-dict['b'] = 'boxer'
-dict['c'] = 'cat'
-
-print(dict) # {'a': 'alligator', 'b': 'boxer', 'c': 'cat'}
-
-print(dict['a'])    # Simple lookup, returns 'alligator'
-dict['a'] = 6       # Put new key/value into dict
-'a' in dict         # True
-## print(dict['z'])                  # Will throw a KeyError
-if 'z' in dict: print(dict['z'])     # Avoids KeyError
-print(dict.get('z'))  # Prints 'None' instead of throwing a KeyError
-```
-
-Check for a specific key or value in a dict  
-```python
-testdict = {'akey':123}
-123 in testdict.values()
-'akey' in testdict.keys()
-```
-
-Check if key exists in a dictionary  
-```python
-if dict.get(key) == None:
-```
-
-Check if dict is empty  
-```python
-bool(dict)
-```
-
-list() function will create a list object.  
-```python
-str='hello'
-list(str) = ['h', 'e', 'l', 'l', 'o']
-dict = {'alpha': 1, 'beta': 2, 'gamma': 3, 'delta':4}
-list(dict) = ['alpha', 'beta', 'gamma', 'delta'] # <-return the keys as a list
-*dict = alpha beta gamma delta    # <- will unpack the keys
-```
 Unpack a tuple (tuple unpacking)  
 ```python
 alist = [(1,2),(3,4)]
@@ -1217,7 +1286,7 @@ dict = {**dict1, **dict2}  # will combine the two dictionaries
 print(dict)
 ```
 
-Print formatting  
+## Print formatting  
 Formatting (place holder %, format, and f-string)  
 Examples below are format and f string  
 ```python
@@ -1242,7 +1311,7 @@ formatted_data = ["{:.3f}".format(x) for x in data]
 formatted_data = [f"{x:.3f}" for x in data]
 ```
 
-map, filter, lambda  
+## map, filter, lambda  
 map will run a function on each item in a list,object  
 filter is similar but will return items that are true based on the function  
 You first give it the function and then the list,object    
@@ -1292,7 +1361,7 @@ list(map(lambda x: x ** 2, mylist))
 list(filter(lambda n: n % 2 == 0,mylist))
 ```
 
-Inheritance (Child Class)  
+## Inheritance (Child Class)  
 Create a class that inherits the functionality (properties and methods) from another class by passing the parent class as a parameter.  
 ```python
 class Button():

@@ -28,7 +28,7 @@ social: false  # includes social icons at the bottom of the page
 **OTHER EXPERIENCE**  
 * Application Engineer at Brewer Science (Rolla, MO) - Global support for customer issues with DUV BARC. Assisted customers with new product development and implementation of the product.
 * Photo Process Engineer at LSI Logic (Gresham, OR) - Started up LSI Logic first DUV process on DNS 200W with Nikon 201 1st generation scanner.  Performed TEL ACT8/DNS tool evaluations.
-* Photo Process Engineer at TwinStar Semiconductor (Richardson, TX) - 200mm DRAM start up. Transferred 16MB and 64MB DRAM from Hitachi on TEL MarkVIII and Canon i4 i-line steppers.
+* Photo Process Engineer at TwinStar Semiconductor (Richardson, TX) - 200mm DRAM start up. Transferred DRAM technolgies (i-line) from Hitachi and worked on key defect projects to achieve benchmark yields.
 
 **AWARDS**  
 * Member of TI Technical Staff 

@@ -14,6 +14,13 @@ html (or markdown) formatted pages are useful for sharing information/data becau
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript) is a scripting language and can provide a user-interaction element with higher level functions. Typically used on client side or front end (compared to the back end or server side using java, python, ruby, etc).  However Node.js is a run-time environment that will allow javascript to run on server side. 
 * [PHP](https://www.php.net/manual/en/intro-whatis.php) is also a scripting language that supports databases and runs on the server side. PHP is older and javascript(Node.js) or Python(flask) are server/back-end frameworks that are other alternatives.
 
+**Client/FrontEnd** - Runs on the client machine/browser. Interface between user and server to make web pages interactive. Sends requests for data to the server and interacts with local memory.  
+**Server/BackEnd** - Runs on the server machine. Processes the user input, runs operations on the database/files on the server. Structures the web applications.  
+
+|Client/FrontEnd Scripting and Formatting|Server/BackEnd|
+|:--------------------------------------:|:-------------------:|
+|HTML, CSS, JavaScript, React, Angular, TypeScript, AJAX|Python, PHP, Java, Ruby, C++|
+
 > [codepen.io](https://codepen.io/) is a great way to test html, css, js code. You get see your code for all three in separate window panes and there are live updates as you type.
 
 How do you start building html pages?  
