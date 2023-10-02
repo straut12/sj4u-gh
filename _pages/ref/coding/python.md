@@ -1364,17 +1364,21 @@ list(filter(lambda n: n % 2 == 0,mylist))
 ## Inheritance (Child Class)  
 Create a class that inherits the functionality (properties and methods) from another class by passing the parent class as a parameter.  
 ```python
-class Button():
+class halogen():
     def __init__(self, pin):
         self.pin = pin
+        self.type = "halogen"
 
     def on(self):
-        self.pin.value(1)
+        print("light is on. pin= {} and light={}".format(self.pin, self.type))
 
-class Switch(Button):
-    pass
+class led(halogen):
+    def __init__(self, pin, socket):
+        self.pin = pin
+        self.type = "led"
+        self.socket = socket
 
-toggle1 = Switch(3)
+toggle1 = led(4, 6)
 toggle1.on()
 ```
 -----------------------------  
