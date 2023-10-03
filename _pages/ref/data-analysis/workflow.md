@@ -6,6 +6,19 @@ description: Intro to Data Analysis
 nav: false
 toc: true
 ---
+
+General data analysis terms  
+- Data storage - understanding of databases
+- Data Scrubbing 
+- Profiling - characterizing a tool
+- Data Mining
+- Mapping - flow of data
+- Analysis
+- Visualization
+- Monitoring
+
+Passive data collection vs DOE
+
 As you start working on STEM project you'll quickly run into the scenario where you want one device (ie an ESP32 microcontroller) to send data and receive commands from another device (ie a Raspberry Pi or your phone). A simple way to do this is with a MQTT-Node-Red server running on a RPi. You can also add a database (ie Influxdb) to save data for charting in Node-red or Grafana. Data analysis involves measuring, transferring, visualizing, and analyzing the data. Below are tools that I have tried out. There are obviously many more options (ie google data studio) these are just the tools I've found easy to learn and useful.  
 
 1. MQTT - Sends data/commands between devices (remote machines and a server)
