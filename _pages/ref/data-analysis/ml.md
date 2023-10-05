@@ -316,7 +316,7 @@ print(regressor.intercept_)
 
 ## Polynomial Linear Regression  
  ý=b₀+b₁X₁+b₂X₁²+..bₙX₁ⁿ  
- - Now the X feature may be at a higher power. ie X₁²
+ - Now the X feature may be at a higher power. ie X₁²  If degree of 2 then quadratic model, if degree of 3 then cubic model ..  
  - Polynomial linear regression is just a type of multiple linear regression.  It is still a linear model  
 - X portion is not linear .. but Linear regression applies to the coefficients (b1) part. Trying determine the coefficients so can plug in varying X values and determine the output.  
 - The linear/non-linear refers to the coefficients (b) and if the function can be expressed as a linear combination of coefficients.  
