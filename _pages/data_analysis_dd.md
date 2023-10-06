@@ -1,6 +1,6 @@
 ---
 layout: page
-title: data Analysis
+title: Data Analysis
 nav: true
 nav_order: 3
 dropdown: true

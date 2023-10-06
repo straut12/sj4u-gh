@@ -1,25 +1,10 @@
-github_users:
-  - straut12
-
 github_repos:
-  - stemjust4u/ServoKitPCA9685
   - straut12/StepMotor-28BYJ-48-ULN2003-Driver
   - straut12/Joystick-MCP3008-RPi-ESP32-Compare 
   - straut12/rotary-encoder
-  - stemjust4u/ADC
-  - stemjust4u/DCmotor
-  - stemjust4u/hardware-troubleshooting
-  - stemjust4u/dash
-  - stemjust4u/DHT11
-  - stemjust4u/1TEMP
-  - stemjust4u/encoder
-  - stemjust4u/Thermocouple
-  - stemjust4u/speech-to-text
-  - stemjust4u/speech-transcribe-podcast-streamlit 
-  - stemjust4u/ina219
-  - stemjust4u/esp32logging
   - straut12/NTC-thermistor-ADS1115c 
+  - stemjust4u/ServoKitPCA9685
+  - stemjust4u/ADC
+  - stemjust4u/ina219
   - stemjust4u/E-ink 
-  - stemjust4u/esp32all 
-  - stemjust4u/mqtt-RPi-monitor
 
