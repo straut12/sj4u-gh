@@ -2,10 +2,10 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Sean Trautman # the website title (if blank, full name will be used instead)
-first_name: 
+title: ST # the website title (if blank, full name will be used instead)
+first_name: Sean
 middle_name: 
-last_name: 
+last_name: Trautman
 email: s.trautman12@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A collection of STEM related tutorials and references. Built using theme from [*folio](https://github.com/bogoli/-folio) design.
@@ -15,7 +15,7 @@ footer_text: >
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website  # add your own keywords or leave empty
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: logo2.png # ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://straut12.github.io # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site or repo name, e.g. /blog/

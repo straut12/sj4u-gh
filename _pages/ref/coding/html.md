@@ -591,7 +591,7 @@ application = app.server
 
 **Enabling** github pages  
 First decide on the type of GitHub Pages Site to host
-* Repo project site - url will be **http://username.github.io/repo**.  Html pages are kept in the same repo as the project but the website content is usually stored in a separate branch like gh-branch or in a docs folder on the main branch. The _config.yml 'baseurl': repo-name   
+* Repo project site - url will be **http://username.github.io/repo**.  Html pages are kept in the same repo as the project but the website content is usually stored in a separate branch like gh-branch or in a docs folder on the main branch. Do not specify repo-name as baseurl in _config.yml if using CNAME custom domain name.     
 * or User/Organization site - url will be **http://username.github.io** or http://organization.github.io  When creating a repo for a user site the repo should be named **user.github.io**  
 
 Once you know which type you want then enable **GitHub Pages**   
