@@ -587,11 +587,11 @@ application = app.server
 ## Github Pages
 [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) is an option in your github repo that can take markdown or html, css, and JavaScript files in your project and use them to build and publish a website. You have the option of creating from scratch or using pre-existing jekyll gem-based themes that will quickly jump start to a professional looking site with drop-down menus, table of contents, header, footer, etc.  
 
-> For projects the github page will default to your repo name for the url (ie http://username.github.io/repo) but there is also an option to use a custom domain name if you already own one.  
+> For projects the github page will default to your repo name for the url (ie http://username The _config.yml 'base' .github.io/repo) but there is also an option to use a custom domain name if you already own one.  
 
 **Enabling** github pages  
 First decide on the type of GitHub Pages Site to host
-* Repo project site - url will be **http://username.github.io/repo**.  Html pages are kept in the same repo as the project but the website content is usually stored in a separate branch like gh-branch or in a docs folder on the main branch.  
+* Repo project site - url will be **http://username.github.io/repo**.  Html pages are kept in the same repo as the project but the website content is usually stored in a separate branch like gh-branch or in a docs folder on the main branch. The _config.yml 'baseurl': repo-name   
 * or User/Organization site - url will be **http://username.github.io** or http://organization.github.io  When creating a repo for a user site the repo should be named **user.github.io**  
 
 Once you know which type you want then enable **GitHub Pages**   
