@@ -9,6 +9,35 @@ toc: true
 
 A lot of data analysis can be done with simple tools like box plots, paretos, and pivot tables. Notes below are geared toward mathematical equations to help analyse data.  
 
+Examples  
+Defect signature detected on wafers. Second set of wafers show same signature but rotated 90d.    
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/wfr-rotated.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+Data table is a list of process and equipment that wafers were processed or inspected with and if the wafer had a defect signature or not (0=clean, 1=defect at notch, 2=defect at 90d). Analysis results from a few classification  models (logistic regression, naive bayes, decision tree) highlighting the suspect tool.     
+
+**Logistic Regression**  
+Only used binary 0 (clean) or 1 (defect signature) for the label.
+Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process).  Higher coefficient values highlight the suspect tool. However the interaction with the inspection tool is not brought out.        
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/wfr-rotated-lr.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+
+**Decision Tree**   
+Decision tree worked best with only 2 defect classes (0=clean, 1=defective)
+Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process).      
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/wfr-rotated-dt.jpg" class="img-fluid rounded z-depth-1" %}
+</div> 
+
+**Naive Bayes**   
+Naive Bayes works with multiple defect classes (0=clean, 1=defective at notch, 2=defect at 90d)
+Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process). Suspect tools highlighted with log probability approaching 0. Naive Bayes was also able to highlight the Inspection interaction. When wafers were inspected they were returned rotated 90d so the resulting defects at the next process step were rotated 90d.     
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/wfr-rotated-nb.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+
+
 AI --> ML --> Deep Learning/Neural Nets  
 
 AI - intelligent machines  
@@ -128,7 +157,8 @@ y = le.fit_transform(y)  # does not have to be numpy array
 ```
 
 ## Training and Test Sets  
-Separating your data into two sets, training and test, allows you to compare the predicted values from the model to the actual values.  
+Separating your data into two sets, training and test, allows you to compare the predicted values from the model to the actual values and generate accuracy scores, confusion matrix, etc. However if the data is limited and/or just searching for commonalities it is not necessary.    
+
 A starting point is to use 80% for training and the remaining data for testing.    
 
 Will create 4 sets.  
@@ -959,7 +989,7 @@ CART - Classification (categories) vs regression (real numbers)
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
-classifier = DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
+classifier = DecisionTreeClassifier(criterion = 'entropy', random_state = 0) # entropy or gini
 classifier.fit(X_train, y_train)
 
 print(classifier.predict(sc.transform([[30,87000]])))
@@ -1065,8 +1095,8 @@ plt.show()
 
 # Evaluation (Classification Accuracy)    
 1. Import data/scrub data
-2. Split data into training/test sets
-3. Feature scaling
+2. Split data into training/test sets (optional)
+3. Feature scaling (optional)
 4. Train model on training set
 5. Generate confusion matrix 
     - y_pred = classifier.predict(X_test)  
@@ -1554,8 +1584,3 @@ plt.show()
 
 
 # Stats
-If data is normally distributed then 2sigma rule (standard error) gives a 95% confidence interval.  
-
-> A confidence interval (CI) is the range of values that a population parameter is likely to fall between with a certain degree of confidence. CIs that contain either 95% or 99% of expected observations is common. For example, if an estimated value is 50 and the confidence interval of 80% is ±5%, then there is an 80% probability that the true value is between 45 and 55.  
-
-> Another example. If you construct a confidence interval with a 95% confidence level, you are confident that 95 out of 100 times the estimate will fall between the upper and lower values specified by the confidence interval. Your desired confidence level is usually one minus the alpha (α) value you used in your statistical test: Confidence level = 1 − a  So if you use an alpha value of p < 0.05 for statistical significance, then your confidence level would be 1 − 0.05 = 0.95, or 95%.  
