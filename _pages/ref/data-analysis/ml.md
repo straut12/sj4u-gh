@@ -529,6 +529,9 @@ Classification is a ML method to identify the category of new observations based
 Logistic Regression will give a probability. Can split into two categories >50% or < 50% and get a binary 0,1 output.  
 Logistic regression classifier is a linear classifier so the prediction boundary/line will be straight line.  
 
+The features are weighted. And the weights are interpretable  
+Prefer the dependent/data labels are balanced.  ie have equal number of 0's and 1's.  
+
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/logistic-regression.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
@@ -549,6 +552,8 @@ X_test = sc.transform(X_test) # do not create new fit. but apply the scalar tran
 from sklearn.linear_model import LogisticRegression
 classifier = LogisticRegression(random_state = 1)
 classifier.fit(X_train, y_train)
+
+results = classifier.coef_ # To see the coefficients. Higher coeff: 1 Lower coeff: 0  
 
 # Predicting
 print(classifier.predict(sc.transform([[30,87000]]))) # Have to use transform since model had scaled values used for training
@@ -840,6 +845,10 @@ Logistic Regression, KNN, SVM_linear, SVM_kernel, Bayes
 ## Naive Bayes  
 Called Naive because you assume X and Y are not dependent when they may be. But it still works.  
 Bayes is a probabilistic type of classify because you first calculate the probabilities and then based on those probabilities assign the new point a class.
+The dependent/y does not need to be binary. Can have multiple classes.    
+
+Gaussian NB would not work on binary features. For categorical features use the CategoricalNB model  
+
 Bayes Theorem Example  
 
 tool1: 60pph  P(tool1)=60/100=0.6  
@@ -889,7 +898,12 @@ P(X|walks)*P(walks) vs P(X|drives) * P(drives)
 ```python
 from sklearn.naive_bayes import GaussianNB
 classifier = GaussianNB()
+# classifier = CategoricalNB() # if features are categorical
+
 classifier.fit(X_train, y_train)
+
+results = classifier.feature_log_prob_ # NumPy array of the log-probabilities of # each feature for each class. The array is of shape (n_features, n_classes)
+# Each array provides the empirical log probability of categories given the # respective feature and class, P(x_i|y).
 
 print(classifier.predict(sc.transform([[30,87000]])))
 
@@ -1092,6 +1106,7 @@ Grouped into two categories
 2. association rule learning (ARL)
 
 **Clustering Model**  
+Clustering works best with numerical data
 
 K-means  
 1. Decide how many clusters  
