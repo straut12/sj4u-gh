@@ -8,7 +8,13 @@ toc: true
 ---
 
 **Databases**  
-# Influxdb  
+
+Types of databases  
+- Relational db (SQL) has tables with rows/cols to store structured data. The tables are related to each other thru keys and you can join based on certain key/col(s) values.
+- Non-relational may contain less structured data  
+- Time based db (influxdb). Optimized for storing/retrieving time based data.  
+
+# Influxdb (Time Based)  
 Some database options  
 * influxdb (time series for monitoring measurements over time)   
 * mysql (relation based) Can be used to collect a set of measurements over varying conditions.    
@@ -136,7 +142,7 @@ Update permission
 
 changed folders in /etc/influxdb/influxdb.conf to /home/pi/influxdb (data and meta) along with IP address and under [http] at bottom enable=true for endpoint and bind-address = 8086   
 
-# MariaDB  
+# MariaDB (SQL)  
 
 Mariadb is based on mysql.  Port 3306
 > Note for remote connection from  excel. 
@@ -296,7 +302,7 @@ To update a value in a column. Example below replaces " with a space
 ```console
 UPDATE table SET colA =  REPLACE(colA, '\"', '');
 ```
-# MS Access
+# MS Access (SQL)
 
 Access makes importing data into excel convenient. You can use PowerQuery to import sheets and transform them. You can also modify tables (add col/rows) with append/merge using the gui and drop down menus vs writing a query.
 

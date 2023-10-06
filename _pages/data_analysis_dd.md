@@ -22,4 +22,7 @@ children:
     - title: divider
     - title: machine learning
       permalink: /ref/data-analysis/ml/
+    - title: divider
+    - title: statistics
+      permalink: /ref/data-analysis/statistics/
 ---

@@ -7,7 +7,7 @@ nav: false
 toc: true
 ---
 # STEM Hardware
-Below is the hardware that I've gravitated towards in my projects. There are many other SBC options and opinions on which H/W is best and it can be a great learning experience to compare them. For example I compared ADC response time of different raspberry pi vs esp32 microcontroller [ADC comparison](https://github.com/straut12/Joystick-MCP3008-RPi-ESP32-Compare).  
+Below is the hardware that I've gravitated towards in projects. There are many other SBC options and opinions on which H/W is best and it can be a great learning experience to compare them. For example I compared ADC response time of different raspberry pi vs esp32 microcontroller [ADC comparison](https://github.com/straut12/Joystick-MCP3008-RPi-ESP32-Compare).  
 
 I've listed five categories of hardware below. Not all the hardware is required for any given project. Depending on the complexity of the project it may require only a couple or multiple parts.
 

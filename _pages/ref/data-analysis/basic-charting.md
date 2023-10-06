@@ -29,6 +29,15 @@ For influxdb and gauges/charts options go to menu in upper right and "manage pal
 Dashboard  
 Once you have gauges/charts setup you can view them at **http://hostname.local:1880/ui**   
 
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/nrchart.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/nrgauge.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
+
 # Grafana    
 Most of the graphing I do is in node-red because it's convenient to setup while working on the main flow and the graphs are compact (look nice on mobile browser). But grafana is useful when you want the ability to zoom in closer and do more analysis. It also has functions to alert you based on conditions you configure.  
 

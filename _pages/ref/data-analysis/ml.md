@@ -6,6 +6,9 @@ description: Machine Learning
 nav: false
 toc: true
 ---
+
+A lot of data analysis can be done with simple tools like box plots, paretos, and pivot tables. Notes below are geared toward mathematical equations to help analyse data.  
+
 AI --> ML --> Deep Learning/Neural Nets  
 
 AI - intelligent machines  
