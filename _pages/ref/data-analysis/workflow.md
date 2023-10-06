@@ -17,6 +17,8 @@ General data analysis terms
 - Analysis - Tools for finding relationships, commonalities, trends. [Data Analysis](../../../ref/data-analysis/ml/)
 - Visualization - Charts, plots, tables [Data visualization](../../../ref/data-analysis/data-visualization/)
 
+
+Maker Space [stemjust4u](http://stemjust4u.org/)  
 # STEM Workflow  
 This is my general workflow I follow for projects. I often start with RPi/Python and then translate it to esp32/uPython.  
 

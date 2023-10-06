@@ -4,7 +4,7 @@ permalink: /repositories/
 title: Repositories
 description: A collection of projects
 nav: true
-nav_order: 6
+nav_order: 5
 ---
 
 ## GitHub users
