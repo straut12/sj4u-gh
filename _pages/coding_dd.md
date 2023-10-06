@@ -19,7 +19,4 @@ children:
     - title: divider
     - title: Web HTML
       permalink: /ref/coding/html/
-    - title: divider
-    - title: Beginner Coding
-      permalink: /ref/begcoding/intro/
 ---

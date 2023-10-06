@@ -1,13 +1,10 @@
 ---
 layout: page
-title: Data Analysis
+title: data Analysis
 nav: true
 nav_order: 3
 dropdown: true
 children: 
-    - title: workflow
-      permalink: /ref/data-analysis/workflow/
-    - title: divider
     - title: data collection
       permalink: /ref/data-analysis/data-collection/
     - title: divider
