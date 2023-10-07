@@ -7,7 +7,7 @@ nav: false
 toc: true
 ---
 
-A lot of data analysis can be done with simple tools like box plots, paretos, and pivot tables. Notes below are geared toward mathematical equations to help analyse data.  
+A lot of data analysis can be done with simple tools like box plots, paretos, and pivot tables. Notes below are geared toward sklearn models to help with quicker and deeper analysis of data.  
 
 Examples  
 Defect signature detected on wafers. Second set of wafers show same signature but rotated 90d.    
