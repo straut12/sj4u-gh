@@ -10,7 +10,7 @@ social: false  # includes social icons at the bottom of the page
 
 **EXPERIENCE**  
 **Process Engineer at Texas Instruments DMOS6 300mm Fab (2001-2019)**  
-* Lead photo engineer - Startup of TI’s first 300mm fab focused on CMOS Cu back end technologies ranging from 65nm-135nm; and 135nm FeRAM technology. Qualified 250nm analog technology (aluminum back end),   
+* Lead photo engineer - Startup of TI’s first 300mm fab focused on CMOS Cu back end technologies ranging from; and 135nm FeRAM technology. Qualified 250nm analog technology (aluminum back end),   
 * Qualified and optimized critical processes in Photo for i-line, 248nm, and 193nm process.  Including ASML scanner, FSI/DNS RF3/TEL Lithius track, KLA bright field inspection (Stealth), KLA macro inspection (Viper), KLA Archer overlay, KLA CD SEM, and AMAT CD SEM.
 * Worked on solutions for top photo issues (both front end and back end of line).  Owned 20+ levels with focus on BEOL that included both Cu damascene levels and Aluminum.  Responsibilities included new process setup and characterization (including OPC), tool release, new device setups, sustaining, chart monitoring (responsible for 300+ charts), optimization of coat, bake, develop, and rinse recipes for defect and CD improvements.
 * Performed multiple resist/BARC evaluations for process improvements and cost savings. Evaluated multiple planarizing via fill products for Dual Damascene technology.
