@@ -318,6 +318,8 @@ Or use rsync (much faster for a lot of files)
 # ssh Key Authentication
 ssh-keygen is a way of creating a secure method to log into remote hosts and allow transfer of code/files/data between your system/client and github or another PC/server. The general concept is two files with keys (a private and matching public key) are created and stored in ~/.ssh. The public key is copied to the remote host (ie github) or server (in the server authorized_keys file). When connecting from your PC/client to the remote host/server a check will be done to confirm the private and public keys match.  
 
+> seahorse is a gui version for checking ssh keys
+
 Example files for RSA algo ssh  
 * Private -> **id_rsa** (The private key acts as a password, remains on your PC, and should not be shared)  
 * Public -> **id_rsa.pub** (The public key is copied to remote host (ie github or server). When you login, the remote is able to use the public key for verification and grant access. (in server scenario the sshd_config will also need to be updated to disable the default simple PasswordAuthentication)  
@@ -376,9 +378,10 @@ If you get a authentication error when logging in with ssh you can do a couple c
 * The server ssh key fingerprints are under /etc/ssh/ so run command below (assuming using SHA256)  
 * ```ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub```  
 * You can compare the returned fingerprint to what the ssh authentication error showed  
-
+* To show key ```ssh-keygen -E sha256 -lf ~/.ssh/id_rsa.pub```
 To fix the mismatch on your remote machine's run the command below to remove the server from the remote known hosts file  
 * ```ssh-keygen -f "$HOME/.ssh/known_hosts" -R "IP-address-of-server"```  
+* or you can try ```ssh-keygen -R github.com (or IP addresses)```
 * Now login again and it will update the known hosts file with the server info  
 
 ---------------------------------
