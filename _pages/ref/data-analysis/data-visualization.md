@@ -18,6 +18,37 @@ For more advanced data analysis options
 # Pandas    
 Pandas is a python library (built on top of NumPy) that provides a tabular structure to your data for most of the advanced data visualization tools. Typically one of the first steps you will do is import your data from a database, spreadsheet, or csv into a pandas dataframe. From here you can easily duplicate the dataframe, modify, create pivots, format columns, add data, etc. An advantage of this is you can easily/quickly transform your data without affecting your original database.  
 
+Convert to Pandas df  
+```python
+df = pd.DataFrame(object)
+```
+
+Use clip to convert negative numbers to 0  
+```python
+df = df.clip(lower=0)
+``` 
+
+Use mask to replace numbers with another number or NaN or a blank  
+```python
+df = df.mask((df[0] > 68) | (df[0] < 63), np.nan) # can use '' to replace with blank
+```
+
+dataframe to dictionary (with list)  
+```python
+dict = df.to_dict('list')
+```
+
+dataframe to numpy array  
+```python
+x = df.iloc[:, -1].values # last column only
+```
+
+Pivot table  
+```python
+df = df.pivot(index="Xmm", columns="Ymm", values="Th") # rows/index will be Xmm and columns will be from Ymm and values will be Th
+```
+
+
 ```python
  df = pd.DataFrame(client.query_api().query_data_frame('from(bucket: "esp2nred") |> range(start: -5d) |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")'))
     df = df.drop(columns=['result', 'table', '_start', '_stop', '_measurement', 'device'])
@@ -48,6 +79,16 @@ print(dfsummary)
 table_summary = dbc.Table.from_dataframe(dfsummary, striped=True, bordered=True, hover=True) # use bootstrap formatting on table
 ```  
 
+Create a summary for a specific column  
+```python
+dfsummary = df.groupby('Tool')['CD'].describe()  # describe outputs a dataframe
+dfsummary = dfsummary.reset_index()
+dfsummary = dfsummary.set_index('Tool').T
+dfsummary = dfsummary.reset_index()
+dfsummary.describe()
+dfsummary
+```
+
 A Pandas DataFrame is a two-dimensional data structure that can store data of different types. A Pandas Series is a one-dimensional data structure that can only store data of one type.
 
 Feature	    DataFrame	                                    Series
@@ -62,6 +103,122 @@ Sorting	    Can be sorted by rows and columns	            Cannot be sorted by ro
 Groupby	    Can be grouped by rows and columns	            Cannot be grouped by rows and columns
 Reshaping	Can be reshaped into different data structures  Cannot be reshaped into different data structures
 
+
+# Numpy
+Scalar: Single value (int, float, str)
+Vector: 1D Array (use np.array([1, 2, 3])). You can do math operations on vectors
+
+
+Shape relates to the size of the dimensions of an N-dimensional array  
+Size relates to the count of elements that are contained in the array  
+
+Example to initialize numpy 2D array with 0's
+```python
+arr = np.zeros((3, 4))
+arr[0][0] = 1
+arr[1][2] = 3
+arr[2][3] = 5
+```
+
+To convert numpy to python  
+```python
+# Create a numpy scalar
+x = np.int64(42)
+# Convert to a Python integer
+y = x.item()
+```
+
+If you have a numpy array and want to convert all of its elements to native Python types, you can use the tolist() method. This method returns a copy of the array as a nested Python list with all elements converted to native Python types.
+
+```python
+# Create a numpy array
+a = np.array([1, 2, 3], dtype=np.int32)
+
+# Convert to a nested Python list
+b = a.tolist()
+
+print(b)  # Output: [1, 2, 3]
+```
+
+Unique and sort  
+```python
+x = np.unique(x)
+y = np.unique(y)
+x = np.sort(x)
+y = np.sort(y)
+X,Y = np.meshgrid(x, y)
+Z = np.zeros((X.shape))
+```
+
+Math, unique, and sort  
+```python
+R = np.sqrt(X**2 + Y**2)
+x = np.unique(x)
+x = np.sort(x)
+```
+
+To get shape and to create a 2D array from two single array
+```python
+x.shape
+X,Y = np.meshgrid(x, y)
+Z = np.zeros((X.shape))
+```
+
+Mask values  
+```python
+Znew = np.ma.masked_where(R > 149, Z) # create new array from Z and mask values with R > 149
+```
+
+# Scipy  
+Scipy can be used to create artificial datasets  
+loc: origin of the transform (mean of the distribution)
+scale: width of the transform (std dev of the distribution)
+a: skewness/shape, the higher the number the more skewed
+size: # of pts or rows, col for numpy normal dist
+
+
+Normal distribution (using numpy)  
+```python
+import numpy as np
+df = pd.DataFrame(np.random.normal(loc=ave,scale=sigma,size=20,1)))
+```
+
+Multivariate (bimodal) distribution  
+```python
+import scipy.stats as stats
+cov = [[1, .5], [0.5, 1]]
+df = pd.DataFrame(stats.multivariate_normal(mean=[63, 67], cov=cov).rvs(number_sites))
+df = pd.concat([df[0], df[1]]).reset_index(drop=True)
+plt.hist(df)
+```
+
+Skewed distribution  
+```python
+from scipy.stats import skewnorm
+df = pd.DataFrame(skewnorm.rvs(a=skewness, loc=ave, scale=sigma, size=number_sites))
+df = df.mask((df[0] > lower_cutoff) | (df[0] < upper_cutoff), '')  # replace with blanks. Excel did not like NaN
+```
+
+Other methods  
+pdf - probability density function  
+pdf(x, mean=None, cov=1, allow_singular=False)  
+rvs - random  
+rvs(mean=None, cov=1, size=1, random_state=None)  
+logpdf(x, mean=None, cov=1, allow_singular=False)  
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/dist-normal.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/dist-bimodal.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/dist-skewed.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>  
+
+
 # Matplot/Seaborn  
  
 Using fig, ax = plt.subplots() creates a figure and set of subplots
@@ -69,7 +226,117 @@ Using fig, ax = plt.subplots() creates a figure and set of subplots
 - ax is the axes of the figure. Allows to manipulate the x and y axes.  
 
 Figure level function  
-displot and catplot return a FacetGrid. When columns are added the figure itself will become wider (subplots will have same size and shape). FacetGrid is an object managing one or more subplots that correspond to conditional data subsets with convenient methods for batch-setting of axes attributes.
+displot and catplot return a FacetGrid. When columns are added the figure itself will become wider (subplots will have same size and shape). FacetGrid is an object managing one or more subplots that correspond to conditional data subsets with convenient methods for batch-setting of axes attributes.  
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+Boxp/strip plots (kind='box' or 'strip)  
+```python
+sns.catplot(x='Slot', y='CD', col='Tool', hue='Wfr', data=df, kind='box', ci='sd')
+```
+
+displot - figure-level interface for drawing distribution plots onto a FacetGrid  
+- hist (histogram) ```sns.displot(data=df, x="Defects", hue="Tool", kind="hist", bins=30)```
+- ecdf (empirical cumulative distribution)```sns.displot(df, x="Defects", hue="Tool", kind="ecdf") ```  
+- kde contour (kernel density estimate) ```sns.displot(x=df.Xmm, y=df.Ymm, hue=df.Th, levels=10, cmap='viridis', fill=True, kind="kde")```
+
+Prob plot  
+```python
+g = sns.displot(df, x="Defects", hue="tool", kind="ecdf") # can use stat='count' to change to counts
+# g.set(xlim=(0,50),ylim=(0,1))
+plt.title("Defects by Track")
+plt.grid(g)
+```
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/probplot.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+
+Contour (filled) with a color bar  
+Note Z must be a 2D array for a 2D image
+```python
+plt.contourf(X, Y, Z, levels=lvl, cmap='seismic')
+plt.colorbar()
+```
+
+3D image  
+```python
+fig = plt.figure()
+ax = fig.add_subplot(121)
+ax.imshow(
+    Z,
+    cmap="seismic",
+    extent=[np.min(x), np.max(x), np.min(y), np.max(y)],
+)
+ax = fig.add_subplot(122, projection="3d")
+ax.plot_surface(X, Y, Z, cmap="seismic")
+plt.show()
+```
+
+Create Z increments  
+```python
+zmin = int(np.floor(np.min(Z)))
+zmax = int(np.ceil(np.max(Z)))
+zinc = int((zmax - zmin) / 20)
+
+zcflev = [i for i in range(zmin, zmax, zinc)]
+zclev = [i for i in range(zmin, zmax, 20)]
+zlvl = 10
+```
+
+2D Contour plot with contour lines  
+```python
+fig, ax = plt.subplots()
+
+#cplt = ax.contour(X, Y, Z, colors='k', linewidths=1) # k: black
+cplt = plt.contour(X, Y, Z, levels=zlvl, cmap='RdBu_r', linewidths=1) # colors='k' for black
+cplt = plt.contour(X, Y, Z, levels=4, colors='k', linewidths=0.5, linestyles='dashed') # colors='k' for black
+cplt_filled = plt.contourf(X, Y, Z, levels=zlvl, cmap='RdBu_r')
+
+fig.colorbar(cplt_filled) # could also do plt.colorbar(cplt_filled)
+plt.clabel(cplt, inline=True, fontsize=10, colors='black') # fmt = '%2.1f'
+
+# Format subplot
+#ax.plot(xplt, yplt, 'ko', ms=3) # Marker type-> k:black line, o: marker and ms=3 is marker size
+ax.set_title('Thickness (A)')
+ax.set_xlabel('X (mmm)')
+ax.set_ylabel('Y (mm)')
+plt.show()
+```
+
+<div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/contourplot.jpg" class="img-fluid rounded z-depth-1" %}
+</div>
+
+Interpolated plot  
+```python
+from scipy.interpolate import RectBivariateSpline
+
+# Create some sample data points
+xspline = y
+yspline = x
+data = Zunmasked
+
+# Define the grid for interpolation
+xi = np.linspace(-147, 147, 500)  # 101 points for interpolation in the x-direction
+yi = np.linspace(-147, 147, 500)  # 101 points for interpolation in the y-direction
+
+# Create a RectBivariateSpline object
+interp_spline = RectBivariateSpline(xspline, yspline, data)
+
+# Evaluate the spline at the grid points
+zi = interp_spline(xi, yi)
+
+# Create a heatmap of the interpolated data
+plt.imshow(zi, extent=(-150, 150, -150, 150), origin='lower', cmap='seismic')
+plt.colorbar()
+plt.title("Interpolated Data")
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.show()
+```
 
 Seaborn empirical cumulative distribution plot
 ```python
@@ -78,7 +345,16 @@ g.set(xlim=(0,50),ylim=(0,1))
 plt.title("Defects by Track")
 plt.grid(g)
 plt.show(g)
+
+sns.displot(data=df, x="Defects", hue="Tool", kind="hist", bins=30)
+
 ```
+
+Seaborn histogram  
+```python
+sns.histplot(data=df, x="Defects", hue="Tool", bins=30)
+```
+
 
 # Python In Excel  
 Python in excel allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter code for reports you can now copy these into excel (or Power BI).  
@@ -87,6 +363,16 @@ Python in excel allows you to enter python code in an excel formula bar and exec
         {% include figure.html path="assets/img/coding/Excel-python-boxplot.jpg" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>  
+
+[Pandas](../../../ref/data-analysis/data-visualization/#pandas)  
+[Seaborn](../../../ref/data-analysis/data-visualization/#matplotseaborn)  
+
+Examples  
+```python
+df=xl("K1:L130", headers=True)
+df.describe()
+sns.kdeplot(x=df.Xmm, y=df.Ymm) 
+```
 
 # Jupyter Notebook
 Jupyter Notebook can be installed separately or easily started from anaconda in either windows, mac, or linux. 

@@ -1194,6 +1194,7 @@ list(range(0,10,2))
 
 ## List comprehension  
 Flattened for loop. Less code space than doing i = i + 1 or list.append in a loop.    
+range takes 3 arg. starting, ending, step  
 ```python
 sensor = [i for i in range(4)] --> [0, 1, 2, 3]
 # 2-dimensional
