@@ -33,6 +33,33 @@ Use mask to replace numbers with another number or NaN or a blank
 df = df.mask((df[0] > 68) | (df[0] < 63), np.nan) # can use '' to replace with blank
 ```
 
+Filtering on a single column  
+```python
+# Filter Rows Based on condition
+df[df["Tool"] == 'CD101'] 
+df.loc[df['Tool'] == value]
+df.query("Tool == 'CD101'")
+df.loc[df['Tool'] != 'CD101']
+df.loc[df['Tool'].isin(values)]
+df.loc[~df['Tool'].isin(values)]
+
+# Filter Multiple Conditions using Multiple Columns
+df.loc[(df['CD'] >= 50) & (df['CD'] <= 70)]
+df.loc[(df['CD'] >= 65) & (df['PEB'] == "PEB15" )]
+
+# Using lambda function
+df.apply(lambda row: row[df['Tool'].isin(['CD101','CD102'])])
+
+# Filter columns that have no None & nana values
+df.dropna()
+
+# Other examples
+df[df['Tool'].str.contains("CD101")]
+df[df['Tool'].str.lower().str.contains("CD101")]
+df[df['Tool'].str.startswith("CD1")]
+```
+
+
 dataframe to dictionary (with list)  
 ```python
 dict = df.to_dict('list')
