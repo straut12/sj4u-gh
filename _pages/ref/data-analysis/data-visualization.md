@@ -23,6 +23,16 @@ Convert to Pandas df
 df = pd.DataFrame(object)
 ```
 
+Convert df to numpy
+```python
+array = array.to_numpy()
+```
+
+Replace NaN with none
+```python
+df.replace(np.nan, None)
+```
+
 Use clip to convert negative numbers to 0  
 ```python
 df = df.clip(lower=0)
@@ -32,6 +42,39 @@ Use mask to replace numbers with another number or NaN or a blank
 ```python
 df = df.mask((df[0] > 68) | (df[0] < 63), np.nan) # can use '' to replace with blank
 ```
+
+See datatypes (3 methods)  
+```python
+df.dtypes
+df.info(verbose=True)
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    print(df.dtypes)
+```
+
+append new values 
+```python
+newdata = pd.DataFrame({'Xmm':0, 'Ymm':-150, 'Rmm':150}, index=[0])
+df = pd.concat([newdata,df.loc[:]]).reset_index(drop=True)
+```
+
+
+Looping through columns and modifying data types  
+```python
+for name, values in df[['PEB', 'DVLP']].items():
+    df[name] = df[name].astype(str)
+
+for name, values in df.iloc[:, 0:2].items():
+    df[name] = df[name].astype(str)
+
+for name, values in df.items():
+	print name(col name), value
+
+for col in df:
+    if col == 'DVLP':
+        for i, row_value in df[col].items():
+            df[col][i] = row_value * df['views'][i]
+```
+
 
 Filtering on a single column  
 ```python
@@ -46,6 +89,7 @@ df.loc[~df['Tool'].isin(values)]
 # Filter Multiple Conditions using Multiple Columns
 df.loc[(df['CD'] >= 50) & (df['CD'] <= 70)]
 df.loc[(df['CD'] >= 65) & (df['PEB'] == "PEB15" )]
+dfcntr = df.loc[(df['Lot'] == lotID) & (df['Wfr'] == wfrID )]
 
 # Using lambda function
 df.apply(lambda row: row[df['Tool'].isin(['CD101','CD102'])])
@@ -59,6 +103,10 @@ df[df['Tool'].str.lower().str.contains("CD101")]
 df[df['Tool'].str.startswith("CD1")]
 ```
 
+Drop/remove columns from dataframe
+```python
+df = df.drop(['Date', 'Target','LS','US'], axis=1)
+```
 
 dataframe to dictionary (with list)  
 ```python
@@ -130,6 +178,11 @@ Sorting	    Can be sorted by rows and columns	            Cannot be sorted by ro
 Groupby	    Can be grouped by rows and columns	            Cannot be grouped by rows and columns
 Reshaping	Can be reshaped into different data structures  Cannot be reshaped into different data structures
 
+Change display in colab/jupyter 
+```python
+pd.set_option('display.precision', 2)
+pd.set_option('display.max_rows', 50)
+```
 
 # Numpy
 Scalar: Single value (int, float, str)
@@ -138,6 +191,11 @@ Vector: 1D Array (use np.array([1, 2, 3])). You can do math operations on vector
 
 Shape relates to the size of the dimensions of an N-dimensional array  
 Size relates to the count of elements that are contained in the array  
+
+Access inidividual row/col 
+```python
+lotdflt = df['Lot'].iloc[0]
+```
 
 Example to initialize numpy 2D array with 0's
 ```python
@@ -153,6 +211,19 @@ To convert numpy to python
 x = np.int64(42)
 # Convert to a Python integer
 y = x.item()
+```
+
+Replace NaN or 0 with none
+```python
+arr = np.where(np.isnan(arr), None, arr) # replace nan with none
+arr = np.where(arr==0, np.nan, arr)  # replace 0 with nan
+```
+
+Append new data to a numpy
+```python
+ydummy = [i for i in range(-150, 160, 10)]
+ycoord = dfcntr.iloc[:, -3:-2].values  # convert df to numpy array
+ycoord = np.append(ycoord, ydummy)
 ```
 
 If you have a numpy array and want to convert all of its elements to native Python types, you can use the tolist() method. This method returns a copy of the array as a nested Python list with all elements converted to native Python types.
