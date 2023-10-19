@@ -87,9 +87,9 @@ df.loc[df['Tool'].isin(values)]
 df.loc[~df['Tool'].isin(values)]
 
 # Filter Multiple Conditions using Multiple Columns
-df.loc[(df['CD'] >= 50) & (df['CD'] <= 70)]
-df.loc[(df['CD'] >= 65) & (df['PEB'] == "PEB15" )]
-dfcntr = df.loc[(df['Lot'] == lotID) & (df['Wfr'] == wfrID )]
+df[(df['CD'] >= 50) & (df['CD'] <= 70)]
+df[(df['CD'] >= 65) & (df['PEB'] == "PEB15" )]
+dfcntr = df[(df['Lot'] == lotID) & (df['Wfr'] == wfrID )]
 
 # Using lambda function
 df.apply(lambda row: row[df['Tool'].isin(['CD101','CD102'])])
