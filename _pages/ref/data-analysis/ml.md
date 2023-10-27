@@ -34,9 +34,11 @@ Results are for a small set of process/tools but it was repeated on a larger set
 Naive Bayes works with multiple defect classes (0=clean, 1=defective at notch, 2=defect at 90d)
 Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process). Suspect tools highlighted with log probability approaching 0. Naive Bayes was also able to highlight the Inspection interaction. When wafers were inspected they were returned rotated 90d so the resulting defects at the next process step were rotated 90d.     
 <div class="col-sm mt-3 mt-md-0">
+    {% include figure.html path="assets/img/coding/excel-python-NB.jpg" class="img-fluid rounded z-depth-1" %}
+</div>  
+<div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/wfr-rotated-nb.jpg" class="img-fluid rounded z-depth-1" %}
 </div>  
-
 
 AI --> ML --> Deep Learning/Neural Nets  
 
@@ -1591,6 +1593,3 @@ plt.show()
     {% include figure.html path="assets/img/coding/UCBvsThompson.jpg" class="img-fluid rounded z-depth-1" %}
 </div>
 [Machine Learning A-Z](https://www.udemy.com/share/101Wci3@fIpzabLTJizOhW5Z7f5nTLyiMam_1ctmhB0flC5at1HREDxUsdwvIF8jj1lHXAOa/)
-
-
-# Stats

@@ -373,7 +373,7 @@ By default ssh only uses password authentication. For the remote PC/server to re
 ```$ sudo nano /etc/ssh/sshd_config```  
 Uncomment the PasswordAuthentication line and set it to Yes  
 
-If you get a authentication error when logging in with ssh you can do a couple checks to confirm the system you're logging into.  
+Part of the ssh security involves a fingerprint check (the fingerprint is a short version of the server's public key). It checks the remote server's fingerprint and compares it with the fingerprint saved from the last time you connected. If the fingerprint has changed you will get a warning. (fingerprint is stored at $HOME/.ssh/known_hosts). You can do a couple checks to confirm the system you're logging into.  
 * Go to or remote desktop to the server  
 * The server ssh key fingerprints are under /etc/ssh/ so run command below (assuming using SHA256)  
 * ```ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub```  

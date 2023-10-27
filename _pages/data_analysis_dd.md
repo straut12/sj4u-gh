@@ -20,6 +20,6 @@ children:
     - title: machine learning
       permalink: /ref/data-analysis/ml/
     - title: divider
-    - title: statistics
+    - title: notes
       permalink: /ref/data-analysis/statistics/
 ---

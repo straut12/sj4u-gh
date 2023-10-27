@@ -23,7 +23,6 @@ OOP is wrapping variables and functions in objects.  js is a prototype based OOP
 * Initialization (constructor) - set the initial/default values.
 
 # Syntax  
-[w3schools](https://www.w3schools.com/js/default.asp) is a good reference site for syntax
 
 **Variables**
 
