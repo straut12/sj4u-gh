@@ -539,7 +539,26 @@ i = sns.catplot(x="file", y="time", data=pivoted, ci='sd', kind="box")
 Google colab is very similar to Jupyter Notebook. It is useful for ML since many of the libraries are pre-installed. Can use google drive to store project code. [colab](https://colab.research.google.com/)  
 
 # Dash-plotly  
-Dash gives more GUI type functions, ie letting a user toggle data series on/off while plotting.  
+Dash gives more GUI type functions, ie letting a user toggle data series on/off while plotting. Allowing the user to select a row of data and updating a contour plot.  
+
+Example of an Engineering Dash Board  
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB1.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB2.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB3.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+
+
 ```$ python3 -m pip install dash```  
 
 You will create a file called app.py that contains the dash/plotly code.  
