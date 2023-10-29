@@ -12,7 +12,7 @@ A lot of data analysis can be done with simple tools like box plots, paretos, an
 Examples  
 Defect signature detected on wafers. Second set of wafers show same signature but notch is rotated 90d.    
 <div class="col-sm mt-3 mt-md-0">
-    {% include figure.html path="assets/img/coding/wfr-rotated.png" class="img-fluid rounded z-depth-1" %}
+    {% include figure.html path="assets/img/coding/wafer-rotated.png" class="img-fluid rounded z-depth-1" %}
 </div>
 Data table is a list of process and equipment that wafers were processed or inspected with and if the wafer had a defect signature or not (0=clean, 1=defect at notch, 2=defect at 90d). Analysis results from a few classification  models (logistic regression, naive bayes, decision tree) highlighting the suspect tool.     
 
