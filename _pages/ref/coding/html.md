@@ -581,6 +581,11 @@ from app import app
 application = app.server
 ```
 
+Quick reset to pull down new changes. If trying to update Python Anywhere code with most recent github version (and you have gotten out of sync with github) can use  
+```python
+git reset --hard
+git pull
+``` 
 
 
 # Github Pages with Jekyll
