@@ -11,9 +11,9 @@ social: false  # includes social icons at the bottom of the page
 **ABOUT**  
 With more than two and a half decades of experience as a photolithography engineer, including an extensive 20-year tenure at Texas Instruments as a Photolithography Process Engineer, I've developed expertise in data analysis and process optimization. Throughout my career, I've been driven by a passion for efficiency, seeking innovative solutions to streamline processes for both myself and fellow engineers. My comprehensive grasp of photolithography and my ability to harness the power of programming for data-driven insights have been instrumental in achieving these goals. I am committed to delivering cutting-edge solutions and fostering a culture of efficiency. I would love to connect with you so that we can explore how my skill set could enhance your team's capabilities and drive continued success for your organization.  
 
-Example of engineering dashboard using Python data analysis tools. Scikit learn models used to predict edge of wafer. Pair-wise Tukey HSD calculations for unit comparisons.  
-[Example Engineering Dashboard](https://straut12.pythonanywhere.com/)  
-[Example of Tool Commonality Analysis](https://seantrautman.com/ref/data-analysis/ml/)  
+Example of engineering dashboard using Python data analysis tools.     
+[Example Engineering Dashboard](https://straut12.pythonanywhere.com/) (Scikit learn models used to predict edge of wafer. Pair-wise Tukey HSD calculations used to run unit comparison and highlight deltas.)  
+[Example of Tool Commonality Analysis](https://seantrautman.com/ref/data-analysis/ml/) (Different classification models used for commonality analysis)    
 
 **EXPERIENCE**  
 **Process Engineer at Texas Instruments DMOS6 300mm Fab**  
