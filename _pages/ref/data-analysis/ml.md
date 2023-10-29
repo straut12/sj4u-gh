@@ -12,26 +12,26 @@ A lot of data analysis can be done with simple tools like box plots, paretos, an
 Examples  
 Defect signature detected on wafers. Second set of wafers show same signature but notch is rotated 90d.    
 <div class="col-sm mt-3 mt-md-0">
-    {% include figure.html path="assets/img/coding/wfr-rotated.jpg" class="img-fluid rounded z-depth-1" %}
+    {% include figure.html path="assets/img/coding/wfr-rotated.png" class="img-fluid rounded z-depth-1" %}
 </div>
 Data table is a list of process and equipment that wafers were processed or inspected with and if the wafer had a defect signature or not (0=clean, 1=defect at notch, 2=defect at 90d). Analysis results from a few classification  models (logistic regression, naive bayes, decision tree) highlighting the suspect tool.     
 
 **Logistic Regression**  
-Only used binary 0 (clean) or 1 (defect signature) for the label.
+Only used binary (0=clean, 1=either defect signature) for the label.
 Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process).  Higher coefficient values highlight the suspect tool. However the interaction with the inspection tool is not brought out.        
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/wfr-rotated-lr.jpg" class="img-fluid rounded z-depth-1" %}
 </div>  
 
 **Decision Tree**   
-Decision tree worked best with only 2 defect classes (0=clean, 1=defective)
+Decision tree worked best with only 2 defect classes (0=clean, 1=either defect signature)
 Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process).      
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/wfr-rotated-dt.jpg" class="img-fluid rounded z-depth-1" %}
 </div> 
 
 **Naive Bayes**   
-Naive Bayes works with multiple defect classes (0=clean, 1=defective at notch, 2=defect at 90d)
+Naive Bayes works with multiple defect classes (0=clean, 1=defective at notch, 2=defect at -90d)
 Results are for a small set of process/tools but it was repeated on a larger set with same results (50 process with 3 tools/process). Suspect tools highlighted with log probability approaching 0. Naive Bayes was also able to highlight the Inspection interaction. When wafers were inspected they were returned rotated 90d so the resulting defects at the next process step were rotated 90d.     
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/excel-python-NB.jpg" class="img-fluid rounded z-depth-1" %}
