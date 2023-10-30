@@ -9,7 +9,7 @@ social: false  # includes social icons at the bottom of the page
 ---
 
 **ABOUT**  
-With more than two and a half decades of experience as a photolithography engineer, including an extensive 20-year tenure at Texas Instruments as a Photolithography Process Engineer, I've developed expertise in data analysis and process optimization. Throughout my career, I've been driven by a passion for efficiency, seeking innovative solutions to streamline processes for both myself and fellow engineers. My comprehensive grasp of photolithography and my ability to harness the power of programming for data-driven insights have been instrumental in achieving these goals. I am committed to delivering cutting-edge solutions and fostering a culture of efficiency. I would love to connect with you so that we can explore how my skill set could enhance your team's capabilities and drive continued success for your organization.  
+With two and a half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I've developed expertise in data analysis and process optimization. Throughout my career, I've been driven by a passion for efficiency, seeking innovative solutions to streamline processes for both myself and fellow engineers. My comprehensive grasp of photolithography and my ability to harness the power of programming for data-driven insights have been instrumental in achieving these goals. I am committed to delivering cutting-edge solutions and fostering a culture of efficiency. I would love to connect with you so that we can explore how my skill set could enhance your team's capabilities and drive continued success for your organization.  
 
 Example of engineering dashboard using Python data analysis tools.     
 [Example Engineering Dashboard](https://straut12.pythonanywhere.com/) (Python-dash with plotly, pandas, and numpy for data tables and visualizations. Scikit learn models used to predict edge of wafer. Pair-wise Tukey HSD calculations used to run unit comparison and highlight deltas.)  
@@ -19,7 +19,7 @@ Example of engineering dashboard using Python data analysis tools.
 * Excel (with Python and VBA), Spotfire, Python, dash, colab, plotly, pandas, numpy, scikit-learn, JMP, Power BI  
 
 **EXPERIENCE**  
-**Process Engineer at Texas Instruments DMOS6 300mm Fab (2000-2019)**  
+**Process Engineer at Texas Instruments DMOS6 300mm Fab (2001-2019)**  
 * Lead photo engineer - Startup of TI’s first 300mm fab. Focused on 248nm/193nm CMOS Cu BEOL process and later qualified FeRAM and analog technologies  
 * Tool sets: Qualified and optimized critical processes in Photo for i-line, 248nm, and 193nm process on the following tool sets.  ASML scanners (450, 850, 1050), FSI/DNS RF3/TEL Lithius track, KLA bright field inspection (Stealth), KLA macro inspection (Viper), KLA Archer overlay, KLA Spectra, KLA CD SEM, and AMAT CD SEM.
 * Photo Process Ownership: Worked on solutions for top photo issues (both front end and back end of line).  Owned 20+ levels with focus on BEOL that included both Cu damascene levels and Aluminum.  Responsibilities included new process setup and characterization (including OPC), tool release, new device setups, sustaining, chart monitoring, Cp/Cpk improvements, optimization of coat, bake, develop, and rinse recipes for defect and CD improvements.
@@ -27,6 +27,7 @@ Example of engineering dashboard using Python data analysis tools.
 * Converted defect prone via fill products with cleaner and lower cost materials on Dual Damascene technologies.
 * Converted Trench pattern layers from 193nm process to 248nm for cost savings.
 * Various times responsible for all metrology (macro inspect, overlay, SEM).  Wrote programs to automatically create metrology recipes for KLA Archer overlay to save significant man hours.  Created recipes on KLA Stealth/Spectra for photo pattern inspections (used as tool monitors for defect and CD control).
+* Co-developed metrology sampling system implemented fab-wide for cycle time improvements. 
 
 **Leader of Cross-Functional Teams**  
 * DMOS6 Back-End-Of-Line Engineering Group (Al and Cu metal loops) 
