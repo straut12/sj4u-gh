@@ -6,6 +6,8 @@ description: Intro to customizing your desktop appearance
 nav: false
 toc: true
 ---
+This section is geared for STEM projects.  
+
 # Linux Desktop Terms
 The Raspberry Pi is a great coding/project system but the out-of-box Raspberry Pi OS/LXDE appearance is pretty basic. (note DE refers to Desktop Environment). However with a few **tweaks** you can quickly improve the appearance. Most of the items on this page will focus on Raspberry Pi but they can often be applied to other Linux Distros, too.  
 

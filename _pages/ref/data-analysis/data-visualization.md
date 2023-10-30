@@ -6,14 +6,20 @@ description: Intro to Data Analysis
 nav: false
 toc: true
 ---
+Once you have data collected it is helpful to visualize it to begin analysis.  This is where the Python data anlysis tools are extremely helpful.  
 
 **Data Visualization**  
 For more advanced data analysis options
-* **Jupyter notebook** with pandas, numpy, matplotlib, seaborn and dash as the interactive portion. 
+* **Jupyter notebook** and **Google Colab** work with pandas, numpy, matplotlib, seaborn, etc in a notebook style. You can execute snippets of code individually and view data tables and plots. This allows you to work on small sections of code without having to execute the entire thing.    
 * **Power BI** (microsoft windows based). Can import data from databases, csv, JSON, etc and do basic plotting with microsoft tools. Can add R/Python scripts to do more advanced box plots, histograms, heat maps, etc with plotly.   
 * **dash** is Python based dashboard using plotly to do advanced box plots, histograms, heat maps.
-* **Python in excel** allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can leverage off pandas to quickly duplicate/transform data tables without changing the original data. You also have access to the python statistical functions. Also if you already have python/jupyter/dash code for reports you can now copy these into excel (or Power BI).   
-* streamlit is a quick and easy data visualizations.
+* **Python in excel** allows you to enter python code in an excel formula bar and execute it. You can then output the plot or table into your spreadsheet. An advantage of this is you can both visualize the raw data tables while leveraging off pandas to quickly duplicate, transform, and perform statistical functions on the data. It also give you access to all the python plotting and statistical tools. If you already have python/jupyter/dash code for reports you can now copy these into excel (or Power BI).   
+
+The general workflow I have found useful is  
+1. Excel with Python for initial data analysis
+2. Jupyter Notebook or Colab for deeper analysis and/or starting to create automated workflow
+3. Python-dash for full automation of the analysis
+4. Power BI for presentation  
 
 # Pandas    
 Pandas is a python library (built on top of NumPy) that provides a tabular structure to your data for most of the advanced data visualization tools. Typically one of the first steps you will do is import your data from a database, spreadsheet, or csv into a pandas dataframe. From here you can easily duplicate the dataframe, modify, create pivots, format columns, add data, etc. An advantage of this is you can easily/quickly transform your data without affecting your original database.  

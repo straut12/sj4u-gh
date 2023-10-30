@@ -7,7 +7,10 @@ nav: false
 toc: true
 ---
 
-For windows you can use cmd.exe or PowerShell.  The Anaconda environment would not activate in PowerShell so I use cmd.exe (updated vscode in command palette. Terminal:Select default profile)
+The terminal is still an important part of navigating and installing data analysis tools. (cli stands for command line interface).  
+
+Note- For windows you can use cmd.exe or PowerShell.  The Anaconda environment would not activate in PowerShell so I use cmd.exe (updated vscode in command palette. Terminal:Select default profile)  
+
 # sudo, su, root
 The following assumes you're either a single user on a Linux distro or Raspberry Pi. By default there are two user names on RPi, "pi" and "root". (For non RPi systems replace "pi" with your user name entered during install)
 "pi" is the default user and is a member of the sudo group. This means you can run commands as root using sudo and can switch to the root user with ```$ sudo su```
@@ -104,7 +107,7 @@ The understanding of bin/executables and how your system knows where to look for
 As an example, take the executable 'ls' used to list contents of a directory. If you do ```$ which ls``` it will output  ```/bin/ls```. Meaning the 'ls' executable file is located in /bin/ dir, which is listed in $PATH above. So when you type ```$ ls ``` your system knows from $PATH what directories it can search and it will find 'ls' in /bin.  (If you go to the /bin/ dir and list the contents you will see many command utilities listed)  
 
 Creating your own simple shell/bash file in a dir, making it executable, and then adding that dir to your $PATH so you can execute it from any location can help understand the concept  
-(Example below will be assuming working on a RPi and the home dir = /home/pi (or you can use $HOME)  
+Example below will be assuming working on a RPi and the home dir = /home/pi (or you can use $HOME)  
 * Create a test dir
 * ```$ mkdir test```
 * Create a test file (bash file)  

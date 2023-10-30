@@ -6,6 +6,8 @@ description: Intro to starting programs on boot
 nav: false
 toc: true
 ---
+This section is geared for STEM projects working with RPis.  
+
 # Start at Boot
 **Options for Starting an Application at Startup (or scheduled time)**
 

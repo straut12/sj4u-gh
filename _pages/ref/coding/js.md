@@ -6,11 +6,14 @@ description: Intro to JavaScript
 nav: false
 toc: true
 ---
-JavaScript is used in web projects and NodeRed functions. It is a scripting language and there are two methods for executing it.
+My primary use of JavaScript has been in NodeRed although it is most used in web applications. Below are some basic notes.  
+
+# Installation
+JavaScript is a scripting language and there are two methods for executing it.
 * Web browser. Many web sites include javascript so all modern browsers can run it. 
 * Or you can run it outside of a browser by installing [nodejs](https://nodejs.org/en/download/). Node.js is a run-time environment for javascript on the server side.  
 
-A big advantage that javascript provides (vs PHP) is asynchronous coding (async function query_api()). While waiting for results from the API other actions can take place.  
+A big advantage that javascript provides (vs PHP) is asynchronous coding (ie async function query_api()). While waiting for results from the API other actions can take place.  
 
 **OOP**  
 OOP is wrapping variables and functions in objects.  js is a prototype based OOP which means it technically does not have classes. But modern js syntax introduced classes as a *syntactic sugar* to mimic classes from other programming languages. But at its core it's prototype based inheritance.

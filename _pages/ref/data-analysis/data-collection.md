@@ -6,6 +6,7 @@ description: Intro to Data Analysis
 nav: false
 toc: true
 ---
+The data collection tools covered here are geared for projects where you have a wi-fi enabled micro controller with sensors connected to it. There is also a short section on API to gather information from web sites.
 
 # MQTT  
 [Mosquitto](https://mosquitto.org/) MQTT is a lightweight messaging protocol that simplifies sending/receiving messages between devices (messages can be in the form of JSON objects). It acts as a broker to handle mqtt traffic among your devices. The messages are organized by topics. By publishing and subscribing to topics devices are able to talk to each other. For example, you can send commands from a node-red dashboard (web based), via the mqtt broker, to a RPi/esp32 to control servos or motors. And in return the the RPi/esp32 can send status (rpms) or other sensor data (voltage, current, temp) back to the node-red dashboard. The mqtt broker can run on the same RPi involved in the project or on a standalone RPi. The RPi can acts as the mqtt server/broker with node-red as the "brains".​  Another example might be collecting the water level of a tank with a sensor and turning a pump off when sensor shows level is high.

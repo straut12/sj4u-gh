@@ -7,7 +7,7 @@ nav: false
 toc: true
 ---
 # Linux Install Options
-At the core of any computer is the Operating System (OS). The most common OS on PC's is Microsoft Windows, Google Chrome OS, and Apple macOS with Linux a far fourth. But when it comes to learning STEM you can't beat Linux. I'll be using Linux as a general term referring to the many Linux distros you can install (RPi OS, Ubuntu, Linux Mint, etc). Most Linux distros are free, have a great coding/learning environment, and light-weight/efficient (ie they can run on newer or older systems with less CPU/RAM/Disk-space). These factors make Linux distros a great choice for STEM projects and personal use.
+At the core of any computer is the Operating System (OS). The most common OS on PC's is Microsoft Windows, Google Chrome OS, and Apple macOS with Linux a far fourth. But when it comes to learning data analysis tools and general STEM concepts the Linux setup is very useful. Linux is often used as a general term referring to the many Linux distros you can install (RPi OS, Ubuntu, Linux Mint, etc). Most Linux distros are free, have a great built-in coding/learning environment, and light-weight/efficient (ie they can run on newer or older systems with less CPU/RAM/Disk-space). 
 
 > For clarification you do not install Linux OS, Linux is a [kernel](https://en.wikipedia.org/wiki/Linux_kernel). Instead you install a Linux distribution or distro.  
 

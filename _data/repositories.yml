@@ -1,4 +1,5 @@
 github_repos:
+  - straut12/dash-EDB-CD
   - straut12/StepMotor-28BYJ-48-ULN2003-Driver
   - straut12/Joystick-MCP3008-RPi-ESP32-Compare 
   - straut12/rotary-encoder

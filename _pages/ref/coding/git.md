@@ -6,15 +6,35 @@ description: Intro to VScode and Github
 nav: false
 toc: true
 ---
-For Linux I install with ```sudo apt install git```  
+# VS code with git  
+There are a large number of code editors to choose from. VScode is my choice because of its wide selection of extensions and how well it integrates with git.​ It is also light enough to run on a smaller system like a RPi.  
+
+With VS code extensions you can essentially turn it into an IDE. The primary extensions I install are Python and GitHub Pull Requests and Issues. However there are a number of other useful extensions depending on what you're working on.  
+- Live Server enables a local server that you can use to preview your web pages while you develop them.  
+- Luna Paint gives you the ability to do quick and simple image edits inside VScode.    
+- Remote-SSH allows you to connect to another machine and create/update code files on it.  
+- Pymakr can connect to microcontrollers and gives you the ability to write/install microPython projects on them.  
+
+---------------------------
+
+**git** is the version control portion and tracks the history of your code/project. Often you create a simpler, first version of your project that works, but doesn't have all the features you ultimately want. You want to add more features but without breaking your working or production code (main branch). Git allows you to create additional branches where you can add features or fix bugs and then merge it back into your main branch.
+
+**github** is the web-based portion where you can remotely store your project in Git repositories. This allows others to copy your project and suggest changes. Thru extensions, VScode has built-in git functions which streamlines the update process. Using VS code with git hub extensions you can easily keep your project code sync'd with the cloud so you always have an up-to-date backup and can easily clone it to another system.
+
+A couple good articles on the functions of git and version control are at [reflectoring](https://reflectoring.io/github-fork-and-pull/) and [adafruit](https://learn.adafruit.com/contribute-to-circuitpython-with-git-and-github?view=all).
+
+Other code editors I looked at and how much resources they use  
+* Pycharm **~800MB** (too much for a Pi3/1GB RAM)
+* VScode  **~300MB**
+* Thonny, mu-editor, geany, nano. **< 50MB**  
+* Memory/RAM comparison using ```$ free -m```  
+
+---------------------------
+
+**Installing VScode and git**  
+[VScode](https://code.visualstudio.com/download) can be downloaded and installed.  
+**git** - For Linux I install with ```sudo apt install git```  
 For Windows I install from the git download page. You can then run a git cmd terminal and have similar functions as a linux terminal. You can also use the vs code to run git commands instead of a terminal.
-
-# VS code with git
-There is a large number of code editors to choose from. [VScode](https://code.visualstudio.com/download) is my choice because of its extensions, light enough to run on RPi3-4, and integrates well with git.​  
-
-With VS code extensions you can essentially turn it into an IDE. For Raspberry Pi the primary extensions I install are Python, Remote-SSH, and GitHub Pull Requests and Issues.
-* With remote-ssh you can connect from your main PC to any RPi (except a Pi0) and code a project. This eliminates having to hook a monitor up to the RPi and is smoother than vnc'ing to the RPi (especially a RPi3/A).
-* Use git to stay sync'd with your github account.  
 
 ----------------------------
 
@@ -24,20 +44,6 @@ Workspace settings -
 { "python.autoComplete.extraPaths": ["./path/to/packageA"] }  
 
 --------------------------------
-
-**git** is the version control portion and tracks the history of your code/project. Often you create a simpler, first version of your project that works, but doesn't have all the features you ultimately want. You want to add more features but without breaking your working or production code (main branch). Git allows you to create additional branches where you can add features or fix bugs and then merge it back into your main branch.
-
-**github** is the web-based portion where you can remotely store your project in Git repositories. This allows others to copy your project and suggest changes. Thru extensions, VScode has built-in git functions which streamlines the update process. Using VS code with git hub extensions you can easily keep your project code sync'd with the cloud so you always have an up-to-date backup and can easily clone it to another system.
-
-A couple good articles on the functions of git and version control are at [reflectoring](https://reflectoring.io/github-fork-and-pull/) and [adafruit](https://learn.adafruit.com/contribute-to-circuitpython-with-git-and-github?view=all).
-
-Other code editors I looked at  
-* Pycharm **~800MB** (too much for a Pi3/1GB RAM)
-* VScode  **~300MB**
-* Thonny, mu-editor, geany, nano. **< 50MB**  
-* Memory/RAM comparison using ```$ free -m```  
-
-----------------------------
 
 # Setup Including SSH Key
 **Installing VScode** - VScode is now supported by Raspberry Pi and can be installed by downloading the .deb at [VScode Downloads](https://code.visualstudio.com/download)  

@@ -43,8 +43,8 @@ Results are for a small set of process/tools but it was repeated on a larger set
 AI --> ML --> Deep Learning/Neural Nets  
 
 AI - intelligent machines  
-ML - Subset of AI algorithms which use data to learn and match patterns aka learn by example. Learn an approximate function that can be used to predict the response (dependent variable)   
-DL - Subset of ML for more complex tasks. Math heavy.  
+ML - Machine Learning. Subset of AI algorithms which use data to learn and match patterns aka learn by example. Learn an approximate function that can be used to predict the response (dependent variable)   
+DL - Deep Learning. Subset of ML for more complex tasks. Math heavy.  
 
 **Inference vs prediction**  
 - Prediction - Predict Y based on X (geared toward future prediction). Create the best model that can take in all the X features and predict Y with high accuracy (low error). What will my final CD be given this dose on this scanner with this etcher. 

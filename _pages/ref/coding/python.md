@@ -6,17 +6,45 @@ description: Intro to Python
 nav: false
 toc: true
 ---
-- On Linux systems I normally use the built-in Python (I only install anaconda for jupyter notebook functions. And I don't run the init script which updates your .bashrc to activate anaconda when you open a terminal. Instead I activate manually with ```source <PATH_TO_CONDA>/bin/activate``` when I want to use it and use ```conda deactivate``` to go back to std env)  
-- For Windows I use Anaconda for python/jupyter notebooks. The Anaconda Navigator has a gui with options to create environments and install python packages.  (I allow it to add to the PATH)
+I primarily use [Python](https://www.python.org/) because of its easy to read syntax, it is now available in Excel and Google Sheets, and has a large number of data analysis and visualization tools ([pandas](https://pandas.pydata.org/), [numpy](https://numpy.org/), [scikit-learn](https://scikit-learn.org/stable/), [matplot](https://matplotlib.org/), [plotly](https://plotly.com/), etc).
+
+A powerful tool you can use that incorporates all these tools into one dashboard is [dash](https://dash.plotly.com/)  
+Example of an Engineering Dash Board that uses Python, plotly, pandas, numpy, scikit-learn.  
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB1.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB2.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md mt-3 mt-md-0">
+        {% include figure.html path="assets/img/coding/EDB3.jpg" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div> 
+
+--------------------------------------------
+
+# Installation
+There are many methods for using Python as stand alone program, inside Excel/Google Sheets, Jupyter Notebooks/Google Colab, and there are also various web sites you can play with it.    
+- On Linux systems I normally use the built-in Python (I only install anaconda for jupyter notebook functions. And I don't run the init script which updates your .bashrc to activate anaconda when you open a terminal. Instead I activate manually with ```source <PATH_TO_CONDA>/bin/activate``` when I want to use it and use ```conda deactivate``` to go back to std env.    
+- For Windows I use Anaconda for python/jupyter notebooks. The Anaconda Navigator has a gui with options to create environments and install python packages.  (I typically allow it to add to the PATH. There is also a anaconda prompt link added to your desktop/task bar that you can use.)
 - For Windows/wsl be sure to run a ```sudo apt-get update``` and ```sudo apt install python3-pip``` to make sure you have all the Python tools installed.  
 
 A powerful aspect of python are all the additional packages you can install. Almost all projects you work on will likely require installing additional python packages (using pip). A nuance of this is that the package installed is specific to the python3 version you used to install it and there are frequently newer versions of Python3 coming out. Which means you end up managing packages for multiple python3 versions. Although extra steps it is cleanest to use virtual environments and always specifying the python version you're using when executing scripts installing packages with pip (```(venv)$ python3.7 -m pip install packageA``` vs generic ```(venv)$ python3 -m pip install packageA```). If you use a venv for each project it will have its own python3/pip environment and will minimize the number of times you get confused or get missing module errors.  ie you know you've installed a package before but don't realize it was installed with a different version of python3. Especially if you install anaconda's python3 distribution later on. Unfortunately I did not learn this til later so a lot of my references to python3 commands do not specify the python3 version.  
 
-> Another Python version you will see is Jupyter notebook (which uses IPython as a backend. IPython is a dependency of Jupyter). Jupyter is a interactive Python interface usually using a web front end.  
+----------------------------------
 
-> ipykernel package provides the IPython kernel for Jupyter. But you can manually create a venv and install it for usage in Jupyter. See below in venv notes.  
+Another Python version you will see is Jupyter notebook (which uses IPython as a backend. IPython is a dependency of Jupyter). Jupyter is a interactive Python interface usually using a web front end.  
 
-> For VS code to work with Python in Jupyter Notebooks you need to activate an Anaconda environment in VS Code or another Python venv in which the Jupyter package has been installed. If you don't want to use Anaconda then ```(.venv) python3.10 -m pip install jupyter``` will install the Jupyter system, including the notebook, qtconsole, and the IPython kernel. You select the kernel in the upper right.
+ipykernel package provides the IPython kernel for Jupyter. But you can manually create a venv and install it for usage in Jupyter. See below in venv notes.  
+
+For VS code to work with Python in Jupyter Notebooks you need to activate an Anaconda environment in VS Code or another Python venv in which the Jupyter package has been installed. If you don't want to use Anaconda then ```(.venv) python3.10 -m pip install jupyter``` will install the Jupyter system, including the notebook, qtconsole, and the IPython kernel. You select the kernel in the upper right.
+
+----------------------------------
 
 To check Python versions installed on your system.  
 ```$ ll /usr/bin/python3*```  
