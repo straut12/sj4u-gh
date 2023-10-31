@@ -1,36 +1,11 @@
-# SJ4U
-This website is my attempt to document, in one location, various STEM concepts I hope to incorporate in a Maker space some day. It contains tutorials and links to resources useful for learning STEM, with a focus on Raspberry Pi (and other Linux distros), Scratch, Python, javascript, and circuits. It is meant to be a reference tool and not a step-by-step guide. If you are interested in STEM and Linux, and want to learn more in those areas, then hopefully the information here will be useful.
+Sean Trautman (s.trautman12@gmail.com)
 
-My background is in engineering. I worked in semiconductor manufacturing and the computer science classes I took in college proved to be the most useful in my career. Those experiences grew an interest I’ve always had in STEM. I have learned a lot in the process and enjoy sharing that info with others. A large portion of the material on the site come from key resources I’ve learned from including wiki, stackexchange, w3schools, freecodecamp, etc.
+ABOUT
+With two-and-a-half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I’ve developed expertise in data analysis and process optimization. Throughout my career, I’ve been driven by a passion for efficiency, seeking innovative solutions to streamline processes for both myself and fellow engineers. My comprehensive grasp of photolithography and my ability to harness the power of programming for data-driven insights have been instrumental in achieving these goals. I am committed to delivering cutting-edge solutions and fostering a culture of efficiency. I would love to connect with you so that we can explore how my skill set could enhance your team’s capabilities and drive continued success for your organization.
 
-# In-progress of converting from www.stemjust4u.com but eventually the following concepts will be covered
-* Basic coding with Scratch
-* Python
-* MicroPython
-* JavaScript (focused on nodered application)
-* HTML/CSS
-* NodeRed
-* MQTT
-* InfluxDB
-* Raspberry Pi
-* esp32
-* VNC/Remote Connect
-* Linux (how to install dual boot, how to install programs, etc.)
-* Circuits
-* Data analysis
-* VS Code
-* GitHub
-
-Projects include additional hardware
-* Led controls
-* DHT11/22 temp/humidity sensor
-* Thermocouple
-* INA219 (voltage, current sensor)
-* ADC (analog to digital with ADS1115)
-* Servo (SG90 and esp32 or RPi with PCA9685)
-* Stepper motor (28BYJ-48-ULN2003 Driver)
-* Eink display (waveshare e-ink screen)
-* Rotary Encoder
+Example of engineering dashboard using Python data analysis tools.
+Example Engineering Dashboard (Python-dash with plotly, pandas, and numpy for data tables and visualizations. Scikit learn models used to predict edge of wafer. Pair-wise Tukey HSD calculations used to run unit comparison and highlight deltas.)
+Example of Tool Commonality Analysis (Used Python in Excel with various classification models to run commonality analysis)
 
 ## License
 
