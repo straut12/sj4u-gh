@@ -14,6 +14,14 @@ Types of databases
 - Non-relational may contain less structured data  
 - Time based db (influxdb). Optimized for storing/retrieving time based data.  
 
+**Indexing**  
+An index is a data structure that improves the speed of data retrieval operations on a database table. You can create an index on one or more columns of a table, and the same column can have multiple indexes. Indexes do not have to be unique and often may have duplicate values.  
+
+An index is created on a column(s) of a database table. When you create an index on a column, it creates another data structure which holds the reference to the data of the column. The index structure is then sorted, allowing a more efficient search to be performed on it. Indexes are used to quickly locate data without having to search every row in a database table every time a database table is accessed. They can be created or dropped with a database intact.    
+
+**Primary Key**
+A primary key is a type of (unique) index over one or more fields in a table with unique values for every single row in this table.  There can only be one primary key in a table and it ensures each record in the table is unique. (unique key with the name PRIMARY) If no primary key is defined MySQL will use first unique key as primary key if there is one. It is useful for updating/deleting a specific record and creating relationships between tables. A primary key from one table can be used as a foreign key in another table to create a link between the two tables.   
+
 # Influxdb (Time Based)  
 Some database options  
 * influxdb (time series for monitoring measurements over time)   
@@ -239,11 +247,12 @@ A good example is in node-red
 mysql> CREATE TABLE mytable (
 'no' INT NULL AUTO_INCREMENT,
 'date' TIMESTAMP NOT NULL,
-field1 INT NOT NULL PRIMARY KEY,
-field2 VARCHAR(20),
-field3 DATE,
+field1 INT NOT NULL,
+field2 VARCHAR(20) NOT NULL,
 field3 INT,
-field4 FLOAT);
+field4 FLOAT,
+PRIMARY KEY (no),
+INDEX idx_field (field2));
 ```
 Now import the data with LOAD  
 ```sql 
@@ -266,6 +275,12 @@ mysql> SELECT * FROM mytable ORDER BY field1;
 or  
 ```sql
 mysql> SELECT * FROM mytable limit 10;
+```
+
+Create an index  
+```console
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
 ```
 
 ## SELECT   

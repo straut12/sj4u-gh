@@ -16,7 +16,7 @@ Example of engineering dashboard using Python data analysis tools.
 [Example of Tool Commonality Analysis](https://seantrautman.com/ref/data-analysis/ml/) (Used Python in Excel with various classification models to run commonality analysis)    
 
 **DATA ANALYSIS SKILLSETS**
-* Excel (with Python and VBA), Spotfire, Python, dash, colab, plotly, pandas, numpy, scikit-learn, JMP, Power BI, PowerPoint  
+* Excel (with Python and VBA), Spotfire, Python, dash, colab, plotly, pandas, numpy, scikit-learn, JavaScript, SQL, JMP, Power BI, PowerPoint  
 
 **EXPERIENCE**  
 **Process Engineer at Texas Instruments DMOS6 300mm Fab (2001-2019)**  

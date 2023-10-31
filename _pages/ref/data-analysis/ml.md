@@ -7,9 +7,9 @@ nav: false
 toc: true
 ---
 
-A lot of data analysis can be done with simple tools like box plots, paretos, and pivot tables. Notes below are geared toward sklearn models to help with quicker and deeper analysis of data.  
+Although a significant amount of data analysis can be done with tools like graphs, box plots, paretos, and pivot tables; often there is a need for another layer. Notes below are geared toward sklearn models to help with quicker and deeper analysis of data.  
 
-Examples  
+Examples below were ran with **Python in Excel**  
 Defect signature detected on wafers. Second set of wafers show same signature but notch is rotated 90d.    
 <div class="col-sm mt-3 mt-md-0">
     {% include figure.html path="assets/img/coding/wafer-rotated.png" class="img-fluid rounded z-depth-1" %}
