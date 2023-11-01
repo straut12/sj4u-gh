@@ -16,17 +16,15 @@ Example of engineering dashboard using Python data analysis tools.
 [Example of Tool Commonality Analysis](https://seantrautman.com/ref/data-analysis/ml/) (Used Python in Excel with various classification models to run commonality analysis)    
 
 **DATA ANALYSIS SKILLSETS**
-* Excel (with Python and VBA), Spotfire, Python, dash, colab, plotly, pandas, numpy, scikit-learn, JavaScript, SQL, JMP, Power BI, PowerPoint  
+* Excel (with Python and VBA), Spotfire, Python, dash, colab, plotly, pandas, numpy, scikit-learn, JavaScript, SQL, Linux, JMP, Power BI, PowerPoint  
 
 **EXPERIENCE**  
 **Process Engineer at Texas Instruments DMOS6 300mm Fab (2001-2019)**  
 * Lead photo engineer - Startup of TI’s first 300mm fab. Focused on 248nm/193nm CMOS Cu BEOL process and later qualified FeRAM and analog technologies  
 * Tool sets: Qualified and optimized processes in Photo for i-line, 248nm, and 193nm layers on ASML scanners (450, 850, 1050), FSI/DNS RF3/TEL Lithius track, KLA bright field inspection (Stealth), KLA macro inspection (Viper), KLA Archer overlay, KLA Spectra, KLA CD SEM, and AMAT CD SEM.
 * Photo Process Ownership: Worked on solutions for top photo issues (both front end and back end of line).  Owned 20+ levels with focus on BEOL that included both Cu damascene levels and Aluminum.  Responsibilities included new process setup and characterization (including OPC), tool release, new device setups, sustaining, chart monitoring, Cp/Cpk improvements, optimization of coat, bake, develop, and rinse recipes for defect and CD improvements.
-* Performed multiple resist/BARC evaluations for process improvements and cost savings. 
-* Converted defect prone via fill products with cleaner and lower cost materials on Dual Damascene technologies.
-* Converted Trench pattern layers from 193nm process to 248nm for cost savings.
-* Various times responsible for all metrology (macro inspect, overlay, SEM).  Wrote programs to automatically create metrology recipes for KLA Archer overlay to save significant man hours.  Created recipes on KLA Stealth/Spectra for photo pattern inspections (used as tool monitors for defect and CD control).
+* Performed multiple resist/BARC evaluations for process improvements and cost savings. Converted defect prone via fill products with cleaner and lower cost materials on Dual Damascene technologies. Converted Trench pattern layers from 193nm process to 248nm for cost savings.
+* Experienced on both Photo and YE metrology (JEOL Tilt SEM, Stealth, Macro inspect, overlay, SEM).  Wrote programs to automatically create metrology recipes for KLA Archer overlay to save significant man hours.  Created recipes on KLA Stealth/Spectra for photo pattern inspections (used as tool monitors for defect and CD control).
 * Co-developed metrology sampling system implemented fab-wide for cycle time improvements. 
 
 **Cross-Functional Team Leader (Back-End-Of-Line Engineering Group)**  
