@@ -9,7 +9,10 @@ social: false  # includes social icons at the bottom of the page
 ---
 
 **ABOUT**  
-With two-and-a-half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I've developed expertise in data analysis and process optimization. Throughout my career, I've been driven by a passion for efficiency, seeking innovative solutions to streamline processes for both myself and fellow engineers. My comprehensive grasp of photolithography and my ability to harness the power of programming for data-driven insights have been instrumental in achieving these goals. I am committed to delivering cutting-edge solutions and fostering a culture of efficiency. I would love to connect with you so that we can explore how my skill set could enhance your team's capabilities and drive continued success for your organization.  
+With two-and-a-half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I’ve developed expertise in data analysis, process optimization, and defect trouble shooting. Throughout my career, I’ve been driven by a passion for efficiency, seeking innovative solutions to streamline processes and resolve yield limiting issues. As a result, I've had the opportunity to not only lead litho teams but also many cross-functional teams. I would love to connect with you so that we can explore how my skill set could enhance your team’s capabilities and drive continued
+success for your organization.  
+
+[LinkedIn](https://www.linkedin.com/in/sean-trautman-b66bb8175/)  
 
 Example of engineering dashboard using Python data analysis tools.     
 [Example Engineering Dashboard](https://straut12.pythonanywhere.com/) (Python-dash with plotly, pandas, and numpy for data tables and visualizations. Scikit learn models used to predict edge of wafer. Pair-wise Tukey HSD calculations used to run unit comparison and highlight deltas.)  
@@ -23,7 +26,10 @@ Example of engineering dashboard using Python data analysis tools.
 * Lead photo engineer - Startup of TI’s first 300mm fab. Focused on 248nm/193nm CMOS Cu BEOL process and later qualified FeRAM and analog technologies  
 * Tool sets: Qualified and optimized processes in Photo for i-line, 248nm, and 193nm layers on ASML scanners (450, 850, 1050), FSI/DNS RF3/TEL Lithius track, KLA bright field inspection (Stealth), KLA macro inspection (Viper), KLA Archer overlay, KLA Spectra, KLA CD SEM, and AMAT CD SEM.
 * Photo Process Ownership: Worked on solutions for top photo issues (both front end and back end of line).  Owned 20+ levels with focus on BEOL that included both Cu damascene levels and Aluminum.  Responsibilities included new process setup and characterization (including OPC), tool release, new device setups, sustaining, chart monitoring, Cp/Cpk improvements, optimization of coat, bake, develop, and rinse recipes for defect and CD improvements.
-* Performed multiple resist/BARC evaluations for process improvements and cost savings. Converted defect prone via fill products with cleaner and lower cost materials on Dual Damascene technologies. Converted Trench pattern layers from 193nm process to 248nm for cost savings.
+* Created macro defect trouble shooting guide with help of equipment technicians to document common signatures: dirty nozzle, lake/puddle defect, off-centered dispense, incomplete coverage, etc.  
+* Worked with chemical vendors and performed multiple resist/BARC evaluations for process improvements, defect reduction, and cost savings. Validated solvent strip test with BARC vendors for nozzle drying issues. Converted defect prone via fill products with cleaner, lower sublimation and lower cost alternatives. Converted Tmet pattern layers from 193nm process to 248nm with off-axis illumination for cost
+savings.  
+
 * Experienced on both Photo and YE metrology (JEOL Tilt SEM, Stealth, Macro inspect, overlay, SEM).  Wrote programs to automatically create metrology recipes for KLA Archer overlay to save significant man hours.  Created recipes on KLA Stealth/Spectra for photo pattern inspections (used as tool monitors for defect and CD control).
 * Co-developed metrology sampling system implemented fab-wide for cycle time improvements. 
 

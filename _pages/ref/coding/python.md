@@ -183,7 +183,7 @@ Note it is recommended to install packages inside a virtual environment to avoid
 To see what packages are installed and the version  
 ```(.venv)$ pip3 list ```  
 Side note list vs freeze 
-```(.venv)$ pip3 freeze > requirements.txt ```  
+```(.venv)$ pip3 list --format=freeze > requirements.txt ```  
 will list packages you installed in a txt file and in a format that can be used to reinstall.  
 
 To see the version of a package when not inside a venv  
