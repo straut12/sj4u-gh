@@ -9,8 +9,7 @@ social: false  # includes social icons at the bottom of the page
 ---
 
 **ABOUT**  
-With two-and-a-half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I’ve developed expertise in data analysis, process optimization, and defect trouble shooting. Throughout my career, I’ve been driven by a passion for efficiency, seeking innovative solutions to streamline processes and resolve yield limiting issues. As a result, I've had the opportunity to not only lead litho teams but also many cross-functional teams. I would love to connect with you so that we can explore how my skill set could enhance your team’s capabilities and drive continued
-success for your organization.  
+With two-and-a-half decades of experience as a photolithography engineer, including an extensive 18-year tenure at Texas Instruments, I’ve developed expertise in data analysis, process optimization, and defect trouble shooting. Throughout my career, I’ve been driven by a passion for efficiency, seeking innovative solutions to streamline processes and resolve yield limiting issues. As a result, I've had the opportunity to not only lead litho teams but also many cross-functional teams.
 
 [LinkedIn](https://www.linkedin.com/in/sean-trautman-b66bb8175/)  
 
