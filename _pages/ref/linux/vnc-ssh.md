@@ -337,7 +337,7 @@ Example files for RSA algo ssh
 * If you need to create a key pair you use ssh-keygen (will create both the private and public key)  
 * Github now has a note that rsa keys need increased security. To increase security you can specify the algo (-t) and bits (-b):  
 ```$ ssh-keygen -t rsa -b 4096 -C "email@gmail.com"```  
-* It will ask you to save the file. If the first time you can save as default. If you already have key pairs for other accounts then change the name and use the new name for commands below.  
+* It will ask you to save the file. If the first time you can save as default. If you already have key pairs for other accounts then change the name and use the new name for commands below. This may also be relevant if using multiple github accounts. You'll need to create a separate file for each and update the ~/.ssh/config file where you can point the github account to the appropriate ssh key file. See the [VScode Github](../../../ref/coding/git/#vs-code-git-workflow) section under Coding for more info.
 
 * Start the ssh-agent in the background and add the newly created SSH key(private) to the ssh-agent. (ssh-agent keeps track of keys and passphrases so you don't have to keep entering a password/passphrase).  
 * ```$ eval "$(ssh-agent -s)"```  

@@ -76,6 +76,27 @@ SSH = read/write (the write portion requires a SSH Key)
 # VS code git Workflow  
 For starting an initial project I create an empty repo in github and then clone it to my local system where it will be running. Then I use VS code to work on the code and keep it sync'd with github.  
 
+> Note if using multiple github accounts  
+
+If using multiple github accounts make sure you have a ~/.ssh/config file created. It will look like the following. 
+
+```console
+# Account: githubuser1
+Host github.com-githubuser1
+  HostName github.com
+  User git
+  IdentityFile C:\Users\user\.ssh\id_rsa_githubuser1
+
+# Account: githubuser2
+Host github.com-githubuser2
+  HostName github.com
+  User git
+  IdentityFile C:\Users\user\.ssh\id_rsa_githubuser2
+```
+
+And then when you git clone specify the Host name at the end of git@github.com   
+```git clone git@github.com-githubuser1:githubuser1/weather.git```
+
 Steps are assuming a RPi will be running the project code  
 1. Login to [github](https://github.com/) and create a new, empty, repository. I also go ahead and create a README and use the .gitignore python template.  
 2. Click on the **Code** button and copy the **SSH link**. (GitHub account must be linked with [SSH key](../../../ref/linux/vnc-ssh/#ssh-key-authentication) to the RPi)  
